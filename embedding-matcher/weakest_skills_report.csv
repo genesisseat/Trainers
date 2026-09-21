@@ -1,0 +1,21 @@
+skill_id,skill_name,skill_type,best_course_id,best_course_title,score
+IS-023,Postman (API testing),Tool,UP-BSCS-28,Special Problem 2,0.5914870500564575
+IS-007,Spring Boot / Java EE,Framework,DLSU-BSCS-08,Web Application Development,0.6116408109664917
+IS-018,Bug Tracking & Documentation,Practice,UST-BSIT-04,Discrete Structures,0.6121537685394287
+IS-005,HTML/CSS,Front-end,DLSU-BSCS-08,Web Application Development,0.627108097076416
+IS-029,Excel (formulas),Tool,UST-BSIT-14,Operating Systems,0.63414067029953
+IS-021,Excel / Google Sheets,Tool,UST-BSIT-14,Operating Systems,0.6364073753356934
+IS-003,PHP,Programming Language,UP-BSCS-25,Special Problem 1,0.6366754174232483
+IS-022,Selenium / Automated Testing,Tool,UP-BSCS-25,Special Problem 1,0.641569972038269
+IS-008,Git / Version Control,Tool,TIP-BSIT-11,Integrative Programming and Technologies,0.6419047713279724
+IS-043,Cloud Security Basics,Cloud/Security,UP-BSCS-26,Introduction to Computer Security,0.6452724933624268
+IS-027,Power BI (incl. DAX),BI Tool,TIP-BSIT-13,Advanced Database Systems,0.6535807847976685
+IS-036,Help Desk / Ticketing Systems,Tool,UP-BSCS-25,Special Problem 1,0.6536263227462769
+IS-017,Manual Testing & Test Case Design,Practice,UST-BSIT-04,Discrete Structures,0.6539958119392395
+IS-009,REST API design/integration,Concept,NULIPA-BSIT-05,Object-Oriented Programming,0.6556357145309448
+IS-014,Dart / Flutter,Framework,UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),0.6585769653320312
+IS-046,CI/CD & Docker,Tool,UP-BSCS-18,Operating Systems,0.6588822603225708
+IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,UST-BSIT-19,Information Technology Capstone Project II,0.6606078147888184
+IS-054,Data analysts,Macro Shortage Signal,UST-BSIT-09,Data Communications and Networking II,0.6730672121047974
+IS-006,MySQL / MS SQL,Database,ADAMSON-BSIT-07,Database Management System,0.6776046752929688
+IS-053,Cybersecurity specialists,Macro Shortage Signal,LPU-BSIT-17,Networks 1,0.6793354749679565

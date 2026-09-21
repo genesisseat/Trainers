@@ -1,0 +1,57 @@
+skill_id,skill_name,skill_type,best_course_id,best_course_title,score
+IS-023,Postman (API testing),Tool,UP-BSCS-28,Special Problem 2,0.5914870500564575
+IS-007,Spring Boot / Java EE,Framework,DLSU-BSCS-08,Web Application Development,0.6116408109664917
+IS-018,Bug Tracking & Documentation,Practice,UST-BSIT-04,Discrete Structures,0.6121537685394287
+IS-005,HTML/CSS,Front-end,DLSU-BSCS-08,Web Application Development,0.627108097076416
+IS-029,Excel (formulas),Tool,UST-BSIT-14,Operating Systems,0.63414067029953
+IS-021,Excel / Google Sheets,Tool,UST-BSIT-14,Operating Systems,0.6364073753356934
+IS-003,PHP,Programming Language,UP-BSCS-25,Special Problem 1,0.6366754174232483
+IS-022,Selenium / Automated Testing,Tool,UP-BSCS-25,Special Problem 1,0.641569972038269
+IS-008,Git / Version Control,Tool,TIP-BSIT-11,Integrative Programming and Technologies,0.6419047713279724
+IS-043,Cloud Security Basics,Cloud/Security,UP-BSCS-26,Introduction to Computer Security,0.6452724933624268
+IS-027,Power BI (incl. DAX),BI Tool,TIP-BSIT-13,Advanced Database Systems,0.6535807847976685
+IS-036,Help Desk / Ticketing Systems,Tool,UP-BSCS-25,Special Problem 1,0.6536263227462769
+IS-017,Manual Testing & Test Case Design,Practice,UST-BSIT-04,Discrete Structures,0.6539958119392395
+IS-009,REST API design/integration,Concept,NULIPA-BSIT-05,Object-Oriented Programming,0.6556357145309448
+IS-014,Dart / Flutter,Framework,UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),0.6585769653320312
+IS-046,CI/CD & Docker,Tool,UP-BSCS-18,Operating Systems,0.6588822603225708
+IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,UST-BSIT-19,Information Technology Capstone Project II,0.6606078147888184
+IS-054,Data analysts,Macro Shortage Signal,UST-BSIT-09,Data Communications and Networking II,0.6730672121047974
+IS-006,MySQL / MS SQL,Database,ADAMSON-BSIT-07,Database Management System,0.6776046752929688
+IS-053,Cybersecurity specialists,Macro Shortage Signal,LPU-BSIT-17,Networks 1,0.6793354749679565
+IS-011,Debugging & Testing basics,Practice,TIP-BSIT-27,Systems Administration and Maintenance,0.681466281414032
+IS-040,Vulnerability Assessment,Practice,UST-BSIT-04,Discrete Structures,0.6827782988548279
+IS-044,AWS / Azure fundamentals,Cloud Platform,NULIPA-BSIT-01,Fundamentals of Programming,0.6859111785888672
+IS-055,AI specialists,Macro Shortage Signal,UP-BSCS-20,Introduction to Artificial Intelligence,0.6859332323074341
+IS-028,Tableau,BI Tool,TIP-BSIT-13,Advanced Database Systems,0.6919724941253662
+IS-016,Kotlin/Java (Android),Programming Language,UST-BSCS-10,Programming Languages,0.6953561902046204
+IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,NULIPA-BSIT-15,Basic Networking,0.6957430839538574
+IS-002,C#,Programming Language,DLSU-BSCS-03,Programming with Structured Data Types,0.6959018111228943
+IS-019,Regression & Performance Testing,Practice,UST-BSIT-01,Introduction to Computing,0.6965340375900269
+IS-047,Infrastructure as Code (Terraform),Tool,UST-BSIT-04,Discrete Structures,0.6977890729904175
+IS-025,SQL,Database/Query Language,DLSU-BSCS-21,Advanced Database Systems,0.6990857124328613
+IS-034,Troubleshooting Hardware/Software,Practice,UP-BSCS-25,Special Problem 1,0.7005184888839722
+IS-049,Problem-Solving / Analytical Thinking,Soft Skill,TIP-BSIT-04,Introduction to Human Computer Interaction,0.7040815353393555
+IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,ADAMSON-BSIT-07,Database Management System,0.7055834531784058
+IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,TIP-BSIT-23,Data Analytics,0.7064316272735596
+IS-030,Data Cleaning / Wrangling,Practice,UST-BSIT-01,Introduction to Computing,0.7072055339813232
+IS-045,Automation scripting (Python),Programming Language,UST-BSCS-10,Programming Languages,0.7108749151229858
+IS-004,JavaScript,Programming Language,UST-BSCS-10,Programming Languages,0.7115639448165894
+IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,TIP-BSIT-19,Application Development and Emerging Technologies,0.7127085328102112
+IS-042,Python (security scripting),Programming Language,UP-BSCS-26,Introduction to Computer Security,0.7143416404724121
+IS-048,Communication Skills,Soft Skill,UST-BSIT-12,Software Engineering 1,0.717188835144043
+IS-020,SQL (basic),Database,ADAMSON-BSIT-07,Database Management System,0.7179629802703857
+IS-012,.NET / C# (MAUI),Framework,UP-BSCS-25,Special Problem 1,0.718984842300415
+IS-024,Basic Programming/Scripting knowledge,Concept,UST-BSCS-10,Programming Languages,0.7238119840621948
+IS-010,Agile/Scrum fundamentals,Methodology,UST-BSIT-02,"Computer Programming I (Fundamentals, Imperative)",0.734515905380249
+IS-013,Python,Programming Language,UST-BSCS-10,Programming Languages,0.7353767156600952
+IS-051,Teamwork / Collaboration,Soft Skill,UST-BSIT-06,Human-Computer Interaction,0.7415051460266113
+IS-037,System Monitoring & Deployment Support,Practice,UST-BSIT-14,Operating Systems,0.742081880569458
+IS-050,Learning Agility / Adaptability,Soft Skill,NULIPA-BSCS-25,Reinforcement Learning,0.7491874694824219
+IS-015,Swift (iOS),Programming Language,UST-BSCS-10,Programming Languages,0.7670055627822876
+IS-001,Java,Programming Language,UST-BSCS-10,Programming Languages,0.7716872692108154
+IS-041,Networking Fundamentals (security context),Concept,TIP-BSIT-12,Networking 1,0.773052453994751
+IS-026,Python,Programming Language,UST-BSCS-10,Programming Languages,0.7755658626556396
+IS-031,Statistical Analysis & Data Modeling,Concept,NULIPA-BSCS-14,Introduction to Machine Learning,0.7819981575012207
+IS-035,Networking Fundamentals,Concept,TIP-BSIT-12,Networking 1,0.8022640347480774
+IS-039,Security Monitoring / SOC basics,Practice,UP-BSCS-26,Introduction to Computer Security,0.804646909236908

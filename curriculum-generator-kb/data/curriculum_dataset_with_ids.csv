@@ -1,0 +1,288 @@
+﻿id,university,program,curriculum_year,role,doc_section,year,year_raw,term,course,units,units_raw,classification,is_elective_or_track,competency_tag,year_term_confirmed
+NULIPA-BSCS-01,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,1,1,1,Fundamentals of Programming,3,3,Core,False,,True
+NULIPA-BSCS-02,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,1,1,1,Introduction to Computing,3,3,Core,False,,True
+NULIPA-BSCS-03,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,1,1,2,Intermediate Programming,3,3,Core,False,,True
+NULIPA-BSCS-04,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,1,1,2,"Hardware, Software and Peripheral Installation",1,1,Professional,False,,True
+NULIPA-BSCS-05,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,1,1,3,Object-Oriented Programming,3,3,Core,False,,True
+NULIPA-BSCS-06,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,1,1,3,Discrete Structures 1,3,3,Core,False,,True
+NULIPA-BSCS-07,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,1,Data Structures and Algorithms,3,3,Core,False,,True
+NULIPA-BSCS-08,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,1,Discrete Structures 2,3,3,Core,False,,True
+NULIPA-BSCS-09,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,2,Computer Organization and Architecture,3,3,Core,False,,True
+NULIPA-BSCS-10,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,2,Information Management,3,3,Core,False,,True
+NULIPA-BSCS-11,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,3,Basic Networking,3,3,Core,False,,True
+NULIPA-BSCS-12,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,3,Algorithms and Complexity,3,3,Core,False,,True
+NULIPA-BSCS-13,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,2,2,3,Advanced Database Systems,3,3,Professional,False,,True
+NULIPA-BSCS-14,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,1,Introduction to Machine Learning,3,3,Specialization,False,,True
+NULIPA-BSCS-15,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,1,Operating Systems,3,3,Core,False,,True
+NULIPA-BSCS-16,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,1,Automata Theory and Formal Languages,3,3,Core,False,,True
+NULIPA-BSCS-17,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,1,Software Engineering 1,3,3,Core,False,,True
+NULIPA-BSCS-18,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,2,Information Assurance and Security,3,3,Professional,False,,True
+NULIPA-BSCS-19,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,2,Software Engineering 2,3,3,Core,False,,True
+NULIPA-BSCS-20,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,2,Advanced Machine Learning,3,3,Specialization,False,,True
+NULIPA-BSCS-21,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,3,Methods of Research,3,3,Research / Capstone,False,,True
+NULIPA-BSCS-22,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,3,Deep Learning,3,3,Specialization,False,,True
+NULIPA-BSCS-23,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,3,Applications Development and Emerging Technologies,3,3,Professional,False,,True
+NULIPA-BSCS-24,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,3,3,3,Introduction to Human-Computer Interaction,3,3,Professional,False,,True
+NULIPA-BSCS-25,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,1,Reinforcement Learning,3,3,Specialization,False,,True
+NULIPA-BSCS-26,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,1,Programming Languages,3,3,Core,False,,True
+NULIPA-BSCS-27,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,1,Social and Professional Issues,3,3,Professional,False,,True
+NULIPA-BSCS-28,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,1,Thesis 1,3,3,Research / Capstone,False,,True
+NULIPA-BSCS-29,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,2,Data Science,3,3,Specialization,False,,True
+NULIPA-BSCS-30,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,2,Thesis 2,3,3,Research / Capstone,False,,True
+NULIPA-BSCS-31,NU Lipa,BSCS (ML specialization),2021 (1-2021-BSCS-ML),baseline,4,4,4,3,Internship (400 hours),3,3,Internship,False,,True
+NULIPA-BSIT-01,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,1,1,1,Fundamentals of Programming,3,3,Core,False,,True
+NULIPA-BSIT-02,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,1,1,1,Introduction to Computing,3,3,Core,False,,True
+NULIPA-BSIT-03,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,1,1,2,Intermediate Programming,3,3,Core,False,,True
+NULIPA-BSIT-04,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,1,1,2,"Hardware, Software and Peripheral Installation",1,1,Professional,False,,True
+NULIPA-BSIT-05,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,1,1,3,Object-Oriented Programming,3,3,Core,False,,True
+NULIPA-BSIT-06,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,1,1,3,Discrete Structures 1,3,3,Core,False,,True
+NULIPA-BSIT-07,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,1,Data Structures and Algorithms,3,3,Core,False,,True
+NULIPA-BSIT-08,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,1,Platform Technologies,3,3,Professional,False,,True
+NULIPA-BSIT-09,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,2,Computer Organization and Architecture,3,3,Core,False,,True
+NULIPA-BSIT-10,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,2,Information Management,3,3,Core,False,,True
+NULIPA-BSIT-11,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,2,Applications Development and Emerging Technologies,3,3,Professional,False,,True
+NULIPA-BSIT-12,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,3,Web Systems and Technologies,3,3,Professional,False,,True
+NULIPA-BSIT-13,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,3,Advanced Database Systems,3,3,Professional,False,,True
+NULIPA-BSIT-14,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,3,Social and Professional Issues,3,3,Professional,False,,True
+NULIPA-BSIT-15,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,2,2,3,Basic Networking,3,3,Core,False,,True
+NULIPA-BSIT-16,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,1,Integrative Programming and Technologies,3,3,Professional,False,,True
+NULIPA-BSIT-17,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,1,Systems Integration and Architecture,3,3,Professional,False,,True
+NULIPA-BSIT-18,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,1,Advanced Networking,3,3,Professional,False,,True
+NULIPA-BSIT-19,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,1,Multimedia Systems,3,3,Professional,False,,True
+NULIPA-BSIT-20,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,1,IT Project Management,3,3,Professional,False,,True
+NULIPA-BSIT-21,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,2,Advanced Multimedia Systems,3,3,Professional,False,,True
+NULIPA-BSIT-22,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,2,Mobile Programming,3,3,Professional,False,,True
+NULIPA-BSIT-23,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,2,Systems Analysis and Design,3,3,Core,False,,True
+NULIPA-BSIT-24,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,2,Information Assurance and Security,3,3,Professional,False,,True
+NULIPA-BSIT-25,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,3,Advanced Web Programming,3,3,Professional,False,,True
+NULIPA-BSIT-26,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,3,Advanced Information Assurance and Security,3,3,Professional,False,,True
+NULIPA-BSIT-27,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,3,Introduction to Human-Computer Interaction,3,3,Professional,False,,True
+NULIPA-BSIT-28,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,3,3,3,Capstone Project 1,3,3,Research / Capstone,False,,True
+NULIPA-BSIT-29,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,4,4,1,Web Commercialization and E-Commerce,3,3,Professional,False,,True
+NULIPA-BSIT-30,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,4,4,1,Advanced Mobile Programming,3,3,Professional,False,,True
+NULIPA-BSIT-31,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,4,4,1,Systems Administration and Maintenance,3,3,Professional,False,,True
+NULIPA-BSIT-32,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,4,4,1,Capstone Project 2,3,3,Research / Capstone,False,,True
+NULIPA-BSIT-33,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,4,4,2,Internship 1 (400 hours),3,3,Internship,False,,True
+NULIPA-BSIT-34,NU Lipa,BSIT (MWA),2021 (1-2021-BSIT-MWA),baseline,5,4,4,3,Internship 2 (400 hours),3,3,Internship,False,,True
+UST-BSCS-01,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,1,1,1,Introduction to Computing,3,3,Core,False,,True
+UST-BSCS-02,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,1,1,1,Computer Programming I (Fundamentals Imperative),5,5,Core,False,,True
+UST-BSCS-03,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,1,1,2,"Computer Programming II (Intermediate, Object-Oriented)",4,4,Core,False,,True
+UST-BSCS-04,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,1,1,1,Discrete Structures,3,3,Core,False,,True
+UST-BSCS-05,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,1,1,2,Data Structures and Algorithms,4,4,Core,False,,True
+UST-BSCS-06,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,2,2,1,Design and Analysis of Algorithms,3,3,Core,False,,True
+UST-BSCS-07,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,2,2,1,Theory of Automata,3,3,Core,False,,True
+UST-BSCS-08,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,2,2,1,Information Management,4,4,Core,False,,True
+UST-BSCS-09,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,2,2,2,Computer Architecture and Organization,3,3,Core,False,,True
+UST-BSCS-10,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,3,3,1,Programming Languages,3,3,Core,False,,True
+UST-BSCS-11,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,3,3,1,Software Engineering I,3,3,Core,False,,True
+UST-BSCS-12,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,2,2,2,Introduction to Intelligent Systems,3,3,Professional,False,,True
+UST-BSCS-13,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,2,2,2,Applications Development and Emerging Technologies 2 (Enterprise Back-end),3,3,Professional,False,,True
+UST-BSCS-14,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,1,1,2,Human-Computer Interaction,2,2,Professional,False,,True
+UST-BSCS-15,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,4,4,1,Graphics Computing and Multimedia Technology,3,3,Professional,False,,True
+UST-BSCS-16,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,4,4,1,Computer Security and Information Assurance,2,2,Professional,False,,True
+UST-BSCS-17,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,4,4,2,Emerging Technology,1,1,Professional,False,,True
+UST-BSCS-18,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,,3-4,varies,Professional electives / specialization,,varies,Specialization,True,,False
+UST-BSCS-19,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,4,4,2,Practicum (250 hours),4,4,Internship,False,,True
+UST-BSCS-20,UST,BSCS,A.Y. 2023-2024,benchmark,7.1,,3-4,varies,Thesis I and II,,varies,Research / Capstone,False,,False
+DLSU-BSCS-01,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,1,1,,Introduction to Computing,3,3,Core,False,,False
+DLSU-BSCS-02,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,1,1,,Logic Formulation and Introductory Programming,3,3,Core,False,,False
+DLSU-BSCS-03,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,1,1,,Programming with Structured Data Types,3,3,Core,False,,False
+DLSU-BSCS-04,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,1,1,,Object-Oriented Programming,3,3,Core,False,,False
+DLSU-BSCS-05,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,1,1,,Discrete Structures,3,3,Core,False,,False
+DLSU-BSCS-06,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,1,1,,Data Structures and Algorithms,3,3,Core,False,,False
+DLSU-BSCS-07,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,2,2,,Information Management,3,3,Core,False,,False
+DLSU-BSCS-08,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Web Application Development,3,3,Core,False,,False
+DLSU-BSCS-09,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,2,2,,Advanced Programming Techniques,3,3,Professional,False,,False
+DLSU-BSCS-10,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Software Engineering,3,3,Professional,False,,False
+DLSU-BSCS-11,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,2,2,,Algorithms and Complexity,3,3,Professional,False,,False
+DLSU-BSCS-12,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Introduction to Computer Networks,3,3,Professional,False,,False
+DLSU-BSCS-13,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Computer Organization and Architecture I,3,3,Professional,False,,False
+DLSU-BSCS-14,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Computer Organization and Architecture II,4,4,Professional,False,,False
+DLSU-BSCS-15,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Operating Systems,3,3,Professional,False,,False
+DLSU-BSCS-16,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,2,2,,Introduction to Artificial Intelligence,3,3,Professional,False,,False
+DLSU-BSCS-17,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Secure Web Development,3,3,Professional,False,,False
+DLSU-BSCS-18,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Advanced Algorithms and Complexities,3,3,Specialization,False,,False
+DLSU-BSCS-19,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Mobile Development,3,3,Specialization,False,,False
+DLSU-BSCS-20,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Advanced Software Engineering,3,3,Specialization,False,,False
+DLSU-BSCS-21,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Advanced Database Systems,3,3,Specialization,False,,False
+DLSU-BSCS-22,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Human Computer Interactions,3,3,Specialization,False,,False
+DLSU-BSCS-23,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Advanced Intelligent Systems,3,3,Specialization,False,,False
+DLSU-BSCS-24,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Distributed Computing,3,3,Specialization,False,,False
+DLSU-BSCS-25,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Software Technology Research Methods,3,3,Research / Capstone,False,,False
+DLSU-BSCS-26,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",,varies,Specialization,True,,False
+DLSU-BSCS-27,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Practicum,3,3,Internship,False,,False
+DLSU-BSCS-28,DLSU,BSCS (Software Technology),not stated,benchmark,7.2,,Not confirmed,,Thesis,6,6,Research / Capstone,False,,False
+UP-BSCS-01,UP,BSCS,2018 (system-wide),benchmark,7.3,1,1,1,Introduction to Computer Science,3,3,Core,False,,True
+UP-BSCS-02,UP,BSCS,2018 (system-wide),benchmark,7.3,1,1,1,Discrete Mathematical Structures in CS 1,3,3,Core,False,,True
+UP-BSCS-03,UP,BSCS,2018 (system-wide),benchmark,7.3,1,1,2,Fundamentals of Programming,3,3,Core,False,,True
+UP-BSCS-04,UP,BSCS,2018 (system-wide),benchmark,7.3,1,1,2,Discrete Mathematical Structures in CS 2,3,3,Core,False,,True
+UP-BSCS-05,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,1,Programming Paradigms,3,3,Core,False,,True
+UP-BSCS-06,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,1,Data Structures,4,4,Core,False,,True
+UP-BSCS-07,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,1,Logic Design and Digital Computer Circuits,3,3,Core,False,,True
+UP-BSCS-08,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,2,Research Methods for Computer Science,3,3,Core,False,,True
+UP-BSCS-09,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,2,File Processing and Database Systems,3,3,Core,False,,True
+UP-BSCS-10,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,2,"Intro to Computer Organization, Architecture, and Machine-Level Programming",3,3,Core,False,,True
+UP-BSCS-11,UP,BSCS,2018 (system-wide),benchmark,7.3,2,2,2,Introduction to the Theory of Computation,3,3,Core,False,,True
+UP-BSCS-12,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,1,Technical Writing for Computer Science,3,3,Core,False,,True
+UP-BSCS-13,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,1,Design and Implementation of Programming Languages,3,3,Core,False,,True
+UP-BSCS-14,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,1,Software Engineering 1,3,3,Core,False,,True
+UP-BSCS-15,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,1,Design and Analysis of Algorithms,3,3,Core,False,,True
+UP-BSCS-16,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,1,Ethical and Professional Issues in Computing,1,1,Core,False,,True
+UP-BSCS-17,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,1,Research Internship 1,1,1,Core,False,,True
+UP-BSCS-18,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,2,Operating Systems,3,3,Core,False,,True
+UP-BSCS-19,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,2,Software Engineering 2,3,3,Core,False,,True
+UP-BSCS-20,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,2,Introduction to Artificial Intelligence,3,3,Core,False,,True
+UP-BSCS-21,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,2,Research Internship 2,1,1,Core,False,,True
+UP-BSCS-22,UP,BSCS,2018 (system-wide),benchmark,7.3,3,3,Midyear,Practicum,3,3,Core,False,,True
+UP-BSCS-23,UP,BSCS,2018 (system-wide),benchmark,7.3,4,4,1,Data Communication and Networking,3,3,Core,False,,True
+UP-BSCS-24,UP,BSCS,2018 (system-wide),benchmark,7.3,4,4,1,Machine Learning,3,3,Core,False,,True
+UP-BSCS-25,UP,BSCS,2018 (system-wide),benchmark,7.3,4,4,1,Special Problem 1,2,2,Core,False,,True
+UP-BSCS-26,UP,BSCS,2018 (system-wide),benchmark,7.3,4,4,2,Introduction to Computer Security,3,3,Core,False,,True
+UP-BSCS-27,UP,BSCS,2018 (system-wide),benchmark,7.3,4,4,2,Technopreneurship,3,3,Core,False,,True
+UP-BSCS-28,UP,BSCS,2018 (system-wide),benchmark,7.3,4,4,2,Special Problem 2,2,2,Core,False,,True
+ATENEO-BSCS-01,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,1,1,1,Introduction to Computing,3,3,Core,False,,True
+ATENEO-BSCS-02,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,1,1,1,Introduction to Programming I,3,3,Core,False,,True
+ATENEO-BSCS-03,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,1,1,2,Introduction to Programming II,3,3,Core,False,,True
+ATENEO-BSCS-04,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,2,2,1,Data Structures and Algorithms,3,3,Core,False,,True
+ATENEO-BSCS-05,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,2,2,2,Software Tools and Development Frameworks,3,3,Professional,False,,True
+ATENEO-BSCS-06,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,1,Information Management,3,3,Core,False,,True
+ATENEO-BSCS-07,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,1,"Computer Organization, Lecture",3,3,Core,False,,True
+ATENEO-BSCS-08,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,1,"Computer Organization, Laboratory",3,3,Core,False,,True
+ATENEO-BSCS-09,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,1,Guided Studies in DISCS,1,1,Professional,False,,True
+ATENEO-BSCS-10,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,1,CSCI Major Elective,3,3,Specialization,True,,True
+ATENEO-BSCS-11,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,2,"Operating Systems, Lecture",3,3,Core,False,,True
+ATENEO-BSCS-12,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,2,"Operating Systems, Laboratory",3,3,Core,False,,True
+ATENEO-BSCS-13,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,2,Introduction to Software Engineering,3,3,Core,False,,True
+ATENEO-BSCS-14,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,2,Guided Studies in DISCS,1,1,Professional,False,,True
+ATENEO-BSCS-15,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,2,Thesis Writing I,1,1,Research / Capstone,False,,True
+ATENEO-BSCS-16,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,3,3,2,CSCI Major Elective,3,3,Specialization,True,,True
+ATENEO-BSCS-17,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,Intersession,Practicum,3,3,Internship,False,,True
+ATENEO-BSCS-18,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,1,Computer Networks and Data Communications,3,3,Core,False,,True
+ATENEO-BSCS-19,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,1,Structure and Interpretation of Programming Languages,3,3,Core,False,,True
+ATENEO-BSCS-20,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,1,CSCI Major Elective,3,3,Specialization,True,,True
+ATENEO-BSCS-21,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,1,Guided Studies in DISCS,1,1,Professional,False,,True
+ATENEO-BSCS-22,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,1,Thesis Writing II,3,3,Research / Capstone,False,,True
+ATENEO-BSCS-23,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,2,Information Assurance and Security,3,3,Professional,False,,True
+ATENEO-BSCS-24,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,2,Theory of Computation,3,3,Core,False,,True
+ATENEO-BSCS-25,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,2,Guided Studies in DISCS,1,1,Professional,False,,True
+ATENEO-BSCS-26,Ateneo de Manila,BSCS,"Program of Study PDF, 2023",benchmark,7.4,4,4,2,Thesis Writing III,3,3,Research / Capstone,False,,True
+UST-BSIT-01,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,1,1,,Introduction to Computing,3,3,Core,False,,False
+UST-BSIT-02,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,1,1,,"Computer Programming I (Fundamentals, Imperative)",5,5,Core,False,,False
+UST-BSIT-03,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,1,1,,"Computer Programming II (Intermediate, Object-Oriented)",4,4,Core,False,,False
+UST-BSIT-04,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,1,1,,Discrete Structures,3,3,Core,False,,False
+UST-BSIT-05,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,1,1,,Information Technology Fundamentals,3,3,Core,False,,False
+UST-BSIT-06,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,1,1,,Human-Computer Interaction,3,3,Professional,False,,False
+UST-BSIT-07,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,2,2,,"Computer Architecture, Organization and Logic",3,3,Core,False,,False
+UST-BSIT-08,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,2,2,,"Computer Architecture, Organization and Logic Laboratory",1,1,Core,False,,False
+UST-BSIT-09,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,2,2,,Data Communications and Networking II,3,3,Core,False,,False
+UST-BSIT-10,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,2,2,,Data Communications and Networking II Laboratory,1,1,Core,False,,False
+UST-BSIT-11,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,2,2,,Applications Development and Emerging Technologies 2 (Enterprise Back-end),3,3,Professional,False,,False
+UST-BSIT-12,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,3,3,,Software Engineering 1,3,3,Professional,False,,False
+UST-BSIT-13,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,3,3,,Applications Development and Emerging Technologies 3 (Mobile Programming),3,3,Professional,False,,False
+UST-BSIT-14,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,3,3,,Operating Systems,3,3,Core,False,,False
+UST-BSIT-15,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,3,3,,Social and Professional Practice,3,3,Professional,False,,False
+UST-BSIT-16,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,3,3,,Information Technology Capstone Project I,3,3,Research / Capstone,False,,False
+UST-BSIT-17,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,3,3,,Professional Elective 1,3,3,Specialization,True,,False
+UST-BSIT-18,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,4,4,,System Integration and Architecture,3,3,Professional,False,,False
+UST-BSIT-19,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,4,4,,Information Technology Capstone Project II,3,3,Research / Capstone,False,,False
+UST-BSIT-20,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,4,4,,Emerging Technologies,1,1,Professional,False,,False
+UST-BSIT-21,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,4,4,,Professional Elective 3,3,3,Specialization,True,,False
+UST-BSIT-22,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,4,4,,Professional Elective 4,3,3,Specialization,True,,False
+UST-BSIT-23,UST,BSIT,A.Y. 2023-2024,benchmark,8.1,4,4,,Practicum (500 hours),6,6,Internship,False,,False
+TIP-BSIT-01,TIP,BSIT,2018,benchmark,8.2,1,1,1,Introduction to Computing,3,3,Core,False,,True
+TIP-BSIT-02,TIP,BSIT,2018,benchmark,8.2,1,1,1,Computer Programming 1,3,3,Core,False,,True
+TIP-BSIT-03,TIP,BSIT,2018,benchmark,8.2,1,1,2,Computer Programming 2,3,3,Core,False,,True
+TIP-BSIT-04,TIP,BSIT,2018,benchmark,8.2,1,1,2,Introduction to Human Computer Interaction,3,3,Professional,False,,True
+TIP-BSIT-05,TIP,BSIT,2018,benchmark,8.2,2,2,1,Data Structures and Algorithms,3,3,Core,False,,True
+TIP-BSIT-06,TIP,BSIT,2018,benchmark,8.2,2,2,1,Web Systems and Technologies,3,3,Professional,False,,True
+TIP-BSIT-07,TIP,BSIT,2018,benchmark,8.2,2,2,1,Prof. Elective 1,3,3,Specialization,True,,True
+TIP-BSIT-08,TIP,BSIT,2018,benchmark,8.2,2,2,2,Information Management,3,3,Core,False,,True
+TIP-BSIT-09,TIP,BSIT,2018,benchmark,8.2,2,2,2,Platform Technologies,3,3,Professional,False,,True
+TIP-BSIT-10,TIP,BSIT,2018,benchmark,8.2,2,2,2,Prof. Elective 2,3,3,Specialization,True,,True
+TIP-BSIT-11,TIP,BSIT,2018,benchmark,8.2,3,3,1,Integrative Programming and Technologies,3,3,Professional,False,,True
+TIP-BSIT-12,TIP,BSIT,2018,benchmark,8.2,3,3,1,Networking 1,3,3,Core,False,,True
+TIP-BSIT-13,TIP,BSIT,2018,benchmark,8.2,3,3,1,Advanced Database Systems,3,3,Professional,False,,True
+TIP-BSIT-14,TIP,BSIT,2018,benchmark,8.2,3,3,1,Systems Integration and Architecture 1,3,3,Professional,False,,True
+TIP-BSIT-15,TIP,BSIT,2018,benchmark,8.2,3,3,1,IT Elective 1,3,3,Specialization,True,,True
+TIP-BSIT-16,TIP,BSIT,2018,benchmark,8.2,3,3,2,Data Mining and Warehousing,3,3,Professional,False,,True
+TIP-BSIT-17,TIP,BSIT,2018,benchmark,8.2,3,3,2,Mobile Computing,3,3,Professional,False,,True
+TIP-BSIT-18,TIP,BSIT,2018,benchmark,8.2,3,3,2,Information Assurance and Security 1,3,3,Professional,False,,True
+TIP-BSIT-19,TIP,BSIT,2018,benchmark,8.2,3,3,2,Application Development and Emerging Technologies,3,3,Professional,False,,True
+TIP-BSIT-20,TIP,BSIT,2018,benchmark,8.2,3,3,2,Networking 2,3,3,Professional,False,,True
+TIP-BSIT-21,TIP,BSIT,2018,benchmark,8.2,3,3,2,Prof. Elective 3,3,3,Specialization,True,,True
+TIP-BSIT-22,TIP,BSIT,2018,benchmark,8.2,3,3,2,IT Elective 2,3,3,Specialization,True,,True
+TIP-BSIT-23,TIP,BSIT,2018,benchmark,8.2,3,3,Summer,Data Analytics,3,3,Specialization,False,,True
+TIP-BSIT-24,TIP,BSIT,2018,benchmark,8.2,3,3,Summer,Capstone Project 1,3,3,Research / Capstone,False,,True
+TIP-BSIT-25,TIP,BSIT,2018,benchmark,8.2,3,3,Summer,IT Elective 3,3,3,Specialization,True,,True
+TIP-BSIT-26,TIP,BSIT,2018,benchmark,8.2,4,4,1,Social and Professional Issues,3,3,Professional,False,,True
+TIP-BSIT-27,TIP,BSIT,2018,benchmark,8.2,4,4,1,Systems Administration and Maintenance,3,3,Professional,False,,True
+TIP-BSIT-28,TIP,BSIT,2018,benchmark,8.2,4,4,1,Information Assurance and Security 2,3,3,Professional,False,,True
+TIP-BSIT-29,TIP,BSIT,2018,benchmark,8.2,4,4,1,Systems Integration and Architecture 2,3,3,Professional,False,,True
+TIP-BSIT-30,TIP,BSIT,2018,benchmark,8.2,4,4,1,Prof. Elective 4,3,3,Specialization,True,,True
+TIP-BSIT-31,TIP,BSIT,2018,benchmark,8.2,4,4,1,IT Elective 4,3,3,Specialization,True,,True
+TIP-BSIT-32,TIP,BSIT,2018,benchmark,8.2,4,4,2,Internship in Computing,6,6,Internship,False,,True
+TIP-BSIT-33,TIP,BSIT,2018,benchmark,8.2,4,4,2,Capstone Project 2,3,3,Research / Capstone,False,,True
+ADAMSON-BSIT-01,Adamson University,BSIT,2026,benchmark,8.3,1,1,1,Introduction to Computing,3,3,Core,False,,True
+ADAMSON-BSIT-02,Adamson University,BSIT,2026,benchmark,8.3,1,1,1,Fundamentals of Programming,3,3,Core,False,,True
+ADAMSON-BSIT-03,Adamson University,BSIT,2026,benchmark,8.3,1,1,1,Digital and Logic Circuits (lab),1,1,Core,False,,True
+ADAMSON-BSIT-04,Adamson University,BSIT,2026,benchmark,8.3,1,1,2,Computer Programming 1,3,3,Core,False,,True
+ADAMSON-BSIT-05,Adamson University,BSIT,2026,benchmark,8.3,1,1,2,Data Structure and Algorithms,3,3,Core,False,,True
+ADAMSON-BSIT-06,Adamson University,BSIT,2026,benchmark,8.3,1,1,2,Web Design Principles (lab),1,1,Professional,False,,True
+ADAMSON-BSIT-07,Adamson University,BSIT,2026,benchmark,8.3,2,2,1,Database Management System,3,3,Core,False,,True
+ADAMSON-BSIT-08,Adamson University,BSIT,2026,benchmark,8.3,2,2,1,Computer Programming 2,3,3,Core,False,,True
+ADAMSON-BSIT-09,Adamson University,BSIT,2026,benchmark,8.3,2,2,1,Multimedia Technology,3,3,Professional,False,,True
+ADAMSON-BSIT-10,Adamson University,BSIT,2026,benchmark,8.3,2,2,1,Discrete Math,3,3,Core,False,,True
+ADAMSON-BSIT-11,Adamson University,BSIT,2026,benchmark,8.3,2,2,2,Object Oriented Programming,3,3,Core,False,,True
+ADAMSON-BSIT-12,Adamson University,BSIT,2026,benchmark,8.3,2,2,2,Advanced Database Management System,3,3,Professional,False,,True
+ADAMSON-BSIT-13,Adamson University,BSIT,2026,benchmark,8.3,2,2,2,Networking 1,3,3,Core,False,,True
+ADAMSON-BSIT-14,Adamson University,BSIT,2026,benchmark,8.3,3,3,1,Networking 2,3,3,Professional,False,,True
+ADAMSON-BSIT-15,Adamson University,BSIT,2026,benchmark,8.3,3,3,1,Information Assurance and Security 1,3,3,Professional,False,,True
+ADAMSON-BSIT-16,Adamson University,BSIT,2026,benchmark,8.3,3,3,1,Project Management,3,3,Professional,False,,True
+ADAMSON-BSIT-17,Adamson University,BSIT,2026,benchmark,8.3,3,3,1,Applications Development and Emerging Technologies,3,3,Professional,False,,True
+ADAMSON-BSIT-18,Adamson University,BSIT,2026,benchmark,8.3,3,3,1,IT Professional Track 1 (Mobile Development or Game Analysis and Design),3,3,Specialization,True,,True
+ADAMSON-BSIT-19,Adamson University,BSIT,2026,benchmark,8.3,3,3,2,Systems Administration and Maintenance,3,3,Professional,False,,True
+ADAMSON-BSIT-20,Adamson University,BSIT,2026,benchmark,8.3,3,3,2,Information Assurance and Security 2,3,3,Professional,False,,True
+ADAMSON-BSIT-21,Adamson University,BSIT,2026,benchmark,8.3,3,3,2,Human Computer Interaction,3,3,Professional,False,,True
+ADAMSON-BSIT-22,Adamson University,BSIT,2026,benchmark,8.3,3,3,2,IT Capstone Project 1,3,3,Research / Capstone,False,,True
+ADAMSON-BSIT-23,Adamson University,BSIT,2026,benchmark,8.3,3,3,2,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",3,3,Specialization,True,,True
+ADAMSON-BSIT-24,Adamson University,BSIT,2026,benchmark,8.3,3,3,2,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",3,3,Specialization,True,,True
+ADAMSON-BSIT-25,Adamson University,BSIT,2026,benchmark,8.3,3,3,3,Systems Integration and Architecture,3,3,Professional,False,,True
+ADAMSON-BSIT-26,Adamson University,BSIT,2026,benchmark,8.3,3,3,3,Code of Ethics for IT Professionals,3,3,Professional,False,,True
+ADAMSON-BSIT-27,Adamson University,BSIT,2026,benchmark,8.3,3,3,3,IT Issues and Seminars,3,3,Professional,False,,True
+ADAMSON-BSIT-28,Adamson University,BSIT,2026,benchmark,8.3,4,4,1,IT Capstone Project 2,3,3,Research / Capstone,False,,True
+ADAMSON-BSIT-29,Adamson University,BSIT,2026,benchmark,8.3,4,4,1,PC Repair and Troubleshooting (lab),1,1,Professional,False,,True
+ADAMSON-BSIT-30,Adamson University,BSIT,2026,benchmark,8.3,4,4,1,IT Professional Track 4 (2D Animation or System/Network Administration),3,3,Specialization,True,,True
+ADAMSON-BSIT-31,Adamson University,BSIT,2026,benchmark,8.3,4,4,2,On-the-Job Training for Information Technology,6,6,Internship,False,,True
+ADAMSON-BSIT-32,Adamson University,BSIT,2026,benchmark,8.3,4,4,2,Technopreneurship,3,3,Professional,False,,True
+LPU-BSIT-01,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,1,Fundamentals of Programming,3,3,Core,False,,True
+LPU-BSIT-02,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,1,Living in the IT Era,3,3,Core,False,,True
+LPU-BSIT-03,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,2,Information Assurance and Security 1,3,3,Professional,False,,True
+LPU-BSIT-04,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,2,Information Management,3,3,Core,False,,True
+LPU-BSIT-05,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,2,Intermediate Programming,3,3,Core,False,,True
+LPU-BSIT-06,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,2,Introduction to Computing,3,3,Core,False,,True
+LPU-BSIT-07,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,1,1,2,Platform Technologies,3,3,Professional,False,,True
+LPU-BSIT-08,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,2,2,1,Applications Development and Emerging Technologies,3,3,Professional,False,,True
+LPU-BSIT-09,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,2,2,1,Data Structures and Algorithms,3,3,Core,False,,True
+LPU-BSIT-10,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,2,2,1,Object Oriented Programming,3,3,Core,False,,True
+LPU-BSIT-11,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,2,2,2,Discrete Mathematics 1,3,3,Core,False,,True
+LPU-BSIT-12,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,2,2,2,Information Assurance and Security 2,3,3,Professional,False,,True
+LPU-BSIT-13,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,2,2,2,Integrative Programming and Technologies,3,3,Professional,False,,True
+LPU-BSIT-14,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,Discrete Mathematics 2,3,3,Core,False,,True
+LPU-BSIT-15,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,IT Elective 1 (Non-Lab),3,3,Specialization,True,,True
+LPU-BSIT-16,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,Multimedia Design and Programming,3,3,Professional,False,,True
+LPU-BSIT-17,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,Networks 1,3,3,Core,False,,True
+LPU-BSIT-18,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,System Integration and Architecture 1,3,3,Professional,False,,True
+LPU-BSIT-19,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,Technopreneurship,3,3,Professional,False,,True
+LPU-BSIT-20,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,1,Web Systems and Technologies,3,3,Professional,False,,True
+LPU-BSIT-21,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,2,Advanced Database Management Systems,3,3,Professional,False,,True
+LPU-BSIT-22,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,2,IT Elective 2 (with Lab),3,3,Specialization,True,,True
+LPU-BSIT-23,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,2,Networks 2,3,3,Professional,False,,True
+LPU-BSIT-24,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,2,Systems Administration and Maintenance,3,3,Professional,False,,True
+LPU-BSIT-25,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,2,System Integration and Architecture 2,3,3,Professional,False,,True
+LPU-BSIT-26,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,3,3,2,Social Issues and Professional Ethics,3,3,Professional,False,,True
+LPU-BSIT-27,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,4,4,1,Capstone Project 1,3,3,Research / Capstone,False,,True
+LPU-BSIT-28,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,4,4,1,IT Elective 3 (Non-Lab),3,3,Specialization,True,,True
+LPU-BSIT-29,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,4,4,1,OJT (600 hours),6,6,Internship,False,,True
+LPU-BSIT-30,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,4,4,2,Capstone Project 2,3,3,Research / Capstone,False,,True
+LPU-BSIT-31,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,4,4,2,Human Computer Interaction,3,3,Professional,False,,True
+LPU-BSIT-32,LPU Manila,BSIT,SY 2022-2023,benchmark,8.4,4,4,2,IT Elective 4 (with Lab),3,3,Specialization,True,,True

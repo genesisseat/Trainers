@@ -1,0 +1,1436 @@
+course_id,course_title,skill_id,skill_name,skill_type,score,rank
+NULIPA-BSCS-01,Fundamentals of Programming,IS-035,Networking Fundamentals,Concept,0.715396523475647,1
+NULIPA-BSCS-01,Fundamentals of Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.7121803164482117,2
+NULIPA-BSCS-01,Fundamentals of Programming,IS-041,Networking Fundamentals (security context),Concept,0.6981658935546875,3
+NULIPA-BSCS-01,Fundamentals of Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6731191873550415,4
+NULIPA-BSCS-01,Fundamentals of Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6719025373458862,5
+NULIPA-BSCS-02,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.6750266551971436,1
+NULIPA-BSCS-02,Introduction to Computing,IS-031,Statistical Analysis & Data Modeling,Concept,0.6723449230194092,2
+NULIPA-BSCS-02,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.6699795722961426,3
+NULIPA-BSCS-02,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.6662344932556152,4
+NULIPA-BSCS-02,Introduction to Computing,IS-050,Learning Agility / Adaptability,Soft Skill,0.657925009727478,5
+NULIPA-BSCS-03,Intermediate Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6705291867256165,1
+NULIPA-BSCS-03,Intermediate Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.6701172590255737,2
+NULIPA-BSCS-03,Intermediate Programming,IS-048,Communication Skills,Soft Skill,0.6580561399459839,3
+NULIPA-BSCS-03,Intermediate Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6570608019828796,4
+NULIPA-BSCS-03,Intermediate Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6534464359283447,5
+NULIPA-BSCS-04,"Hardware, Software and Peripheral Installation",IS-037,System Monitoring & Deployment Support,Practice,0.6733627319335938,1
+NULIPA-BSCS-04,"Hardware, Software and Peripheral Installation",IS-039,Security Monitoring / SOC basics,Practice,0.6608610153198242,2
+NULIPA-BSCS-04,"Hardware, Software and Peripheral Installation",IS-048,Communication Skills,Soft Skill,0.637440025806427,3
+NULIPA-BSCS-04,"Hardware, Software and Peripheral Installation",IS-035,Networking Fundamentals,Concept,0.6364485621452332,4
+NULIPA-BSCS-04,"Hardware, Software and Peripheral Installation",IS-041,Networking Fundamentals (security context),Concept,0.6355923414230347,5
+NULIPA-BSCS-05,Object-Oriented Programming,IS-031,Statistical Analysis & Data Modeling,Concept,0.7015032768249512,1
+NULIPA-BSCS-05,Object-Oriented Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.6961886882781982,2
+NULIPA-BSCS-05,Object-Oriented Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6835429668426514,3
+NULIPA-BSCS-05,Object-Oriented Programming,IS-035,Networking Fundamentals,Concept,0.6797695159912109,4
+NULIPA-BSCS-05,Object-Oriented Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6749674081802368,5
+NULIPA-BSCS-06,Discrete Structures 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.662011981010437,1
+NULIPA-BSCS-06,Discrete Structures 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6430244445800781,2
+NULIPA-BSCS-06,Discrete Structures 1,IS-035,Networking Fundamentals,Concept,0.6378579139709473,3
+NULIPA-BSCS-06,Discrete Structures 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6309337615966797,4
+NULIPA-BSCS-06,Discrete Structures 1,IS-041,Networking Fundamentals (security context),Concept,0.6236492395401001,5
+NULIPA-BSCS-07,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7342115044593811,1
+NULIPA-BSCS-07,Data Structures and Algorithms,IS-035,Networking Fundamentals,Concept,0.6703697443008423,2
+NULIPA-BSCS-07,Data Structures and Algorithms,IS-010,Agile/Scrum fundamentals,Methodology,0.656859278678894,3
+NULIPA-BSCS-07,Data Structures and Algorithms,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6504443287849426,4
+NULIPA-BSCS-07,Data Structures and Algorithms,IS-051,Teamwork / Collaboration,Soft Skill,0.650000810623169,5
+NULIPA-BSCS-08,Discrete Structures 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6783163547515869,1
+NULIPA-BSCS-08,Discrete Structures 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6517541408538818,2
+NULIPA-BSCS-08,Discrete Structures 2,IS-035,Networking Fundamentals,Concept,0.6473430395126343,3
+NULIPA-BSCS-08,Discrete Structures 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6407250165939331,4
+NULIPA-BSCS-08,Discrete Structures 2,IS-041,Networking Fundamentals (security context),Concept,0.6312993168830872,5
+NULIPA-BSCS-09,Computer Organization and Architecture,IS-010,Agile/Scrum fundamentals,Methodology,0.6676956415176392,1
+NULIPA-BSCS-09,Computer Organization and Architecture,IS-035,Networking Fundamentals,Concept,0.654026985168457,2
+NULIPA-BSCS-09,Computer Organization and Architecture,IS-041,Networking Fundamentals (security context),Concept,0.645854651927948,3
+NULIPA-BSCS-09,Computer Organization and Architecture,IS-031,Statistical Analysis & Data Modeling,Concept,0.6417612433433533,4
+NULIPA-BSCS-09,Computer Organization and Architecture,IS-051,Teamwork / Collaboration,Soft Skill,0.640923261642456,5
+NULIPA-BSCS-10,Information Management,IS-031,Statistical Analysis & Data Modeling,Concept,0.6655692458152771,1
+NULIPA-BSCS-10,Information Management,IS-048,Communication Skills,Soft Skill,0.6608483195304871,2
+NULIPA-BSCS-10,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6602262258529663,3
+NULIPA-BSCS-10,Information Management,IS-010,Agile/Scrum fundamentals,Methodology,0.6332541704177856,4
+NULIPA-BSCS-10,Information Management,IS-050,Learning Agility / Adaptability,Soft Skill,0.6266897916793823,5
+NULIPA-BSCS-11,Basic Networking,IS-035,Networking Fundamentals,Concept,0.7702263593673706,1
+NULIPA-BSCS-11,Basic Networking,IS-041,Networking Fundamentals (security context),Concept,0.7388567924499512,2
+NULIPA-BSCS-11,Basic Networking,IS-010,Agile/Scrum fundamentals,Methodology,0.6718567609786987,3
+NULIPA-BSCS-11,Basic Networking,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6662158966064453,4
+NULIPA-BSCS-11,Basic Networking,IS-048,Communication Skills,Soft Skill,0.6644054055213928,5
+NULIPA-BSCS-12,Algorithms and Complexity,IS-031,Statistical Analysis & Data Modeling,Concept,0.7043296098709106,1
+NULIPA-BSCS-12,Algorithms and Complexity,IS-050,Learning Agility / Adaptability,Soft Skill,0.662986695766449,2
+NULIPA-BSCS-12,Algorithms and Complexity,IS-035,Networking Fundamentals,Concept,0.6563726663589478,3
+NULIPA-BSCS-12,Algorithms and Complexity,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6415721774101257,4
+NULIPA-BSCS-12,Algorithms and Complexity,IS-051,Teamwork / Collaboration,Soft Skill,0.6397594809532166,5
+NULIPA-BSCS-13,Advanced Database Systems,IS-020,SQL (basic),Database,0.6659386157989502,1
+NULIPA-BSCS-13,Advanced Database Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6658502817153931,2
+NULIPA-BSCS-13,Advanced Database Systems,IS-025,SQL,Database/Query Language,0.654364824295044,3
+NULIPA-BSCS-13,Advanced Database Systems,IS-048,Communication Skills,Soft Skill,0.6461971998214722,4
+NULIPA-BSCS-13,Advanced Database Systems,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6401746273040771,5
+NULIPA-BSCS-14,Introduction to Machine Learning,IS-031,Statistical Analysis & Data Modeling,Concept,0.7819981575012207,1
+NULIPA-BSCS-14,Introduction to Machine Learning,IS-050,Learning Agility / Adaptability,Soft Skill,0.7177298069000244,2
+NULIPA-BSCS-14,Introduction to Machine Learning,IS-051,Teamwork / Collaboration,Soft Skill,0.6765050888061523,3
+NULIPA-BSCS-14,Introduction to Machine Learning,IS-035,Networking Fundamentals,Concept,0.6732016801834106,4
+NULIPA-BSCS-14,Introduction to Machine Learning,IS-019,Regression & Performance Testing,Practice,0.664763331413269,5
+NULIPA-BSCS-15,Operating Systems,IS-039,Security Monitoring / SOC basics,Practice,0.6614784002304077,1
+NULIPA-BSCS-15,Operating Systems,IS-037,System Monitoring & Deployment Support,Practice,0.6591358780860901,2
+NULIPA-BSCS-15,Operating Systems,IS-010,Agile/Scrum fundamentals,Methodology,0.6558465957641602,3
+NULIPA-BSCS-15,Operating Systems,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6476483941078186,4
+NULIPA-BSCS-15,Operating Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6469179391860962,5
+NULIPA-BSCS-16,Automata Theory and Formal Languages,IS-031,Statistical Analysis & Data Modeling,Concept,0.6999087333679199,1
+NULIPA-BSCS-16,Automata Theory and Formal Languages,IS-050,Learning Agility / Adaptability,Soft Skill,0.657164454460144,2
+NULIPA-BSCS-16,Automata Theory and Formal Languages,IS-001,Java,Programming Language,0.6571063995361328,3
+NULIPA-BSCS-16,Automata Theory and Formal Languages,IS-051,Teamwork / Collaboration,Soft Skill,0.6553308963775635,4
+NULIPA-BSCS-16,Automata Theory and Formal Languages,IS-035,Networking Fundamentals,Concept,0.6474331617355347,5
+NULIPA-BSCS-17,Software Engineering 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6702131032943726,1
+NULIPA-BSCS-17,Software Engineering 1,IS-048,Communication Skills,Soft Skill,0.6616424918174744,2
+NULIPA-BSCS-17,Software Engineering 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6610593199729919,3
+NULIPA-BSCS-17,Software Engineering 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6592323780059814,4
+NULIPA-BSCS-17,Software Engineering 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6434415578842163,5
+NULIPA-BSCS-18,Information Assurance and Security,IS-039,Security Monitoring / SOC basics,Practice,0.666642427444458,1
+NULIPA-BSCS-18,Information Assurance and Security,IS-048,Communication Skills,Soft Skill,0.6497433185577393,2
+NULIPA-BSCS-18,Information Assurance and Security,IS-041,Networking Fundamentals (security context),Concept,0.6436877250671387,3
+NULIPA-BSCS-18,Information Assurance and Security,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6245812177658081,4
+NULIPA-BSCS-18,Information Assurance and Security,IS-042,Python (security scripting),Programming Language,0.6107900142669678,5
+NULIPA-BSCS-19,Software Engineering 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6742589473724365,1
+NULIPA-BSCS-19,Software Engineering 2,IS-048,Communication Skills,Soft Skill,0.6701669096946716,2
+NULIPA-BSCS-19,Software Engineering 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6682267189025879,3
+NULIPA-BSCS-19,Software Engineering 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6647248268127441,4
+NULIPA-BSCS-19,Software Engineering 2,IS-051,Teamwork / Collaboration,Soft Skill,0.649713397026062,5
+NULIPA-BSCS-20,Advanced Machine Learning,IS-031,Statistical Analysis & Data Modeling,Concept,0.7347426414489746,1
+NULIPA-BSCS-20,Advanced Machine Learning,IS-050,Learning Agility / Adaptability,Soft Skill,0.7016977667808533,2
+NULIPA-BSCS-20,Advanced Machine Learning,IS-019,Regression & Performance Testing,Practice,0.6719433069229126,3
+NULIPA-BSCS-20,Advanced Machine Learning,IS-051,Teamwork / Collaboration,Soft Skill,0.6596027612686157,4
+NULIPA-BSCS-20,Advanced Machine Learning,IS-048,Communication Skills,Soft Skill,0.6555866003036499,5
+NULIPA-BSCS-21,Methods of Research,IS-031,Statistical Analysis & Data Modeling,Concept,0.6644765138626099,1
+NULIPA-BSCS-21,Methods of Research,IS-010,Agile/Scrum fundamentals,Methodology,0.639684796333313,2
+NULIPA-BSCS-21,Methods of Research,IS-050,Learning Agility / Adaptability,Soft Skill,0.6327766180038452,3
+NULIPA-BSCS-21,Methods of Research,IS-051,Teamwork / Collaboration,Soft Skill,0.6195050477981567,4
+NULIPA-BSCS-21,Methods of Research,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6182899475097656,5
+NULIPA-BSCS-22,Deep Learning,IS-050,Learning Agility / Adaptability,Soft Skill,0.7064617276191711,1
+NULIPA-BSCS-22,Deep Learning,IS-031,Statistical Analysis & Data Modeling,Concept,0.6991925239562988,2
+NULIPA-BSCS-22,Deep Learning,IS-051,Teamwork / Collaboration,Soft Skill,0.6780719757080078,3
+NULIPA-BSCS-22,Deep Learning,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.668188750743866,4
+NULIPA-BSCS-22,Deep Learning,IS-048,Communication Skills,Soft Skill,0.6556022763252258,5
+NULIPA-BSCS-23,Applications Development and Emerging Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6467045545578003,1
+NULIPA-BSCS-23,Applications Development and Emerging Technologies,IS-048,Communication Skills,Soft Skill,0.6457126140594482,2
+NULIPA-BSCS-23,Applications Development and Emerging Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6412136554718018,3
+NULIPA-BSCS-23,Applications Development and Emerging Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6304174661636353,4
+NULIPA-BSCS-23,Applications Development and Emerging Technologies,IS-010,Agile/Scrum fundamentals,Methodology,0.6222211122512817,5
+NULIPA-BSCS-24,Introduction to Human-Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.7025424838066101,1
+NULIPA-BSCS-24,Introduction to Human-Computer Interaction,IS-050,Learning Agility / Adaptability,Soft Skill,0.693038284778595,2
+NULIPA-BSCS-24,Introduction to Human-Computer Interaction,IS-048,Communication Skills,Soft Skill,0.6850568056106567,3
+NULIPA-BSCS-24,Introduction to Human-Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6758116483688354,4
+NULIPA-BSCS-24,Introduction to Human-Computer Interaction,IS-010,Agile/Scrum fundamentals,Methodology,0.6672968864440918,5
+NULIPA-BSCS-25,Reinforcement Learning,IS-050,Learning Agility / Adaptability,Soft Skill,0.7491874694824219,1
+NULIPA-BSCS-25,Reinforcement Learning,IS-051,Teamwork / Collaboration,Soft Skill,0.6997953653335571,2
+NULIPA-BSCS-25,Reinforcement Learning,IS-031,Statistical Analysis & Data Modeling,Concept,0.6916193962097168,3
+NULIPA-BSCS-25,Reinforcement Learning,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6789093017578125,4
+NULIPA-BSCS-25,Reinforcement Learning,IS-019,Regression & Performance Testing,Practice,0.6738268733024597,5
+NULIPA-BSCS-26,Programming Languages,IS-013,Python,Programming Language,0.7250292301177979,1
+NULIPA-BSCS-26,Programming Languages,IS-026,Python,Programming Language,0.7188155651092529,2
+NULIPA-BSCS-26,Programming Languages,IS-015,Swift (iOS),Programming Language,0.7107020020484924,3
+NULIPA-BSCS-26,Programming Languages,IS-045,Automation scripting (Python),Programming Language,0.6941138505935669,4
+NULIPA-BSCS-26,Programming Languages,IS-001,Java,Programming Language,0.687530517578125,5
+NULIPA-BSCS-27,Social and Professional Issues,IS-051,Teamwork / Collaboration,Soft Skill,0.6492378115653992,1
+NULIPA-BSCS-27,Social and Professional Issues,IS-048,Communication Skills,Soft Skill,0.643669605255127,2
+NULIPA-BSCS-27,Social and Professional Issues,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.637099027633667,3
+NULIPA-BSCS-27,Social and Professional Issues,IS-010,Agile/Scrum fundamentals,Methodology,0.6177776455879211,4
+NULIPA-BSCS-27,Social and Professional Issues,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6169368028640747,5
+NULIPA-BSCS-28,Thesis 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6952236890792847,1
+NULIPA-BSCS-28,Thesis 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6633251905441284,2
+NULIPA-BSCS-28,Thesis 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6483891010284424,3
+NULIPA-BSCS-28,Thesis 1,IS-035,Networking Fundamentals,Concept,0.637252688407898,4
+NULIPA-BSCS-28,Thesis 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6369317770004272,5
+NULIPA-BSCS-29,Data Science,IS-031,Statistical Analysis & Data Modeling,Concept,0.7136387825012207,1
+NULIPA-BSCS-29,Data Science,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6771053075790405,2
+NULIPA-BSCS-29,Data Science,IS-048,Communication Skills,Soft Skill,0.654363751411438,3
+NULIPA-BSCS-29,Data Science,IS-030,Data Cleaning / Wrangling,Practice,0.6357244253158569,4
+NULIPA-BSCS-29,Data Science,IS-050,Learning Agility / Adaptability,Soft Skill,0.6310354471206665,5
+NULIPA-BSCS-30,Thesis 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.7130014896392822,1
+NULIPA-BSCS-30,Thesis 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6646831035614014,2
+NULIPA-BSCS-30,Thesis 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6492367386817932,3
+NULIPA-BSCS-30,Thesis 2,IS-019,Regression & Performance Testing,Practice,0.6435413360595703,4
+NULIPA-BSCS-30,Thesis 2,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6390097141265869,5
+NULIPA-BSCS-31,Internship (400 hours),IS-048,Communication Skills,Soft Skill,0.6424150466918945,1
+NULIPA-BSCS-31,Internship (400 hours),IS-010,Agile/Scrum fundamentals,Methodology,0.6326971054077148,2
+NULIPA-BSCS-31,Internship (400 hours),IS-050,Learning Agility / Adaptability,Soft Skill,0.6315935254096985,3
+NULIPA-BSCS-31,Internship (400 hours),IS-051,Teamwork / Collaboration,Soft Skill,0.6314769983291626,4
+NULIPA-BSCS-31,Internship (400 hours),IS-031,Statistical Analysis & Data Modeling,Concept,0.6267151832580566,5
+NULIPA-BSIT-01,Fundamentals of Programming,IS-035,Networking Fundamentals,Concept,0.7412109971046448,1
+NULIPA-BSIT-01,Fundamentals of Programming,IS-041,Networking Fundamentals (security context),Concept,0.731835126876831,2
+NULIPA-BSIT-01,Fundamentals of Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.7283223867416382,3
+NULIPA-BSIT-01,Fundamentals of Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6955090165138245,4
+NULIPA-BSIT-01,Fundamentals of Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6927698850631714,5
+NULIPA-BSIT-02,Introduction to Computing,IS-031,Statistical Analysis & Data Modeling,Concept,0.7066243886947632,1
+NULIPA-BSIT-02,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.703248143196106,2
+NULIPA-BSIT-02,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.6995389461517334,3
+NULIPA-BSIT-02,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.6891177892684937,4
+NULIPA-BSIT-02,Introduction to Computing,IS-050,Learning Agility / Adaptability,Soft Skill,0.6798615455627441,5
+NULIPA-BSIT-03,Intermediate Programming,IS-015,Swift (iOS),Programming Language,0.6899740695953369,1
+NULIPA-BSIT-03,Intermediate Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6875975131988525,2
+NULIPA-BSIT-03,Intermediate Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6853615045547485,3
+NULIPA-BSIT-03,Intermediate Programming,IS-001,Java,Programming Language,0.6815716028213501,4
+NULIPA-BSIT-03,Intermediate Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.6799229383468628,5
+NULIPA-BSIT-04,"Hardware, Software and Peripheral Installation",IS-037,System Monitoring & Deployment Support,Practice,0.7055932879447937,1
+NULIPA-BSIT-04,"Hardware, Software and Peripheral Installation",IS-039,Security Monitoring / SOC basics,Practice,0.661888837814331,2
+NULIPA-BSIT-04,"Hardware, Software and Peripheral Installation",IS-044,AWS / Azure fundamentals,Cloud Platform,0.6507115960121155,3
+NULIPA-BSIT-04,"Hardware, Software and Peripheral Installation",IS-034,Troubleshooting Hardware/Software,Practice,0.6465829014778137,4
+NULIPA-BSIT-04,"Hardware, Software and Peripheral Installation",IS-048,Communication Skills,Soft Skill,0.6416685581207275,5
+NULIPA-BSIT-05,Object-Oriented Programming,IS-031,Statistical Analysis & Data Modeling,Concept,0.709100604057312,1
+NULIPA-BSIT-05,Object-Oriented Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.6946364641189575,2
+NULIPA-BSIT-05,Object-Oriented Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.688468337059021,3
+NULIPA-BSIT-05,Object-Oriented Programming,IS-001,Java,Programming Language,0.6858056783676147,4
+NULIPA-BSIT-05,Object-Oriented Programming,IS-004,JavaScript,Programming Language,0.6830289363861084,5
+NULIPA-BSIT-06,Discrete Structures 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6548656225204468,1
+NULIPA-BSIT-06,Discrete Structures 1,IS-047,Infrastructure as Code (Terraform),Tool,0.6455047130584717,2
+NULIPA-BSIT-06,Discrete Structures 1,IS-044,AWS / Azure fundamentals,Cloud Platform,0.637931227684021,3
+NULIPA-BSIT-06,Discrete Structures 1,IS-035,Networking Fundamentals,Concept,0.6360323429107666,4
+NULIPA-BSIT-06,Discrete Structures 1,IS-041,Networking Fundamentals (security context),Concept,0.6302560567855835,5
+NULIPA-BSIT-07,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7521241903305054,1
+NULIPA-BSIT-07,Data Structures and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.6825717091560364,2
+NULIPA-BSIT-07,Data Structures and Algorithms,IS-035,Networking Fundamentals,Concept,0.6786192059516907,3
+NULIPA-BSIT-07,Data Structures and Algorithms,IS-047,Infrastructure as Code (Terraform),Tool,0.6660385131835938,4
+NULIPA-BSIT-07,Data Structures and Algorithms,IS-019,Regression & Performance Testing,Practice,0.6606261134147644,5
+NULIPA-BSIT-08,Platform Technologies,IS-044,AWS / Azure fundamentals,Cloud Platform,0.6844580173492432,1
+NULIPA-BSIT-08,Platform Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6543394327163696,2
+NULIPA-BSIT-08,Platform Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6415315270423889,3
+NULIPA-BSIT-08,Platform Technologies,IS-048,Communication Skills,Soft Skill,0.6371022462844849,4
+NULIPA-BSIT-08,Platform Technologies,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6303449869155884,5
+NULIPA-BSIT-09,Computer Organization and Architecture,IS-035,Networking Fundamentals,Concept,0.6729108095169067,1
+NULIPA-BSIT-09,Computer Organization and Architecture,IS-047,Infrastructure as Code (Terraform),Tool,0.6710014343261719,2
+NULIPA-BSIT-09,Computer Organization and Architecture,IS-039,Security Monitoring / SOC basics,Practice,0.6709806323051453,3
+NULIPA-BSIT-09,Computer Organization and Architecture,IS-041,Networking Fundamentals (security context),Concept,0.6699399948120117,4
+NULIPA-BSIT-09,Computer Organization and Architecture,IS-010,Agile/Scrum fundamentals,Methodology,0.6689461469650269,5
+NULIPA-BSIT-10,Information Management,IS-031,Statistical Analysis & Data Modeling,Concept,0.6767212748527527,1
+NULIPA-BSIT-10,Information Management,IS-048,Communication Skills,Soft Skill,0.6667168140411377,2
+NULIPA-BSIT-10,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6602696180343628,3
+NULIPA-BSIT-10,Information Management,IS-030,Data Cleaning / Wrangling,Practice,0.6488806009292603,4
+NULIPA-BSIT-10,Information Management,IS-037,System Monitoring & Deployment Support,Practice,0.6424175500869751,5
+NULIPA-BSIT-11,Applications Development and Emerging Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6888253688812256,1
+NULIPA-BSIT-11,Applications Development and Emerging Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6630483865737915,2
+NULIPA-BSIT-11,Applications Development and Emerging Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6535125970840454,3
+NULIPA-BSIT-11,Applications Development and Emerging Technologies,IS-048,Communication Skills,Soft Skill,0.6534621715545654,4
+NULIPA-BSIT-11,Applications Development and Emerging Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6431052684783936,5
+NULIPA-BSIT-12,Web Systems and Technologies,IS-048,Communication Skills,Soft Skill,0.6563677191734314,1
+NULIPA-BSIT-12,Web Systems and Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6546768546104431,2
+NULIPA-BSIT-12,Web Systems and Technologies,IS-035,Networking Fundamentals,Concept,0.6544429659843445,3
+NULIPA-BSIT-12,Web Systems and Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6503438949584961,4
+NULIPA-BSIT-12,Web Systems and Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6475977301597595,5
+NULIPA-BSIT-13,Advanced Database Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6809780597686768,1
+NULIPA-BSIT-13,Advanced Database Systems,IS-028,Tableau,BI Tool,0.6732607483863831,2
+NULIPA-BSIT-13,Advanced Database Systems,IS-020,SQL (basic),Database,0.6642266511917114,3
+NULIPA-BSIT-13,Advanced Database Systems,IS-044,AWS / Azure fundamentals,Cloud Platform,0.6612972021102905,4
+NULIPA-BSIT-13,Advanced Database Systems,IS-030,Data Cleaning / Wrangling,Practice,0.6593642234802246,5
+NULIPA-BSIT-14,Social and Professional Issues,IS-051,Teamwork / Collaboration,Soft Skill,0.6636480093002319,1
+NULIPA-BSIT-14,Social and Professional Issues,IS-048,Communication Skills,Soft Skill,0.6535465121269226,2
+NULIPA-BSIT-14,Social and Professional Issues,IS-040,Vulnerability Assessment,Practice,0.6435962915420532,3
+NULIPA-BSIT-14,Social and Professional Issues,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6333469152450562,4
+NULIPA-BSIT-14,Social and Professional Issues,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.625995397567749,5
+NULIPA-BSIT-15,Basic Networking,IS-035,Networking Fundamentals,Concept,0.7605697512626648,1
+NULIPA-BSIT-15,Basic Networking,IS-041,Networking Fundamentals (security context),Concept,0.7416793704032898,2
+NULIPA-BSIT-15,Basic Networking,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6957430839538574,3
+NULIPA-BSIT-15,Basic Networking,IS-010,Agile/Scrum fundamentals,Methodology,0.6710016131401062,4
+NULIPA-BSIT-15,Basic Networking,IS-039,Security Monitoring / SOC basics,Practice,0.6699276566505432,5
+NULIPA-BSIT-16,Integrative Programming and Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6854607462882996,1
+NULIPA-BSIT-16,Integrative Programming and Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6851794719696045,2
+NULIPA-BSIT-16,Integrative Programming and Technologies,IS-048,Communication Skills,Soft Skill,0.6675783395767212,3
+NULIPA-BSIT-16,Integrative Programming and Technologies,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6646614074707031,4
+NULIPA-BSIT-16,Integrative Programming and Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6640070080757141,5
+NULIPA-BSIT-17,Systems Integration and Architecture,IS-037,System Monitoring & Deployment Support,Practice,0.6854249835014343,1
+NULIPA-BSIT-17,Systems Integration and Architecture,IS-047,Infrastructure as Code (Terraform),Tool,0.6611577272415161,2
+NULIPA-BSIT-17,Systems Integration and Architecture,IS-035,Networking Fundamentals,Concept,0.6606213450431824,3
+NULIPA-BSIT-17,Systems Integration and Architecture,IS-051,Teamwork / Collaboration,Soft Skill,0.6567785739898682,4
+NULIPA-BSIT-17,Systems Integration and Architecture,IS-031,Statistical Analysis & Data Modeling,Concept,0.6538482904434204,5
+NULIPA-BSIT-18,Advanced Networking,IS-035,Networking Fundamentals,Concept,0.7225797176361084,1
+NULIPA-BSIT-18,Advanced Networking,IS-041,Networking Fundamentals (security context),Concept,0.6944005489349365,2
+NULIPA-BSIT-18,Advanced Networking,IS-048,Communication Skills,Soft Skill,0.6739518642425537,3
+NULIPA-BSIT-18,Advanced Networking,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6685113906860352,4
+NULIPA-BSIT-18,Advanced Networking,IS-051,Teamwork / Collaboration,Soft Skill,0.6664103269577026,5
+NULIPA-BSIT-19,Multimedia Systems,IS-048,Communication Skills,Soft Skill,0.6601880192756653,1
+NULIPA-BSIT-19,Multimedia Systems,IS-051,Teamwork / Collaboration,Soft Skill,0.6584840416908264,2
+NULIPA-BSIT-19,Multimedia Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6579873561859131,3
+NULIPA-BSIT-19,Multimedia Systems,IS-037,System Monitoring & Deployment Support,Practice,0.6500847339630127,4
+NULIPA-BSIT-19,Multimedia Systems,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6434788703918457,5
+NULIPA-BSIT-20,IT Project Management,IS-048,Communication Skills,Soft Skill,0.681631326675415,1
+NULIPA-BSIT-20,IT Project Management,IS-051,Teamwork / Collaboration,Soft Skill,0.6639297008514404,2
+NULIPA-BSIT-20,IT Project Management,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6598267555236816,3
+NULIPA-BSIT-20,IT Project Management,IS-010,Agile/Scrum fundamentals,Methodology,0.6459498405456543,4
+NULIPA-BSIT-20,IT Project Management,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6452130079269409,5
+NULIPA-BSIT-21,Advanced Multimedia Systems,IS-048,Communication Skills,Soft Skill,0.6571223735809326,1
+NULIPA-BSIT-21,Advanced Multimedia Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6526917219161987,2
+NULIPA-BSIT-21,Advanced Multimedia Systems,IS-037,System Monitoring & Deployment Support,Practice,0.6468590497970581,3
+NULIPA-BSIT-21,Advanced Multimedia Systems,IS-051,Teamwork / Collaboration,Soft Skill,0.6464041471481323,4
+NULIPA-BSIT-21,Advanced Multimedia Systems,IS-050,Learning Agility / Adaptability,Soft Skill,0.6442251205444336,5
+NULIPA-BSIT-22,Mobile Programming,IS-015,Swift (iOS),Programming Language,0.686050534248352,1
+NULIPA-BSIT-22,Mobile Programming,IS-048,Communication Skills,Soft Skill,0.6777598261833191,2
+NULIPA-BSIT-22,Mobile Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6762802600860596,3
+NULIPA-BSIT-22,Mobile Programming,IS-016,Kotlin/Java (Android),Programming Language,0.6673246622085571,4
+NULIPA-BSIT-22,Mobile Programming,IS-001,Java,Programming Language,0.6635630130767822,5
+NULIPA-BSIT-23,Systems Analysis and Design,IS-031,Statistical Analysis & Data Modeling,Concept,0.7340782284736633,1
+NULIPA-BSIT-23,Systems Analysis and Design,IS-037,System Monitoring & Deployment Support,Practice,0.6755796670913696,2
+NULIPA-BSIT-23,Systems Analysis and Design,IS-019,Regression & Performance Testing,Practice,0.6752970218658447,3
+NULIPA-BSIT-23,Systems Analysis and Design,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6671828627586365,4
+NULIPA-BSIT-23,Systems Analysis and Design,IS-050,Learning Agility / Adaptability,Soft Skill,0.663735032081604,5
+NULIPA-BSIT-24,Information Assurance and Security,IS-039,Security Monitoring / SOC basics,Practice,0.6690793633460999,1
+NULIPA-BSIT-24,Information Assurance and Security,IS-048,Communication Skills,Soft Skill,0.6648187041282654,2
+NULIPA-BSIT-24,Information Assurance and Security,IS-037,System Monitoring & Deployment Support,Practice,0.6496336460113525,3
+NULIPA-BSIT-24,Information Assurance and Security,IS-041,Networking Fundamentals (security context),Concept,0.6472598910331726,4
+NULIPA-BSIT-24,Information Assurance and Security,IS-040,Vulnerability Assessment,Practice,0.6430867910385132,5
+NULIPA-BSIT-25,Advanced Web Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6842426061630249,1
+NULIPA-BSIT-25,Advanced Web Programming,IS-048,Communication Skills,Soft Skill,0.6836405992507935,2
+NULIPA-BSIT-25,Advanced Web Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6831291913986206,3
+NULIPA-BSIT-25,Advanced Web Programming,IS-001,Java,Programming Language,0.6793836951255798,4
+NULIPA-BSIT-25,Advanced Web Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6790030002593994,5
+NULIPA-BSIT-26,Advanced Information Assurance and Security,IS-048,Communication Skills,Soft Skill,0.6600404977798462,1
+NULIPA-BSIT-26,Advanced Information Assurance and Security,IS-039,Security Monitoring / SOC basics,Practice,0.6565548777580261,2
+NULIPA-BSIT-26,Advanced Information Assurance and Security,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.652275800704956,3
+NULIPA-BSIT-26,Advanced Information Assurance and Security,IS-037,System Monitoring & Deployment Support,Practice,0.6472504138946533,4
+NULIPA-BSIT-26,Advanced Information Assurance and Security,IS-041,Networking Fundamentals (security context),Concept,0.6402754783630371,5
+NULIPA-BSIT-27,Introduction to Human-Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.7146077156066895,1
+NULIPA-BSIT-27,Introduction to Human-Computer Interaction,IS-050,Learning Agility / Adaptability,Soft Skill,0.7030863761901855,2
+NULIPA-BSIT-27,Introduction to Human-Computer Interaction,IS-048,Communication Skills,Soft Skill,0.6859946250915527,3
+NULIPA-BSIT-27,Introduction to Human-Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.682684063911438,4
+NULIPA-BSIT-27,Introduction to Human-Computer Interaction,IS-010,Agile/Scrum fundamentals,Methodology,0.6725679636001587,5
+NULIPA-BSIT-28,Capstone Project 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6755805611610413,1
+NULIPA-BSIT-28,Capstone Project 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6553325057029724,2
+NULIPA-BSIT-28,Capstone Project 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6536731719970703,3
+NULIPA-BSIT-28,Capstone Project 1,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6495724320411682,4
+NULIPA-BSIT-28,Capstone Project 1,IS-019,Regression & Performance Testing,Practice,0.638296365737915,5
+NULIPA-BSIT-29,Web Commercialization and E-Commerce,IS-031,Statistical Analysis & Data Modeling,Concept,0.6254885792732239,1
+NULIPA-BSIT-29,Web Commercialization and E-Commerce,IS-019,Regression & Performance Testing,Practice,0.6166618466377258,2
+NULIPA-BSIT-29,Web Commercialization and E-Commerce,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6139318346977234,3
+NULIPA-BSIT-29,Web Commercialization and E-Commerce,IS-044,AWS / Azure fundamentals,Cloud Platform,0.6111485362052917,4
+NULIPA-BSIT-29,Web Commercialization and E-Commerce,IS-028,Tableau,BI Tool,0.6073480844497681,5
+NULIPA-BSIT-30,Advanced Mobile Programming,IS-015,Swift (iOS),Programming Language,0.6826696991920471,1
+NULIPA-BSIT-30,Advanced Mobile Programming,IS-048,Communication Skills,Soft Skill,0.6779631972312927,2
+NULIPA-BSIT-30,Advanced Mobile Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6729031801223755,3
+NULIPA-BSIT-30,Advanced Mobile Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6682517528533936,4
+NULIPA-BSIT-30,Advanced Mobile Programming,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6656312942504883,5
+NULIPA-BSIT-31,Systems Administration and Maintenance,IS-037,System Monitoring & Deployment Support,Practice,0.690332293510437,1
+NULIPA-BSIT-31,Systems Administration and Maintenance,IS-048,Communication Skills,Soft Skill,0.6547716856002808,2
+NULIPA-BSIT-31,Systems Administration and Maintenance,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6362212896347046,3
+NULIPA-BSIT-31,Systems Administration and Maintenance,IS-044,AWS / Azure fundamentals,Cloud Platform,0.6303801536560059,4
+NULIPA-BSIT-31,Systems Administration and Maintenance,IS-019,Regression & Performance Testing,Practice,0.6235592365264893,5
+NULIPA-BSIT-32,Capstone Project 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6865953207015991,1
+NULIPA-BSIT-32,Capstone Project 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6578294038772583,2
+NULIPA-BSIT-32,Capstone Project 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.656816840171814,3
+NULIPA-BSIT-32,Capstone Project 2,IS-019,Regression & Performance Testing,Practice,0.653112530708313,4
+NULIPA-BSIT-32,Capstone Project 2,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6466154456138611,5
+NULIPA-BSIT-33,Internship 1 (400 hours),IS-048,Communication Skills,Soft Skill,0.6425255537033081,1
+NULIPA-BSIT-33,Internship 1 (400 hours),IS-050,Learning Agility / Adaptability,Soft Skill,0.6360077857971191,2
+NULIPA-BSIT-33,Internship 1 (400 hours),IS-051,Teamwork / Collaboration,Soft Skill,0.6325327157974243,3
+NULIPA-BSIT-33,Internship 1 (400 hours),IS-010,Agile/Scrum fundamentals,Methodology,0.6207390427589417,4
+NULIPA-BSIT-33,Internship 1 (400 hours),IS-012,.NET / C# (MAUI),Framework,0.6155208349227905,5
+NULIPA-BSIT-34,Internship 2 (400 hours),IS-048,Communication Skills,Soft Skill,0.6382811069488525,1
+NULIPA-BSIT-34,Internship 2 (400 hours),IS-050,Learning Agility / Adaptability,Soft Skill,0.6312402486801147,2
+NULIPA-BSIT-34,Internship 2 (400 hours),IS-051,Teamwork / Collaboration,Soft Skill,0.6282953023910522,3
+NULIPA-BSIT-34,Internship 2 (400 hours),IS-010,Agile/Scrum fundamentals,Methodology,0.6151226162910461,4
+NULIPA-BSIT-34,Internship 2 (400 hours),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6096889972686768,5
+UST-BSCS-01,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.7315332889556885,1
+UST-BSCS-01,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.7213798761367798,2
+UST-BSCS-01,Introduction to Computing,IS-039,Security Monitoring / SOC basics,Practice,0.7022708058357239,3
+UST-BSCS-01,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.7009119987487793,4
+UST-BSCS-01,Introduction to Computing,IS-031,Statistical Analysis & Data Modeling,Concept,0.6765742897987366,5
+UST-BSCS-02,Computer Programming I (Fundamentals Imperative),IS-035,Networking Fundamentals,Concept,0.7480484843254089,1
+UST-BSCS-02,Computer Programming I (Fundamentals Imperative),IS-041,Networking Fundamentals (security context),Concept,0.7335793972015381,2
+UST-BSCS-02,Computer Programming I (Fundamentals Imperative),IS-010,Agile/Scrum fundamentals,Methodology,0.7200117707252502,3
+UST-BSCS-02,Computer Programming I (Fundamentals Imperative),IS-024,Basic Programming/Scripting knowledge,Concept,0.7084534168243408,4
+UST-BSCS-02,Computer Programming I (Fundamentals Imperative),IS-045,Automation scripting (Python),Programming Language,0.700649619102478,5
+UST-BSCS-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-001,Java,Programming Language,0.7009482383728027,1
+UST-BSCS-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-024,Basic Programming/Scripting knowledge,Concept,0.6986396312713623,2
+UST-BSCS-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-035,Networking Fundamentals,Concept,0.6943261623382568,3
+UST-BSCS-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-010,Agile/Scrum fundamentals,Methodology,0.6854721307754517,4
+UST-BSCS-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-045,Automation scripting (Python),Programming Language,0.6807166337966919,5
+UST-BSCS-04,Discrete Structures,IS-035,Networking Fundamentals,Concept,0.7148727774620056,1
+UST-BSCS-04,Discrete Structures,IS-031,Statistical Analysis & Data Modeling,Concept,0.7110421061515808,2
+UST-BSCS-04,Discrete Structures,IS-047,Infrastructure as Code (Terraform),Tool,0.6919964551925659,3
+UST-BSCS-04,Discrete Structures,IS-041,Networking Fundamentals (security context),Concept,0.673621416091919,4
+UST-BSCS-04,Discrete Structures,IS-040,Vulnerability Assessment,Practice,0.6723650097846985,5
+UST-BSCS-05,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7601644992828369,1
+UST-BSCS-05,Data Structures and Algorithms,IS-035,Networking Fundamentals,Concept,0.7079713344573975,2
+UST-BSCS-05,Data Structures and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.684360146522522,3
+UST-BSCS-05,Data Structures and Algorithms,IS-047,Infrastructure as Code (Terraform),Tool,0.669468104839325,4
+UST-BSCS-05,Data Structures and Algorithms,IS-041,Networking Fundamentals (security context),Concept,0.6616252660751343,5
+UST-BSCS-06,Design and Analysis of Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7285504341125488,1
+UST-BSCS-06,Design and Analysis of Algorithms,IS-035,Networking Fundamentals,Concept,0.6889872550964355,2
+UST-BSCS-06,Design and Analysis of Algorithms,IS-019,Regression & Performance Testing,Practice,0.6598321795463562,3
+UST-BSCS-06,Design and Analysis of Algorithms,IS-039,Security Monitoring / SOC basics,Practice,0.6559797525405884,4
+UST-BSCS-06,Design and Analysis of Algorithms,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6453164219856262,5
+UST-BSCS-07,Theory of Automata,IS-031,Statistical Analysis & Data Modeling,Concept,0.6946301460266113,1
+UST-BSCS-07,Theory of Automata,IS-035,Networking Fundamentals,Concept,0.6506423950195312,2
+UST-BSCS-07,Theory of Automata,IS-050,Learning Agility / Adaptability,Soft Skill,0.6474418640136719,3
+UST-BSCS-07,Theory of Automata,IS-055,AI specialists,Macro Shortage Signal,0.6467247009277344,4
+UST-BSCS-07,Theory of Automata,IS-001,Java,Programming Language,0.641362190246582,5
+UST-BSCS-08,Information Management,IS-048,Communication Skills,Soft Skill,0.6872680187225342,1
+UST-BSCS-08,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6855088472366333,2
+UST-BSCS-08,Information Management,IS-031,Statistical Analysis & Data Modeling,Concept,0.6854450702667236,3
+UST-BSCS-08,Information Management,IS-035,Networking Fundamentals,Concept,0.678857147693634,4
+UST-BSCS-08,Information Management,IS-010,Agile/Scrum fundamentals,Methodology,0.6586340665817261,5
+UST-BSCS-09,Computer Architecture and Organization,IS-035,Networking Fundamentals,Concept,0.7117591500282288,1
+UST-BSCS-09,Computer Architecture and Organization,IS-039,Security Monitoring / SOC basics,Practice,0.6896740198135376,2
+UST-BSCS-09,Computer Architecture and Organization,IS-010,Agile/Scrum fundamentals,Methodology,0.68890380859375,3
+UST-BSCS-09,Computer Architecture and Organization,IS-041,Networking Fundamentals (security context),Concept,0.6811932325363159,4
+UST-BSCS-09,Computer Architecture and Organization,IS-051,Teamwork / Collaboration,Soft Skill,0.6674966812133789,5
+UST-BSCS-10,Programming Languages,IS-026,Python,Programming Language,0.7755658626556396,1
+UST-BSCS-10,Programming Languages,IS-001,Java,Programming Language,0.7716872692108154,2
+UST-BSCS-10,Programming Languages,IS-015,Swift (iOS),Programming Language,0.7670055627822876,3
+UST-BSCS-10,Programming Languages,IS-013,Python,Programming Language,0.7353767156600952,4
+UST-BSCS-10,Programming Languages,IS-024,Basic Programming/Scripting knowledge,Concept,0.7238119840621948,5
+UST-BSCS-11,Software Engineering I,IS-048,Communication Skills,Soft Skill,0.6909178495407104,1
+UST-BSCS-11,Software Engineering I,IS-010,Agile/Scrum fundamentals,Methodology,0.6789028644561768,2
+UST-BSCS-11,Software Engineering I,IS-035,Networking Fundamentals,Concept,0.6666184663772583,3
+UST-BSCS-11,Software Engineering I,IS-051,Teamwork / Collaboration,Soft Skill,0.6624197959899902,4
+UST-BSCS-11,Software Engineering I,IS-031,Statistical Analysis & Data Modeling,Concept,0.65589439868927,5
+UST-BSCS-12,Introduction to Intelligent Systems,IS-035,Networking Fundamentals,Concept,0.7134960293769836,1
+UST-BSCS-12,Introduction to Intelligent Systems,IS-039,Security Monitoring / SOC basics,Practice,0.6973525285720825,2
+UST-BSCS-12,Introduction to Intelligent Systems,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6928642988204956,3
+UST-BSCS-12,Introduction to Intelligent Systems,IS-041,Networking Fundamentals (security context),Concept,0.6910207271575928,4
+UST-BSCS-12,Introduction to Intelligent Systems,IS-048,Communication Skills,Soft Skill,0.6891733407974243,5
+UST-BSCS-13,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-048,Communication Skills,Soft Skill,0.6728390455245972,1
+UST-BSCS-13,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-035,Networking Fundamentals,Concept,0.6641532182693481,2
+UST-BSCS-13,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-037,System Monitoring & Deployment Support,Practice,0.6631001234054565,3
+UST-BSCS-13,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-010,Agile/Scrum fundamentals,Methodology,0.6600790619850159,4
+UST-BSCS-13,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-051,Teamwork / Collaboration,Soft Skill,0.6507003307342529,5
+UST-BSCS-14,Human-Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.7240585088729858,1
+UST-BSCS-14,Human-Computer Interaction,IS-048,Communication Skills,Soft Skill,0.7080900073051453,2
+UST-BSCS-14,Human-Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6994399428367615,3
+UST-BSCS-14,Human-Computer Interaction,IS-050,Learning Agility / Adaptability,Soft Skill,0.6777451038360596,4
+UST-BSCS-14,Human-Computer Interaction,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6591243743896484,5
+UST-BSCS-15,Graphics Computing and Multimedia Technology,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6229342222213745,1
+UST-BSCS-15,Graphics Computing and Multimedia Technology,IS-048,Communication Skills,Soft Skill,0.6141795516014099,2
+UST-BSCS-15,Graphics Computing and Multimedia Technology,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.613483726978302,3
+UST-BSCS-15,Graphics Computing and Multimedia Technology,IS-031,Statistical Analysis & Data Modeling,Concept,0.608617901802063,4
+UST-BSCS-15,Graphics Computing and Multimedia Technology,IS-051,Teamwork / Collaboration,Soft Skill,0.6083630919456482,5
+UST-BSCS-16,Computer Security and Information Assurance,IS-039,Security Monitoring / SOC basics,Practice,0.7284926772117615,1
+UST-BSCS-16,Computer Security and Information Assurance,IS-042,Python (security scripting),Programming Language,0.6743988990783691,2
+UST-BSCS-16,Computer Security and Information Assurance,IS-048,Communication Skills,Soft Skill,0.6743061542510986,3
+UST-BSCS-16,Computer Security and Information Assurance,IS-041,Networking Fundamentals (security context),Concept,0.6664164066314697,4
+UST-BSCS-16,Computer Security and Information Assurance,IS-037,System Monitoring & Deployment Support,Practice,0.6604056358337402,5
+UST-BSCS-17,Emerging Technology,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6777441501617432,1
+UST-BSCS-17,Emerging Technology,IS-035,Networking Fundamentals,Concept,0.6736806631088257,2
+UST-BSCS-17,Emerging Technology,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6559100151062012,3
+UST-BSCS-17,Emerging Technology,IS-048,Communication Skills,Soft Skill,0.6553753018379211,4
+UST-BSCS-17,Emerging Technology,IS-031,Statistical Analysis & Data Modeling,Concept,0.6538034677505493,5
+UST-BSCS-18,Professional electives / specialization,IS-050,Learning Agility / Adaptability,Soft Skill,0.6412047147750854,1
+UST-BSCS-18,Professional electives / specialization,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.638249933719635,2
+UST-BSCS-18,Professional electives / specialization,IS-035,Networking Fundamentals,Concept,0.6360375881195068,3
+UST-BSCS-18,Professional electives / specialization,IS-010,Agile/Scrum fundamentals,Methodology,0.6271989345550537,4
+UST-BSCS-18,Professional electives / specialization,IS-051,Teamwork / Collaboration,Soft Skill,0.6256126761436462,5
+UST-BSCS-19,Practicum (250 hours),IS-048,Communication Skills,Soft Skill,0.6789432168006897,1
+UST-BSCS-19,Practicum (250 hours),IS-051,Teamwork / Collaboration,Soft Skill,0.6496182084083557,2
+UST-BSCS-19,Practicum (250 hours),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6440451741218567,3
+UST-BSCS-19,Practicum (250 hours),IS-010,Agile/Scrum fundamentals,Methodology,0.6352198123931885,4
+UST-BSCS-19,Practicum (250 hours),IS-050,Learning Agility / Adaptability,Soft Skill,0.6324030160903931,5
+UST-BSCS-20,Thesis I and II,IS-031,Statistical Analysis & Data Modeling,Concept,0.7261523008346558,1
+UST-BSCS-20,Thesis I and II,IS-019,Regression & Performance Testing,Practice,0.6836915016174316,2
+UST-BSCS-20,Thesis I and II,IS-051,Teamwork / Collaboration,Soft Skill,0.6679887771606445,3
+UST-BSCS-20,Thesis I and II,IS-050,Learning Agility / Adaptability,Soft Skill,0.6660764217376709,4
+UST-BSCS-20,Thesis I and II,IS-035,Networking Fundamentals,Concept,0.6622943878173828,5
+DLSU-BSCS-01,Introduction to Computing,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6787995100021362,1
+DLSU-BSCS-01,Introduction to Computing,IS-012,.NET / C# (MAUI),Framework,0.6608282327651978,2
+DLSU-BSCS-01,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.6505246162414551,3
+DLSU-BSCS-01,Introduction to Computing,IS-020,SQL (basic),Database,0.6469454765319824,4
+DLSU-BSCS-01,Introduction to Computing,IS-051,Teamwork / Collaboration,Soft Skill,0.6415458917617798,5
+DLSU-BSCS-02,Logic Formulation and Introductory Programming,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6852105855941772,1
+DLSU-BSCS-02,Logic Formulation and Introductory Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.676044762134552,2
+DLSU-BSCS-02,Logic Formulation and Introductory Programming,IS-011,Debugging & Testing basics,Practice,0.6582271456718445,3
+DLSU-BSCS-02,Logic Formulation and Introductory Programming,IS-012,.NET / C# (MAUI),Framework,0.6582269668579102,4
+DLSU-BSCS-02,Logic Formulation and Introductory Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.655220627784729,5
+DLSU-BSCS-03,Programming with Structured Data Types,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6990983486175537,1
+DLSU-BSCS-03,Programming with Structured Data Types,IS-002,C#,Programming Language,0.6959018111228943,2
+DLSU-BSCS-03,Programming with Structured Data Types,IS-012,.NET / C# (MAUI),Framework,0.6887854933738708,3
+DLSU-BSCS-03,Programming with Structured Data Types,IS-025,SQL,Database/Query Language,0.6819974184036255,4
+DLSU-BSCS-03,Programming with Structured Data Types,IS-020,SQL (basic),Database,0.6721118688583374,5
+DLSU-BSCS-04,Object-Oriented Programming,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6814424395561218,1
+DLSU-BSCS-04,Object-Oriented Programming,IS-012,.NET / C# (MAUI),Framework,0.6759393215179443,2
+DLSU-BSCS-04,Object-Oriented Programming,IS-001,Java,Programming Language,0.6554703712463379,3
+DLSU-BSCS-04,Object-Oriented Programming,IS-004,JavaScript,Programming Language,0.6445913314819336,4
+DLSU-BSCS-04,Object-Oriented Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6345312595367432,5
+DLSU-BSCS-05,Discrete Structures,IS-012,.NET / C# (MAUI),Framework,0.6906174421310425,1
+DLSU-BSCS-05,Discrete Structures,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6710320711135864,2
+DLSU-BSCS-05,Discrete Structures,IS-035,Networking Fundamentals,Concept,0.6319965124130249,3
+DLSU-BSCS-05,Discrete Structures,IS-004,JavaScript,Programming Language,0.6314312815666199,4
+DLSU-BSCS-05,Discrete Structures,IS-051,Teamwork / Collaboration,Soft Skill,0.6293661594390869,5
+DLSU-BSCS-06,Data Structures and Algorithms,IS-012,.NET / C# (MAUI),Framework,0.6869678497314453,1
+DLSU-BSCS-06,Data Structures and Algorithms,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6850433349609375,2
+DLSU-BSCS-06,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.6667381525039673,3
+DLSU-BSCS-06,Data Structures and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.6467623114585876,4
+DLSU-BSCS-06,Data Structures and Algorithms,IS-051,Teamwork / Collaboration,Soft Skill,0.6467332243919373,5
+DLSU-BSCS-07,Information Management,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6839487552642822,1
+DLSU-BSCS-07,Information Management,IS-012,.NET / C# (MAUI),Framework,0.6524741649627686,2
+DLSU-BSCS-07,Information Management,IS-048,Communication Skills,Soft Skill,0.6226972341537476,3
+DLSU-BSCS-07,Information Management,IS-020,SQL (basic),Database,0.6185163259506226,4
+DLSU-BSCS-07,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6155467629432678,5
+DLSU-BSCS-08,Web Application Development,IS-012,.NET / C# (MAUI),Framework,0.6887207627296448,1
+DLSU-BSCS-08,Web Application Development,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6883125305175781,2
+DLSU-BSCS-08,Web Application Development,IS-004,JavaScript,Programming Language,0.6811383366584778,3
+DLSU-BSCS-08,Web Application Development,IS-011,Debugging & Testing basics,Practice,0.6437453031539917,4
+DLSU-BSCS-08,Web Application Development,IS-001,Java,Programming Language,0.6311956644058228,5
+DLSU-BSCS-09,Advanced Programming Techniques,IS-048,Communication Skills,Soft Skill,0.660697877407074,1
+DLSU-BSCS-09,Advanced Programming Techniques,IS-051,Teamwork / Collaboration,Soft Skill,0.6595027446746826,2
+DLSU-BSCS-09,Advanced Programming Techniques,IS-045,Automation scripting (Python),Programming Language,0.6565532684326172,3
+DLSU-BSCS-09,Advanced Programming Techniques,IS-024,Basic Programming/Scripting knowledge,Concept,0.652847945690155,4
+DLSU-BSCS-09,Advanced Programming Techniques,IS-012,.NET / C# (MAUI),Framework,0.6524860858917236,5
+DLSU-BSCS-10,Software Engineering,IS-048,Communication Skills,Soft Skill,0.6349043846130371,1
+DLSU-BSCS-10,Software Engineering,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6323366165161133,2
+DLSU-BSCS-10,Software Engineering,IS-051,Teamwork / Collaboration,Soft Skill,0.6246556043624878,3
+DLSU-BSCS-10,Software Engineering,IS-012,.NET / C# (MAUI),Framework,0.6209946274757385,4
+DLSU-BSCS-10,Software Engineering,IS-001,Java,Programming Language,0.6164848208427429,5
+DLSU-BSCS-11,Algorithms and Complexity,IS-031,Statistical Analysis & Data Modeling,Concept,0.6608302593231201,1
+DLSU-BSCS-11,Algorithms and Complexity,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6569037437438965,2
+DLSU-BSCS-11,Algorithms and Complexity,IS-051,Teamwork / Collaboration,Soft Skill,0.6526471376419067,3
+DLSU-BSCS-11,Algorithms and Complexity,IS-050,Learning Agility / Adaptability,Soft Skill,0.6413455605506897,4
+DLSU-BSCS-11,Algorithms and Complexity,IS-030,Data Cleaning / Wrangling,Practice,0.6364660859107971,5
+DLSU-BSCS-12,Introduction to Computer Networks,IS-035,Networking Fundamentals,Concept,0.726891279220581,1
+DLSU-BSCS-12,Introduction to Computer Networks,IS-041,Networking Fundamentals (security context),Concept,0.7226883172988892,2
+DLSU-BSCS-12,Introduction to Computer Networks,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6651871800422668,3
+DLSU-BSCS-12,Introduction to Computer Networks,IS-039,Security Monitoring / SOC basics,Practice,0.662710428237915,4
+DLSU-BSCS-12,Introduction to Computer Networks,IS-051,Teamwork / Collaboration,Soft Skill,0.6552319526672363,5
+DLSU-BSCS-13,Computer Organization and Architecture I,IS-012,.NET / C# (MAUI),Framework,0.6575503945350647,1
+DLSU-BSCS-13,Computer Organization and Architecture I,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6418366432189941,2
+DLSU-BSCS-13,Computer Organization and Architecture I,IS-051,Teamwork / Collaboration,Soft Skill,0.6387225389480591,3
+DLSU-BSCS-13,Computer Organization and Architecture I,IS-048,Communication Skills,Soft Skill,0.6258023977279663,4
+DLSU-BSCS-13,Computer Organization and Architecture I,IS-039,Security Monitoring / SOC basics,Practice,0.613242506980896,5
+DLSU-BSCS-14,Computer Organization and Architecture II,IS-012,.NET / C# (MAUI),Framework,0.645709753036499,1
+DLSU-BSCS-14,Computer Organization and Architecture II,IS-051,Teamwork / Collaboration,Soft Skill,0.6357210278511047,2
+DLSU-BSCS-14,Computer Organization and Architecture II,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6355389356613159,3
+DLSU-BSCS-14,Computer Organization and Architecture II,IS-048,Communication Skills,Soft Skill,0.626603901386261,4
+DLSU-BSCS-14,Computer Organization and Architecture II,IS-039,Security Monitoring / SOC basics,Practice,0.6131775379180908,5
+DLSU-BSCS-15,Operating Systems,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6755448579788208,1
+DLSU-BSCS-15,Operating Systems,IS-034,Troubleshooting Hardware/Software,Practice,0.6469724178314209,2
+DLSU-BSCS-15,Operating Systems,IS-012,.NET / C# (MAUI),Framework,0.6449101567268372,3
+DLSU-BSCS-15,Operating Systems,IS-039,Security Monitoring / SOC basics,Practice,0.6293306350708008,4
+DLSU-BSCS-15,Operating Systems,IS-048,Communication Skills,Soft Skill,0.6216205954551697,5
+DLSU-BSCS-16,Introduction to Artificial Intelligence,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.687873899936676,1
+DLSU-BSCS-16,Introduction to Artificial Intelligence,IS-051,Teamwork / Collaboration,Soft Skill,0.6800777912139893,2
+DLSU-BSCS-16,Introduction to Artificial Intelligence,IS-048,Communication Skills,Soft Skill,0.6685864925384521,3
+DLSU-BSCS-16,Introduction to Artificial Intelligence,IS-050,Learning Agility / Adaptability,Soft Skill,0.6650557518005371,4
+DLSU-BSCS-16,Introduction to Artificial Intelligence,IS-045,Automation scripting (Python),Programming Language,0.6543756723403931,5
+DLSU-BSCS-17,Secure Web Development,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6580915451049805,1
+DLSU-BSCS-17,Secure Web Development,IS-042,Python (security scripting),Programming Language,0.6505465507507324,2
+DLSU-BSCS-17,Secure Web Development,IS-012,.NET / C# (MAUI),Framework,0.6501154899597168,3
+DLSU-BSCS-17,Secure Web Development,IS-039,Security Monitoring / SOC basics,Practice,0.6439826488494873,4
+DLSU-BSCS-17,Secure Web Development,IS-048,Communication Skills,Soft Skill,0.6364195346832275,5
+DLSU-BSCS-18,Advanced Algorithms and Complexities,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6464470624923706,1
+DLSU-BSCS-18,Advanced Algorithms and Complexities,IS-051,Teamwork / Collaboration,Soft Skill,0.6454035639762878,2
+DLSU-BSCS-18,Advanced Algorithms and Complexities,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6400257349014282,3
+DLSU-BSCS-18,Advanced Algorithms and Complexities,IS-031,Statistical Analysis & Data Modeling,Concept,0.6372614502906799,4
+DLSU-BSCS-18,Advanced Algorithms and Complexities,IS-048,Communication Skills,Soft Skill,0.6331769824028015,5
+DLSU-BSCS-19,Mobile Development,IS-014,Dart / Flutter,Framework,0.6466269493103027,1
+DLSU-BSCS-19,Mobile Development,IS-048,Communication Skills,Soft Skill,0.6367716193199158,2
+DLSU-BSCS-19,Mobile Development,IS-051,Teamwork / Collaboration,Soft Skill,0.6291171908378601,3
+DLSU-BSCS-19,Mobile Development,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.624042809009552,4
+DLSU-BSCS-19,Mobile Development,IS-012,.NET / C# (MAUI),Framework,0.6235955357551575,5
+DLSU-BSCS-20,Advanced Software Engineering,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6271927952766418,1
+DLSU-BSCS-20,Advanced Software Engineering,IS-048,Communication Skills,Soft Skill,0.6269681453704834,2
+DLSU-BSCS-20,Advanced Software Engineering,IS-012,.NET / C# (MAUI),Framework,0.6202521324157715,3
+DLSU-BSCS-20,Advanced Software Engineering,IS-051,Teamwork / Collaboration,Soft Skill,0.6173096895217896,4
+DLSU-BSCS-20,Advanced Software Engineering,IS-001,Java,Programming Language,0.617171049118042,5
+DLSU-BSCS-21,Advanced Database Systems,IS-020,SQL (basic),Database,0.7101424336433411,1
+DLSU-BSCS-21,Advanced Database Systems,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.7018094062805176,2
+DLSU-BSCS-21,Advanced Database Systems,IS-025,SQL,Database/Query Language,0.6990857124328613,3
+DLSU-BSCS-21,Advanced Database Systems,IS-002,C#,Programming Language,0.6485844850540161,4
+DLSU-BSCS-21,Advanced Database Systems,IS-006,MySQL / MS SQL,Database,0.6315488815307617,5
+DLSU-BSCS-22,Human Computer Interactions,IS-051,Teamwork / Collaboration,Soft Skill,0.7177375555038452,1
+DLSU-BSCS-22,Human Computer Interactions,IS-048,Communication Skills,Soft Skill,0.6802421808242798,2
+DLSU-BSCS-22,Human Computer Interactions,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.655681848526001,3
+DLSU-BSCS-22,Human Computer Interactions,IS-050,Learning Agility / Adaptability,Soft Skill,0.6546968817710876,4
+DLSU-BSCS-22,Human Computer Interactions,IS-035,Networking Fundamentals,Concept,0.6488838195800781,5
+DLSU-BSCS-23,Advanced Intelligent Systems,IS-048,Communication Skills,Soft Skill,0.6546807885169983,1
+DLSU-BSCS-23,Advanced Intelligent Systems,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6394560933113098,2
+DLSU-BSCS-23,Advanced Intelligent Systems,IS-051,Teamwork / Collaboration,Soft Skill,0.6349199414253235,3
+DLSU-BSCS-23,Advanced Intelligent Systems,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6309606432914734,4
+DLSU-BSCS-23,Advanced Intelligent Systems,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.629138708114624,5
+DLSU-BSCS-24,Distributed Computing,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6571677923202515,1
+DLSU-BSCS-24,Distributed Computing,IS-051,Teamwork / Collaboration,Soft Skill,0.635694146156311,2
+DLSU-BSCS-24,Distributed Computing,IS-012,.NET / C# (MAUI),Framework,0.6275703310966492,3
+DLSU-BSCS-24,Distributed Computing,IS-041,Networking Fundamentals (security context),Concept,0.6268813610076904,4
+DLSU-BSCS-24,Distributed Computing,IS-038,Basic Cloud Awareness (AWS/Azure),Cloud,0.6222805976867676,5
+DLSU-BSCS-25,Software Technology Research Methods,IS-051,Teamwork / Collaboration,Soft Skill,0.6347047686576843,1
+DLSU-BSCS-25,Software Technology Research Methods,IS-031,Statistical Analysis & Data Modeling,Concept,0.6174306869506836,2
+DLSU-BSCS-25,Software Technology Research Methods,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6114271283149719,3
+DLSU-BSCS-25,Software Technology Research Methods,IS-050,Learning Agility / Adaptability,Soft Skill,0.604566216468811,4
+DLSU-BSCS-25,Software Technology Research Methods,IS-010,Agile/Scrum fundamentals,Methodology,0.6043767333030701,5
+DLSU-BSCS-26,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",IS-048,Communication Skills,Soft Skill,0.6498056650161743,1
+DLSU-BSCS-26,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6494760513305664,2
+DLSU-BSCS-26,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6483837962150574,3
+DLSU-BSCS-26,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",IS-051,Teamwork / Collaboration,Soft Skill,0.6443613171577454,4
+DLSU-BSCS-26,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",IS-031,Statistical Analysis & Data Modeling,Concept,0.6249324083328247,5
+DLSU-BSCS-27,Practicum,IS-048,Communication Skills,Soft Skill,0.6404870748519897,1
+DLSU-BSCS-27,Practicum,IS-051,Teamwork / Collaboration,Soft Skill,0.6342226266860962,2
+DLSU-BSCS-27,Practicum,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.62794029712677,3
+DLSU-BSCS-27,Practicum,IS-012,.NET / C# (MAUI),Framework,0.6183888912200928,4
+DLSU-BSCS-27,Practicum,IS-011,Debugging & Testing basics,Practice,0.6138288974761963,5
+DLSU-BSCS-28,Thesis,IS-051,Teamwork / Collaboration,Soft Skill,0.6568607687950134,1
+DLSU-BSCS-28,Thesis,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6524747610092163,2
+DLSU-BSCS-28,Thesis,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6349716186523438,3
+DLSU-BSCS-28,Thesis,IS-012,.NET / C# (MAUI),Framework,0.6328250765800476,4
+DLSU-BSCS-28,Thesis,IS-041,Networking Fundamentals (security context),Concept,0.623477578163147,5
+UP-BSCS-01,Introduction to Computer Science,IS-039,Security Monitoring / SOC basics,Practice,0.709290087223053,1
+UP-BSCS-01,Introduction to Computer Science,IS-041,Networking Fundamentals (security context),Concept,0.7010738849639893,2
+UP-BSCS-01,Introduction to Computer Science,IS-035,Networking Fundamentals,Concept,0.7007993459701538,3
+UP-BSCS-01,Introduction to Computer Science,IS-010,Agile/Scrum fundamentals,Methodology,0.6867095828056335,4
+UP-BSCS-01,Introduction to Computer Science,IS-031,Statistical Analysis & Data Modeling,Concept,0.6611493825912476,5
+UP-BSCS-02,Discrete Mathematical Structures in CS 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6869271397590637,1
+UP-BSCS-02,Discrete Mathematical Structures in CS 1,IS-035,Networking Fundamentals,Concept,0.6591299772262573,2
+UP-BSCS-02,Discrete Mathematical Structures in CS 1,IS-001,Java,Programming Language,0.6491096615791321,3
+UP-BSCS-02,Discrete Mathematical Structures in CS 1,IS-041,Networking Fundamentals (security context),Concept,0.6399948596954346,4
+UP-BSCS-02,Discrete Mathematical Structures in CS 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6369973421096802,5
+UP-BSCS-03,Fundamentals of Programming,IS-035,Networking Fundamentals,Concept,0.745894730091095,1
+UP-BSCS-03,Fundamentals of Programming,IS-041,Networking Fundamentals (security context),Concept,0.7271313667297363,2
+UP-BSCS-03,Fundamentals of Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.7135595083236694,3
+UP-BSCS-03,Fundamentals of Programming,IS-039,Security Monitoring / SOC basics,Practice,0.6927037835121155,4
+UP-BSCS-03,Fundamentals of Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6835570335388184,5
+UP-BSCS-04,Discrete Mathematical Structures in CS 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6874266266822815,1
+UP-BSCS-04,Discrete Mathematical Structures in CS 2,IS-035,Networking Fundamentals,Concept,0.6576831340789795,2
+UP-BSCS-04,Discrete Mathematical Structures in CS 2,IS-001,Java,Programming Language,0.64698326587677,3
+UP-BSCS-04,Discrete Mathematical Structures in CS 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6388459801673889,4
+UP-BSCS-04,Discrete Mathematical Structures in CS 2,IS-041,Networking Fundamentals (security context),Concept,0.6352629661560059,5
+UP-BSCS-05,Programming Paradigms,IS-035,Networking Fundamentals,Concept,0.704676628112793,1
+UP-BSCS-05,Programming Paradigms,IS-010,Agile/Scrum fundamentals,Methodology,0.688400387763977,2
+UP-BSCS-05,Programming Paradigms,IS-001,Java,Programming Language,0.6862736940383911,3
+UP-BSCS-05,Programming Paradigms,IS-041,Networking Fundamentals (security context),Concept,0.6745334267616272,4
+UP-BSCS-05,Programming Paradigms,IS-004,JavaScript,Programming Language,0.6730464696884155,5
+UP-BSCS-06,Data Structures,IS-031,Statistical Analysis & Data Modeling,Concept,0.7443608045578003,1
+UP-BSCS-06,Data Structures,IS-035,Networking Fundamentals,Concept,0.6981189250946045,2
+UP-BSCS-06,Data Structures,IS-030,Data Cleaning / Wrangling,Practice,0.6923287510871887,3
+UP-BSCS-06,Data Structures,IS-047,Infrastructure as Code (Terraform),Tool,0.6770126819610596,4
+UP-BSCS-06,Data Structures,IS-012,.NET / C# (MAUI),Framework,0.6743588447570801,5
+UP-BSCS-07,Logic Design and Digital Computer Circuits,IS-039,Security Monitoring / SOC basics,Practice,0.6728217601776123,1
+UP-BSCS-07,Logic Design and Digital Computer Circuits,IS-035,Networking Fundamentals,Concept,0.6633529663085938,2
+UP-BSCS-07,Logic Design and Digital Computer Circuits,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6602799892425537,3
+UP-BSCS-07,Logic Design and Digital Computer Circuits,IS-031,Statistical Analysis & Data Modeling,Concept,0.6560451984405518,4
+UP-BSCS-07,Logic Design and Digital Computer Circuits,IS-041,Networking Fundamentals (security context),Concept,0.6355441808700562,5
+UP-BSCS-08,Research Methods for Computer Science,IS-031,Statistical Analysis & Data Modeling,Concept,0.7193645238876343,1
+UP-BSCS-08,Research Methods for Computer Science,IS-010,Agile/Scrum fundamentals,Methodology,0.6787278056144714,2
+UP-BSCS-08,Research Methods for Computer Science,IS-035,Networking Fundamentals,Concept,0.6760669946670532,3
+UP-BSCS-08,Research Methods for Computer Science,IS-041,Networking Fundamentals (security context),Concept,0.6597705483436584,4
+UP-BSCS-08,Research Methods for Computer Science,IS-039,Security Monitoring / SOC basics,Practice,0.6577540636062622,5
+UP-BSCS-09,File Processing and Database Systems,IS-030,Data Cleaning / Wrangling,Practice,0.6937087774276733,1
+UP-BSCS-09,File Processing and Database Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6741169691085815,2
+UP-BSCS-09,File Processing and Database Systems,IS-039,Security Monitoring / SOC basics,Practice,0.6727993488311768,3
+UP-BSCS-09,File Processing and Database Systems,IS-037,System Monitoring & Deployment Support,Practice,0.6693581342697144,4
+UP-BSCS-09,File Processing and Database Systems,IS-020,SQL (basic),Database,0.6668400764465332,5
+UP-BSCS-10,"Intro to Computer Organization, Architecture, and Machine-Level Programming",IS-039,Security Monitoring / SOC basics,Practice,0.7157052755355835,1
+UP-BSCS-10,"Intro to Computer Organization, Architecture, and Machine-Level Programming",IS-010,Agile/Scrum fundamentals,Methodology,0.7128938436508179,2
+UP-BSCS-10,"Intro to Computer Organization, Architecture, and Machine-Level Programming",IS-035,Networking Fundamentals,Concept,0.7116550207138062,3
+UP-BSCS-10,"Intro to Computer Organization, Architecture, and Machine-Level Programming",IS-041,Networking Fundamentals (security context),Concept,0.7081425189971924,4
+UP-BSCS-10,"Intro to Computer Organization, Architecture, and Machine-Level Programming",IS-051,Teamwork / Collaboration,Soft Skill,0.6803430318832397,5
+UP-BSCS-11,Introduction to the Theory of Computation,IS-031,Statistical Analysis & Data Modeling,Concept,0.7232909202575684,1
+UP-BSCS-11,Introduction to the Theory of Computation,IS-035,Networking Fundamentals,Concept,0.7039598822593689,2
+UP-BSCS-11,Introduction to the Theory of Computation,IS-041,Networking Fundamentals (security context),Concept,0.67920982837677,3
+UP-BSCS-11,Introduction to the Theory of Computation,IS-039,Security Monitoring / SOC basics,Practice,0.6654510498046875,4
+UP-BSCS-11,Introduction to the Theory of Computation,IS-030,Data Cleaning / Wrangling,Practice,0.6582143902778625,5
+UP-BSCS-12,Technical Writing for Computer Science,IS-035,Networking Fundamentals,Concept,0.6778210401535034,1
+UP-BSCS-12,Technical Writing for Computer Science,IS-041,Networking Fundamentals (security context),Concept,0.6750942468643188,2
+UP-BSCS-12,Technical Writing for Computer Science,IS-039,Security Monitoring / SOC basics,Practice,0.6706994771957397,3
+UP-BSCS-12,Technical Writing for Computer Science,IS-051,Teamwork / Collaboration,Soft Skill,0.6706603169441223,4
+UP-BSCS-12,Technical Writing for Computer Science,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6611943244934082,5
+UP-BSCS-13,Design and Implementation of Programming Languages,IS-001,Java,Programming Language,0.722413182258606,1
+UP-BSCS-13,Design and Implementation of Programming Languages,IS-026,Python,Programming Language,0.6977190375328064,2
+UP-BSCS-13,Design and Implementation of Programming Languages,IS-035,Networking Fundamentals,Concept,0.6964287757873535,3
+UP-BSCS-13,Design and Implementation of Programming Languages,IS-013,Python,Programming Language,0.6907841563224792,4
+UP-BSCS-13,Design and Implementation of Programming Languages,IS-031,Statistical Analysis & Data Modeling,Concept,0.6895866394042969,5
+UP-BSCS-14,Software Engineering 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6686260104179382,1
+UP-BSCS-14,Software Engineering 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6626455783843994,2
+UP-BSCS-14,Software Engineering 1,IS-039,Security Monitoring / SOC basics,Practice,0.6573236584663391,3
+UP-BSCS-14,Software Engineering 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6542105674743652,4
+UP-BSCS-14,Software Engineering 1,IS-035,Networking Fundamentals,Concept,0.6541770100593567,5
+UP-BSCS-15,Design and Analysis of Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7365347146987915,1
+UP-BSCS-15,Design and Analysis of Algorithms,IS-035,Networking Fundamentals,Concept,0.6777777671813965,2
+UP-BSCS-15,Design and Analysis of Algorithms,IS-039,Security Monitoring / SOC basics,Practice,0.6644072532653809,3
+UP-BSCS-15,Design and Analysis of Algorithms,IS-019,Regression & Performance Testing,Practice,0.6538565754890442,4
+UP-BSCS-15,Design and Analysis of Algorithms,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6467494368553162,5
+UP-BSCS-16,Ethical and Professional Issues in Computing,IS-051,Teamwork / Collaboration,Soft Skill,0.6539171934127808,1
+UP-BSCS-16,Ethical and Professional Issues in Computing,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6521583199501038,2
+UP-BSCS-16,Ethical and Professional Issues in Computing,IS-039,Security Monitoring / SOC basics,Practice,0.6498745679855347,3
+UP-BSCS-16,Ethical and Professional Issues in Computing,IS-040,Vulnerability Assessment,Practice,0.6492702960968018,4
+UP-BSCS-16,Ethical and Professional Issues in Computing,IS-037,System Monitoring & Deployment Support,Practice,0.6392086744308472,5
+UP-BSCS-17,Research Internship 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6466768980026245,1
+UP-BSCS-17,Research Internship 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6391466856002808,2
+UP-BSCS-17,Research Internship 1,IS-037,System Monitoring & Deployment Support,Practice,0.6375364661216736,3
+UP-BSCS-17,Research Internship 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6337062120437622,4
+UP-BSCS-17,Research Internship 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6311471462249756,5
+UP-BSCS-18,Operating Systems,IS-037,System Monitoring & Deployment Support,Practice,0.7213694453239441,1
+UP-BSCS-18,Operating Systems,IS-039,Security Monitoring / SOC basics,Practice,0.7118889093399048,2
+UP-BSCS-18,Operating Systems,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6610556244850159,3
+UP-BSCS-18,Operating Systems,IS-046,CI/CD & Docker,Tool,0.6588822603225708,4
+UP-BSCS-18,Operating Systems,IS-012,.NET / C# (MAUI),Framework,0.6566898822784424,5
+UP-BSCS-19,Software Engineering 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6804653406143188,1
+UP-BSCS-19,Software Engineering 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6677865386009216,2
+UP-BSCS-19,Software Engineering 2,IS-039,Security Monitoring / SOC basics,Practice,0.6669101715087891,3
+UP-BSCS-19,Software Engineering 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6656166315078735,4
+UP-BSCS-19,Software Engineering 2,IS-035,Networking Fundamentals,Concept,0.6629259586334229,5
+UP-BSCS-20,Introduction to Artificial Intelligence,IS-031,Statistical Analysis & Data Modeling,Concept,0.7151386141777039,1
+UP-BSCS-20,Introduction to Artificial Intelligence,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.689975380897522,2
+UP-BSCS-20,Introduction to Artificial Intelligence,IS-055,AI specialists,Macro Shortage Signal,0.6859332323074341,3
+UP-BSCS-20,Introduction to Artificial Intelligence,IS-050,Learning Agility / Adaptability,Soft Skill,0.6811608076095581,4
+UP-BSCS-20,Introduction to Artificial Intelligence,IS-035,Networking Fundamentals,Concept,0.6777056455612183,5
+UP-BSCS-21,Research Internship 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6534162759780884,1
+UP-BSCS-21,Research Internship 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6470884084701538,2
+UP-BSCS-21,Research Internship 2,IS-037,System Monitoring & Deployment Support,Practice,0.6435878276824951,3
+UP-BSCS-21,Research Internship 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6409839391708374,4
+UP-BSCS-21,Research Internship 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6392956376075745,5
+UP-BSCS-22,Practicum,IS-051,Teamwork / Collaboration,Soft Skill,0.6942439079284668,1
+UP-BSCS-22,Practicum,IS-010,Agile/Scrum fundamentals,Methodology,0.6841360330581665,2
+UP-BSCS-22,Practicum,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6834290623664856,3
+UP-BSCS-22,Practicum,IS-039,Security Monitoring / SOC basics,Practice,0.6813751459121704,4
+UP-BSCS-22,Practicum,IS-035,Networking Fundamentals,Concept,0.6763367056846619,5
+UP-BSCS-23,Data Communication and Networking,IS-035,Networking Fundamentals,Concept,0.7595721483230591,1
+UP-BSCS-23,Data Communication and Networking,IS-041,Networking Fundamentals (security context),Concept,0.7144018411636353,2
+UP-BSCS-23,Data Communication and Networking,IS-039,Security Monitoring / SOC basics,Practice,0.6917931437492371,3
+UP-BSCS-23,Data Communication and Networking,IS-031,Statistical Analysis & Data Modeling,Concept,0.681704044342041,4
+UP-BSCS-23,Data Communication and Networking,IS-048,Communication Skills,Soft Skill,0.6760807037353516,5
+UP-BSCS-24,Machine Learning,IS-031,Statistical Analysis & Data Modeling,Concept,0.7577680945396423,1
+UP-BSCS-24,Machine Learning,IS-050,Learning Agility / Adaptability,Soft Skill,0.6819629073143005,2
+UP-BSCS-24,Machine Learning,IS-019,Regression & Performance Testing,Practice,0.6774279475212097,3
+UP-BSCS-24,Machine Learning,IS-051,Teamwork / Collaboration,Soft Skill,0.6672918796539307,4
+UP-BSCS-24,Machine Learning,IS-035,Networking Fundamentals,Concept,0.6651009917259216,5
+UP-BSCS-25,Special Problem 1,IS-012,.NET / C# (MAUI),Framework,0.718984842300415,1
+UP-BSCS-25,Special Problem 1,IS-034,Troubleshooting Hardware/Software,Practice,0.7005184888839722,2
+UP-BSCS-25,Special Problem 1,IS-039,Security Monitoring / SOC basics,Practice,0.6822144389152527,3
+UP-BSCS-25,Special Problem 1,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6796237230300903,4
+UP-BSCS-25,Special Problem 1,IS-020,SQL (basic),Database,0.6776823401451111,5
+UP-BSCS-26,Introduction to Computer Security,IS-039,Security Monitoring / SOC basics,Practice,0.804646909236908,1
+UP-BSCS-26,Introduction to Computer Security,IS-041,Networking Fundamentals (security context),Concept,0.7642897367477417,2
+UP-BSCS-26,Introduction to Computer Security,IS-042,Python (security scripting),Programming Language,0.7143416404724121,3
+UP-BSCS-26,Introduction to Computer Security,IS-035,Networking Fundamentals,Concept,0.7005161046981812,4
+UP-BSCS-26,Introduction to Computer Security,IS-037,System Monitoring & Deployment Support,Practice,0.6766208410263062,5
+UP-BSCS-27,Technopreneurship,IS-035,Networking Fundamentals,Concept,0.68427574634552,1
+UP-BSCS-27,Technopreneurship,IS-010,Agile/Scrum fundamentals,Methodology,0.6623274087905884,2
+UP-BSCS-27,Technopreneurship,IS-037,System Monitoring & Deployment Support,Practice,0.6608293056488037,3
+UP-BSCS-27,Technopreneurship,IS-031,Statistical Analysis & Data Modeling,Concept,0.6603442430496216,4
+UP-BSCS-27,Technopreneurship,IS-051,Teamwork / Collaboration,Soft Skill,0.6557130217552185,5
+UP-BSCS-28,Special Problem 2,IS-034,Troubleshooting Hardware/Software,Practice,0.6922607421875,1
+UP-BSCS-28,Special Problem 2,IS-012,.NET / C# (MAUI),Framework,0.690994381904602,2
+UP-BSCS-28,Special Problem 2,IS-039,Security Monitoring / SOC basics,Practice,0.6848801374435425,3
+UP-BSCS-28,Special Problem 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6843068599700928,4
+UP-BSCS-28,Special Problem 2,IS-035,Networking Fundamentals,Concept,0.6802341938018799,5
+ATENEO-BSCS-01,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.6557674407958984,1
+ATENEO-BSCS-01,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.6553400158882141,2
+ATENEO-BSCS-01,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.6506260633468628,3
+ATENEO-BSCS-01,Introduction to Computing,IS-039,Security Monitoring / SOC basics,Practice,0.6439148783683777,4
+ATENEO-BSCS-01,Introduction to Computing,IS-031,Statistical Analysis & Data Modeling,Concept,0.6288400888442993,5
+ATENEO-BSCS-02,Introduction to Programming I,IS-010,Agile/Scrum fundamentals,Methodology,0.679360568523407,1
+ATENEO-BSCS-02,Introduction to Programming I,IS-024,Basic Programming/Scripting knowledge,Concept,0.6654994487762451,2
+ATENEO-BSCS-02,Introduction to Programming I,IS-035,Networking Fundamentals,Concept,0.6496132612228394,3
+ATENEO-BSCS-02,Introduction to Programming I,IS-001,Java,Programming Language,0.6438516974449158,4
+ATENEO-BSCS-02,Introduction to Programming I,IS-041,Networking Fundamentals (security context),Concept,0.6417044401168823,5
+ATENEO-BSCS-03,Introduction to Programming II,IS-010,Agile/Scrum fundamentals,Methodology,0.6766152381896973,1
+ATENEO-BSCS-03,Introduction to Programming II,IS-024,Basic Programming/Scripting knowledge,Concept,0.660818338394165,2
+ATENEO-BSCS-03,Introduction to Programming II,IS-035,Networking Fundamentals,Concept,0.641573429107666,3
+ATENEO-BSCS-03,Introduction to Programming II,IS-041,Networking Fundamentals (security context),Concept,0.6363930702209473,4
+ATENEO-BSCS-03,Introduction to Programming II,IS-001,Java,Programming Language,0.6362148523330688,5
+ATENEO-BSCS-04,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7331108450889587,1
+ATENEO-BSCS-04,Data Structures and Algorithms,IS-035,Networking Fundamentals,Concept,0.6666414141654968,2
+ATENEO-BSCS-04,Data Structures and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.6590228080749512,3
+ATENEO-BSCS-04,Data Structures and Algorithms,IS-010,Agile/Scrum fundamentals,Methodology,0.6496201157569885,4
+ATENEO-BSCS-04,Data Structures and Algorithms,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6368206739425659,5
+ATENEO-BSCS-05,Software Tools and Development Frameworks,IS-010,Agile/Scrum fundamentals,Methodology,0.6467050313949585,1
+ATENEO-BSCS-05,Software Tools and Development Frameworks,IS-051,Teamwork / Collaboration,Soft Skill,0.6436206102371216,2
+ATENEO-BSCS-05,Software Tools and Development Frameworks,IS-047,Infrastructure as Code (Terraform),Tool,0.6273396015167236,3
+ATENEO-BSCS-05,Software Tools and Development Frameworks,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.615613579750061,4
+ATENEO-BSCS-05,Software Tools and Development Frameworks,IS-048,Communication Skills,Soft Skill,0.613274335861206,5
+ATENEO-BSCS-06,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6432362198829651,1
+ATENEO-BSCS-06,Information Management,IS-031,Statistical Analysis & Data Modeling,Concept,0.6261608600616455,2
+ATENEO-BSCS-06,Information Management,IS-010,Agile/Scrum fundamentals,Methodology,0.6145775318145752,3
+ATENEO-BSCS-06,Information Management,IS-048,Communication Skills,Soft Skill,0.6141568422317505,4
+ATENEO-BSCS-06,Information Management,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6012136936187744,5
+ATENEO-BSCS-07,"Computer Organization, Lecture",IS-035,Networking Fundamentals,Concept,0.665740966796875,1
+ATENEO-BSCS-07,"Computer Organization, Lecture",IS-010,Agile/Scrum fundamentals,Methodology,0.6568697690963745,2
+ATENEO-BSCS-07,"Computer Organization, Lecture",IS-039,Security Monitoring / SOC basics,Practice,0.652041494846344,3
+ATENEO-BSCS-07,"Computer Organization, Lecture",IS-041,Networking Fundamentals (security context),Concept,0.6480087041854858,4
+ATENEO-BSCS-07,"Computer Organization, Lecture",IS-051,Teamwork / Collaboration,Soft Skill,0.618397057056427,5
+ATENEO-BSCS-08,"Computer Organization, Laboratory",IS-035,Networking Fundamentals,Concept,0.6522411108016968,1
+ATENEO-BSCS-08,"Computer Organization, Laboratory",IS-010,Agile/Scrum fundamentals,Methodology,0.6491950750350952,2
+ATENEO-BSCS-08,"Computer Organization, Laboratory",IS-039,Security Monitoring / SOC basics,Practice,0.6462292671203613,3
+ATENEO-BSCS-08,"Computer Organization, Laboratory",IS-031,Statistical Analysis & Data Modeling,Concept,0.6332054138183594,4
+ATENEO-BSCS-08,"Computer Organization, Laboratory",IS-041,Networking Fundamentals (security context),Concept,0.6267352104187012,5
+ATENEO-BSCS-09,Guided Studies in DISCS,IS-017,Manual Testing & Test Case Design,Practice,0.6154235005378723,1
+ATENEO-BSCS-09,Guided Studies in DISCS,IS-010,Agile/Scrum fundamentals,Methodology,0.6141211986541748,2
+ATENEO-BSCS-09,Guided Studies in DISCS,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6049272418022156,3
+ATENEO-BSCS-09,Guided Studies in DISCS,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6016117334365845,4
+ATENEO-BSCS-09,Guided Studies in DISCS,IS-019,Regression & Performance Testing,Practice,0.5915712118148804,5
+ATENEO-BSCS-10,CSCI Major Elective,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6299682855606079,1
+ATENEO-BSCS-10,CSCI Major Elective,IS-039,Security Monitoring / SOC basics,Practice,0.6040624380111694,2
+ATENEO-BSCS-10,CSCI Major Elective,IS-010,Agile/Scrum fundamentals,Methodology,0.5983157157897949,3
+ATENEO-BSCS-10,CSCI Major Elective,IS-031,Statistical Analysis & Data Modeling,Concept,0.5735503435134888,4
+ATENEO-BSCS-10,CSCI Major Elective,IS-041,Networking Fundamentals (security context),Concept,0.5691483616828918,5
+ATENEO-BSCS-11,"Operating Systems, Lecture",IS-039,Security Monitoring / SOC basics,Practice,0.6514811515808105,1
+ATENEO-BSCS-11,"Operating Systems, Lecture",IS-035,Networking Fundamentals,Concept,0.6413147449493408,2
+ATENEO-BSCS-11,"Operating Systems, Lecture",IS-041,Networking Fundamentals (security context),Concept,0.6394472122192383,3
+ATENEO-BSCS-11,"Operating Systems, Lecture",IS-037,System Monitoring & Deployment Support,Practice,0.6390261650085449,4
+ATENEO-BSCS-11,"Operating Systems, Lecture",IS-010,Agile/Scrum fundamentals,Methodology,0.6245993375778198,5
+ATENEO-BSCS-12,"Operating Systems, Laboratory",IS-039,Security Monitoring / SOC basics,Practice,0.6598828434944153,1
+ATENEO-BSCS-12,"Operating Systems, Laboratory",IS-037,System Monitoring & Deployment Support,Practice,0.647396445274353,2
+ATENEO-BSCS-12,"Operating Systems, Laboratory",IS-035,Networking Fundamentals,Concept,0.6405789256095886,3
+ATENEO-BSCS-12,"Operating Systems, Laboratory",IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6319778561592102,4
+ATENEO-BSCS-12,"Operating Systems, Laboratory",IS-010,Agile/Scrum fundamentals,Methodology,0.6303308010101318,5
+ATENEO-BSCS-13,Introduction to Software Engineering,IS-010,Agile/Scrum fundamentals,Methodology,0.6889642477035522,1
+ATENEO-BSCS-13,Introduction to Software Engineering,IS-035,Networking Fundamentals,Concept,0.6431174278259277,2
+ATENEO-BSCS-13,Introduction to Software Engineering,IS-031,Statistical Analysis & Data Modeling,Concept,0.640040397644043,3
+ATENEO-BSCS-13,Introduction to Software Engineering,IS-041,Networking Fundamentals (security context),Concept,0.6332623958587646,4
+ATENEO-BSCS-13,Introduction to Software Engineering,IS-039,Security Monitoring / SOC basics,Practice,0.6327989101409912,5
+ATENEO-BSCS-14,Guided Studies in DISCS,IS-017,Manual Testing & Test Case Design,Practice,0.6154235601425171,1
+ATENEO-BSCS-14,Guided Studies in DISCS,IS-010,Agile/Scrum fundamentals,Methodology,0.6141212582588196,2
+ATENEO-BSCS-14,Guided Studies in DISCS,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6049272418022156,3
+ATENEO-BSCS-14,Guided Studies in DISCS,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6016117930412292,4
+ATENEO-BSCS-14,Guided Studies in DISCS,IS-019,Regression & Performance Testing,Practice,0.5915711522102356,5
+ATENEO-BSCS-15,Thesis Writing I,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6229293346405029,1
+ATENEO-BSCS-15,Thesis Writing I,IS-031,Statistical Analysis & Data Modeling,Concept,0.6105402708053589,2
+ATENEO-BSCS-15,Thesis Writing I,IS-010,Agile/Scrum fundamentals,Methodology,0.594039261341095,3
+ATENEO-BSCS-15,Thesis Writing I,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.5939651727676392,4
+ATENEO-BSCS-15,Thesis Writing I,IS-051,Teamwork / Collaboration,Soft Skill,0.5920306444168091,5
+ATENEO-BSCS-16,CSCI Major Elective,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6299682855606079,1
+ATENEO-BSCS-16,CSCI Major Elective,IS-039,Security Monitoring / SOC basics,Practice,0.6040624380111694,2
+ATENEO-BSCS-16,CSCI Major Elective,IS-010,Agile/Scrum fundamentals,Methodology,0.5983157157897949,3
+ATENEO-BSCS-16,CSCI Major Elective,IS-031,Statistical Analysis & Data Modeling,Concept,0.5735503435134888,4
+ATENEO-BSCS-16,CSCI Major Elective,IS-041,Networking Fundamentals (security context),Concept,0.5691483616828918,5
+ATENEO-BSCS-17,Practicum,IS-048,Communication Skills,Soft Skill,0.6095755100250244,1
+ATENEO-BSCS-17,Practicum,IS-010,Agile/Scrum fundamentals,Methodology,0.6090395450592041,2
+ATENEO-BSCS-17,Practicum,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.5996341705322266,3
+ATENEO-BSCS-17,Practicum,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.5994930267333984,4
+ATENEO-BSCS-17,Practicum,IS-051,Teamwork / Collaboration,Soft Skill,0.5970923900604248,5
+ATENEO-BSCS-18,Computer Networks and Data Communications,IS-035,Networking Fundamentals,Concept,0.720574140548706,1
+ATENEO-BSCS-18,Computer Networks and Data Communications,IS-041,Networking Fundamentals (security context),Concept,0.6858316659927368,2
+ATENEO-BSCS-18,Computer Networks and Data Communications,IS-031,Statistical Analysis & Data Modeling,Concept,0.6500157713890076,3
+ATENEO-BSCS-18,Computer Networks and Data Communications,IS-039,Security Monitoring / SOC basics,Practice,0.6478508710861206,4
+ATENEO-BSCS-18,Computer Networks and Data Communications,IS-048,Communication Skills,Soft Skill,0.6468651294708252,5
+ATENEO-BSCS-19,Structure and Interpretation of Programming Languages,IS-001,Java,Programming Language,0.6980099678039551,1
+ATENEO-BSCS-19,Structure and Interpretation of Programming Languages,IS-010,Agile/Scrum fundamentals,Methodology,0.6657772064208984,2
+ATENEO-BSCS-19,Structure and Interpretation of Programming Languages,IS-024,Basic Programming/Scripting knowledge,Concept,0.6554419994354248,3
+ATENEO-BSCS-19,Structure and Interpretation of Programming Languages,IS-013,Python,Programming Language,0.6387258172035217,4
+ATENEO-BSCS-19,Structure and Interpretation of Programming Languages,IS-041,Networking Fundamentals (security context),Concept,0.6349613666534424,5
+ATENEO-BSCS-20,CSCI Major Elective,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6299682855606079,1
+ATENEO-BSCS-20,CSCI Major Elective,IS-039,Security Monitoring / SOC basics,Practice,0.6040624380111694,2
+ATENEO-BSCS-20,CSCI Major Elective,IS-010,Agile/Scrum fundamentals,Methodology,0.5983157157897949,3
+ATENEO-BSCS-20,CSCI Major Elective,IS-031,Statistical Analysis & Data Modeling,Concept,0.5735503435134888,4
+ATENEO-BSCS-20,CSCI Major Elective,IS-041,Networking Fundamentals (security context),Concept,0.5691483616828918,5
+ATENEO-BSCS-21,Guided Studies in DISCS,IS-017,Manual Testing & Test Case Design,Practice,0.6154235005378723,1
+ATENEO-BSCS-21,Guided Studies in DISCS,IS-010,Agile/Scrum fundamentals,Methodology,0.6141211986541748,2
+ATENEO-BSCS-21,Guided Studies in DISCS,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6049272418022156,3
+ATENEO-BSCS-21,Guided Studies in DISCS,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6016117334365845,4
+ATENEO-BSCS-21,Guided Studies in DISCS,IS-019,Regression & Performance Testing,Practice,0.5915712118148804,5
+ATENEO-BSCS-22,Thesis Writing II,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.61501145362854,1
+ATENEO-BSCS-22,Thesis Writing II,IS-031,Statistical Analysis & Data Modeling,Concept,0.6047540903091431,2
+ATENEO-BSCS-22,Thesis Writing II,IS-017,Manual Testing & Test Case Design,Practice,0.5917843580245972,3
+ATENEO-BSCS-22,Thesis Writing II,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.5856421589851379,4
+ATENEO-BSCS-22,Thesis Writing II,IS-010,Agile/Scrum fundamentals,Methodology,0.5853679776191711,5
+ATENEO-BSCS-23,Information Assurance and Security,IS-039,Security Monitoring / SOC basics,Practice,0.6699414253234863,1
+ATENEO-BSCS-23,Information Assurance and Security,IS-041,Networking Fundamentals (security context),Concept,0.6189429759979248,2
+ATENEO-BSCS-23,Information Assurance and Security,IS-048,Communication Skills,Soft Skill,0.612099289894104,3
+ATENEO-BSCS-23,Information Assurance and Security,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6118898391723633,4
+ATENEO-BSCS-23,Information Assurance and Security,IS-040,Vulnerability Assessment,Practice,0.6069505214691162,5
+ATENEO-BSCS-24,Theory of Computation,IS-031,Statistical Analysis & Data Modeling,Concept,0.6921170949935913,1
+ATENEO-BSCS-24,Theory of Computation,IS-035,Networking Fundamentals,Concept,0.6656014323234558,2
+ATENEO-BSCS-24,Theory of Computation,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6442517042160034,3
+ATENEO-BSCS-24,Theory of Computation,IS-041,Networking Fundamentals (security context),Concept,0.6394858360290527,4
+ATENEO-BSCS-24,Theory of Computation,IS-019,Regression & Performance Testing,Practice,0.6131657361984253,5
+ATENEO-BSCS-25,Guided Studies in DISCS,IS-017,Manual Testing & Test Case Design,Practice,0.6154235005378723,1
+ATENEO-BSCS-25,Guided Studies in DISCS,IS-010,Agile/Scrum fundamentals,Methodology,0.6141211986541748,2
+ATENEO-BSCS-25,Guided Studies in DISCS,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6049272418022156,3
+ATENEO-BSCS-25,Guided Studies in DISCS,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6016117334365845,4
+ATENEO-BSCS-25,Guided Studies in DISCS,IS-019,Regression & Performance Testing,Practice,0.5915712118148804,5
+ATENEO-BSCS-26,Thesis Writing III,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6098536252975464,1
+ATENEO-BSCS-26,Thesis Writing III,IS-031,Statistical Analysis & Data Modeling,Concept,0.6068780422210693,2
+ATENEO-BSCS-26,Thesis Writing III,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.5891259908676147,3
+ATENEO-BSCS-26,Thesis Writing III,IS-010,Agile/Scrum fundamentals,Methodology,0.5856730937957764,4
+ATENEO-BSCS-26,Thesis Writing III,IS-017,Manual Testing & Test Case Design,Practice,0.5791537761688232,5
+UST-BSIT-01,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.7498350143432617,1
+UST-BSIT-01,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.7375447154045105,2
+UST-BSIT-01,Introduction to Computing,IS-039,Security Monitoring / SOC basics,Practice,0.7260181903839111,3
+UST-BSIT-01,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.7116274833679199,4
+UST-BSIT-01,Introduction to Computing,IS-030,Data Cleaning / Wrangling,Practice,0.7072055339813232,5
+UST-BSIT-02,"Computer Programming I (Fundamentals, Imperative)",IS-035,Networking Fundamentals,Concept,0.7573059797286987,1
+UST-BSIT-02,"Computer Programming I (Fundamentals, Imperative)",IS-041,Networking Fundamentals (security context),Concept,0.749980092048645,2
+UST-BSIT-02,"Computer Programming I (Fundamentals, Imperative)",IS-010,Agile/Scrum fundamentals,Methodology,0.734515905380249,3
+UST-BSIT-02,"Computer Programming I (Fundamentals, Imperative)",IS-039,Security Monitoring / SOC basics,Practice,0.7202946543693542,4
+UST-BSIT-02,"Computer Programming I (Fundamentals, Imperative)",IS-024,Basic Programming/Scripting knowledge,Concept,0.7173761129379272,5
+UST-BSIT-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-035,Networking Fundamentals,Concept,0.7225746512413025,1
+UST-BSIT-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-024,Basic Programming/Scripting knowledge,Concept,0.7167781591415405,2
+UST-BSIT-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-001,Java,Programming Language,0.7166798114776611,3
+UST-BSIT-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-010,Agile/Scrum fundamentals,Methodology,0.7105876207351685,4
+UST-BSIT-03,"Computer Programming II (Intermediate, Object-Oriented)",IS-041,Networking Fundamentals (security context),Concept,0.7051671743392944,5
+UST-BSIT-04,Discrete Structures,IS-035,Networking Fundamentals,Concept,0.7113552093505859,1
+UST-BSIT-04,Discrete Structures,IS-031,Statistical Analysis & Data Modeling,Concept,0.7020865678787231,2
+UST-BSIT-04,Discrete Structures,IS-047,Infrastructure as Code (Terraform),Tool,0.6977890729904175,3
+UST-BSIT-04,Discrete Structures,IS-040,Vulnerability Assessment,Practice,0.6827782988548279,4
+UST-BSIT-04,Discrete Structures,IS-041,Networking Fundamentals (security context),Concept,0.67500901222229,5
+UST-BSIT-05,Information Technology Fundamentals,IS-035,Networking Fundamentals,Concept,0.7474744915962219,1
+UST-BSIT-05,Information Technology Fundamentals,IS-041,Networking Fundamentals (security context),Concept,0.7191295027732849,2
+UST-BSIT-05,Information Technology Fundamentals,IS-010,Agile/Scrum fundamentals,Methodology,0.686211884021759,3
+UST-BSIT-05,Information Technology Fundamentals,IS-039,Security Monitoring / SOC basics,Practice,0.6845741271972656,4
+UST-BSIT-05,Information Technology Fundamentals,IS-031,Statistical Analysis & Data Modeling,Concept,0.6616503000259399,5
+UST-BSIT-06,Human-Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.7415051460266113,1
+UST-BSIT-06,Human-Computer Interaction,IS-048,Communication Skills,Soft Skill,0.7131837010383606,2
+UST-BSIT-06,Human-Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.7023483514785767,3
+UST-BSIT-06,Human-Computer Interaction,IS-050,Learning Agility / Adaptability,Soft Skill,0.6927886009216309,4
+UST-BSIT-06,Human-Computer Interaction,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6825987696647644,5
+UST-BSIT-07,"Computer Architecture, Organization and Logic",IS-035,Networking Fundamentals,Concept,0.7112860679626465,1
+UST-BSIT-07,"Computer Architecture, Organization and Logic",IS-039,Security Monitoring / SOC basics,Practice,0.6924551725387573,2
+UST-BSIT-07,"Computer Architecture, Organization and Logic",IS-041,Networking Fundamentals (security context),Concept,0.6838794946670532,3
+UST-BSIT-07,"Computer Architecture, Organization and Logic",IS-037,System Monitoring & Deployment Support,Practice,0.6751593351364136,4
+UST-BSIT-07,"Computer Architecture, Organization and Logic",IS-047,Infrastructure as Code (Terraform),Tool,0.6744963526725769,5
+UST-BSIT-08,"Computer Architecture, Organization and Logic Laboratory",IS-035,Networking Fundamentals,Concept,0.7116117477416992,1
+UST-BSIT-08,"Computer Architecture, Organization and Logic Laboratory",IS-031,Statistical Analysis & Data Modeling,Concept,0.68584144115448,2
+UST-BSIT-08,"Computer Architecture, Organization and Logic Laboratory",IS-039,Security Monitoring / SOC basics,Practice,0.6824404001235962,3
+UST-BSIT-08,"Computer Architecture, Organization and Logic Laboratory",IS-041,Networking Fundamentals (security context),Concept,0.6703754663467407,4
+UST-BSIT-08,"Computer Architecture, Organization and Logic Laboratory",IS-019,Regression & Performance Testing,Practice,0.666235625743866,5
+UST-BSIT-09,Data Communications and Networking II,IS-035,Networking Fundamentals,Concept,0.7493444681167603,1
+UST-BSIT-09,Data Communications and Networking II,IS-048,Communication Skills,Soft Skill,0.6992882490158081,2
+UST-BSIT-09,Data Communications and Networking II,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6990351676940918,3
+UST-BSIT-09,Data Communications and Networking II,IS-031,Statistical Analysis & Data Modeling,Concept,0.6988043785095215,4
+UST-BSIT-09,Data Communications and Networking II,IS-041,Networking Fundamentals (security context),Concept,0.6911702156066895,5
+UST-BSIT-10,Data Communications and Networking II Laboratory,IS-035,Networking Fundamentals,Concept,0.7610324025154114,1
+UST-BSIT-10,Data Communications and Networking II Laboratory,IS-031,Statistical Analysis & Data Modeling,Concept,0.733262300491333,2
+UST-BSIT-10,Data Communications and Networking II Laboratory,IS-041,Networking Fundamentals (security context),Concept,0.6953772902488708,3
+UST-BSIT-10,Data Communications and Networking II Laboratory,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6925637722015381,4
+UST-BSIT-10,Data Communications and Networking II Laboratory,IS-039,Security Monitoring / SOC basics,Practice,0.6816596388816833,5
+UST-BSIT-11,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-037,System Monitoring & Deployment Support,Practice,0.6775263547897339,1
+UST-BSIT-11,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-048,Communication Skills,Soft Skill,0.6676324605941772,2
+UST-BSIT-11,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-035,Networking Fundamentals,Concept,0.6668813228607178,3
+UST-BSIT-11,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6604838371276855,4
+UST-BSIT-11,Applications Development and Emerging Technologies 2 (Enterprise Back-end),IS-010,Agile/Scrum fundamentals,Methodology,0.6573691964149475,5
+UST-BSIT-12,Software Engineering 1,IS-048,Communication Skills,Soft Skill,0.717188835144043,1
+UST-BSIT-12,Software Engineering 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6817460060119629,2
+UST-BSIT-12,Software Engineering 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6655690670013428,3
+UST-BSIT-12,Software Engineering 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6603758335113525,4
+UST-BSIT-12,Software Engineering 1,IS-001,Java,Programming Language,0.6588282585144043,5
+UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),IS-001,Java,Programming Language,0.6681951880455017,1
+UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6596629619598389,2
+UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),IS-014,Dart / Flutter,Framework,0.6585769653320312,3
+UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),IS-037,System Monitoring & Deployment Support,Practice,0.6579979658126831,4
+UST-BSIT-13,Applications Development and Emerging Technologies 3 (Mobile Programming),IS-048,Communication Skills,Soft Skill,0.6566614508628845,5
+UST-BSIT-14,Operating Systems,IS-037,System Monitoring & Deployment Support,Practice,0.742081880569458,1
+UST-BSIT-14,Operating Systems,IS-039,Security Monitoring / SOC basics,Practice,0.7062839269638062,2
+UST-BSIT-14,Operating Systems,IS-035,Networking Fundamentals,Concept,0.6731082201004028,3
+UST-BSIT-14,Operating Systems,IS-019,Regression & Performance Testing,Practice,0.6656389236450195,4
+UST-BSIT-14,Operating Systems,IS-041,Networking Fundamentals (security context),Concept,0.6606228351593018,5
+UST-BSIT-15,Social and Professional Practice,IS-051,Teamwork / Collaboration,Soft Skill,0.6944537162780762,1
+UST-BSIT-15,Social and Professional Practice,IS-019,Regression & Performance Testing,Practice,0.6685167551040649,2
+UST-BSIT-15,Social and Professional Practice,IS-040,Vulnerability Assessment,Practice,0.666611909866333,3
+UST-BSIT-15,Social and Professional Practice,IS-048,Communication Skills,Soft Skill,0.661192774772644,4
+UST-BSIT-15,Social and Professional Practice,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6518617272377014,5
+UST-BSIT-16,Information Technology Capstone Project I,IS-031,Statistical Analysis & Data Modeling,Concept,0.6822556853294373,1
+UST-BSIT-16,Information Technology Capstone Project I,IS-047,Infrastructure as Code (Terraform),Tool,0.6727274656295776,2
+UST-BSIT-16,Information Technology Capstone Project I,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6709693670272827,3
+UST-BSIT-16,Information Technology Capstone Project I,IS-035,Networking Fundamentals,Concept,0.6681566834449768,4
+UST-BSIT-16,Information Technology Capstone Project I,IS-051,Teamwork / Collaboration,Soft Skill,0.6658100485801697,5
+UST-BSIT-17,Professional Elective 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6491503715515137,1
+UST-BSIT-17,Professional Elective 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6468828916549683,2
+UST-BSIT-17,Professional Elective 1,IS-019,Regression & Performance Testing,Practice,0.645928144454956,3
+UST-BSIT-17,Professional Elective 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6405659914016724,4
+UST-BSIT-17,Professional Elective 1,IS-048,Communication Skills,Soft Skill,0.6397135257720947,5
+UST-BSIT-18,System Integration and Architecture,IS-037,System Monitoring & Deployment Support,Practice,0.7133587598800659,1
+UST-BSIT-18,System Integration and Architecture,IS-035,Networking Fundamentals,Concept,0.6780853271484375,2
+UST-BSIT-18,System Integration and Architecture,IS-039,Security Monitoring / SOC basics,Practice,0.659653902053833,3
+UST-BSIT-18,System Integration and Architecture,IS-047,Infrastructure as Code (Terraform),Tool,0.6577396392822266,4
+UST-BSIT-18,System Integration and Architecture,IS-040,Vulnerability Assessment,Practice,0.6486374735832214,5
+UST-BSIT-19,Information Technology Capstone Project II,IS-031,Statistical Analysis & Data Modeling,Concept,0.7006353139877319,1
+UST-BSIT-19,Information Technology Capstone Project II,IS-035,Networking Fundamentals,Concept,0.6770560145378113,2
+UST-BSIT-19,Information Technology Capstone Project II,IS-047,Infrastructure as Code (Terraform),Tool,0.6767617464065552,3
+UST-BSIT-19,Information Technology Capstone Project II,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6705883145332336,4
+UST-BSIT-19,Information Technology Capstone Project II,IS-051,Teamwork / Collaboration,Soft Skill,0.6644336581230164,5
+UST-BSIT-20,Emerging Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6968812942504883,1
+UST-BSIT-20,Emerging Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6721981763839722,2
+UST-BSIT-20,Emerging Technologies,IS-019,Regression & Performance Testing,Practice,0.6620632410049438,3
+UST-BSIT-20,Emerging Technologies,IS-035,Networking Fundamentals,Concept,0.661571741104126,4
+UST-BSIT-20,Emerging Technologies,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6611144542694092,5
+UST-BSIT-21,Professional Elective 3,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6435802578926086,1
+UST-BSIT-21,Professional Elective 3,IS-048,Communication Skills,Soft Skill,0.6428896188735962,2
+UST-BSIT-21,Professional Elective 3,IS-019,Regression & Performance Testing,Practice,0.6399331092834473,3
+UST-BSIT-21,Professional Elective 3,IS-050,Learning Agility / Adaptability,Soft Skill,0.638991117477417,4
+UST-BSIT-21,Professional Elective 3,IS-051,Teamwork / Collaboration,Soft Skill,0.6323726177215576,5
+UST-BSIT-22,Professional Elective 4,IS-048,Communication Skills,Soft Skill,0.6429464817047119,1
+UST-BSIT-22,Professional Elective 4,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6418938040733337,2
+UST-BSIT-22,Professional Elective 4,IS-019,Regression & Performance Testing,Practice,0.641718864440918,3
+UST-BSIT-22,Professional Elective 4,IS-050,Learning Agility / Adaptability,Soft Skill,0.6394879817962646,4
+UST-BSIT-22,Professional Elective 4,IS-051,Teamwork / Collaboration,Soft Skill,0.6386383771896362,5
+UST-BSIT-23,Practicum (500 hours),IS-048,Communication Skills,Soft Skill,0.6668524742126465,1
+UST-BSIT-23,Practicum (500 hours),IS-051,Teamwork / Collaboration,Soft Skill,0.6465756893157959,2
+UST-BSIT-23,Practicum (500 hours),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6442502737045288,3
+UST-BSIT-23,Practicum (500 hours),IS-050,Learning Agility / Adaptability,Soft Skill,0.6391369104385376,4
+UST-BSIT-23,Practicum (500 hours),IS-019,Regression & Performance Testing,Practice,0.634346604347229,5
+TIP-BSIT-01,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.7327356338500977,1
+TIP-BSIT-01,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.726757824420929,2
+TIP-BSIT-01,Introduction to Computing,IS-039,Security Monitoring / SOC basics,Practice,0.7182103395462036,3
+TIP-BSIT-01,Introduction to Computing,IS-051,Teamwork / Collaboration,Soft Skill,0.7164727449417114,4
+TIP-BSIT-01,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.7100417613983154,5
+TIP-BSIT-02,Computer Programming 1,IS-024,Basic Programming/Scripting knowledge,Concept,0.7154226303100586,1
+TIP-BSIT-02,Computer Programming 1,IS-051,Teamwork / Collaboration,Soft Skill,0.7060591578483582,2
+TIP-BSIT-02,Computer Programming 1,IS-041,Networking Fundamentals (security context),Concept,0.7044298648834229,3
+TIP-BSIT-02,Computer Programming 1,IS-039,Security Monitoring / SOC basics,Practice,0.70198655128479,4
+TIP-BSIT-02,Computer Programming 1,IS-035,Networking Fundamentals,Concept,0.6959938406944275,5
+TIP-BSIT-03,Computer Programming 2,IS-051,Teamwork / Collaboration,Soft Skill,0.7112501859664917,1
+TIP-BSIT-03,Computer Programming 2,IS-041,Networking Fundamentals (security context),Concept,0.7044295072555542,2
+TIP-BSIT-03,Computer Programming 2,IS-024,Basic Programming/Scripting knowledge,Concept,0.7035315036773682,3
+TIP-BSIT-03,Computer Programming 2,IS-035,Networking Fundamentals,Concept,0.7032668590545654,4
+TIP-BSIT-03,Computer Programming 2,IS-039,Security Monitoring / SOC basics,Practice,0.7028480768203735,5
+TIP-BSIT-04,Introduction to Human Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.734818696975708,1
+TIP-BSIT-04,Introduction to Human Computer Interaction,IS-050,Learning Agility / Adaptability,Soft Skill,0.7144430875778198,2
+TIP-BSIT-04,Introduction to Human Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.7040815353393555,3
+TIP-BSIT-04,Introduction to Human Computer Interaction,IS-048,Communication Skills,Soft Skill,0.6928669214248657,4
+TIP-BSIT-04,Introduction to Human Computer Interaction,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6849100589752197,5
+TIP-BSIT-05,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7383788228034973,1
+TIP-BSIT-05,Data Structures and Algorithms,IS-035,Networking Fundamentals,Concept,0.6933575868606567,2
+TIP-BSIT-05,Data Structures and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.683808445930481,3
+TIP-BSIT-05,Data Structures and Algorithms,IS-041,Networking Fundamentals (security context),Concept,0.6700024604797363,4
+TIP-BSIT-05,Data Structures and Algorithms,IS-051,Teamwork / Collaboration,Soft Skill,0.6621319651603699,5
+TIP-BSIT-06,Web Systems and Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6907532215118408,1
+TIP-BSIT-06,Web Systems and Technologies,IS-035,Networking Fundamentals,Concept,0.6689691543579102,2
+TIP-BSIT-06,Web Systems and Technologies,IS-048,Communication Skills,Soft Skill,0.66762375831604,3
+TIP-BSIT-06,Web Systems and Technologies,IS-041,Networking Fundamentals (security context),Concept,0.6591345071792603,4
+TIP-BSIT-06,Web Systems and Technologies,IS-039,Security Monitoring / SOC basics,Practice,0.64823317527771,5
+TIP-BSIT-07,Prof. Elective 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6849974393844604,1
+TIP-BSIT-07,Prof. Elective 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6766853928565979,2
+TIP-BSIT-07,Prof. Elective 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6732876300811768,3
+TIP-BSIT-07,Prof. Elective 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6517491936683655,4
+TIP-BSIT-07,Prof. Elective 1,IS-048,Communication Skills,Soft Skill,0.6497981548309326,5
+TIP-BSIT-08,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.7028940916061401,1
+TIP-BSIT-08,Information Management,IS-051,Teamwork / Collaboration,Soft Skill,0.6986013650894165,2
+TIP-BSIT-08,Information Management,IS-048,Communication Skills,Soft Skill,0.685058057308197,3
+TIP-BSIT-08,Information Management,IS-039,Security Monitoring / SOC basics,Practice,0.6839024424552917,4
+TIP-BSIT-08,Information Management,IS-010,Agile/Scrum fundamentals,Methodology,0.683063268661499,5
+TIP-BSIT-09,Platform Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6898312568664551,1
+TIP-BSIT-09,Platform Technologies,IS-044,AWS / Azure fundamentals,Cloud Platform,0.6806922554969788,2
+TIP-BSIT-09,Platform Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6607836484909058,3
+TIP-BSIT-09,Platform Technologies,IS-048,Communication Skills,Soft Skill,0.6525945663452148,4
+TIP-BSIT-09,Platform Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6507476568222046,5
+TIP-BSIT-10,Prof. Elective 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6771536469459534,1
+TIP-BSIT-10,Prof. Elective 2,IS-051,Teamwork / Collaboration,Soft Skill,0.667288064956665,2
+TIP-BSIT-10,Prof. Elective 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6668800115585327,3
+TIP-BSIT-10,Prof. Elective 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6436675786972046,4
+TIP-BSIT-10,Prof. Elective 2,IS-048,Communication Skills,Soft Skill,0.6411920189857483,5
+TIP-BSIT-11,Integrative Programming and Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.7205224633216858,1
+TIP-BSIT-11,Integrative Programming and Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6963445544242859,2
+TIP-BSIT-11,Integrative Programming and Technologies,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6855384707450867,3
+TIP-BSIT-11,Integrative Programming and Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6847177147865295,4
+TIP-BSIT-11,Integrative Programming and Technologies,IS-035,Networking Fundamentals,Concept,0.6678682565689087,5
+TIP-BSIT-12,Networking 1,IS-035,Networking Fundamentals,Concept,0.8022640347480774,1
+TIP-BSIT-12,Networking 1,IS-041,Networking Fundamentals (security context),Concept,0.773052453994751,2
+TIP-BSIT-12,Networking 1,IS-051,Teamwork / Collaboration,Soft Skill,0.7269977331161499,3
+TIP-BSIT-12,Networking 1,IS-039,Security Monitoring / SOC basics,Practice,0.6949349641799927,4
+TIP-BSIT-12,Networking 1,IS-048,Communication Skills,Soft Skill,0.6862733364105225,5
+TIP-BSIT-13,Advanced Database Systems,IS-020,SQL (basic),Database,0.7082323431968689,1
+TIP-BSIT-13,Advanced Database Systems,IS-028,Tableau,BI Tool,0.6919724941253662,2
+TIP-BSIT-13,Advanced Database Systems,IS-025,SQL,Database/Query Language,0.6900439262390137,3
+TIP-BSIT-13,Advanced Database Systems,IS-030,Data Cleaning / Wrangling,Practice,0.6844489574432373,4
+TIP-BSIT-13,Advanced Database Systems,IS-051,Teamwork / Collaboration,Soft Skill,0.6712108850479126,5
+TIP-BSIT-14,Systems Integration and Architecture 1,IS-035,Networking Fundamentals,Concept,0.6956037878990173,1
+TIP-BSIT-14,Systems Integration and Architecture 1,IS-051,Teamwork / Collaboration,Soft Skill,0.689409613609314,2
+TIP-BSIT-14,Systems Integration and Architecture 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6879494190216064,3
+TIP-BSIT-14,Systems Integration and Architecture 1,IS-041,Networking Fundamentals (security context),Concept,0.6828405857086182,4
+TIP-BSIT-14,Systems Integration and Architecture 1,IS-039,Security Monitoring / SOC basics,Practice,0.6805135011672974,5
+TIP-BSIT-15,IT Elective 1,IS-048,Communication Skills,Soft Skill,0.6943801641464233,1
+TIP-BSIT-15,IT Elective 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6933731436729431,2
+TIP-BSIT-15,IT Elective 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6819602251052856,3
+TIP-BSIT-15,IT Elective 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6741711497306824,4
+TIP-BSIT-15,IT Elective 1,IS-039,Security Monitoring / SOC basics,Practice,0.6723653674125671,5
+TIP-BSIT-16,Data Mining and Warehousing,IS-031,Statistical Analysis & Data Modeling,Concept,0.7359552383422852,1
+TIP-BSIT-16,Data Mining and Warehousing,IS-030,Data Cleaning / Wrangling,Practice,0.7023231983184814,2
+TIP-BSIT-16,Data Mining and Warehousing,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.7015175223350525,3
+TIP-BSIT-16,Data Mining and Warehousing,IS-051,Teamwork / Collaboration,Soft Skill,0.6679819822311401,4
+TIP-BSIT-16,Data Mining and Warehousing,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6630486845970154,5
+TIP-BSIT-17,Mobile Computing,IS-051,Teamwork / Collaboration,Soft Skill,0.6822317838668823,1
+TIP-BSIT-17,Mobile Computing,IS-037,System Monitoring & Deployment Support,Practice,0.6818853616714478,2
+TIP-BSIT-17,Mobile Computing,IS-039,Security Monitoring / SOC basics,Practice,0.673372745513916,3
+TIP-BSIT-17,Mobile Computing,IS-048,Communication Skills,Soft Skill,0.6653454303741455,4
+TIP-BSIT-17,Mobile Computing,IS-030,Data Cleaning / Wrangling,Practice,0.6601157188415527,5
+TIP-BSIT-18,Information Assurance and Security 1,IS-039,Security Monitoring / SOC basics,Practice,0.7369500994682312,1
+TIP-BSIT-18,Information Assurance and Security 1,IS-041,Networking Fundamentals (security context),Concept,0.7094106674194336,2
+TIP-BSIT-18,Information Assurance and Security 1,IS-048,Communication Skills,Soft Skill,0.6843715310096741,3
+TIP-BSIT-18,Information Assurance and Security 1,IS-040,Vulnerability Assessment,Practice,0.6785001754760742,4
+TIP-BSIT-18,Information Assurance and Security 1,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6718454957008362,5
+TIP-BSIT-19,Application Development and Emerging Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.7127085328102112,1
+TIP-BSIT-19,Application Development and Emerging Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6695594787597656,2
+TIP-BSIT-19,Application Development and Emerging Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6583771109580994,3
+TIP-BSIT-19,Application Development and Emerging Technologies,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6580036282539368,4
+TIP-BSIT-19,Application Development and Emerging Technologies,IS-048,Communication Skills,Soft Skill,0.6577904224395752,5
+TIP-BSIT-20,Networking 2,IS-035,Networking Fundamentals,Concept,0.7528163194656372,1
+TIP-BSIT-20,Networking 2,IS-041,Networking Fundamentals (security context),Concept,0.7270790338516235,2
+TIP-BSIT-20,Networking 2,IS-051,Teamwork / Collaboration,Soft Skill,0.7209279537200928,3
+TIP-BSIT-20,Networking 2,IS-048,Communication Skills,Soft Skill,0.694778561592102,4
+TIP-BSIT-20,Networking 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6566196084022522,5
+TIP-BSIT-21,Prof. Elective 3,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.676204264163971,1
+TIP-BSIT-21,Prof. Elective 3,IS-051,Teamwork / Collaboration,Soft Skill,0.6695364713668823,2
+TIP-BSIT-21,Prof. Elective 3,IS-050,Learning Agility / Adaptability,Soft Skill,0.6679775714874268,3
+TIP-BSIT-21,Prof. Elective 3,IS-010,Agile/Scrum fundamentals,Methodology,0.6471374034881592,4
+TIP-BSIT-21,Prof. Elective 3,IS-048,Communication Skills,Soft Skill,0.6465944051742554,5
+TIP-BSIT-22,IT Elective 2,IS-048,Communication Skills,Soft Skill,0.6883148550987244,1
+TIP-BSIT-22,IT Elective 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6875880360603333,2
+TIP-BSIT-22,IT Elective 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6750994324684143,3
+TIP-BSIT-22,IT Elective 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6690322756767273,4
+TIP-BSIT-22,IT Elective 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6684017181396484,5
+TIP-BSIT-23,Data Analytics,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.7064316272735596,1
+TIP-BSIT-23,Data Analytics,IS-031,Statistical Analysis & Data Modeling,Concept,0.7062926292419434,2
+TIP-BSIT-23,Data Analytics,IS-030,Data Cleaning / Wrangling,Practice,0.6729583740234375,3
+TIP-BSIT-23,Data Analytics,IS-048,Communication Skills,Soft Skill,0.6697995662689209,4
+TIP-BSIT-23,Data Analytics,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6672416925430298,5
+TIP-BSIT-24,Capstone Project 1,IS-051,Teamwork / Collaboration,Soft Skill,0.7189896106719971,1
+TIP-BSIT-24,Capstone Project 1,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.702791690826416,2
+TIP-BSIT-24,Capstone Project 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.7021253108978271,3
+TIP-BSIT-24,Capstone Project 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6980986595153809,4
+TIP-BSIT-24,Capstone Project 1,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6918702125549316,5
+TIP-BSIT-25,IT Elective 3,IS-048,Communication Skills,Soft Skill,0.6916884183883667,1
+TIP-BSIT-25,IT Elective 3,IS-051,Teamwork / Collaboration,Soft Skill,0.6891289353370667,2
+TIP-BSIT-25,IT Elective 3,IS-010,Agile/Scrum fundamentals,Methodology,0.6722316741943359,3
+TIP-BSIT-25,IT Elective 3,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6722127199172974,4
+TIP-BSIT-25,IT Elective 3,IS-041,Networking Fundamentals (security context),Concept,0.670280933380127,5
+TIP-BSIT-26,Social and Professional Issues,IS-051,Teamwork / Collaboration,Soft Skill,0.7157319188117981,1
+TIP-BSIT-26,Social and Professional Issues,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6814039945602417,2
+TIP-BSIT-26,Social and Professional Issues,IS-048,Communication Skills,Soft Skill,0.6706814765930176,3
+TIP-BSIT-26,Social and Professional Issues,IS-039,Security Monitoring / SOC basics,Practice,0.6527799367904663,4
+TIP-BSIT-26,Social and Professional Issues,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6504302024841309,5
+TIP-BSIT-27,Systems Administration and Maintenance,IS-037,System Monitoring & Deployment Support,Practice,0.7038779258728027,1
+TIP-BSIT-27,Systems Administration and Maintenance,IS-011,Debugging & Testing basics,Practice,0.681466281414032,2
+TIP-BSIT-27,Systems Administration and Maintenance,IS-039,Security Monitoring / SOC basics,Practice,0.6804134845733643,3
+TIP-BSIT-27,Systems Administration and Maintenance,IS-048,Communication Skills,Soft Skill,0.6713128089904785,4
+TIP-BSIT-27,Systems Administration and Maintenance,IS-051,Teamwork / Collaboration,Soft Skill,0.6696470975875854,5
+TIP-BSIT-28,Information Assurance and Security 2,IS-039,Security Monitoring / SOC basics,Practice,0.7258544564247131,1
+TIP-BSIT-28,Information Assurance and Security 2,IS-041,Networking Fundamentals (security context),Concept,0.6975212097167969,2
+TIP-BSIT-28,Information Assurance and Security 2,IS-048,Communication Skills,Soft Skill,0.6855851411819458,3
+TIP-BSIT-28,Information Assurance and Security 2,IS-040,Vulnerability Assessment,Practice,0.6765210628509521,4
+TIP-BSIT-28,Information Assurance and Security 2,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6684474945068359,5
+TIP-BSIT-29,Systems Integration and Architecture 2,IS-035,Networking Fundamentals,Concept,0.698993980884552,1
+TIP-BSIT-29,Systems Integration and Architecture 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6947914361953735,2
+TIP-BSIT-29,Systems Integration and Architecture 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6923456192016602,3
+TIP-BSIT-29,Systems Integration and Architecture 2,IS-041,Networking Fundamentals (security context),Concept,0.6825101375579834,4
+TIP-BSIT-29,Systems Integration and Architecture 2,IS-039,Security Monitoring / SOC basics,Practice,0.6796674728393555,5
+TIP-BSIT-30,Prof. Elective 4,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6766112446784973,1
+TIP-BSIT-30,Prof. Elective 4,IS-051,Teamwork / Collaboration,Soft Skill,0.6731313467025757,2
+TIP-BSIT-30,Prof. Elective 4,IS-050,Learning Agility / Adaptability,Soft Skill,0.6644579172134399,3
+TIP-BSIT-30,Prof. Elective 4,IS-041,Networking Fundamentals (security context),Concept,0.648914635181427,4
+TIP-BSIT-30,Prof. Elective 4,IS-010,Agile/Scrum fundamentals,Methodology,0.6487598419189453,5
+TIP-BSIT-31,IT Elective 4,IS-051,Teamwork / Collaboration,Soft Skill,0.6907955408096313,1
+TIP-BSIT-31,IT Elective 4,IS-048,Communication Skills,Soft Skill,0.6890790462493896,2
+TIP-BSIT-31,IT Elective 4,IS-041,Networking Fundamentals (security context),Concept,0.675382137298584,3
+TIP-BSIT-31,IT Elective 4,IS-039,Security Monitoring / SOC basics,Practice,0.6722224950790405,4
+TIP-BSIT-31,IT Elective 4,IS-010,Agile/Scrum fundamentals,Methodology,0.6719537377357483,5
+TIP-BSIT-32,Internship in Computing,IS-048,Communication Skills,Soft Skill,0.6792046427726746,1
+TIP-BSIT-32,Internship in Computing,IS-051,Teamwork / Collaboration,Soft Skill,0.6703894138336182,2
+TIP-BSIT-32,Internship in Computing,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6424521207809448,3
+TIP-BSIT-32,Internship in Computing,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6385469436645508,4
+TIP-BSIT-32,Internship in Computing,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6348791122436523,5
+TIP-BSIT-33,Capstone Project 2,IS-051,Teamwork / Collaboration,Soft Skill,0.7227327823638916,1
+TIP-BSIT-33,Capstone Project 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.7172129154205322,2
+TIP-BSIT-33,Capstone Project 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.69830322265625,3
+TIP-BSIT-33,Capstone Project 2,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.695823073387146,4
+TIP-BSIT-33,Capstone Project 2,IS-010,Agile/Scrum fundamentals,Methodology,0.693151593208313,5
+ADAMSON-BSIT-01,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.6826223731040955,1
+ADAMSON-BSIT-01,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.6761980056762695,2
+ADAMSON-BSIT-01,Introduction to Computing,IS-030,Data Cleaning / Wrangling,Practice,0.659521222114563,3
+ADAMSON-BSIT-01,Introduction to Computing,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6568917036056519,4
+ADAMSON-BSIT-01,Introduction to Computing,IS-024,Basic Programming/Scripting knowledge,Concept,0.6552233695983887,5
+ADAMSON-BSIT-02,Fundamentals of Programming,IS-035,Networking Fundamentals,Concept,0.7412298917770386,1
+ADAMSON-BSIT-02,Fundamentals of Programming,IS-041,Networking Fundamentals (security context),Concept,0.7117894887924194,2
+ADAMSON-BSIT-02,Fundamentals of Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.7018488645553589,3
+ADAMSON-BSIT-02,Fundamentals of Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.692547082901001,4
+ADAMSON-BSIT-02,Fundamentals of Programming,IS-001,Java,Programming Language,0.669065535068512,5
+ADAMSON-BSIT-03,Digital and Logic Circuits (lab),IS-035,Networking Fundamentals,Concept,0.6399710178375244,1
+ADAMSON-BSIT-03,Digital and Logic Circuits (lab),IS-039,Security Monitoring / SOC basics,Practice,0.628020167350769,2
+ADAMSON-BSIT-03,Digital and Logic Circuits (lab),IS-031,Statistical Analysis & Data Modeling,Concept,0.625627875328064,3
+ADAMSON-BSIT-03,Digital and Logic Circuits (lab),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6235902309417725,4
+ADAMSON-BSIT-03,Digital and Logic Circuits (lab),IS-019,Regression & Performance Testing,Practice,0.6033880710601807,5
+ADAMSON-BSIT-04,Computer Programming 1,IS-024,Basic Programming/Scripting knowledge,Concept,0.6807596683502197,1
+ADAMSON-BSIT-04,Computer Programming 1,IS-001,Java,Programming Language,0.6691113114356995,2
+ADAMSON-BSIT-04,Computer Programming 1,IS-035,Networking Fundamentals,Concept,0.6522100567817688,3
+ADAMSON-BSIT-04,Computer Programming 1,IS-026,Python,Programming Language,0.6509932279586792,4
+ADAMSON-BSIT-04,Computer Programming 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6463255882263184,5
+ADAMSON-BSIT-05,Data Structure and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7481904625892639,1
+ADAMSON-BSIT-05,Data Structure and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.6845541000366211,2
+ADAMSON-BSIT-05,Data Structure and Algorithms,IS-035,Networking Fundamentals,Concept,0.664355993270874,3
+ADAMSON-BSIT-05,Data Structure and Algorithms,IS-041,Networking Fundamentals (security context),Concept,0.6221160292625427,4
+ADAMSON-BSIT-05,Data Structure and Algorithms,IS-019,Regression & Performance Testing,Practice,0.6215406060218811,5
+ADAMSON-BSIT-06,Web Design Principles (lab),IS-035,Networking Fundamentals,Concept,0.6809203624725342,1
+ADAMSON-BSIT-06,Web Design Principles (lab),IS-041,Networking Fundamentals (security context),Concept,0.6435112357139587,2
+ADAMSON-BSIT-06,Web Design Principles (lab),IS-051,Teamwork / Collaboration,Soft Skill,0.6415956616401672,3
+ADAMSON-BSIT-06,Web Design Principles (lab),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6274207830429077,4
+ADAMSON-BSIT-06,Web Design Principles (lab),IS-004,JavaScript,Programming Language,0.6253229379653931,5
+ADAMSON-BSIT-07,Database Management System,IS-020,SQL (basic),Database,0.7179629802703857,1
+ADAMSON-BSIT-07,Database Management System,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.7055834531784058,2
+ADAMSON-BSIT-07,Database Management System,IS-025,SQL,Database/Query Language,0.6901819705963135,3
+ADAMSON-BSIT-07,Database Management System,IS-031,Statistical Analysis & Data Modeling,Concept,0.6782280206680298,4
+ADAMSON-BSIT-07,Database Management System,IS-006,MySQL / MS SQL,Database,0.6776046752929688,5
+ADAMSON-BSIT-08,Computer Programming 2,IS-024,Basic Programming/Scripting knowledge,Concept,0.6765778064727783,1
+ADAMSON-BSIT-08,Computer Programming 2,IS-001,Java,Programming Language,0.6678317785263062,2
+ADAMSON-BSIT-08,Computer Programming 2,IS-035,Networking Fundamentals,Concept,0.6579945087432861,3
+ADAMSON-BSIT-08,Computer Programming 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6475179195404053,4
+ADAMSON-BSIT-08,Computer Programming 2,IS-026,Python,Programming Language,0.6469436883926392,5
+ADAMSON-BSIT-09,Multimedia Technology,IS-051,Teamwork / Collaboration,Soft Skill,0.6056070327758789,1
+ADAMSON-BSIT-09,Multimedia Technology,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.600360095500946,2
+ADAMSON-BSIT-09,Multimedia Technology,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.5979448556900024,3
+ADAMSON-BSIT-09,Multimedia Technology,IS-035,Networking Fundamentals,Concept,0.5947215557098389,4
+ADAMSON-BSIT-09,Multimedia Technology,IS-031,Statistical Analysis & Data Modeling,Concept,0.591151237487793,5
+ADAMSON-BSIT-10,Discrete Math,IS-031,Statistical Analysis & Data Modeling,Concept,0.6512742042541504,1
+ADAMSON-BSIT-10,Discrete Math,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6432865262031555,2
+ADAMSON-BSIT-10,Discrete Math,IS-035,Networking Fundamentals,Concept,0.6275284886360168,3
+ADAMSON-BSIT-10,Discrete Math,IS-030,Data Cleaning / Wrangling,Practice,0.6203635334968567,4
+ADAMSON-BSIT-10,Discrete Math,IS-024,Basic Programming/Scripting knowledge,Concept,0.6100890636444092,5
+ADAMSON-BSIT-11,Object Oriented Programming,IS-001,Java,Programming Language,0.6874805688858032,1
+ADAMSON-BSIT-11,Object Oriented Programming,IS-031,Statistical Analysis & Data Modeling,Concept,0.6846684217453003,2
+ADAMSON-BSIT-11,Object Oriented Programming,IS-035,Networking Fundamentals,Concept,0.6822105646133423,3
+ADAMSON-BSIT-11,Object Oriented Programming,IS-050,Learning Agility / Adaptability,Soft Skill,0.6711475849151611,4
+ADAMSON-BSIT-11,Object Oriented Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.6676145792007446,5
+ADAMSON-BSIT-12,Advanced Database Management System,IS-020,SQL (basic),Database,0.7053852081298828,1
+ADAMSON-BSIT-12,Advanced Database Management System,IS-025,SQL,Database/Query Language,0.6767152547836304,2
+ADAMSON-BSIT-12,Advanced Database Management System,IS-032,"Cloud/DB platforms (Azure, Databricks, SQL Server)",Cloud/Database,0.6701329350471497,3
+ADAMSON-BSIT-12,Advanced Database Management System,IS-031,Statistical Analysis & Data Modeling,Concept,0.6625540256500244,4
+ADAMSON-BSIT-12,Advanced Database Management System,IS-030,Data Cleaning / Wrangling,Practice,0.6607835292816162,5
+ADAMSON-BSIT-13,Networking 1,IS-035,Networking Fundamentals,Concept,0.7505596876144409,1
+ADAMSON-BSIT-13,Networking 1,IS-041,Networking Fundamentals (security context),Concept,0.6911473870277405,2
+ADAMSON-BSIT-13,Networking 1,IS-051,Teamwork / Collaboration,Soft Skill,0.635703444480896,3
+ADAMSON-BSIT-13,Networking 1,IS-050,Learning Agility / Adaptability,Soft Skill,0.6021273136138916,4
+ADAMSON-BSIT-13,Networking 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.5978181958198547,5
+ADAMSON-BSIT-14,Networking 2,IS-035,Networking Fundamentals,Concept,0.7215499877929688,1
+ADAMSON-BSIT-14,Networking 2,IS-041,Networking Fundamentals (security context),Concept,0.6608431339263916,2
+ADAMSON-BSIT-14,Networking 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6396948099136353,3
+ADAMSON-BSIT-14,Networking 2,IS-048,Communication Skills,Soft Skill,0.6136941909790039,4
+ADAMSON-BSIT-14,Networking 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6118136644363403,5
+ADAMSON-BSIT-15,Information Assurance and Security 1,IS-039,Security Monitoring / SOC basics,Practice,0.6716551780700684,1
+ADAMSON-BSIT-15,Information Assurance and Security 1,IS-041,Networking Fundamentals (security context),Concept,0.6412798166275024,2
+ADAMSON-BSIT-15,Information Assurance and Security 1,IS-042,Python (security scripting),Programming Language,0.6301348805427551,3
+ADAMSON-BSIT-15,Information Assurance and Security 1,IS-040,Vulnerability Assessment,Practice,0.6154478788375854,4
+ADAMSON-BSIT-15,Information Assurance and Security 1,IS-048,Communication Skills,Soft Skill,0.6114705801010132,5
+ADAMSON-BSIT-16,Project Management,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6246503591537476,1
+ADAMSON-BSIT-16,Project Management,IS-051,Teamwork / Collaboration,Soft Skill,0.6187621355056763,2
+ADAMSON-BSIT-16,Project Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6046508550643921,3
+ADAMSON-BSIT-16,Project Management,IS-010,Agile/Scrum fundamentals,Methodology,0.5942238569259644,4
+ADAMSON-BSIT-16,Project Management,IS-050,Learning Agility / Adaptability,Soft Skill,0.5935681462287903,5
+ADAMSON-BSIT-17,Applications Development and Emerging Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6393558979034424,1
+ADAMSON-BSIT-17,Applications Development and Emerging Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6340439319610596,2
+ADAMSON-BSIT-17,Applications Development and Emerging Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6197775602340698,3
+ADAMSON-BSIT-17,Applications Development and Emerging Technologies,IS-035,Networking Fundamentals,Concept,0.6126173734664917,4
+ADAMSON-BSIT-17,Applications Development and Emerging Technologies,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6006451845169067,5
+ADAMSON-BSIT-18,IT Professional Track 1 (Mobile Development or Game Analysis and Design),IS-051,Teamwork / Collaboration,Soft Skill,0.6396293640136719,1
+ADAMSON-BSIT-18,IT Professional Track 1 (Mobile Development or Game Analysis and Design),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6394662261009216,2
+ADAMSON-BSIT-18,IT Professional Track 1 (Mobile Development or Game Analysis and Design),IS-050,Learning Agility / Adaptability,Soft Skill,0.6301199197769165,3
+ADAMSON-BSIT-18,IT Professional Track 1 (Mobile Development or Game Analysis and Design),IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6192949414253235,4
+ADAMSON-BSIT-18,IT Professional Track 1 (Mobile Development or Game Analysis and Design),IS-048,Communication Skills,Soft Skill,0.615503191947937,5
+ADAMSON-BSIT-19,Systems Administration and Maintenance,IS-037,System Monitoring & Deployment Support,Practice,0.6504590511322021,1
+ADAMSON-BSIT-19,Systems Administration and Maintenance,IS-011,Debugging & Testing basics,Practice,0.629582405090332,2
+ADAMSON-BSIT-19,Systems Administration and Maintenance,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6054626703262329,3
+ADAMSON-BSIT-19,Systems Administration and Maintenance,IS-039,Security Monitoring / SOC basics,Practice,0.6029536724090576,4
+ADAMSON-BSIT-19,Systems Administration and Maintenance,IS-030,Data Cleaning / Wrangling,Practice,0.598315954208374,5
+ADAMSON-BSIT-20,Information Assurance and Security 2,IS-039,Security Monitoring / SOC basics,Practice,0.6602805256843567,1
+ADAMSON-BSIT-20,Information Assurance and Security 2,IS-041,Networking Fundamentals (security context),Concept,0.6284401416778564,2
+ADAMSON-BSIT-20,Information Assurance and Security 2,IS-042,Python (security scripting),Programming Language,0.6179391145706177,3
+ADAMSON-BSIT-20,Information Assurance and Security 2,IS-040,Vulnerability Assessment,Practice,0.609633207321167,4
+ADAMSON-BSIT-20,Information Assurance and Security 2,IS-048,Communication Skills,Soft Skill,0.6080760955810547,5
+ADAMSON-BSIT-21,Human Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.6955611705780029,1
+ADAMSON-BSIT-21,Human Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6818122267723083,2
+ADAMSON-BSIT-21,Human Computer Interaction,IS-050,Learning Agility / Adaptability,Soft Skill,0.6714862585067749,3
+ADAMSON-BSIT-21,Human Computer Interaction,IS-048,Communication Skills,Soft Skill,0.6430756449699402,4
+ADAMSON-BSIT-21,Human Computer Interaction,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6336846947669983,5
+ADAMSON-BSIT-22,IT Capstone Project 1,IS-035,Networking Fundamentals,Concept,0.6644293665885925,1
+ADAMSON-BSIT-22,IT Capstone Project 1,IS-051,Teamwork / Collaboration,Soft Skill,0.654533863067627,2
+ADAMSON-BSIT-22,IT Capstone Project 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6508429646492004,3
+ADAMSON-BSIT-22,IT Capstone Project 1,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6378340125083923,4
+ADAMSON-BSIT-22,IT Capstone Project 1,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6368005275726318,5
+ADAMSON-BSIT-23,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",IS-035,Networking Fundamentals,Concept,0.6661632061004639,1
+ADAMSON-BSIT-23,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",IS-051,Teamwork / Collaboration,Soft Skill,0.6608214378356934,2
+ADAMSON-BSIT-23,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",IS-010,Agile/Scrum fundamentals,Methodology,0.6501145362854004,3
+ADAMSON-BSIT-23,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",IS-004,JavaScript,Programming Language,0.649553656578064,4
+ADAMSON-BSIT-23,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",IS-050,Learning Agility / Adaptability,Soft Skill,0.6474229097366333,5
+ADAMSON-BSIT-24,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",IS-051,Teamwork / Collaboration,Soft Skill,0.6334273815155029,1
+ADAMSON-BSIT-24,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",IS-010,Agile/Scrum fundamentals,Methodology,0.6276891231536865,2
+ADAMSON-BSIT-24,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",IS-044,AWS / Azure fundamentals,Cloud Platform,0.6275255084037781,3
+ADAMSON-BSIT-24,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",IS-037,System Monitoring & Deployment Support,Practice,0.6258347034454346,4
+ADAMSON-BSIT-24,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",IS-050,Learning Agility / Adaptability,Soft Skill,0.6203173398971558,5
+ADAMSON-BSIT-25,Systems Integration and Architecture,IS-035,Networking Fundamentals,Concept,0.6486482620239258,1
+ADAMSON-BSIT-25,Systems Integration and Architecture,IS-037,System Monitoring & Deployment Support,Practice,0.6376675367355347,2
+ADAMSON-BSIT-25,Systems Integration and Architecture,IS-031,Statistical Analysis & Data Modeling,Concept,0.6191248893737793,3
+ADAMSON-BSIT-25,Systems Integration and Architecture,IS-051,Teamwork / Collaboration,Soft Skill,0.6131604313850403,4
+ADAMSON-BSIT-25,Systems Integration and Architecture,IS-010,Agile/Scrum fundamentals,Methodology,0.6105287075042725,5
+ADAMSON-BSIT-26,Code of Ethics for IT Professionals,IS-048,Communication Skills,Soft Skill,0.6087139844894409,1
+ADAMSON-BSIT-26,Code of Ethics for IT Professionals,IS-051,Teamwork / Collaboration,Soft Skill,0.599087119102478,2
+ADAMSON-BSIT-26,Code of Ethics for IT Professionals,IS-030,Data Cleaning / Wrangling,Practice,0.5941004753112793,3
+ADAMSON-BSIT-26,Code of Ethics for IT Professionals,IS-042,Python (security scripting),Programming Language,0.589561939239502,4
+ADAMSON-BSIT-26,Code of Ethics for IT Professionals,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.588852047920227,5
+ADAMSON-BSIT-27,IT Issues and Seminars,IS-051,Teamwork / Collaboration,Soft Skill,0.6303911209106445,1
+ADAMSON-BSIT-27,IT Issues and Seminars,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6298487782478333,2
+ADAMSON-BSIT-27,IT Issues and Seminars,IS-030,Data Cleaning / Wrangling,Practice,0.627983570098877,3
+ADAMSON-BSIT-27,IT Issues and Seminars,IS-035,Networking Fundamentals,Concept,0.6279823780059814,4
+ADAMSON-BSIT-27,IT Issues and Seminars,IS-037,System Monitoring & Deployment Support,Practice,0.6225794553756714,5
+ADAMSON-BSIT-28,IT Capstone Project 2,IS-035,Networking Fundamentals,Concept,0.6731048822402954,1
+ADAMSON-BSIT-28,IT Capstone Project 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6663733720779419,2
+ADAMSON-BSIT-28,IT Capstone Project 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6612941026687622,3
+ADAMSON-BSIT-28,IT Capstone Project 2,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6432701349258423,4
+ADAMSON-BSIT-28,IT Capstone Project 2,IS-050,Learning Agility / Adaptability,Soft Skill,0.6428436040878296,5
+ADAMSON-BSIT-29,PC Repair and Troubleshooting (lab),IS-034,Troubleshooting Hardware/Software,Practice,0.6765494346618652,1
+ADAMSON-BSIT-29,PC Repair and Troubleshooting (lab),IS-037,System Monitoring & Deployment Support,Practice,0.6550619602203369,2
+ADAMSON-BSIT-29,PC Repair and Troubleshooting (lab),IS-030,Data Cleaning / Wrangling,Practice,0.636023759841919,3
+ADAMSON-BSIT-29,PC Repair and Troubleshooting (lab),IS-039,Security Monitoring / SOC basics,Practice,0.6326825618743896,4
+ADAMSON-BSIT-29,PC Repair and Troubleshooting (lab),IS-011,Debugging & Testing basics,Practice,0.6277826428413391,5
+ADAMSON-BSIT-30,IT Professional Track 4 (2D Animation or System/Network Administration),IS-051,Teamwork / Collaboration,Soft Skill,0.6363881826400757,1
+ADAMSON-BSIT-30,IT Professional Track 4 (2D Animation or System/Network Administration),IS-035,Networking Fundamentals,Concept,0.6320854425430298,2
+ADAMSON-BSIT-30,IT Professional Track 4 (2D Animation or System/Network Administration),IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6192725896835327,3
+ADAMSON-BSIT-30,IT Professional Track 4 (2D Animation or System/Network Administration),IS-041,Networking Fundamentals (security context),Concept,0.6162732243537903,4
+ADAMSON-BSIT-30,IT Professional Track 4 (2D Animation or System/Network Administration),IS-039,Security Monitoring / SOC basics,Practice,0.6131823062896729,5
+ADAMSON-BSIT-31,On-the-Job Training for Information Technology,IS-048,Communication Skills,Soft Skill,0.6558473110198975,1
+ADAMSON-BSIT-31,On-the-Job Training for Information Technology,IS-051,Teamwork / Collaboration,Soft Skill,0.6310772895812988,2
+ADAMSON-BSIT-31,On-the-Job Training for Information Technology,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6271049976348877,3
+ADAMSON-BSIT-31,On-the-Job Training for Information Technology,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6232986450195312,4
+ADAMSON-BSIT-31,On-the-Job Training for Information Technology,IS-050,Learning Agility / Adaptability,Soft Skill,0.6200804710388184,5
+ADAMSON-BSIT-32,Technopreneurship,IS-050,Learning Agility / Adaptability,Soft Skill,0.6165350079536438,1
+ADAMSON-BSIT-32,Technopreneurship,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6155129075050354,2
+ADAMSON-BSIT-32,Technopreneurship,IS-051,Teamwork / Collaboration,Soft Skill,0.6132747530937195,3
+ADAMSON-BSIT-32,Technopreneurship,IS-035,Networking Fundamentals,Concept,0.6115670800209045,4
+ADAMSON-BSIT-32,Technopreneurship,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6100063920021057,5
+LPU-BSIT-01,Fundamentals of Programming,IS-035,Networking Fundamentals,Concept,0.7196652889251709,1
+LPU-BSIT-01,Fundamentals of Programming,IS-041,Networking Fundamentals (security context),Concept,0.7020946741104126,2
+LPU-BSIT-01,Fundamentals of Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.7019641399383545,3
+LPU-BSIT-01,Fundamentals of Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6675673723220825,4
+LPU-BSIT-01,Fundamentals of Programming,IS-039,Security Monitoring / SOC basics,Practice,0.6624687910079956,5
+LPU-BSIT-02,Living in the IT Era,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6732712984085083,1
+LPU-BSIT-02,Living in the IT Era,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6479876041412354,2
+LPU-BSIT-02,Living in the IT Era,IS-048,Communication Skills,Soft Skill,0.6313780546188354,3
+LPU-BSIT-02,Living in the IT Era,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6210609078407288,4
+LPU-BSIT-02,Living in the IT Era,IS-037,System Monitoring & Deployment Support,Practice,0.6137417554855347,5
+LPU-BSIT-03,Information Assurance and Security 1,IS-039,Security Monitoring / SOC basics,Practice,0.6881382465362549,1
+LPU-BSIT-03,Information Assurance and Security 1,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6693871021270752,2
+LPU-BSIT-03,Information Assurance and Security 1,IS-041,Networking Fundamentals (security context),Concept,0.645024299621582,3
+LPU-BSIT-03,Information Assurance and Security 1,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6386786103248596,4
+LPU-BSIT-03,Information Assurance and Security 1,IS-048,Communication Skills,Soft Skill,0.6333153247833252,5
+LPU-BSIT-04,Information Management,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6659039258956909,1
+LPU-BSIT-04,Information Management,IS-031,Statistical Analysis & Data Modeling,Concept,0.6617605686187744,2
+LPU-BSIT-04,Information Management,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6605122089385986,3
+LPU-BSIT-04,Information Management,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6320784091949463,4
+LPU-BSIT-04,Information Management,IS-048,Communication Skills,Soft Skill,0.627902626991272,5
+LPU-BSIT-05,Intermediate Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6549183130264282,1
+LPU-BSIT-05,Intermediate Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.6538197994232178,2
+LPU-BSIT-05,Intermediate Programming,IS-024,Basic Programming/Scripting knowledge,Concept,0.6529291868209839,3
+LPU-BSIT-05,Intermediate Programming,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6514471769332886,4
+LPU-BSIT-05,Intermediate Programming,IS-035,Networking Fundamentals,Concept,0.6422315835952759,5
+LPU-BSIT-06,Introduction to Computing,IS-041,Networking Fundamentals (security context),Concept,0.6782205104827881,1
+LPU-BSIT-06,Introduction to Computing,IS-035,Networking Fundamentals,Concept,0.6731557846069336,2
+LPU-BSIT-06,Introduction to Computing,IS-039,Security Monitoring / SOC basics,Practice,0.6716353893280029,3
+LPU-BSIT-06,Introduction to Computing,IS-010,Agile/Scrum fundamentals,Methodology,0.662400484085083,4
+LPU-BSIT-06,Introduction to Computing,IS-031,Statistical Analysis & Data Modeling,Concept,0.6617507934570312,5
+LPU-BSIT-07,Platform Technologies,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6551127433776855,1
+LPU-BSIT-07,Platform Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6214286684989929,2
+LPU-BSIT-07,Platform Technologies,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6158636808395386,3
+LPU-BSIT-07,Platform Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6141006946563721,4
+LPU-BSIT-07,Platform Technologies,IS-019,Regression & Performance Testing,Practice,0.6039614677429199,5
+LPU-BSIT-08,Applications Development and Emerging Technologies,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6723580360412598,1
+LPU-BSIT-08,Applications Development and Emerging Technologies,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6443343162536621,2
+LPU-BSIT-08,Applications Development and Emerging Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6436131000518799,3
+LPU-BSIT-08,Applications Development and Emerging Technologies,IS-037,System Monitoring & Deployment Support,Practice,0.6178041100502014,4
+LPU-BSIT-08,Applications Development and Emerging Technologies,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6172950267791748,5
+LPU-BSIT-09,Data Structures and Algorithms,IS-031,Statistical Analysis & Data Modeling,Concept,0.7522718906402588,1
+LPU-BSIT-09,Data Structures and Algorithms,IS-035,Networking Fundamentals,Concept,0.6662297248840332,2
+LPU-BSIT-09,Data Structures and Algorithms,IS-030,Data Cleaning / Wrangling,Practice,0.6607723236083984,3
+LPU-BSIT-09,Data Structures and Algorithms,IS-019,Regression & Performance Testing,Practice,0.6356358528137207,4
+LPU-BSIT-09,Data Structures and Algorithms,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6328897476196289,5
+LPU-BSIT-10,Object Oriented Programming,IS-031,Statistical Analysis & Data Modeling,Concept,0.6903455257415771,1
+LPU-BSIT-10,Object Oriented Programming,IS-010,Agile/Scrum fundamentals,Methodology,0.681010365486145,2
+LPU-BSIT-10,Object Oriented Programming,IS-001,Java,Programming Language,0.6756237745285034,3
+LPU-BSIT-10,Object Oriented Programming,IS-035,Networking Fundamentals,Concept,0.6674407124519348,4
+LPU-BSIT-10,Object Oriented Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.665767252445221,5
+LPU-BSIT-11,Discrete Mathematics 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6749580502510071,1
+LPU-BSIT-11,Discrete Mathematics 1,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6404901146888733,2
+LPU-BSIT-11,Discrete Mathematics 1,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6247557401657104,3
+LPU-BSIT-11,Discrete Mathematics 1,IS-030,Data Cleaning / Wrangling,Practice,0.6169248819351196,4
+LPU-BSIT-11,Discrete Mathematics 1,IS-035,Networking Fundamentals,Concept,0.6140626668930054,5
+LPU-BSIT-12,Information Assurance and Security 2,IS-039,Security Monitoring / SOC basics,Practice,0.6654859781265259,1
+LPU-BSIT-12,Information Assurance and Security 2,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6522189974784851,2
+LPU-BSIT-12,Information Assurance and Security 2,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6289924383163452,3
+LPU-BSIT-12,Information Assurance and Security 2,IS-048,Communication Skills,Soft Skill,0.6215786933898926,4
+LPU-BSIT-12,Information Assurance and Security 2,IS-041,Networking Fundamentals (security context),Concept,0.6182388663291931,5
+LPU-BSIT-13,Integrative Programming and Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.671730101108551,1
+LPU-BSIT-13,Integrative Programming and Technologies,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6608752012252808,2
+LPU-BSIT-13,Integrative Programming and Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6547170281410217,3
+LPU-BSIT-13,Integrative Programming and Technologies,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6407588720321655,4
+LPU-BSIT-13,Integrative Programming and Technologies,IS-050,Learning Agility / Adaptability,Soft Skill,0.6377678513526917,5
+LPU-BSIT-14,Discrete Mathematics 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.6867797374725342,1
+LPU-BSIT-14,Discrete Mathematics 2,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6468337774276733,2
+LPU-BSIT-14,Discrete Mathematics 2,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6302636861801147,3
+LPU-BSIT-14,Discrete Mathematics 2,IS-030,Data Cleaning / Wrangling,Practice,0.6254427433013916,4
+LPU-BSIT-14,Discrete Mathematics 2,IS-035,Networking Fundamentals,Concept,0.6189717650413513,5
+LPU-BSIT-15,IT Elective 1 (Non-Lab),IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6573336124420166,1
+LPU-BSIT-15,IT Elective 1 (Non-Lab),IS-048,Communication Skills,Soft Skill,0.6300954818725586,2
+LPU-BSIT-15,IT Elective 1 (Non-Lab),IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6269572973251343,3
+LPU-BSIT-15,IT Elective 1 (Non-Lab),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6229095458984375,4
+LPU-BSIT-15,IT Elective 1 (Non-Lab),IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6189092993736267,5
+LPU-BSIT-16,Multimedia Design and Programming,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6358808279037476,1
+LPU-BSIT-16,Multimedia Design and Programming,IS-051,Teamwork / Collaboration,Soft Skill,0.6273438930511475,2
+LPU-BSIT-16,Multimedia Design and Programming,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6264927387237549,3
+LPU-BSIT-16,Multimedia Design and Programming,IS-031,Statistical Analysis & Data Modeling,Concept,0.6080175638198853,4
+LPU-BSIT-16,Multimedia Design and Programming,IS-048,Communication Skills,Soft Skill,0.6047987937927246,5
+LPU-BSIT-17,Networks 1,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6793354749679565,1
+LPU-BSIT-17,Networks 1,IS-035,Networking Fundamentals,Concept,0.6785063743591309,2
+LPU-BSIT-17,Networks 1,IS-041,Networking Fundamentals (security context),Concept,0.6518357992172241,3
+LPU-BSIT-17,Networks 1,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6159082651138306,4
+LPU-BSIT-17,Networks 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6142898201942444,5
+LPU-BSIT-18,System Integration and Architecture 1,IS-037,System Monitoring & Deployment Support,Practice,0.6579945087432861,1
+LPU-BSIT-18,System Integration and Architecture 1,IS-035,Networking Fundamentals,Concept,0.6476681232452393,2
+LPU-BSIT-18,System Integration and Architecture 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6409986019134521,3
+LPU-BSIT-18,System Integration and Architecture 1,IS-039,Security Monitoring / SOC basics,Practice,0.6399544477462769,4
+LPU-BSIT-18,System Integration and Architecture 1,IS-010,Agile/Scrum fundamentals,Methodology,0.6351423263549805,5
+LPU-BSIT-19,Technopreneurship,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6716632843017578,1
+LPU-BSIT-19,Technopreneurship,IS-019,Regression & Performance Testing,Practice,0.6325134038925171,2
+LPU-BSIT-19,Technopreneurship,IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6288447380065918,3
+LPU-BSIT-19,Technopreneurship,IS-051,Teamwork / Collaboration,Soft Skill,0.6267181634902954,4
+LPU-BSIT-19,Technopreneurship,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6202735900878906,5
+LPU-BSIT-20,Web Systems and Technologies,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6402634382247925,1
+LPU-BSIT-20,Web Systems and Technologies,IS-035,Networking Fundamentals,Concept,0.6371843814849854,2
+LPU-BSIT-20,Web Systems and Technologies,IS-051,Teamwork / Collaboration,Soft Skill,0.6295491456985474,3
+LPU-BSIT-20,Web Systems and Technologies,IS-031,Statistical Analysis & Data Modeling,Concept,0.6294050812721252,4
+LPU-BSIT-20,Web Systems and Technologies,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6227152943611145,5
+LPU-BSIT-21,Advanced Database Management Systems,IS-031,Statistical Analysis & Data Modeling,Concept,0.6623990535736084,1
+LPU-BSIT-21,Advanced Database Management Systems,IS-020,SQL (basic),Database,0.6415706276893616,2
+LPU-BSIT-21,Advanced Database Management Systems,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6312130689620972,3
+LPU-BSIT-21,Advanced Database Management Systems,IS-030,Data Cleaning / Wrangling,Practice,0.625224232673645,4
+LPU-BSIT-21,Advanced Database Management Systems,IS-025,SQL,Database/Query Language,0.6225579380989075,5
+LPU-BSIT-22,IT Elective 2 (with Lab),IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6620150208473206,1
+LPU-BSIT-22,IT Elective 2 (with Lab),IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6279598474502563,2
+LPU-BSIT-22,IT Elective 2 (with Lab),IS-031,Statistical Analysis & Data Modeling,Concept,0.627409040927887,3
+LPU-BSIT-22,IT Elective 2 (with Lab),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6256646513938904,4
+LPU-BSIT-22,IT Elective 2 (with Lab),IS-051,Teamwork / Collaboration,Soft Skill,0.6225273609161377,5
+LPU-BSIT-23,Networks 2,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6698503494262695,1
+LPU-BSIT-23,Networks 2,IS-035,Networking Fundamentals,Concept,0.6547746658325195,2
+LPU-BSIT-23,Networks 2,IS-041,Networking Fundamentals (security context),Concept,0.6287589073181152,3
+LPU-BSIT-23,Networks 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6192114353179932,4
+LPU-BSIT-23,Networks 2,IS-048,Communication Skills,Soft Skill,0.6098500490188599,5
+LPU-BSIT-24,Systems Administration and Maintenance,IS-037,System Monitoring & Deployment Support,Practice,0.6551976203918457,1
+LPU-BSIT-24,Systems Administration and Maintenance,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6435278654098511,2
+LPU-BSIT-24,Systems Administration and Maintenance,IS-039,Security Monitoring / SOC basics,Practice,0.6133464574813843,3
+LPU-BSIT-24,Systems Administration and Maintenance,IS-031,Statistical Analysis & Data Modeling,Concept,0.609557032585144,4
+LPU-BSIT-24,Systems Administration and Maintenance,IS-048,Communication Skills,Soft Skill,0.6079161167144775,5
+LPU-BSIT-25,System Integration and Architecture 2,IS-037,System Monitoring & Deployment Support,Practice,0.6428109407424927,1
+LPU-BSIT-25,System Integration and Architecture 2,IS-035,Networking Fundamentals,Concept,0.6311790943145752,2
+LPU-BSIT-25,System Integration and Architecture 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.629929780960083,3
+LPU-BSIT-25,System Integration and Architecture 2,IS-039,Security Monitoring / SOC basics,Practice,0.6274533271789551,4
+LPU-BSIT-25,System Integration and Architecture 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6241973638534546,5
+LPU-BSIT-26,Social Issues and Professional Ethics,IS-051,Teamwork / Collaboration,Soft Skill,0.6345365047454834,1
+LPU-BSIT-26,Social Issues and Professional Ethics,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.622948408126831,2
+LPU-BSIT-26,Social Issues and Professional Ethics,IS-040,Vulnerability Assessment,Practice,0.6127028465270996,3
+LPU-BSIT-26,Social Issues and Professional Ethics,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.603203535079956,4
+LPU-BSIT-26,Social Issues and Professional Ethics,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.601974606513977,5
+LPU-BSIT-27,Capstone Project 1,IS-031,Statistical Analysis & Data Modeling,Concept,0.6750627756118774,1
+LPU-BSIT-27,Capstone Project 1,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6554854512214661,2
+LPU-BSIT-27,Capstone Project 1,IS-051,Teamwork / Collaboration,Soft Skill,0.6515219211578369,3
+LPU-BSIT-27,Capstone Project 1,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6440020799636841,4
+LPU-BSIT-27,Capstone Project 1,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6321079730987549,5
+LPU-BSIT-28,IT Elective 3 (Non-Lab),IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6559834480285645,1
+LPU-BSIT-28,IT Elective 3 (Non-Lab),IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.629098653793335,2
+LPU-BSIT-28,IT Elective 3 (Non-Lab),IS-048,Communication Skills,Soft Skill,0.6260432004928589,3
+LPU-BSIT-28,IT Elective 3 (Non-Lab),IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6189299821853638,4
+LPU-BSIT-28,IT Elective 3 (Non-Lab),IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6139265298843384,5
+LPU-BSIT-29,OJT (600 hours),IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6683241128921509,1
+LPU-BSIT-29,OJT (600 hours),IS-048,Communication Skills,Soft Skill,0.6286662817001343,2
+LPU-BSIT-29,OJT (600 hours),IS-031,Statistical Analysis & Data Modeling,Concept,0.6283019781112671,3
+LPU-BSIT-29,OJT (600 hours),IS-010,Agile/Scrum fundamentals,Methodology,0.6266375780105591,4
+LPU-BSIT-29,OJT (600 hours),IS-001,Java,Programming Language,0.6221227645874023,5
+LPU-BSIT-30,Capstone Project 2,IS-031,Statistical Analysis & Data Modeling,Concept,0.681771993637085,1
+LPU-BSIT-30,Capstone Project 2,IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6605297327041626,2
+LPU-BSIT-30,Capstone Project 2,IS-051,Teamwork / Collaboration,Soft Skill,0.6519630551338196,3
+LPU-BSIT-30,Capstone Project 2,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6439951062202454,4
+LPU-BSIT-30,Capstone Project 2,IS-010,Agile/Scrum fundamentals,Methodology,0.6299173831939697,5
+LPU-BSIT-31,Human Computer Interaction,IS-051,Teamwork / Collaboration,Soft Skill,0.7037198543548584,1
+LPU-BSIT-31,Human Computer Interaction,IS-049,Problem-Solving / Analytical Thinking,Soft Skill,0.6755083799362183,2
+LPU-BSIT-31,Human Computer Interaction,IS-048,Communication Skills,Soft Skill,0.672835111618042,3
+LPU-BSIT-31,Human Computer Interaction,IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.6527692675590515,4
+LPU-BSIT-31,Human Computer Interaction,IS-052,AI Tool Fluency (Copilot/LLM-assisted work),Emerging Skill,0.6505684852600098,5
+LPU-BSIT-32,IT Elective 4 (with Lab),IS-053,Cybersecurity specialists,Macro Shortage Signal,0.6677114963531494,1
+LPU-BSIT-32,IT Elective 4 (with Lab),IS-056,Digital/Talent upskilling (IT-BPM),Macro Shortage Signal,0.6299200057983398,2
+LPU-BSIT-32,IT Elective 4 (with Lab),IS-031,Statistical Analysis & Data Modeling,Concept,0.6297671794891357,3
+LPU-BSIT-32,IT Elective 4 (with Lab),IS-051,Teamwork / Collaboration,Soft Skill,0.6276477575302124,4
+LPU-BSIT-32,IT Elective 4 (with Lab),IS-033,Data Storytelling/Business Reporting,Soft/Applied Skill,0.626724362373352,5

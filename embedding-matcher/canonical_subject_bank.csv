@@ -1,0 +1,252 @@
+program,program_key,canonical_subject,display_name,classification,year_terms,units,subject_variants,source_colleges
+BSCS,bscs,applications development and emerging technologies 2 enterprise back end,Applications Development and Emerging Technologies 2 (Enterprise Back-end),Professional,Y2T2,3,Applications Development and Emerging Technologies 2 (Enterprise Back-end),UST
+BSCS,bscs,computer architecture and organization,Computer Architecture and Organization,Core,Y2T2,3,Computer Architecture and Organization,UST
+BSCS,bscs,computer networks and data communications,Computer Networks and Data Communications,Core,Y4T1,3,Computer Networks and Data Communications,Ateneo de Manila
+BSCS,bscs,computer organization laboratory,"Computer Organization, Laboratory",Core,Y3T1,3,"Computer Organization, Laboratory",Ateneo de Manila
+BSCS,bscs,computer organization lecture,"Computer Organization, Lecture",Core,Y3T1,3,"Computer Organization, Lecture",Ateneo de Manila
+BSCS,bscs,computer programming i fundamentals imperative,Computer Programming I (Fundamentals Imperative),Core,Y1T1,5,Computer Programming I (Fundamentals Imperative),UST
+BSCS,bscs,computer programming ii intermediate object oriented,"Computer Programming II (Intermediate, Object-Oriented)",Core,Y1T2,4,"Computer Programming II (Intermediate, Object-Oriented)",UST
+BSCS,bscs,computer security and information assurance,Computer Security and Information Assurance,Professional,Y4T1,2,Computer Security and Information Assurance,UST
+BSCS,bscs,csci major elective,CSCI Major Elective,Specialization,Y3T1; Y3T2; Y4T1,3,CSCI Major Elective,Ateneo de Manila
+BSCS,bscs,data communication and networking,Data Communication and Networking,Core,Y4T1,3,Data Communication and Networking,UP
+BSCS,bscs,data structures,Data Structures,Core,Y2T1,4,Data Structures,UP
+BSCS,bscs,data structures and algorithms,Data Structures and Algorithms,Core,Y1T2; Y2T1,3; 4,Data Structures and Algorithms,Ateneo de Manila; UST
+BSCS,bscs,design and analysis of algorithms,Design and Analysis of Algorithms,Core,Y2T1; Y3T1,3,Design and Analysis of Algorithms,UP; UST
+BSCS,bscs,design and implementation of programming languages,Design and Implementation of Programming Languages,Core,Y3T1,3,Design and Implementation of Programming Languages,UP
+BSCS,bscs,discrete mathematical structures in cs 1,Discrete Mathematical Structures in CS 1,Core,Y1T1,3,Discrete Mathematical Structures in CS 1,UP
+BSCS,bscs,discrete mathematical structures in cs 2,Discrete Mathematical Structures in CS 2,Core,Y1T2,3,Discrete Mathematical Structures in CS 2,UP
+BSCS,bscs,discrete structures,Discrete Structures,Core,Y1T1,3,Discrete Structures,UST
+BSCS,bscs,emerging technology,Emerging Technology,Professional,Y4T2,1,Emerging Technology,UST
+BSCS,bscs,ethical and professional issues in computing,Ethical and Professional Issues in Computing,Core,Y3T1,1,Ethical and Professional Issues in Computing,UP
+BSCS,bscs,file processing and database systems,File Processing and Database Systems,Core,Y2T2,3,File Processing and Database Systems,UP
+BSCS,bscs,fundamentals of programming,Fundamentals of Programming,Core,Y1T2,3,Fundamentals of Programming,UP
+BSCS,bscs,graphics computing and multimedia technology,Graphics Computing and Multimedia Technology,Professional,Y4T1,3,Graphics Computing and Multimedia Technology,UST
+BSCS,bscs,guided studies in discs,Guided Studies in DISCS,Professional,Y3T1; Y3T2; Y4T1; Y4T2,1,Guided Studies in DISCS,Ateneo de Manila
+BSCS,bscs,human computer interaction,Human-Computer Interaction,Professional,Y1T2,2,Human-Computer Interaction,UST
+BSCS,bscs,information assurance and security,Information Assurance and Security,Professional,Y4T2,3,Information Assurance and Security,Ateneo de Manila
+BSCS,bscs,information management,Information Management,Core,Y2T1; Y3T1,3; 4,Information Management,Ateneo de Manila; UST
+BSCS,bscs,intro to computer organization architecture and machine level programming,"Intro to Computer Organization, Architecture, and Machine-Level Programming",Core,Y2T2,3,"Intro to Computer Organization, Architecture, and Machine-Level Programming",UP
+BSCS,bscs,introduction to artificial intelligence,Introduction to Artificial Intelligence,Core,Y3T2,3,Introduction to Artificial Intelligence,UP
+BSCS,bscs,introduction to computer science,Introduction to Computer Science,Core,Y1T1,3,Introduction to Computer Science,UP
+BSCS,bscs,introduction to computer security,Introduction to Computer Security,Core,Y4T2,3,Introduction to Computer Security,UP
+BSCS,bscs,introduction to computing,Introduction to Computing,Core,Y1T1,3,Introduction to Computing,Ateneo de Manila; UST
+BSCS,bscs,introduction to intelligent systems,Introduction to Intelligent Systems,Professional,Y2T2,3,Introduction to Intelligent Systems,UST
+BSCS,bscs,introduction to programming i,Introduction to Programming I,Core,Y1T1,3,Introduction to Programming I,Ateneo de Manila
+BSCS,bscs,introduction to programming ii,Introduction to Programming II,Core,Y1T2,3,Introduction to Programming II,Ateneo de Manila
+BSCS,bscs,introduction to software engineering,Introduction to Software Engineering,Core,Y3T2,3,Introduction to Software Engineering,Ateneo de Manila
+BSCS,bscs,introduction to the theory of computation,Introduction to the Theory of Computation,Core,Y2T2,3,Introduction to the Theory of Computation,UP
+BSCS,bscs,logic design and digital computer circuits,Logic Design and Digital Computer Circuits,Core,Y2T1,3,Logic Design and Digital Computer Circuits,UP
+BSCS,bscs,machine learning,Machine Learning,Core,Y4T1,3,Machine Learning,UP
+BSCS,bscs,operating systems,Operating Systems,Core,Y3T2,3,Operating Systems,UP
+BSCS,bscs,operating systems laboratory,"Operating Systems, Laboratory",Core,Y3T2,3,"Operating Systems, Laboratory",Ateneo de Manila
+BSCS,bscs,operating systems lecture,"Operating Systems, Lecture",Core,Y3T2,3,"Operating Systems, Lecture",Ateneo de Manila
+BSCS,bscs,practicum,Practicum,Core,Y3TMidyear; Y4TIntersession,3,Practicum,Ateneo de Manila; UP
+BSCS,bscs,practicum 250 hours,Practicum (250 hours),Internship,Y4T2,4,Practicum (250 hours),UST
+BSCS,bscs,professional electives specialization,Professional electives / specialization,Specialization,YTvaries,,Professional electives / specialization,UST
+BSCS,bscs,programming languages,Programming Languages,Core,Y3T1,3,Programming Languages,UST
+BSCS,bscs,programming paradigms,Programming Paradigms,Core,Y2T1,3,Programming Paradigms,UP
+BSCS,bscs,research internship 1,Research Internship 1,Core,Y3T1,1,Research Internship 1,UP
+BSCS,bscs,research internship 2,Research Internship 2,Core,Y3T2,1,Research Internship 2,UP
+BSCS,bscs,research methods for computer science,Research Methods for Computer Science,Core,Y2T2,3,Research Methods for Computer Science,UP
+BSCS,bscs,software engineering 1,Software Engineering 1,Core,Y3T1,3,Software Engineering 1,UP
+BSCS,bscs,software engineering 2,Software Engineering 2,Core,Y3T2,3,Software Engineering 2,UP
+BSCS,bscs,software engineering i,Software Engineering I,Core,Y3T1,3,Software Engineering I,UST
+BSCS,bscs,software tools and development frameworks,Software Tools and Development Frameworks,Professional,Y2T2,3,Software Tools and Development Frameworks,Ateneo de Manila
+BSCS,bscs,special problem 1,Special Problem 1,Core,Y4T1,2,Special Problem 1,UP
+BSCS,bscs,special problem 2,Special Problem 2,Core,Y4T2,2,Special Problem 2,UP
+BSCS,bscs,structure and interpretation of programming languages,Structure and Interpretation of Programming Languages,Core,Y4T1,3,Structure and Interpretation of Programming Languages,Ateneo de Manila
+BSCS,bscs,technical writing for computer science,Technical Writing for Computer Science,Core,Y3T1,3,Technical Writing for Computer Science,UP
+BSCS,bscs,technopreneurship,Technopreneurship,Core,Y4T2,3,Technopreneurship,UP
+BSCS,bscs,theory of automata,Theory of Automata,Core,Y2T1,3,Theory of Automata,UST
+BSCS,bscs,theory of computation,Theory of Computation,Core,Y4T2,3,Theory of Computation,Ateneo de Manila
+BSCS,bscs,thesis i and ii,Thesis I and II,Research / Capstone,YTvaries,,Thesis I and II,UST
+BSCS,bscs,thesis writing i,Thesis Writing I,Research / Capstone,Y3T2,1,Thesis Writing I,Ateneo de Manila
+BSCS,bscs,thesis writing ii,Thesis Writing II,Research / Capstone,Y4T1,3,Thesis Writing II,Ateneo de Manila
+BSCS,bscs,thesis writing iii,Thesis Writing III,Research / Capstone,Y4T2,3,Thesis Writing III,Ateneo de Manila
+BSCS (ML specialization),bscs ml specialization,advanced database systems,Advanced Database Systems,Professional,Y2T3,3,Advanced Database Systems,NU Lipa
+BSCS (ML specialization),bscs ml specialization,advanced machine learning,Advanced Machine Learning,Specialization,Y3T2,3,Advanced Machine Learning,NU Lipa
+BSCS (ML specialization),bscs ml specialization,algorithms and complexity,Algorithms and Complexity,Core,Y2T3,3,Algorithms and Complexity,NU Lipa
+BSCS (ML specialization),bscs ml specialization,applications development and emerging technologies,Applications Development and Emerging Technologies,Professional,Y3T3,3,Applications Development and Emerging Technologies,NU Lipa
+BSCS (ML specialization),bscs ml specialization,automata theory and formal languages,Automata Theory and Formal Languages,Core,Y3T1,3,Automata Theory and Formal Languages,NU Lipa
+BSCS (ML specialization),bscs ml specialization,basic networking,Basic Networking,Core,Y2T3,3,Basic Networking,NU Lipa
+BSCS (ML specialization),bscs ml specialization,computer organization and architecture,Computer Organization and Architecture,Core,Y2T2,3,Computer Organization and Architecture,NU Lipa
+BSCS (ML specialization),bscs ml specialization,data science,Data Science,Specialization,Y4T2,3,Data Science,NU Lipa
+BSCS (ML specialization),bscs ml specialization,data structures and algorithms,Data Structures and Algorithms,Core,Y2T1,3,Data Structures and Algorithms,NU Lipa
+BSCS (ML specialization),bscs ml specialization,deep learning,Deep Learning,Specialization,Y3T3,3,Deep Learning,NU Lipa
+BSCS (ML specialization),bscs ml specialization,discrete structures 1,Discrete Structures 1,Core,Y1T3,3,Discrete Structures 1,NU Lipa
+BSCS (ML specialization),bscs ml specialization,discrete structures 2,Discrete Structures 2,Core,Y2T1,3,Discrete Structures 2,NU Lipa
+BSCS (ML specialization),bscs ml specialization,fundamentals of programming,Fundamentals of Programming,Core,Y1T1,3,Fundamentals of Programming,NU Lipa
+BSCS (ML specialization),bscs ml specialization,hardware software and peripheral installation,"Hardware, Software and Peripheral Installation",Professional,Y1T2,1,"Hardware, Software and Peripheral Installation",NU Lipa
+BSCS (ML specialization),bscs ml specialization,information assurance and security,Information Assurance and Security,Professional,Y3T2,3,Information Assurance and Security,NU Lipa
+BSCS (ML specialization),bscs ml specialization,information management,Information Management,Core,Y2T2,3,Information Management,NU Lipa
+BSCS (ML specialization),bscs ml specialization,intermediate programming,Intermediate Programming,Core,Y1T2,3,Intermediate Programming,NU Lipa
+BSCS (ML specialization),bscs ml specialization,internship 400 hours,Internship (400 hours),Internship,Y4T3,3,Internship (400 hours),NU Lipa
+BSCS (ML specialization),bscs ml specialization,introduction to computing,Introduction to Computing,Core,Y1T1,3,Introduction to Computing,NU Lipa
+BSCS (ML specialization),bscs ml specialization,introduction to human computer interaction,Introduction to Human-Computer Interaction,Professional,Y3T3,3,Introduction to Human-Computer Interaction,NU Lipa
+BSCS (ML specialization),bscs ml specialization,introduction to machine learning,Introduction to Machine Learning,Specialization,Y3T1,3,Introduction to Machine Learning,NU Lipa
+BSCS (ML specialization),bscs ml specialization,methods of research,Methods of Research,Research / Capstone,Y3T3,3,Methods of Research,NU Lipa
+BSCS (ML specialization),bscs ml specialization,object oriented programming,Object-Oriented Programming,Core,Y1T3,3,Object-Oriented Programming,NU Lipa
+BSCS (ML specialization),bscs ml specialization,operating systems,Operating Systems,Core,Y3T1,3,Operating Systems,NU Lipa
+BSCS (ML specialization),bscs ml specialization,programming languages,Programming Languages,Core,Y4T1,3,Programming Languages,NU Lipa
+BSCS (ML specialization),bscs ml specialization,reinforcement learning,Reinforcement Learning,Specialization,Y4T1,3,Reinforcement Learning,NU Lipa
+BSCS (ML specialization),bscs ml specialization,social and professional issues,Social and Professional Issues,Professional,Y4T1,3,Social and Professional Issues,NU Lipa
+BSCS (ML specialization),bscs ml specialization,software engineering 1,Software Engineering 1,Core,Y3T1,3,Software Engineering 1,NU Lipa
+BSCS (ML specialization),bscs ml specialization,software engineering 2,Software Engineering 2,Core,Y3T2,3,Software Engineering 2,NU Lipa
+BSCS (ML specialization),bscs ml specialization,thesis 1,Thesis 1,Research / Capstone,Y4T1,3,Thesis 1,NU Lipa
+BSCS (ML specialization),bscs ml specialization,thesis 2,Thesis 2,Research / Capstone,Y4T2,3,Thesis 2,NU Lipa
+BSCS (Software Technology),bscs software technology,advanced algorithms and complexities,Advanced Algorithms and Complexities,Specialization,YT,3,Advanced Algorithms and Complexities,DLSU
+BSCS (Software Technology),bscs software technology,advanced database systems,Advanced Database Systems,Specialization,YT,3,Advanced Database Systems,DLSU
+BSCS (Software Technology),bscs software technology,advanced intelligent systems,Advanced Intelligent Systems,Specialization,YT,3,Advanced Intelligent Systems,DLSU
+BSCS (Software Technology),bscs software technology,advanced programming techniques,Advanced Programming Techniques,Professional,Y2T,3,Advanced Programming Techniques,DLSU
+BSCS (Software Technology),bscs software technology,advanced software engineering,Advanced Software Engineering,Specialization,YT,3,Advanced Software Engineering,DLSU
+BSCS (Software Technology),bscs software technology,algorithms and complexity,Algorithms and Complexity,Professional,Y2T,3,Algorithms and Complexity,DLSU
+BSCS (Software Technology),bscs software technology,computer organization and architecture i,Computer Organization and Architecture I,Professional,YT,3,Computer Organization and Architecture I,DLSU
+BSCS (Software Technology),bscs software technology,computer organization and architecture ii,Computer Organization and Architecture II,Professional,YT,4,Computer Organization and Architecture II,DLSU
+BSCS (Software Technology),bscs software technology,data structures and algorithms,Data Structures and Algorithms,Core,Y1T,3,Data Structures and Algorithms,DLSU
+BSCS (Software Technology),bscs software technology,discrete structures,Discrete Structures,Core,Y1T,3,Discrete Structures,DLSU
+BSCS (Software Technology),bscs software technology,distributed computing,Distributed Computing,Specialization,YT,3,Distributed Computing,DLSU
+BSCS (Software Technology),bscs software technology,human computer interactions,Human Computer Interactions,Specialization,YT,3,Human Computer Interactions,DLSU
+BSCS (Software Technology),bscs software technology,information management,Information Management,Core,Y2T,3,Information Management,DLSU
+BSCS (Software Technology),bscs software technology,introduction to artificial intelligence,Introduction to Artificial Intelligence,Professional,Y2T,3,Introduction to Artificial Intelligence,DLSU
+BSCS (Software Technology),bscs software technology,introduction to computer networks,Introduction to Computer Networks,Professional,YT,3,Introduction to Computer Networks,DLSU
+BSCS (Software Technology),bscs software technology,introduction to computing,Introduction to Computing,Core,Y1T,3,Introduction to Computing,DLSU
+BSCS (Software Technology),bscs software technology,logic formulation and introductory programming,Logic Formulation and Introductory Programming,Core,Y1T,3,Logic Formulation and Introductory Programming,DLSU
+BSCS (Software Technology),bscs software technology,mobile development,Mobile Development,Specialization,YT,3,Mobile Development,DLSU
+BSCS (Software Technology),bscs software technology,object oriented programming,Object-Oriented Programming,Core,Y1T,3,Object-Oriented Programming,DLSU
+BSCS (Software Technology),bscs software technology,operating systems,Operating Systems,Professional,YT,3,Operating Systems,DLSU
+BSCS (Software Technology),bscs software technology,practicum,Practicum,Internship,YT,3,Practicum,DLSU
+BSCS (Software Technology),bscs software technology,professional electives nlp advanced ml 3d graphics data analytics complex systems,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",Specialization,YT,,"Professional electives (NLP, advanced ML, 3D graphics, data analytics, complex systems)",DLSU
+BSCS (Software Technology),bscs software technology,programming with structured data types,Programming with Structured Data Types,Core,Y1T,3,Programming with Structured Data Types,DLSU
+BSCS (Software Technology),bscs software technology,secure web development,Secure Web Development,Professional,YT,3,Secure Web Development,DLSU
+BSCS (Software Technology),bscs software technology,software engineering,Software Engineering,Professional,YT,3,Software Engineering,DLSU
+BSCS (Software Technology),bscs software technology,software technology research methods,Software Technology Research Methods,Research / Capstone,YT,3,Software Technology Research Methods,DLSU
+BSCS (Software Technology),bscs software technology,thesis,Thesis,Research / Capstone,YT,6,Thesis,DLSU
+BSCS (Software Technology),bscs software technology,web application development,Web Application Development,Core,YT,3,Web Application Development,DLSU
+BSIT,bsit,advanced database management system,Advanced Database Management System,Professional,Y2T2,3,Advanced Database Management System,Adamson University
+BSIT,bsit,advanced database management systems,Advanced Database Management Systems,Professional,Y3T2,3,Advanced Database Management Systems,LPU Manila
+BSIT,bsit,advanced database systems,Advanced Database Systems,Professional,Y3T1,3,Advanced Database Systems,TIP
+BSIT,bsit,application development and emerging technologies,Application Development and Emerging Technologies,Professional,Y3T2,3,Application Development and Emerging Technologies,TIP
+BSIT,bsit,applications development and emerging technologies,Applications Development and Emerging Technologies,Professional,Y2T1; Y3T1,3,Applications Development and Emerging Technologies,Adamson University; LPU Manila
+BSIT,bsit,applications development and emerging technologies 2 enterprise back end,Applications Development and Emerging Technologies 2 (Enterprise Back-end),Professional,Y2T,3,Applications Development and Emerging Technologies 2 (Enterprise Back-end),UST
+BSIT,bsit,applications development and emerging technologies 3 mobile programming,Applications Development and Emerging Technologies 3 (Mobile Programming),Professional,Y3T,3,Applications Development and Emerging Technologies 3 (Mobile Programming),UST
+BSIT,bsit,capstone project 1,Capstone Project 1,Research / Capstone,Y3TSummer; Y4T1,3,Capstone Project 1,LPU Manila; TIP
+BSIT,bsit,capstone project 2,Capstone Project 2,Research / Capstone,Y4T2,3,Capstone Project 2,LPU Manila; TIP
+BSIT,bsit,code of ethics for it professionals,Code of Ethics for IT Professionals,Professional,Y3T3,3,Code of Ethics for IT Professionals,Adamson University
+BSIT,bsit,computer architecture organization and logic,"Computer Architecture, Organization and Logic",Core,Y2T,3,"Computer Architecture, Organization and Logic",UST
+BSIT,bsit,computer architecture organization and logic laboratory,"Computer Architecture, Organization and Logic Laboratory",Core,Y2T,1,"Computer Architecture, Organization and Logic Laboratory",UST
+BSIT,bsit,computer programming 1,Computer Programming 1,Core,Y1T1; Y1T2,3,Computer Programming 1,Adamson University; TIP
+BSIT,bsit,computer programming 2,Computer Programming 2,Core,Y1T2; Y2T1,3,Computer Programming 2,Adamson University; TIP
+BSIT,bsit,computer programming i fundamentals imperative,"Computer Programming I (Fundamentals, Imperative)",Core,Y1T,5,"Computer Programming I (Fundamentals, Imperative)",UST
+BSIT,bsit,computer programming ii intermediate object oriented,"Computer Programming II (Intermediate, Object-Oriented)",Core,Y1T,4,"Computer Programming II (Intermediate, Object-Oriented)",UST
+BSIT,bsit,data analytics,Data Analytics,Specialization,Y3TSummer,3,Data Analytics,TIP
+BSIT,bsit,data communications and networking ii,Data Communications and Networking II,Core,Y2T,3,Data Communications and Networking II,UST
+BSIT,bsit,data communications and networking ii laboratory,Data Communications and Networking II Laboratory,Core,Y2T,1,Data Communications and Networking II Laboratory,UST
+BSIT,bsit,data mining and warehousing,Data Mining and Warehousing,Professional,Y3T2,3,Data Mining and Warehousing,TIP
+BSIT,bsit,data structure and algorithms,Data Structure and Algorithms,Core,Y1T2,3,Data Structure and Algorithms,Adamson University
+BSIT,bsit,data structures and algorithms,Data Structures and Algorithms,Core,Y2T1,3,Data Structures and Algorithms,LPU Manila; TIP
+BSIT,bsit,database management system,Database Management System,Core,Y2T1,3,Database Management System,Adamson University
+BSIT,bsit,digital and logic circuits lab,Digital and Logic Circuits (lab),Core,Y1T1,1,Digital and Logic Circuits (lab),Adamson University
+BSIT,bsit,discrete math,Discrete Math,Core,Y2T1,3,Discrete Math,Adamson University
+BSIT,bsit,discrete mathematics 1,Discrete Mathematics 1,Core,Y2T2,3,Discrete Mathematics 1,LPU Manila
+BSIT,bsit,discrete mathematics 2,Discrete Mathematics 2,Core,Y3T1,3,Discrete Mathematics 2,LPU Manila
+BSIT,bsit,discrete structures,Discrete Structures,Core,Y1T,3,Discrete Structures,UST
+BSIT,bsit,emerging technologies,Emerging Technologies,Professional,Y4T,1,Emerging Technologies,UST
+BSIT,bsit,fundamentals of programming,Fundamentals of Programming,Core,Y1T1,3,Fundamentals of Programming,Adamson University; LPU Manila
+BSIT,bsit,human computer interaction,Human-Computer Interaction,Professional,Y1T; Y3T2; Y4T2,3,Human Computer Interaction; Human-Computer Interaction,Adamson University; LPU Manila; UST
+BSIT,bsit,information assurance and security 1,Information Assurance and Security 1,Professional,Y1T2; Y3T1; Y3T2,3,Information Assurance and Security 1,Adamson University; LPU Manila; TIP
+BSIT,bsit,information assurance and security 2,Information Assurance and Security 2,Professional,Y2T2; Y3T2; Y4T1,3,Information Assurance and Security 2,Adamson University; LPU Manila; TIP
+BSIT,bsit,information management,Information Management,Core,Y1T2; Y2T2,3,Information Management,LPU Manila; TIP
+BSIT,bsit,information technology capstone project i,Information Technology Capstone Project I,Research / Capstone,Y3T,3,Information Technology Capstone Project I,UST
+BSIT,bsit,information technology capstone project ii,Information Technology Capstone Project II,Research / Capstone,Y4T,3,Information Technology Capstone Project II,UST
+BSIT,bsit,information technology fundamentals,Information Technology Fundamentals,Core,Y1T,3,Information Technology Fundamentals,UST
+BSIT,bsit,integrative programming and technologies,Integrative Programming and Technologies,Professional,Y2T2; Y3T1,3,Integrative Programming and Technologies,LPU Manila; TIP
+BSIT,bsit,intermediate programming,Intermediate Programming,Core,Y1T2,3,Intermediate Programming,LPU Manila
+BSIT,bsit,internship in computing,Internship in Computing,Internship,Y4T2,6,Internship in Computing,TIP
+BSIT,bsit,introduction to computing,Introduction to Computing,Core,Y1T; Y1T1; Y1T2,3,Introduction to Computing,Adamson University; LPU Manila; TIP; UST
+BSIT,bsit,introduction to human computer interaction,Introduction to Human Computer Interaction,Professional,Y1T2,3,Introduction to Human Computer Interaction,TIP
+BSIT,bsit,it capstone project 1,IT Capstone Project 1,Research / Capstone,Y3T2,3,IT Capstone Project 1,Adamson University
+BSIT,bsit,it capstone project 2,IT Capstone Project 2,Research / Capstone,Y4T1,3,IT Capstone Project 2,Adamson University
+BSIT,bsit,it elective 1,IT Elective 1,Specialization,Y3T1,3,IT Elective 1,TIP
+BSIT,bsit,it elective 1 non lab,IT Elective 1 (Non-Lab),Specialization,Y3T1,3,IT Elective 1 (Non-Lab),LPU Manila
+BSIT,bsit,it elective 2,IT Elective 2,Specialization,Y3T2,3,IT Elective 2,TIP
+BSIT,bsit,it elective 2 with lab,IT Elective 2 (with Lab),Specialization,Y3T2,3,IT Elective 2 (with Lab),LPU Manila
+BSIT,bsit,it elective 3,IT Elective 3,Specialization,Y3TSummer,3,IT Elective 3,TIP
+BSIT,bsit,it elective 3 non lab,IT Elective 3 (Non-Lab),Specialization,Y4T1,3,IT Elective 3 (Non-Lab),LPU Manila
+BSIT,bsit,it elective 4,IT Elective 4,Specialization,Y4T1,3,IT Elective 4,TIP
+BSIT,bsit,it elective 4 with lab,IT Elective 4 (with Lab),Specialization,Y4T2,3,IT Elective 4 (with Lab),LPU Manila
+BSIT,bsit,it issues and seminars,IT Issues and Seminars,Professional,Y3T3,3,IT Issues and Seminars,Adamson University
+BSIT,bsit,it professional track 1 mobile development or game analysis and design,IT Professional Track 1 (Mobile Development or Game Analysis and Design),Specialization,Y3T1,3,IT Professional Track 1 (Mobile Development or Game Analysis and Design),Adamson University
+BSIT,bsit,it professional track 2 developing asp net core web frameworks advanced internetwork devices or game programming,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",Specialization,Y3T2,3,"IT Professional Track 2 (Developing ASP.NET Core, Web Frameworks, Advanced Internetwork Devices or Game Programming)",Adamson University
+BSIT,bsit,it professional track 3 software development for enterprise systems game assets and environment design or virtualization and cloud services,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",Specialization,Y3T2,3,"IT Professional Track 3 (Software Development for Enterprise Systems, Game Assets and Environment Design, or Virtualization and Cloud Services)",Adamson University
+BSIT,bsit,it professional track 4 2d animation or system network administration,IT Professional Track 4 (2D Animation or System/Network Administration),Specialization,Y4T1,3,IT Professional Track 4 (2D Animation or System/Network Administration),Adamson University
+BSIT,bsit,living in the it era,Living in the IT Era,Core,Y1T1,3,Living in the IT Era,LPU Manila
+BSIT,bsit,mobile computing,Mobile Computing,Professional,Y3T2,3,Mobile Computing,TIP
+BSIT,bsit,multimedia design and programming,Multimedia Design and Programming,Professional,Y3T1,3,Multimedia Design and Programming,LPU Manila
+BSIT,bsit,multimedia technology,Multimedia Technology,Professional,Y2T1,3,Multimedia Technology,Adamson University
+BSIT,bsit,networking 1,Networking 1,Core,Y2T2; Y3T1,3,Networking 1,Adamson University; TIP
+BSIT,bsit,networking 2,Networking 2,Professional,Y3T1; Y3T2,3,Networking 2,Adamson University; TIP
+BSIT,bsit,networks 1,Networks 1,Core,Y3T1,3,Networks 1,LPU Manila
+BSIT,bsit,networks 2,Networks 2,Professional,Y3T2,3,Networks 2,LPU Manila
+BSIT,bsit,object oriented programming,Object Oriented Programming,Core,Y2T1; Y2T2,3,Object Oriented Programming,Adamson University; LPU Manila
+BSIT,bsit,ojt 600 hours,OJT (600 hours),Internship,Y4T1,6,OJT (600 hours),LPU Manila
+BSIT,bsit,on the job training for information technology,On-the-Job Training for Information Technology,Internship,Y4T2,6,On-the-Job Training for Information Technology,Adamson University
+BSIT,bsit,operating systems,Operating Systems,Core,Y3T,3,Operating Systems,UST
+BSIT,bsit,pc repair and troubleshooting lab,PC Repair and Troubleshooting (lab),Professional,Y4T1,1,PC Repair and Troubleshooting (lab),Adamson University
+BSIT,bsit,platform technologies,Platform Technologies,Professional,Y1T2; Y2T2,3,Platform Technologies,LPU Manila; TIP
+BSIT,bsit,practicum 500 hours,Practicum (500 hours),Internship,Y4T,6,Practicum (500 hours),UST
+BSIT,bsit,prof elective 1,Prof. Elective 1,Specialization,Y2T1,3,Prof. Elective 1,TIP
+BSIT,bsit,prof elective 2,Prof. Elective 2,Specialization,Y2T2,3,Prof. Elective 2,TIP
+BSIT,bsit,prof elective 3,Prof. Elective 3,Specialization,Y3T2,3,Prof. Elective 3,TIP
+BSIT,bsit,prof elective 4,Prof. Elective 4,Specialization,Y4T1,3,Prof. Elective 4,TIP
+BSIT,bsit,professional elective 1,Professional Elective 1,Specialization,Y3T,3,Professional Elective 1,UST
+BSIT,bsit,professional elective 3,Professional Elective 3,Specialization,Y4T,3,Professional Elective 3,UST
+BSIT,bsit,professional elective 4,Professional Elective 4,Specialization,Y4T,3,Professional Elective 4,UST
+BSIT,bsit,project management,Project Management,Professional,Y3T1,3,Project Management,Adamson University
+BSIT,bsit,social and professional issues,Social and Professional Issues,Professional,Y4T1,3,Social and Professional Issues,TIP
+BSIT,bsit,social and professional practice,Social and Professional Practice,Professional,Y3T,3,Social and Professional Practice,UST
+BSIT,bsit,social issues and professional ethics,Social Issues and Professional Ethics,Professional,Y3T2,3,Social Issues and Professional Ethics,LPU Manila
+BSIT,bsit,software engineering 1,Software Engineering 1,Professional,Y3T,3,Software Engineering 1,UST
+BSIT,bsit,system integration and architecture,System Integration and Architecture,Professional,Y4T,3,System Integration and Architecture,UST
+BSIT,bsit,system integration and architecture 1,System Integration and Architecture 1,Professional,Y3T1,3,System Integration and Architecture 1,LPU Manila
+BSIT,bsit,system integration and architecture 2,System Integration and Architecture 2,Professional,Y3T2,3,System Integration and Architecture 2,LPU Manila
+BSIT,bsit,systems administration and maintenance,Systems Administration and Maintenance,Professional,Y3T2; Y4T1,3,Systems Administration and Maintenance,Adamson University; LPU Manila; TIP
+BSIT,bsit,systems integration and architecture,Systems Integration and Architecture,Professional,Y3T3,3,Systems Integration and Architecture,Adamson University
+BSIT,bsit,systems integration and architecture 1,Systems Integration and Architecture 1,Professional,Y3T1,3,Systems Integration and Architecture 1,TIP
+BSIT,bsit,systems integration and architecture 2,Systems Integration and Architecture 2,Professional,Y4T1,3,Systems Integration and Architecture 2,TIP
+BSIT,bsit,technopreneurship,Technopreneurship,Professional,Y3T1; Y4T2,3,Technopreneurship,Adamson University; LPU Manila
+BSIT,bsit,web design principles lab,Web Design Principles (lab),Professional,Y1T2,1,Web Design Principles (lab),Adamson University
+BSIT,bsit,web systems and technologies,Web Systems and Technologies,Professional,Y2T1; Y3T1,3,Web Systems and Technologies,LPU Manila; TIP
+BSIT (MWA),bsit mwa,advanced database systems,Advanced Database Systems,Professional,Y2T3,3,Advanced Database Systems,NU Lipa
+BSIT (MWA),bsit mwa,advanced information assurance and security,Advanced Information Assurance and Security,Professional,Y3T3,3,Advanced Information Assurance and Security,NU Lipa
+BSIT (MWA),bsit mwa,advanced mobile programming,Advanced Mobile Programming,Professional,Y4T1,3,Advanced Mobile Programming,NU Lipa
+BSIT (MWA),bsit mwa,advanced multimedia systems,Advanced Multimedia Systems,Professional,Y3T2,3,Advanced Multimedia Systems,NU Lipa
+BSIT (MWA),bsit mwa,advanced networking,Advanced Networking,Professional,Y3T1,3,Advanced Networking,NU Lipa
+BSIT (MWA),bsit mwa,advanced web programming,Advanced Web Programming,Professional,Y3T3,3,Advanced Web Programming,NU Lipa
+BSIT (MWA),bsit mwa,applications development and emerging technologies,Applications Development and Emerging Technologies,Professional,Y2T2,3,Applications Development and Emerging Technologies,NU Lipa
+BSIT (MWA),bsit mwa,basic networking,Basic Networking,Core,Y2T3,3,Basic Networking,NU Lipa
+BSIT (MWA),bsit mwa,capstone project 1,Capstone Project 1,Research / Capstone,Y3T3,3,Capstone Project 1,NU Lipa
+BSIT (MWA),bsit mwa,capstone project 2,Capstone Project 2,Research / Capstone,Y4T1,3,Capstone Project 2,NU Lipa
+BSIT (MWA),bsit mwa,computer organization and architecture,Computer Organization and Architecture,Core,Y2T2,3,Computer Organization and Architecture,NU Lipa
+BSIT (MWA),bsit mwa,data structures and algorithms,Data Structures and Algorithms,Core,Y2T1,3,Data Structures and Algorithms,NU Lipa
+BSIT (MWA),bsit mwa,discrete structures 1,Discrete Structures 1,Core,Y1T3,3,Discrete Structures 1,NU Lipa
+BSIT (MWA),bsit mwa,fundamentals of programming,Fundamentals of Programming,Core,Y1T1,3,Fundamentals of Programming,NU Lipa
+BSIT (MWA),bsit mwa,hardware software and peripheral installation,"Hardware, Software and Peripheral Installation",Professional,Y1T2,1,"Hardware, Software and Peripheral Installation",NU Lipa
+BSIT (MWA),bsit mwa,information assurance and security,Information Assurance and Security,Professional,Y3T2,3,Information Assurance and Security,NU Lipa
+BSIT (MWA),bsit mwa,information management,Information Management,Core,Y2T2,3,Information Management,NU Lipa
+BSIT (MWA),bsit mwa,integrative programming and technologies,Integrative Programming and Technologies,Professional,Y3T1,3,Integrative Programming and Technologies,NU Lipa
+BSIT (MWA),bsit mwa,intermediate programming,Intermediate Programming,Core,Y1T2,3,Intermediate Programming,NU Lipa
+BSIT (MWA),bsit mwa,internship 1 400 hours,Internship 1 (400 hours),Internship,Y4T2,3,Internship 1 (400 hours),NU Lipa
+BSIT (MWA),bsit mwa,internship 2 400 hours,Internship 2 (400 hours),Internship,Y4T3,3,Internship 2 (400 hours),NU Lipa
+BSIT (MWA),bsit mwa,introduction to computing,Introduction to Computing,Core,Y1T1,3,Introduction to Computing,NU Lipa
+BSIT (MWA),bsit mwa,introduction to human computer interaction,Introduction to Human-Computer Interaction,Professional,Y3T3,3,Introduction to Human-Computer Interaction,NU Lipa
+BSIT (MWA),bsit mwa,it project management,IT Project Management,Professional,Y3T1,3,IT Project Management,NU Lipa
+BSIT (MWA),bsit mwa,mobile programming,Mobile Programming,Professional,Y3T2,3,Mobile Programming,NU Lipa
+BSIT (MWA),bsit mwa,multimedia systems,Multimedia Systems,Professional,Y3T1,3,Multimedia Systems,NU Lipa
+BSIT (MWA),bsit mwa,object oriented programming,Object-Oriented Programming,Core,Y1T3,3,Object-Oriented Programming,NU Lipa
+BSIT (MWA),bsit mwa,platform technologies,Platform Technologies,Professional,Y2T1,3,Platform Technologies,NU Lipa
+BSIT (MWA),bsit mwa,social and professional issues,Social and Professional Issues,Professional,Y2T3,3,Social and Professional Issues,NU Lipa
+BSIT (MWA),bsit mwa,systems administration and maintenance,Systems Administration and Maintenance,Professional,Y4T1,3,Systems Administration and Maintenance,NU Lipa
+BSIT (MWA),bsit mwa,systems analysis and design,Systems Analysis and Design,Core,Y3T2,3,Systems Analysis and Design,NU Lipa
+BSIT (MWA),bsit mwa,systems integration and architecture,Systems Integration and Architecture,Professional,Y3T1,3,Systems Integration and Architecture,NU Lipa
+BSIT (MWA),bsit mwa,web commercialization and e commerce,Web Commercialization and E-Commerce,Professional,Y4T1,3,Web Commercialization and E-Commerce,NU Lipa
+BSIT (MWA),bsit mwa,web systems and technologies,Web Systems and Technologies,Professional,Y2T3,3,Web Systems and Technologies,NU Lipa
