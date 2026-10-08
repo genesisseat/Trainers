@@ -1,48 +1,483 @@
 <?php
-$dbPath = __DIR__ . '/curriculum_matching.db';
-$reviewAction = trim((string)($_POST['review_action'] ?? ''));
-$reviewRunId = isset($_POST['review_run_id']) ? (int)$_POST['review_run_id'] : null;
-$reviewStatus = trim((string)($_POST['review_status'] ?? 'approved'));
-$reviewer = trim((string)($_POST['reviewer'] ?? 'admin'));
-$reviewNotes = trim((string)($_POST['review_notes'] ?? 'Reviewed in browser.'));
-$generationMessage = '';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/draft_management.php';
+if (current_user() === null
+    && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET'
+    && ($_GET['guest_draft_clear'] ?? '') === '1') {
+    clear_guest_trial_draft();
+}
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST'
+    && !validate_csrf_token($_POST['csrf_token'] ?? null)) {
+    http_response_code(400);
+    exit('Invalid or expired form token. Please reload the page and try again.');
+}
+$isGuestMode = current_user() === null && ((isset($_GET['guest']) && $_GET['guest'] === '1') || (!empty($_SESSION['guest_trial_mode'])));
+if ($isGuestMode) {
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+    $_SESSION['guest_trial_mode'] = true;
+    if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
+        && is_string($_POST['guest_tab_id'] ?? null)) {
+        claim_guest_draft_tab($_POST['guest_tab_id']);
+    }
+} elseif (current_user() === null) {
+    require_login();
+}
+$isUserChatSubmission = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
+    && trim((string)($_POST['chat_action'] ?? '')) === 'send'
+    && trim((string)($_POST['delete_action'] ?? '')) === ''
+    && trim((string)($_POST['draft_update_action'] ?? '')) === ''
+    && trim((string)($_POST['generate_action'] ?? '')) === '';
+$isUserGenerateSubmission = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
+    && trim((string)($_POST['generate_action'] ?? '')) === 'generate'
+    && trim((string)($_POST['chat_action'] ?? '')) === ''
+    && trim((string)($_POST['delete_action'] ?? '')) === ''
+    && trim((string)($_POST['draft_update_action'] ?? '')) === '';
+$isGuestGenerateSubmission = $isGuestMode
+    && ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
+    && trim((string)($_POST['generate_action'] ?? '')) === 'generate'
+    && trim((string)($_POST['chat_action'] ?? '')) === ''
+    && trim((string)($_POST['delete_action'] ?? '')) === ''
+    && trim((string)($_POST['draft_update_action'] ?? '')) === '';
+$isDraftUpdateSubmission = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
+    && trim((string)($_POST['draft_update_action'] ?? '')) === 'save'
+    && trim((string)($_POST['chat_action'] ?? '')) === ''
+    && trim((string)($_POST['delete_action'] ?? '')) === ''
+    && trim((string)($_POST['generate_action'] ?? '')) === '';
+$isUserDeleteSubmission = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST'
+    && trim((string)($_POST['delete_action'] ?? '')) === 'delete'
+    && trim((string)($_POST['chat_action'] ?? '')) === ''
+    && trim((string)($_POST['draft_update_action'] ?? '')) === ''
+    && trim((string)($_POST['generate_action'] ?? '')) === '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST'
+    && !has_role('admin', 'super_admin')
+    && !$isUserChatSubmission
+    && !$isUserGenerateSubmission
+    && !$isGuestGenerateSubmission
+    && !$isDraftUpdateSubmission
+    && !$isUserDeleteSubmission) {
+    http_response_code(403);
+    exit('Forbidden: your account does not have permission to perform this action.');
+}
 
-if ($reviewAction !== '' && $reviewRunId !== null) {
-    $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
-    $script = __DIR__ . '/user_operations.py';
-    if (file_exists($pythonExe) && file_exists($script)) {
-        $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-            ' --review --run-id ' . escapeshellarg((string)$reviewRunId) .
-            ' --review-status ' . escapeshellarg($reviewStatus) .
-            ' --reviewer ' . escapeshellarg($reviewer) .
-            ' --review-notes ' . escapeshellarg($reviewNotes) .
-            ' --output-db ' . escapeshellarg($dbPath) . ' 2>&1';
-        $reviewOutput = shell_exec($command);
-        $generationMessage = 'Review saved: ' . htmlspecialchars($reviewStatus) . '.';
-    } else {
-        $generationMessage = 'Python environment not found. Cannot save review status.';
+$dbPath = __DIR__ . '/curriculum_matching.db';
+$deleteAction = trim((string)($_POST['delete_action'] ?? ''));
+$deleteRunId = isset($_POST['delete_run_id']) ? (int)$_POST['delete_run_id'] : null;
+$draftUpdateAction = trim((string)($_POST['draft_update_action'] ?? ''));
+$draftUpdateRunIdInput = $_POST['draft_update_run_id'] ?? null;
+$draftUpdateRunId = is_string($draftUpdateRunIdInput) && ctype_digit($draftUpdateRunIdInput)
+    ? (int)$draftUpdateRunIdInput
+    : null;
+$generateAction = trim((string)($_POST['generate_action'] ?? ''));
+$generationProgram = trim((string)($_POST['generate_program'] ?? 'BSIT'));
+$generationPrompt = trim((string)($_POST['generate_prompt'] ?? ''));
+$chatAction = trim((string)($_POST['chat_action'] ?? ''));
+$chatRunId = isset($_POST['chat_run_id']) ? (int)$_POST['chat_run_id'] : null;
+$chatMessage = trim((string)($_POST['chat_message'] ?? ''));
+$currentUser = current_user();
+$currentUserApiKey = $currentUser !== null ? get_user_api_key((int)$currentUser['id']) : null;
+$apiKeyPolicy = gemini_api_key_policy(
+    $currentUser,
+    $currentUserApiKey,
+    has_shared_api_key(),
+    $isGuestMode
+);
+$hasApiKeyAvailable = $apiKeyPolicy['allowed'];
+$requestedRunId = $_GET['run_id'] ?? $_GET['chat_run_id'] ?? null;
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    $requestedRunId = match (true) {
+        $deleteAction === 'delete' => $_POST['delete_run_id'] ?? null,
+        $draftUpdateAction === 'save' => $draftUpdateRunIdInput,
+        $chatAction === 'send' => $_POST['chat_run_id'] ?? null,
+        default => $requestedRunId,
+    };
+}
+if (
+    !$isGuestMode
+    && ($requestedRunId !== null || $deleteAction === 'delete' || $draftUpdateAction === 'save' || $chatAction === 'send')
+) {
+    $accessDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $accessDb->enableExceptions(true);
+    $requestedRun = run_access_require($accessDb, $requestedRunId, $currentUser);
+    if ($deleteAction === 'delete' && !run_access_can_delete($currentUser, $requestedRun)) {
+        $accessDb->close();
+        run_access_not_found();
+    }
+    if ($draftUpdateAction === 'save' && !run_access_can_update($currentUser, $requestedRun)) {
+        $accessDb->close();
+        run_access_not_found();
+    }
+    $accessDb->close();
+}
+$guestTrialLimitReached = $isGuestMode && guest_trial_limit_reached();
+$generationMessage = '';
+$generationError = '';
+$offlineFallbackDetected = false;
+$apiKeyMessage = '';
+$accountMenuOpen = false;
+$apiKeyMessageType = 'warning';
+
+if (isset($_SESSION['flash_success'])) {
+    $generationMessage = (string)$_SESSION['flash_success'];
+    unset($_SESSION['flash_success']);
+}
+if (isset($_SESSION['flash_error'])) {
+    $generationError = (string)$_SESSION['flash_error'];
+    unset($_SESSION['flash_error']);
+}
+if (!empty($_SESSION['open_api_key_settings'])) {
+    $accountMenuOpen = true;
+    $apiKeyMessage = $generationError !== '' ? $generationError : GEMINI_API_KEY_REQUIRED_MESSAGE;
+    unset($_SESSION['open_api_key_settings']);
+}
+if ($isGuestMode && isset($_SESSION['guest_generation_flash'])) {
+    $generationMessage = (string)$_SESSION['guest_generation_flash'];
+    unset($_SESSION['guest_generation_flash']);
+}
+if ($apiKeyMessage === '' && $generationError === GEMINI_API_KEY_REQUIRED_MESSAGE) {
+    $apiKeyMessage = GEMINI_API_KEY_REQUIRED_MESSAGE;
+    $accountMenuOpen = true;
+}
+
+if ($chatAction === 'send' && current_user() === null) {
+    http_response_code(403);
+    exit('Forbidden: sign in to use curriculum chat.');
+}
+
+if ($deleteAction === 'delete') {
+    try {
+        $deleteDb = new SQLite3($dbPath);
+        $deleteDb->enableExceptions(true);
+        run_access_delete($deleteDb, $deleteRunId, $currentUser);
+        $deleteDb->close();
+        $_SESSION['flash_success'] = 'Curriculum draft and all related data have been permanently deleted.';
+        header('Location: generated_curriculum.php');
+        exit;
+    } catch (Throwable $e) {
+        if (isset($deleteDb) && $deleteDb instanceof SQLite3) {
+            try {
+                $deleteDb->exec('ROLLBACK');
+            } catch (Throwable $rollbackException) {
+                // Ignore rollback errors if already rolled back
+            }
+            $deleteDb->close();
+        }
+        $generationError = 'Failed to delete curriculum draft #' . $deleteRunId . ': ' . $e->getMessage();
     }
 }
 
-$db = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
-$db->enableExceptions(true);
-
-$query = "
-    SELECT r.id, r.program, r.prompt, r.model_name, r.status, r.generated_at,
-           s.id as subject_id, s.year, s.term, s.subject_code, s.subject_title,
-           s.units, s.prerequisites, s.topics, s.rationale, s.source_colleges
-    FROM generated_curriculum_runs r
-    LEFT JOIN generated_curriculum_subjects s ON s.run_id = r.id
-    ORDER BY r.generated_at DESC, CAST(s.year AS INTEGER), CAST(s.term AS INTEGER)
-";
-
-$runRows = [];
-$result = $db->query($query);
-while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-    $runRows[] = $row;
+$schemaDb = null;
+if (!$isGuestMode) {
+    $schemaDb = new SQLite3($dbPath);
+    $schemaDb->enableExceptions(true);
+$schemaDb->exec(
+    "CREATE TABLE IF NOT EXISTS generated_curriculum_chat (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        run_id INTEGER,
+        role TEXT,
+        message TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(run_id) REFERENCES generated_curriculum_runs(id)
+    )"
+);
+$subjectColumns = [];
+$subjectColumnResult = $schemaDb->query('PRAGMA table_info(generated_curriculum_subjects)');
+while ($subjectColumn = $subjectColumnResult->fetchArray(SQLITE3_ASSOC)) {
+    $subjectColumns[] = $subjectColumn['name'];
+}
+if (!in_array('mapped_industry_skills', $subjectColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_subjects ADD COLUMN mapped_industry_skills TEXT');
+}
+if (!in_array('description', $subjectColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_subjects ADD COLUMN description TEXT');
+}
+if (!in_array('source', $subjectColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_subjects ADD COLUMN source TEXT');
+}
+$runColumns = [];
+$runColumnResult = $schemaDb->query('PRAGMA table_info(generated_curriculum_runs)');
+while ($runColumn = $runColumnResult->fetchArray(SQLITE3_ASSOC)) {
+    $runColumns[] = $runColumn['name'];
+}
+if (!in_array('created_by_user_id', $runColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_runs ADD COLUMN created_by_user_id INTEGER');
+}
+if (!in_array('created_by_username', $runColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_runs ADD COLUMN created_by_username TEXT');
+}
+draft_management_ensure_columns($schemaDb);
+$chatColumns = [];
+$chatColumnResult = $schemaDb->query('PRAGMA table_info(generated_curriculum_chat)');
+while ($chatColumn = $chatColumnResult->fetchArray(SQLITE3_ASSOC)) {
+    $chatColumns[] = $chatColumn['name'];
+}
+if (!in_array('sender_user_id', $chatColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_chat ADD COLUMN sender_user_id INTEGER');
+}
+if (!in_array('sender_username', $chatColumns, true)) {
+    $schemaDb->exec('ALTER TABLE generated_curriculum_chat ADD COLUMN sender_username TEXT');
+}
+    $schemaDb->close();
 }
 
-$db->close();
+if ($draftUpdateAction === 'save') {
+    if (current_user() === null || $isGuestMode) {
+        run_access_not_found();
+    }
+    $updateDb = new SQLite3($dbPath);
+    $updateDb->enableExceptions(true);
+    $draftOwner = run_access_require($updateDb, $draftUpdateRunId, $currentUser);
+    if (!run_access_can_update($currentUser, $draftOwner)) {
+        $updateDb->close();
+        run_access_not_found();
+    }
+
+    $userTitle = draft_management_clean_text($_POST['user_title'] ?? null, 150);
+    $userNotes = draft_management_clean_text($_POST['user_notes'] ?? null, 5000);
+    $finalizedValue = draft_management_finalized_value($_POST['is_finalized'] ?? null);
+    if ($userTitle === null || $userNotes === null || $finalizedValue === null) {
+        $updateDb->close();
+        http_response_code(400);
+        exit('Invalid draft update. Check the title, notes, and finalized value.');
+    }
+
+    $updateStmt = $updateDb->prepare(
+        'UPDATE generated_curriculum_runs
+         SET user_title = :title, user_notes = :notes, is_finalized = :finalized,
+             updated_at = CURRENT_TIMESTAMP
+         WHERE id = :id'
+    );
+    $updateStmt->bindValue(':title', $userTitle !== '' ? $userTitle : null, $userTitle !== '' ? SQLITE3_TEXT : SQLITE3_NULL);
+    $updateStmt->bindValue(':notes', $userNotes, SQLITE3_TEXT);
+    $updateStmt->bindValue(':finalized', $finalizedValue, SQLITE3_INTEGER);
+    $updateStmt->bindValue(':id', $draftUpdateRunId, SQLITE3_INTEGER);
+    $updateStmt->execute();
+    $updateDb->close();
+
+    $_SESSION['flash_success'] = 'Draft details updated.';
+    header('Location: generated_curriculum.php?run_id=' . $draftUpdateRunId . '#run-' . $draftUpdateRunId);
+    exit;
+}
+
+if (isset($_GET['enhanced']) && $_GET['enhanced'] === '1') {
+    $generationMessage = 'Partial curriculum completed and saved as a new draft.';
+}
+
+if ($chatAction === 'send' && $chatRunId !== null && $chatMessage !== '') {
+    if (!$hasApiKeyAvailable) {
+        $_SESSION['flash_error'] = GEMINI_API_KEY_REQUIRED_MESSAGE;
+        $_SESSION['open_api_key_settings'] = true;
+    } else {
+        $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
+        $script = __DIR__ . '/user_operations.py';
+        if (file_exists($pythonExe) && file_exists($script)) {
+            $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
+                ' --chat --run-id ' . escapeshellarg((string)$chatRunId) .
+                ' --message ' . escapeshellarg($chatMessage) .
+                    ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
+                    ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
+                    ' --admin-access-policy ' . escapeshellarg(RUN_ACCESS_ADMIN_POLICY) .
+                    ' --output-db ' . escapeshellarg($dbPath) . ' 2>&1';
+            try {
+                run_command_with_api_key($command, $currentUserApiKey);
+            } catch (RuntimeException $error) {
+                error_log('Curriculum chat subprocess failed to start: ' . $error->getMessage());
+                $_SESSION['flash_error'] = 'The curriculum assistant could not be started.';
+            }
+        } else {
+            $_SESSION['flash_error'] = 'The curriculum assistant is not available.';
+        }
+    }
+
+    header('Location: generated_curriculum.php?chat_run_id=' . urlencode((string)$chatRunId));
+    exit;
+}
+
+if ($generateAction === 'generate') {
+    $requestedProgram = strtoupper(trim($generationProgram));
+    $program = in_array($requestedProgram, ['BSIT', 'BSCS'], true) ? $requestedProgram : 'BSIT';
+    $prompt = preg_replace('/\s+/', ' ', $generationPrompt)
+        ?: "Generate a {$program} curriculum focused on software development, databases, and networking.";
+
+    if ($isGuestMode && $guestTrialLimitReached) {
+        $generationError = 'You have used all 3 guest trial attempts. Create an account to continue.';
+    } elseif ($isGuestMode && !has_shared_api_key()) {
+        $generationError = 'Guest trial is currently unavailable because the shared API key is not configured.';
+    } elseif (!$hasApiKeyAvailable) {
+        $generationError = GEMINI_API_KEY_REQUIRED_MESSAGE;
+        $apiKeyMessage = GEMINI_API_KEY_REQUIRED_MESSAGE;
+        $accountMenuOpen = true;
+    } else {
+        if ($isGuestMode) {
+            $requestedDraft = guest_generate_program($program, $prompt);
+            if (is_array($requestedDraft) && $requestedDraft !== []) {
+                $_SESSION['guest_trial_draft'] = [
+                    'type' => 'generated',
+                    'program' => $program,
+                    'model_name' => 'gemini-3.5-flash-lite',
+                    'prompt' => $prompt,
+                    'draft' => $requestedDraft,
+                ];
+                mark_guest_attempt_success();
+                $_SESSION['guest_generation_flash'] = 'Guest draft saved for this session. Create an account to keep this draft.';
+                header('Location: generated_curriculum.php?guest=1');
+                exit;
+            } else {
+                $generationError = 'The guest trial could not generate a curriculum draft. Please try again.';
+            }
+        } else {
+            $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
+            $script = __DIR__ . '/user_operations.py';
+            $coursesCsv = __DIR__ . '/../curriculum-generator-kb/data/curriculum_dataset_with_ids.csv';
+            $coverageCsv = __DIR__ . '/skill_coverage.csv';
+
+            if (file_exists($pythonExe) && file_exists($script)) {
+                $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
+                    ' --generate --program ' . escapeshellarg($program) .
+                    ' --prompt ' . escapeshellarg($prompt) .
+                    ' --courses-csv ' . escapeshellarg($coursesCsv) .
+                    ' --skill-coverage ' . escapeshellarg($coverageCsv) .
+                    ' --output-db ' . escapeshellarg($dbPath) .
+                    ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
+                    ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
+                    ' --limit 6 2>&1';
+                set_time_limit(180);
+                try {
+                    $generationOutput = run_command_with_api_key($command, $currentUserApiKey);
+                } catch (RuntimeException $error) {
+                    error_log('Curriculum generation subprocess failed to start: ' . $error->getMessage());
+                    $generationOutput = null;
+                }
+                if ($generationOutput !== null && strpos($generationOutput, '[Offline Fallback]') !== false) {
+                    $failureDetail = 'Gemini API request failed. The offline template was used for this draft.';
+                    if (preg_match('/Gemini curriculum generation failed:\s*(.+)/', $generationOutput, $failureMatch)) {
+                        $failureDetail = 'Generation unavailable: ' . trim($failureMatch[1]);
+                    }
+                    $generationMessage = $failureDetail . ' Review the draft below.';
+                } elseif ($generationOutput !== null && $generationOutput !== '') {
+                    $generationMessage = 'Draft generated for ' . $program . '. Review the curriculum section below.';
+                } else {
+                    $generationError = 'Draft generation could not be completed. Please try again.';
+                }
+            } else {
+                $generationError = 'Python environment not found. Please activate the project venv first.';
+            }
+        }
+    }
+}
+
+$runs = [];
+$chatByRun = [];
+if (!$isGuestMode) {
+    $db = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $db->enableExceptions(true);
+
+    $runScope = run_access_sql_scope($currentUser);
+    $query = "
+        SELECT r.id, r.program, r.prompt, r.model_name, r.status, r.generated_at,
+               r.created_by_user_id, r.created_by_username, r.user_title, r.user_notes,
+               r.is_finalized, r.updated_at,
+               s.id as subject_id, s.year, s.term, s.subject_code, s.subject_title,
+               s.units, s.prerequisites, s.topics, s.rationale, s.description, s.source_colleges,
+               s.mapped_industry_skills, s.source
+        FROM generated_curriculum_runs r
+        LEFT JOIN generated_curriculum_subjects s ON s.run_id = r.id
+        WHERE {$runScope['sql']}
+        ORDER BY r.generated_at DESC, CAST(s.year AS INTEGER), CAST(s.term AS INTEGER)
+    ";
+
+    $runRows = [];
+    $runStmt = $db->prepare($query);
+    run_access_bind_scope($runStmt, $runScope);
+    $result = $runStmt->execute();
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $runRows[] = $row;
+        if (strpos(strtolower((string)($row['rationale'] ?? '')), '[offline template fallback]') !== false) {
+            $offlineFallbackDetected = true;
+        }
+    }
+
+    $chatStmt = $db->prepare(
+        "SELECT c.run_id, c.role, c.message, c.created_at, c.sender_username
+         FROM generated_curriculum_chat c
+         INNER JOIN generated_curriculum_runs r ON r.id = c.run_id
+         WHERE {$runScope['sql']}
+         ORDER BY c.created_at ASC, c.id ASC"
+    );
+    run_access_bind_scope($chatStmt, $runScope);
+    $chatResult = $chatStmt->execute();
+    while ($chatRow = $chatResult->fetchArray(SQLITE3_ASSOC)) {
+        $chatByRun[(int)$chatRow['run_id']][] = $chatRow;
+    }
+
+    foreach ($runRows as $run) {
+        $runId = (int)$run['id'];
+        if (!isset($runs[$runId])) {
+            $runs[$runId] = [
+                'details' => $run,
+                'subjects' => [],
+            ];
+        }
+        if ($run['subject_title'] !== null) {
+            $runs[$runId]['subjects'][] = $run;
+        }
+    }
+
+    $db->close();
+} elseif (isset($_SESSION['guest_trial_draft']) && is_array($_SESSION['guest_trial_draft'])) {
+    $guestDraft = $_SESSION['guest_trial_draft'];
+    $guestDraftType = $guestDraft['type'] ?? 'generated';
+    $runs = [];
+    $guestSubjectRows = [];
+    if ($guestDraftType === 'generated' && isset($guestDraft['draft']) && is_array($guestDraft['draft'])) {
+        foreach ($guestDraft['draft'] as $index => $subject) {
+            if (!is_array($subject)) {
+                continue;
+            }
+            $prerequisiteValue = $subject['prerequisites'] ?? 'None';
+            $prerequisites = is_array($prerequisiteValue)
+                ? implode(', ', array_filter(array_map(
+                    static fn($prerequisite): string => is_scalar($prerequisite)
+                        ? trim((string)$prerequisite)
+                        : '',
+                    $prerequisiteValue
+                ), static fn(string $prerequisite): bool => $prerequisite !== ''))
+                : (is_scalar($prerequisiteValue) ? (string)$prerequisiteValue : 'None');
+            $subjectRow = [
+                'id' => $index + 1,
+                'program' => $guestDraft['program'] ?? 'BSIT',
+                'prompt' => $guestDraft['prompt'] ?? '',
+                'model_name' => $guestDraft['model_name'] ?? 'gemini-3.5-flash-lite',
+                'status' => 'draft',
+                'generated_at' => date('Y-m-d H:i:s'),
+                'year' => (string)($subject['year'] ?? '1'),
+                'term' => (string)($subject['term'] ?? '1'),
+                'subject_code' => (string)($subject['subject_code'] ?? ''),
+                'subject_title' => (string)($subject['subject_title'] ?? ''),
+                'units' => (string)($subject['units'] ?? ''),
+                'prerequisites' => $prerequisites,
+                'topics' => $subject['topics'] ?? [],
+                'rationale' => (string)($subject['rationale'] ?? ''),
+                'description' => (string)($subject['description'] ?? ''),
+                'source_colleges' => $subject['source_colleges'] ?? [],
+                'mapped_industry_skills' => $subject['mapped_industry_skills'] ?? [],
+                'source' => 'generated',
+            ];
+            $guestSubjectRows[] = $subjectRow;
+        }
+        $runs[] = [
+            'details' => [
+                'id' => 'guest',
+                'program' => $guestDraft['program'] ?? 'BSIT',
+                'prompt' => $guestDraft['prompt'] ?? '',
+                'model_name' => $guestDraft['model_name'] ?? 'gemini-3.5-flash-lite',
+                'status' => 'draft',
+                'generated_at' => date('Y-m-d H:i:s'),
+                'created_by_username' => 'Guest trial',
+            ],
+            'subjects' => $guestSubjectRows,
+        ];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,105 +485,323 @@ $db->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generated Curriculum Drafts</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 24px; background: #f5f7fb; color: #1e293b; }
-        .container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08); }
-        h1 { margin-top: 0; }
-        .nav { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
-        .nav a { padding: 8px 12px; border-radius: 8px; text-decoration: none; }
-        .nav a.primary { background: #0f172a; color: white; }
-        .nav a.secondary { background: #e2e8f0; color: #0f172a; }
-        .card { border: 1px solid #e2e8f0; padding: 16px; border-radius: 10px; background: #f8fafc; margin-bottom: 20px; }
-        .field { display: flex; flex-direction: column; gap: 6px; min-width: 180px; }
-        form.review-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin: 12px 0; }
-        input, select, button { padding: 10px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 14px; }
-        button { background: #0f172a; color: white; border: none; cursor: pointer; min-width: 120px; }
-        .subject { border: 1px solid #dbeafe; border-radius: 8px; padding: 12px; background: white; margin-top: 12px; }
-        .empty { padding: 12px; color: #475569; }
-        .meta { color: #475569; }
-    </style>
+    <link rel="stylesheet" href="assets/theme.css">
+    <?php require __DIR__ . '/partials/guest_draft_lifecycle_head.php'; ?>
 </head>
-<body>
-    <div class="container">
+<?php $activePage = 'generate'; require __DIR__ . '/partials/dashboard_shell_start.php'; ?>
         <h1>Generated Curriculum Drafts</h1>
-        <div class="nav">
-            <a class="secondary" href="index.php">Skill Coverage</a>
-            <a class="primary" href="generated_curriculum.php">Generated Drafts</a>
-            <a class="secondary" href="review_status.php">Approved / Rejected</a>
-        </div>
-
+        <?php if (!$hasApiKeyAvailable): ?>
+            <div class="notice warning" role="status"><?= htmlspecialchars(GEMINI_API_KEY_REQUIRED_MESSAGE, ENT_QUOTES, 'UTF-8') ?> <a href="#api_key_value">Open key settings</a></div>
+        <?php endif; ?>
         <?php if ($generationMessage !== ''): ?>
-            <div style="padding: 10px 12px; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; border-radius: 8px; margin-bottom: 18px;">
+            <div class="alert success" role="status">
                 <?= htmlspecialchars($generationMessage) ?>
             </div>
         <?php endif; ?>
-
-        <?php if (empty($runRows)): ?>
-            <div class="empty">No generated curriculum drafts found yet.</div>
-        <?php else: ?>
-            <?php $currentRun = null; ?>
-            <?php foreach ($runRows as $run): ?>
-                <?php if ($currentRun === null || (int)$run['id'] !== (int)$currentRun['id']): ?>
-                    <?php if ($currentRun !== null): ?>
-                        </div>
-                        </div>
-                    <?php endif; ?>
-                    <?php $currentRun = $run; ?>
-                    <div class="card">
-                        <h2 style="margin-top: 0; margin-bottom: 8px;">
-                            <?= htmlspecialchars($run['program']) ?> — <?= htmlspecialchars($run['status'] ?? 'draft') ?>
-                        </h2>
-                        <p class="meta"><strong>Generated:</strong> <?= htmlspecialchars($run['generated_at']) ?></p>
-                        <p class="meta"><strong>Prompt:</strong> <?= htmlspecialchars($run['prompt']) ?></p>
-
-                        <form method="post" class="review-form">
-                            <input type="hidden" name="review_run_id" value="<?= (int)$run['id'] ?>">
-                            <div class="field">
-                                <label for="review_status">Decision</label>
-                                <select name="review_status" id="review_status">
-                                    <option value="approved">Approved</option>
-                                    <option value="rejected">Rejected</option>
-                                    <option value="needs_revision">Needs revision</option>
-                                    <option value="draft">Draft</option>
-                                </select>
-                            </div>
-                            <div class="field">
-                                <label for="reviewer">Reviewer</label>
-                                <input type="text" name="reviewer" value="admin" placeholder="Reviewer name">
-                            </div>
-                            <div class="field" style="min-width: 260px; flex: 1;">
-                                <label for="review_notes">Notes</label>
-                                <input type="text" name="review_notes" value="Reviewed in browser." placeholder="Review notes">
-                            </div>
-                            <button type="submit" name="review_action" value="save">Save review</button>
-                        </form>
-                        <div style="display: grid; gap: 12px;">
-                <?php endif; ?>
-
-                <?php if ($run['subject_title'] !== null): ?>
-                    <div class="subject">
-                        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 10px;">
-                            <strong><?= htmlspecialchars($run['subject_title']) ?></strong>
-                            <span class="meta">Year <?= htmlspecialchars($run['year']) ?>, Term <?= htmlspecialchars($run['term']) ?></span>
-                        </div>
-                        <p style="margin: 4px 0;"><strong>Code:</strong> <?= htmlspecialchars($run['subject_code']) ?></p>
-                        <p style="margin: 4px 0;"><strong>Units:</strong> <?= htmlspecialchars($run['units']) ?> | <strong>Prereqs:</strong> <?= htmlspecialchars($run['prerequisites']) ?></p>
-                        <p style="margin: 6px 0;"><strong>Source colleges:</strong> <?= htmlspecialchars($run['source_colleges']) ?></p>
-                        <p style="margin: 6px 0;"><strong>Rationale:</strong> <?= htmlspecialchars($run['rationale']) ?></p>
-                        <p style="margin: 6px 0;"><strong>Topics:</strong></p>
-                        <ul style="margin-top: 4px; margin-bottom: 0; padding-left: 18px;">
-                            <?php $topics = json_decode((string)$run['topics'], true); if (is_array($topics)): foreach ($topics as $topic): ?>
-                                <li><?= htmlspecialchars((string)$topic) ?></li>
-                            <?php endforeach; endif; ?>
-                        </ul>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <?php if ($currentRun !== null): ?>
-                </div>
+        <?php if ($generationError !== ''): ?>
+            <div class="alert error" role="alert">
+                <?= htmlspecialchars($generationError) ?>
             </div>
-            <?php endif; ?>
         <?php endif; ?>
-    </div>
+
+        <section class="card generation-form-panel" id="generate-curriculum">
+            <div class="panel-body">
+                <form method="post" class="generation-form">
+                    <?= csrf_token_field() ?>
+                    <?php if ($isGuestMode): ?><input type="hidden" name="guest_tab_id" value=""><?php endif; ?>
+                    <input type="hidden" name="generate_action" value="generate">
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="generate_program">Program</label>
+                            <select id="generate_program" name="generate_program">
+                                <option value="BSIT" <?= $generationProgram === 'BSIT' ? 'selected' : '' ?>>BSIT</option>
+                                <option value="BSCS" <?= $generationProgram === 'BSCS' ? 'selected' : '' ?>>BSCS</option>
+                            </select>
+                        </div>
+                        <div class="field wide">
+                            <label for="generate_prompt">Generation request</label>
+                            <textarea id="generate_prompt" name="generate_prompt" placeholder="Describe focus areas, progression, or other curriculum goals."><?= htmlspecialchars($generationPrompt, ENT_QUOTES, 'UTF-8') ?></textarea>
+                        </div>
+                    </div>
+                    <div class="generation-actions"><button type="submit" <?= $isGuestMode && $guestTrialLimitReached ? 'disabled' : '' ?>>Generate draft</button></div>
+                </form>
+            </div>
+        </section>
+
+        <?php if ($isGuestMode): ?>
+            <div class="notice info" role="status">Guest trial mode: 3 total attempts across Generate and Enhance. Drafts are temporary and are cleared when this page is reloaded or guest mode is opened in another tab. Create an account to keep a draft.</div>
+        <?php endif; ?>
+        <div class="draft-toolbar" id="history" aria-label="Filter generated drafts">
+                <div class="field draft-search-field">
+                    <label for="draft-search">Search drafts</label>
+                    <input id="draft-search" type="search" placeholder="Run number, program, or prompt">
+                </div>
+                <div class="field">
+                    <label for="draft-status-filter">Status</label>
+                    <select id="draft-status-filter">
+                        <option value="">All statuses</option>
+                        <option value="draft">Draft</option>
+                        <option value="finalized">Finalized</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="draft-program-filter">Program</label>
+                    <select id="draft-program-filter">
+                        <option value="">All programs</option>
+                        <?php $draftPrograms = []; foreach ($runs as $programRunData) { $draftProgram = (string)($programRunData['details']['program'] ?? ''); if ($draftProgram !== '' && !in_array($draftProgram, $draftPrograms, true)) { $draftPrograms[] = $draftProgram; } } foreach ($draftPrograms as $draftProgram): ?>
+                            <option value="<?= htmlspecialchars($draftProgram, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($draftProgram) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <p class="draft-count" id="draft-count" aria-live="polite">Showing <?= count($runs) ?> of <?= count($runs) ?> drafts</p>
+        </div>
+        <div class="empty draft-empty" id="draft-empty" <?= $runs ? 'hidden' : '' ?>><?= $runs ? 'No drafts match these filters.' : 'No generated curriculum drafts found yet.' ?></div>
+        <?php foreach ($runs as $runData): ?>
+                <?php
+                    $run = $runData['details'];
+                    $subjectsByYear = [];
+                    $runOfflineFallback = false;
+                    foreach ($runData['subjects'] as $subject) {
+                        $subjectsByYear[(string)$subject['year']][(string)$subject['term']][] = $subject;
+                        if (strpos(strtolower((string)($subject['rationale'] ?? '')), '[offline template fallback]') !== false) {
+                            $runOfflineFallback = true;
+                        }
+                    }
+                    ksort($subjectsByYear, SORT_NUMERIC);
+                    foreach ($subjectsByYear as &$yearTerms) {
+                        ksort($yearTerms, SORT_NUMERIC);
+                    }
+                    unset($yearTerms);
+                    $runStatus = draft_management_status_label($run['is_finalized'] ?? 0);
+                    $runStatusClass = strtolower($runStatus);
+                    $runId = (int)$run['id'];
+                    $runTitle = trim((string)($run['user_title'] ?? '')) ?: (string)$run['program'];
+                    $chatTargetedRun = isset($_GET['chat_run_id']) && (int)$_GET['chat_run_id'] === $runId;
+                    $updateTargetedRun = isset($_GET['run_id']) && (int)$_GET['run_id'] === $runId;
+                    $isNewestRun = $runId === (int)array_key_first($runs);
+                    $hasRequestedRun = isset($_GET['chat_run_id']) || isset($_GET['run_id']);
+                    $runIsOpen = $chatTargetedRun || $updateTargetedRun || (!$hasRequestedRun && $isNewestRun);
+                    $runSearchText = 'Run #' . $runId . ' ' . $runTitle . ' ' . (string)$run['program'] . ' ' . (string)$run['prompt'];
+                ?>
+                <details class="card draft-item" id="run-<?= $runId ?>" data-status="<?= htmlspecialchars(strtolower($runStatus), ENT_QUOTES, 'UTF-8') ?>" data-program="<?= htmlspecialchars((string)$run['program'], ENT_QUOTES, 'UTF-8') ?>" data-search="<?= htmlspecialchars($runSearchText, ENT_QUOTES, 'UTF-8') ?>" <?= $runIsOpen ? 'open' : '' ?>>
+                    <summary class="draft-summary">
+                        <span class="draft-chevron" aria-hidden="true"></span>
+                        <span class="draft-summary-main">
+                            <span class="draft-program"><?= htmlspecialchars($runTitle, ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="draft-run-number">Run #<?= $runId ?></span>
+                            <span class="draft-badges">
+                                <span class="draft-status"><span class="status-dot status-dot-<?= htmlspecialchars($runStatusClass, ENT_QUOTES, 'UTF-8') ?>"></span><?= htmlspecialchars($runStatus) ?></span>
+                                <?php if ($runOfflineFallback): ?><span class="fallback-badge">Offline template</span><?php endif; ?>
+                            </span>
+                            <span class="draft-date"><strong>Generated:</strong> <?= htmlspecialchars((string)$run['generated_at']) ?></span>
+                            <span class="draft-date"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span>
+                            <span class="draft-prompt" title="<?= htmlspecialchars((string)$run['prompt'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string)$run['prompt']) ?></span>
+                        </span>
+                    </summary>
+                    <div class="draft-actions pdf-export-hide">
+                        <?php if (current_user() !== null): ?>
+                            <div class="draft-actions-primary">
+                                <button type="button" class="button-secondary" data-export-pdf>Export to PDF</button>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (run_access_can_delete(current_user(), $run)): ?>
+                        <div class="draft-actions-danger">
+                            <button type="button" class="btn-danger" data-open-delete-dialog="delete-dialog-<?= $runId ?>">Delete draft</button>
+                            <dialog class="confirm-dialog" id="delete-dialog-<?= $runId ?>" aria-label="Confirm deletion">
+                                <div class="confirm-dialog-content">
+                                    <div class="confirm-dialog-header">
+                                        <p class="eyebrow">Confirm deletion</p>
+                                    </div>
+                                    <div class="confirm-dialog-target">
+                                        <div><strong>Run #<?= $runId ?></strong> · <?= htmlspecialchars((string)$run['program']) ?></div>
+                                        <div class="meta">Generated: <?= htmlspecialchars((string)$run['generated_at']) ?></div>
+                                    </div>
+                                    <p class="confirm-dialog-warning">
+                                        <strong>Warning:</strong> This permanently removes this draft, including its course subjects and chat messages. Historical records are retained. This action cannot be undone.
+                                    </p>
+                                    <div class="confirm-dialog-actions">
+                                        <button type="button" class="button-secondary" data-close-delete-dialog>Cancel</button>
+                                        <form method="post">
+                                            <?= csrf_token_field() ?>
+                                            <input type="hidden" name="delete_action" value="delete">
+                                            <input type="hidden" name="delete_run_id" value="<?= $runId ?>">
+                                            <button type="submit" class="button-danger-solid">Delete permanently</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </dialog>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ($runOfflineFallback): ?>
+                        <div class="alert warning draft-fallback-warning" role="status">This draft used the offline template because the Gemini API request was unavailable. Review its content before approval.</div>
+                    <?php endif; ?>
+                    <div class="run-header">
+                        <div class="run-title">
+                            <h2><?= htmlspecialchars($runTitle, ENT_QUOTES, 'UTF-8') ?></h2>
+                            <span class="meta">Run #<?= $runId ?> · <span class="status-badge <?= htmlspecialchars(strtolower($runStatus), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($runStatus) ?></span></span>
+                        </div>
+                        <div class="run-meta meta"><span><strong>Program:</strong> <?= htmlspecialchars((string)$run['program']) ?></span><span><strong>Generated:</strong> <?= htmlspecialchars($run['generated_at']) ?></span><?php if (!empty($run['updated_at'])): ?><span><strong>Updated:</strong> <?= htmlspecialchars((string)$run['updated_at']) ?></span><?php endif; ?><span><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span><span><strong>Prompt:</strong> <?= htmlspecialchars($run['prompt']) ?></span></div>
+                    </div>
+                    <p class="notice warning advisory-disclaimer">Advisory recommendations only: verify all content before any use.</p>
+                    <?php if (draft_management_can_update(current_user(), $run)): ?>
+                    <form method="post" class="draft-update-form pdf-export-hide">
+                        <?= csrf_token_field() ?>
+                        <input type="hidden" name="draft_update_action" value="save">
+                        <input type="hidden" name="draft_update_run_id" value="<?= $runId ?>">
+                        <div class="field"><label for="user_title_<?= $runId ?>">Draft title (optional)</label><input id="user_title_<?= $runId ?>" name="user_title" maxlength="150" value="<?= htmlspecialchars((string)($run['user_title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"></div>
+                        <div class="field notes"><label for="user_notes_<?= $runId ?>">Personal notes</label><textarea id="user_notes_<?= $runId ?>" name="user_notes" maxlength="5000"><?= htmlspecialchars((string)($run['user_notes'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea></div>
+                        <input type="hidden" name="is_finalized" value="0">
+                        <label class="field checkbox-field"><input type="checkbox" name="is_finalized" value="1" <?= (int)($run['is_finalized'] ?? 0) === 1 ? 'checked' : '' ?>> Finalized (your own tracking only; not approval or validation)</label>
+                        <button type="submit">Save draft details</button>
+                    </form>
+                    <?php endif; ?>
+                    <div class="curriculum">
+                        <?php foreach ($subjectsByYear as $year => $terms): ?>
+                            <section aria-labelledby="year-<?= $runId ?>-<?= htmlspecialchars($year) ?>">
+                                <h3 class="year-heading" id="year-<?= $runId ?>-<?= htmlspecialchars($year) ?>">Year <?= htmlspecialchars($year) ?></h3>
+                                <div class="terms">
+                                    <?php foreach ($terms as $term => $subjects): ?>
+                                        <div class="term">
+                                            <div class="term-heading"><strong><?= htmlspecialchars($term === '1' ? 'First Term' : ($term === '2' ? 'Second Term' : 'Term ' . $term)) ?></strong><span><?= count($subjects) ?> courses</span></div>
+                                            <table class="course-table"><thead><tr><th>Code</th><th>Course title</th><th class="units">Units</th></tr></thead><tbody>
+                                                <?php foreach ($subjects as $subject): ?>
+                                                    <?php $prerequisites = trim((string)$subject['prerequisites']); $skillValue = $subject['mapped_industry_skills'] ?? []; $skills = is_array($skillValue) ? $skillValue : json_decode((string)$skillValue, true); $topicValue = $subject['topics'] ?? []; $topics = is_array($topicValue) ? $topicValue : json_decode((string)$topicValue, true); if (!is_array($skills)) { $skills = []; } if (!is_array($topics)) { $topics = []; } $description = trim((string)($subject['description'] ?? '')); if ($description === '') { $description = trim((string)$subject['rationale']); } ?>
+                                                    <tr><td><span class="course-code"><?= htmlspecialchars((string)$subject['subject_code']) ?></span></td><td><div class="course-title"><?= htmlspecialchars((string)$subject['subject_title']) ?></div><?php if (current_user() !== null): ?><button type="button" class="ask-subject" data-chat-target="chat_message_<?= $runId ?>" data-prompt="<?= htmlspecialchars('Why did you place "' . (string)$subject['subject_title'] . '" in Year ' . (string)$subject['year'] . ' Term ' . (string)$subject['term'] . '?', ENT_QUOTES, 'UTF-8') ?>">Ask about this subject</button><?php endif; ?><div class="course-description"><?= htmlspecialchars($description) ?></div><?php if (!empty($topics)): ?><ul class="course-topics"><?php foreach ($topics as $topic): ?><li><?= htmlspecialchars((string)$topic) ?></li><?php endforeach; ?></ul><?php endif; ?><div class="course-meta"><span><strong>Prerequisite:</strong> <?= $prerequisites !== '' ? htmlspecialchars($prerequisites) : 'None' ?></span><?php if (!empty($skills)): ?><span><strong>Mapped skills:</strong> <?php foreach ($skills as $skillIndex => $skill): ?><?= $skillIndex > 0 ? ', ' : '' ?><?= htmlspecialchars((string)$skill) ?><?php endforeach; ?></span><?php endif; ?></div></td><td class="units"><?= htmlspecialchars((string)$subject['units']) ?></td></tr>
+                                                <?php endforeach; ?>
+                                            </tbody></table>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </section>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php $currentChat = $chatByRun[$runId] ?? []; ?>
+                <?php if (current_user() !== null && $hasApiKeyAvailable): ?>
+                <div class="chat-panel pdf-export-hide">
+                    <h3>Ask about this curriculum draft</h3>
+                    <?php if (!empty($currentChat)): ?>
+                        <div class="chat-history">
+                            <?php foreach ($currentChat as $chat): ?>
+                                <div class="chat-message <?= $chat['role'] === 'assistant' ? 'assistant' : 'user' ?>">
+                                    <span class="meta"><strong><?= htmlspecialchars($chat['role'] === 'assistant' ? 'Assistant' : (trim((string)($chat['sender_username'] ?? '')) !== '' ? (string)$chat['sender_username'] : 'Unattributed sender')) ?></strong> · <?= htmlspecialchars((string)$chat['created_at']) ?></span>
+                                    <?= htmlspecialchars((string)$chat['message']) ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <p class="meta">Ask a question or request an edit for this draft.</p>
+                    <?php endif; ?>
+                    <div class="suggested-prompts" aria-label="Suggested prompts">
+                        <?php foreach ([
+                            'Why was this curriculum structured this way?',
+                            'Which weak industry skills does this curriculum still not cover well?',
+                            'Suggest one elective that would strengthen this curriculum.',
+                            'Are there any prerequisite issues in this sequence?'
+                        ] as $suggestedPrompt): ?>
+                            <button type="button" class="suggested-prompt" data-chat-target="chat_message_<?= (int)$run['id'] ?>" data-prompt="<?= htmlspecialchars($suggestedPrompt, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($suggestedPrompt) ?></button>
+                        <?php endforeach; ?>
+                    </div>
+                    <form method="post" class="chat-form">
+                        <?= csrf_token_field() ?>
+                        <input type="hidden" name="chat_action" value="send">
+                        <input type="hidden" name="chat_run_id" value="<?= $runId ?>">
+                        <textarea id="chat_message_<?= $runId ?>" name="chat_message" placeholder="Ask a question or request an edit..." required></textarea>
+                        <button type="submit">Send Question / Request Edit</button>
+                    </form>
+                </div>
+                <?php elseif (current_user() !== null): ?>
+                <div class="notice warning" role="status"><?= htmlspecialchars(GEMINI_API_KEY_REQUIRED_MESSAGE, ENT_QUOTES, 'UTF-8') ?> <a href="#api_key_value">Open key settings</a></div>
+                <?php endif; ?>
+                </details>
+        <?php endforeach; ?>
+<?php require __DIR__ . '/partials/dashboard_shell_end.php'; ?>
+    <script src="assets/jspdf.umd.min.js"></script>
+    <script src="assets/jspdf.plugin.autotable.min.js"></script>
+    <script src="assets/pdf-export.js"></script>
+    <script>
+        var draftItems = Array.prototype.slice.call(document.querySelectorAll('.draft-item'));
+        var draftSearch = document.getElementById('draft-search');
+        var draftStatusFilter = document.getElementById('draft-status-filter');
+        var draftProgramFilter = document.getElementById('draft-program-filter');
+        var draftCount = document.getElementById('draft-count');
+        var draftEmpty = document.getElementById('draft-empty');
+
+        function filterDrafts() {
+            var searchTerm = draftSearch.value.trim().toLowerCase();
+            var selectedStatus = draftStatusFilter.value;
+            var selectedProgram = draftProgramFilter.value;
+            var visibleCount = 0;
+
+            draftItems.forEach(function (draft) {
+                var matches = draft.dataset.search.toLowerCase().indexOf(searchTerm) !== -1
+                    && (!selectedStatus || draft.dataset.status === selectedStatus)
+                    && (!selectedProgram || draft.dataset.program === selectedProgram);
+                draft.hidden = !matches;
+                if (matches) {
+                    visibleCount += 1;
+                }
+            });
+
+            draftCount.textContent = 'Showing ' + visibleCount + ' of ' + draftItems.length + ' drafts';
+            draftEmpty.hidden = visibleCount !== 0;
+        }
+
+        if (draftSearch && draftStatusFilter && draftProgramFilter && draftCount && draftEmpty) {
+            draftSearch.addEventListener('input', filterDrafts);
+            draftStatusFilter.addEventListener('change', filterDrafts);
+            draftProgramFilter.addEventListener('change', filterDrafts);
+
+            var deepLinkDraft = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+            var chatRunId = new URLSearchParams(window.location.search).get('chat_run_id');
+            var scrollTarget = deepLinkDraft || (chatRunId ? document.getElementById('run-' + chatRunId) : null);
+            if (scrollTarget && scrollTarget.classList.contains('draft-item')) {
+                scrollTarget.open = true;
+                window.requestAnimationFrame(function () {
+                    scrollTarget.scrollIntoView({ block: 'start' });
+                });
+            }
+        }
+
+        document.querySelectorAll('[data-chat-target][data-prompt]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var textarea = document.getElementById(button.dataset.chatTarget);
+                if (textarea) {
+                    textarea.value = button.dataset.prompt;
+                    textarea.focus();
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-open-delete-dialog]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var dialogId = button.dataset.openDeleteDialog;
+                var dialog = document.getElementById(dialogId);
+                if (dialog && typeof dialog.showModal === 'function') {
+                    dialog.showModal();
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-close-delete-dialog]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var dialog = button.closest('dialog');
+                if (dialog && typeof dialog.close === 'function') {
+                    dialog.close();
+                }
+            });
+        });
+
+        document.querySelectorAll('dialog.confirm-dialog').forEach(function (dialog) {
+            dialog.addEventListener('click', function (event) {
+                var rect = dialog.getBoundingClientRect();
+                var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height
+                    && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+                if (!isInDialog) {
+                    dialog.close();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

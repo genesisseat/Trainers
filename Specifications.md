@@ -8,32 +8,30 @@
 - Storage: Windows system drive plus project work folders on local storage
 
 ## Workplace / directory layout
-- Main workspace root: `W:\Trainers`
+- Main workspace root: `C:\Trainers`
 - Project folders:
-  - `W:\Trainers\embedding-matcher`
-  - `W:\Trainers\curriculum-generator-kb`
-  - `W:\Trainers\curriculum-generator-project`
-  - `W:\Trainers\Models`
+  - `C:\Trainers\embedding-matcher`
+  - `C:\Trainers\curriculum-generator-kb`
 - Current project folder for embedding work:
-  - `W:\Trainers\embedding-matcher`
+  - `C:\Trainers\embedding-matcher`
 - Knowledge base data source:
-  - `W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv`
-  - `W:\Trainers\curriculum-generator-kb\03_industry_skills_data.md`
+  - `C:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv`
+  - `C:\Trainers\curriculum-generator-kb\03_industry_skills_data.md`
 - Generated output files:
-  - `W:\Trainers\embedding-matcher\course_to_skill_matches.csv`
-  - `W:\Trainers\embedding-matcher\skill_coverage.csv`
-  - `W:\Trainers\embedding-matcher\AI_CONTEXT.md`
+  - `C:\Trainers\embedding-matcher\course_to_skill_matches.csv`
+  - `C:\Trainers\embedding-matcher\skill_coverage.csv`
+  - `C:\Trainers\embedding-matcher\curriculum_matching.db`
 
 ## Installed services and environment
 - Operating system: Windows 11
 - PowerShell available for command execution
 - Python 3.12.10
 - Virtual environment created in project folder:
-  - `W:\Trainers\embedding-matcher\venv`
+  - `C:\Trainers\embedding-matcher\venv`
 - CUDA available for PyTorch:
   - `torch.cuda.is_available() == True`
 - Hugging Face cache configured for model downloads:
-  - `W:\Trainers\embedding-matcher\hf_cache`
+  - `C:\Trainers\embedding-matcher\hf_cache`
 - Python tooling installed in the venv:
   - `torch` (CUDA-enabled PyTorch)
   - `sentence-transformers`
@@ -54,7 +52,7 @@
 
 ## Installation commands used
 ```powershell
-cd W:\Trainers\embedding-matcher
+cd C:\Trainers\embedding-matcher
 python -m venv venv
 .\venv\Scripts\activate
 pip install torch --index-url https://download.pytorch.org/whl/cu124
@@ -77,12 +75,14 @@ This workstation is used to evaluate curriculum-to-skill alignment by embedding:
 
 The matcher computes similarity between course and skill text using pretrained sentence embeddings and identifies likely curriculum gaps.
 
+The current application also builds a canonical course directory, generates structured curriculum drafts through Gemini when configured (with an offline template fallback), stores analysis and review records in SQLite, and provides a PHP browser review interface. The active embedding default is `BAAI/bge-small-en-v1.5`.
+
 ## Main working script
-- `W:\Trainers\embedding-matcher\match_courses_to_skills.py`
+- `C:\Trainers\embedding-matcher\match_courses_to_skills.py`
 
 ## Typical execution commands
 ```powershell
-cd W:\Trainers\embedding-matcher
+cd C:\Trainers\embedding-matcher
 .\venv\Scripts\activate
 python match_courses_to_skills.py --model all-MiniLM-L6-v2
 python match_courses_to_skills.py --model BAAI/bge-small-en-v1.5

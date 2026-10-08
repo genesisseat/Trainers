@@ -128,10 +128,33 @@ def create_tables(conn: sqlite3.Connection) -> None:
             model_name TEXT,
             status TEXT,
             generated_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            notes TEXT
+            notes TEXT,
+            source TEXT NOT NULL DEFAULT 'generated',
+            created_by_user_id INTEGER,
+            created_by_username TEXT,
+            user_title TEXT,
+            user_notes TEXT,
+            is_finalized INTEGER NOT NULL DEFAULT 0,
+            updated_at TEXT
         )
         """
     )
+    run_columns = {row[1] for row in conn.execute("PRAGMA table_info(generated_curriculum_runs)")}
+    if "source" not in run_columns:
+        conn.execute("ALTER TABLE generated_curriculum_runs ADD COLUMN source TEXT NOT NULL DEFAULT 'generated'")
+        conn.execute("UPDATE generated_curriculum_runs SET source = 'generated' WHERE source IS NULL OR source = ''")
+    if "created_by_user_id" not in run_columns:
+        conn.execute("ALTER TABLE generated_curriculum_runs ADD COLUMN created_by_user_id INTEGER")
+    if "created_by_username" not in run_columns:
+        conn.execute("ALTER TABLE generated_curriculum_runs ADD COLUMN created_by_username TEXT")
+    for column, definition in {
+        "user_title": "TEXT",
+        "user_notes": "TEXT",
+        "is_finalized": "INTEGER NOT NULL DEFAULT 0",
+        "updated_at": "TEXT",
+    }.items():
+        if column not in run_columns:
+            conn.execute(f"ALTER TABLE generated_curriculum_runs ADD COLUMN {column} {definition}")
 
     conn.execute(
         """
@@ -148,9 +171,46 @@ def create_tables(conn: sqlite3.Connection) -> None:
             topics TEXT,
             rationale TEXT,
             source_colleges TEXT,
+            description TEXT,
+            mapped_industry_skills TEXT,
+            source TEXT,
             FOREIGN KEY(run_id) REFERENCES generated_curriculum_runs(id)
         )
         """
+    )
+    subject_columns = {
+        row[1]
+        for row in conn.execute("PRAGMA table_info(generated_curriculum_subjects)")
+    }
+    if "source" not in subject_columns:
+        conn.execute("ALTER TABLE generated_curriculum_subjects ADD COLUMN source TEXT")
+
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS generated_curriculum_chat (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            run_id INTEGER,
+            role TEXT,
+            message TEXT,
+            sender_user_id INTEGER,
+            sender_username TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(run_id) REFERENCES generated_curriculum_runs(id)
+        )
+        """
+    )
+    chat_columns = {row[1] for row in conn.execute("PRAGMA table_info(generated_curriculum_chat)")}
+    if "sender_user_id" not in chat_columns:
+        conn.execute("ALTER TABLE generated_curriculum_chat ADD COLUMN sender_user_id INTEGER")
+    if "sender_username" not in chat_columns:
+        conn.execute("ALTER TABLE generated_curriculum_chat ADD COLUMN sender_username TEXT")
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_generated_curriculum_runs_owner_id "
+        "ON generated_curriculum_runs(created_by_user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_generated_curriculum_chat_run_id "
+        "ON generated_curriculum_chat(run_id)"
     )
 
     conn.commit()
@@ -297,13 +357,24 @@ def import_coverage_csv(conn: sqlite3.Connection, csv_path: Path, model_name: st
     return inserted
 
 
-def add_generated_curriculum(conn: sqlite3.Connection, program: str, prompt: str, model_name: str, subjects: list[dict], status: str = "draft", notes: str = "") -> int:
+def add_generated_curriculum(
+    conn: sqlite3.Connection,
+    program: str,
+    prompt: str,
+    model_name: str,
+    subjects: list[dict],
+    status: str = "draft",
+    notes: str = "",
+    created_by_user_id: int | None = None,
+    created_by_username: str | None = None,
+) -> int:
     run_id = conn.execute(
         """
-        INSERT INTO generated_curriculum_runs (program, prompt, model_name, status, notes)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO generated_curriculum_runs (
+            program, prompt, model_name, status, notes, source, created_by_user_id, created_by_username
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
-        (program, prompt, model_name, status, notes),
+        (program, prompt, model_name, status, notes, "generated", created_by_user_id, created_by_username),
     ).lastrowid
 
     for subject in subjects:
@@ -311,8 +382,8 @@ def add_generated_curriculum(conn: sqlite3.Connection, program: str, prompt: str
             """
             INSERT INTO generated_curriculum_subjects (
                 run_id, program, year, term, subject_code, subject_title, units,
-                prerequisites, topics, rationale, source_colleges
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                prerequisites, topics, rationale, source_colleges, source
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 run_id,
@@ -326,6 +397,7 @@ def add_generated_curriculum(conn: sqlite3.Connection, program: str, prompt: str
                 str(subject.get("topics") or "").strip(),
                 str(subject.get("rationale") or "").strip(),
                 str(subject.get("source_colleges") or "").strip(),
+                subject.get("source"),
             ),
         )
 
