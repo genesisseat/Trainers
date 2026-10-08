@@ -1,148 +1,64 @@
-Project progress brief for Claude
-Use this as the handoff note:
+# Curriculum Matcher & Generator: AI Handoff
 
-I built a working curriculum-to-skill matching prototype in W:\Trainers\embedding-matcher using pretrained sentence-transformer embeddings only, without fine-tuning. The project reads the canonical dataset from W:\Trainers\curriculum-generator-kb and matches each course to industry skills using semantic similarity.
+Use this note for current project status. The implementation and detailed AI context live in `embedding-matcher/`; the active workspace is `C:\Trainers`.
 
-Current status:
+## Purpose and principles
 
-- Core pipeline works end-to-end in Python
-- Verified models: all-MiniLM-L6-v2 and BAAI/bge-small-en-v1.5
-- CUDA is available on this machine, so local embedding generation works well
-- SQLite database is populated and usable
-- Weak skill export is generated successfully
-- Browser PHP viewer exists and reads from SQLite
-- README and developer context files were created for continuity
-- A local venv is working in W:\Trainers\embedding-matcher
+Local-first curriculum analysis and draft generation. The system compares courses with industry skills, identifies coverage gaps, builds a canonical course directory, and generates evidence-grounded curriculum recommendations. Generated content is advisory and requires human review. Embeddings are pretrained; this is not a fine-tuned curriculum model.
 
-Main files:
+## Current stack
 
-- match_courses_to_skills.py
-- user_operations.py
-- database_setup.py
-- weak_skills_report.py
-- index.php
-- curriculum_matching.db
-- skill_coverage.csv
-- weakest_skills_report.csv
-- README.md
-- AI_CONTEXT.md
+- Python in `embedding-matcher/venv`, with CUDA-enabled PyTorch where available.
+- Hugging Face SentenceTransformers; operational embedding default is `BAAI/bge-small-en-v1.5`.
+- Google Gemini API for generation and review assistance when configured, with deterministic offline template fallback.
+- SQLite database: `embedding-matcher/curriculum_matching.db`.
+- PHP browser interface for matching reports, generated curricula, and review operations.
 
-Data sources:
+## Module checklist
 
-- W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv
-- W:\Trainers\curriculum-generator-kb\03_industry_skills_data.md
+| Module | Area | Status |
+| --- | --- | --- |
+| 1 | Data Management | Completed |
+| 2 | Industry Skills | Completed |
+| 3 | Benchmarking | Completed |
+| 4 | Master Course List / Course Directory | Completed |
+| 5 | Matching | Completed |
+| 6 | Gap Analysis | Completed |
+| 7 | AI Generation | Completed |
+| 8 | Validation | Completed |
+| 9 | Browser Review, Approval/Rejection, Notes Tracking | Ongoing |
+| 10 | Reports and Dashboard | Completed |
 
-What the pipeline does:
+Module 9 is the active workstream. Basic browser forms and persistence exist, but keep its overall status as ongoing until the review workflow is finished.
 
-- Loads curriculum course rows from the CSV
-- Loads skill rows from the markdown skill list
-- Normalizes and embeds both sets using sentence-transformers
-- Computes cosine similarity
-- Produces top-k matches per course
-- Produces skill coverage output showing the strongest and weakest coverage
-- Exports a weak-skills report for human review
-- Stores everything in SQLite for dashboard usage
+## Terminology and canonical grouping
 
-Verified outputs:
+Use **Master Course List / Course Directory** for the feature previously called “Subject Bank Management.” `canonical_subject_bank.csv` and internal `subject_bank` names remain implementation artifacts.
 
-- course_to_skill_matches.csv created
-- skill_coverage.csv created
-- weakest_skills_report.csv created
-- curriculum_matching.db created and populated
-- project working on Windows under a local venv
+Canonical equivalent-course grouping normalizes names (lowercase, `&` to `and`, punctuation removal, whitespace cleanup), deduplicates exact normalized names, and embeds unique titles. Titles are greedily clustered against later unassigned titles at cosine similarity `>= 0.82`; canonical groups are separated by normalized program. Variants, source colleges, classifications, year/term positions, and units are retained. This is heuristic matching, not formal equivalency approval; preserve the original names and provenance.
 
-Known current limitation:
+## Implemented additions
 
-- This is a pretrained embedding baseline, not a trained custom model; no fine-tuning or supervised curriculum label training has been done yet
-- The PHP browser page still needs final polish and a clean launch setup if the local runtime issue continues
+- Structured Gemini curriculum generation, four-year roadmap validation, bounded retries, diagnostics, and marked offline template fallback.
+- Skill-gap evidence and source-college provenance in generated curriculum records.
+- Enhancement workflow for user-submitted curricula.
+- Chat about generated curricula and enhancement reviews, including explanations and validated modification flows.
+- SQLite persistence for generated runs, courses, reviews, and chat; PHP views for coverage, generation, review, and reporting.
 
-Recommended next improvements:
+## Working paths and files
 
-- Add “course details” page with individual match breakdowns
-- Add filtering by skill type, course category, or confidence threshold
-- Add a scoring explanation section: why a skill is weak/strong
-- Add comparison mode between models (MiniLM vs BGE-small vs BGE-base)
-- Add a recommended action section: suggest new course, elective, or track adjustment
-- Add export to Excel or CSV from the browser
-- Add admin/supervisor view with role-based access or saved reports
-- Add a “manual review” workflow where staff can approve or override match quality
-- Add a historical versioning feature so each analysis run is stored with a timestamp
-- Add a simple REST API layer so PHP or another front end can query the data cleanly
+- Course data: `curriculum-generator-kb/data/curriculum_dataset_with_ids.csv`
+- Industry skills: `curriculum-generator-kb/03_industry_skills_data.md`
+- CLI: `embedding-matcher/user_operations.py`
+- Generation, validation, review, and chat: `embedding-matcher/curriculum_generator.py`
+- Course directory builder: `embedding-matcher/curriculum_generator_foundation.py`
+- Browser entry: `embedding-matcher/index.php`
+- Detailed AI context: `embedding-matcher/AI_CONTEXT.md`
 
-Strategic direction:
+## Guardrails and next focus
 
-- Keep pretrained embeddings as the operational baseline
-- Do not train yet unless a real labeled gold dataset exists
-- Use the system as a gap-analysis tool first
-- Only consider fine-tuning after there is human-reviewed curriculum-to-skill labels
-- This project is already strong as a prototype for analyzing curriculum gaps and preparing decisions for curriculum design
-
-Current product status:
-
-The current embedding-matcher prototype is a matching/gap-analysis tool:
-- It embeds existing courses and industry skills
-- It computes cosine similarity to find course↔skill matches
-- It produces coverage + weak-skill reports into SQLite
-- It is browsable via a PHP viewer
-
-It does not generate new curricula. It only evaluates curricula already present in the dataset.
-
-Next Plan — Curriculum Generator Expansion
-
-The goal:
-Let a user prompt something like “Generate a curriculum for BSIT” and get back a structured, recommended curriculum — broken down by year/term, with subjects and topics per subject — designed to prepare students for actual industry demand.
-
-Basis for generation:
-- Curriculum data from 8 Philippine colleges: NU Lipa, UST, DLSU, TIP, Ateneo, UP, LPU, Adamson
-- Industry skills scanned from job postings
-
-Why this needs a new layer, not just more matching:
-Similarity scoring tells you how well a curriculum covers skills — it cannot author a curriculum (sequence subjects into years/terms, decide topic lists, resolve prerequisites). That requires a generation step. Per the project’s strategy, the correct approach is retrieval-augmented generation (RAG): use the embedding pipeline to retrieve relevant reference material, then use an LLM to synthesize the curriculum from that retrieved context — not a trained or fine-tuned model.
-
-Phase 1 — Data normalization (foundation)
-- Standardize the 8 colleges’ curricula into one schema: program, year, term, subject_code, subject_title, units, prerequisites, description/topics if available
-- Tag each subject with its source college, so provenance is traceable in generated output
-- Confirm topic-level detail exists per subject (syllabus-level), or only subject titles — this determines how granular Phase 3 generation can be
-- Re-run the industry skill scan/cleanup: dedupe, categorize skills (technical/soft/tooling), and tag with frequency/source job postings for weighting
-
-Phase 2 — Cross-college structural analysis
-- Cluster equivalent subjects across colleges using the existing embedding pipeline
-- Build a canonical subject bank per program: which subjects are common across most colleges (core), which are unique to one or two (electives/differentiators)
-- Re-run skill-coverage analysis per college to see which schools already cover which industry skills best — this becomes generation context, not just a report
-
-Phase 3 — Generation layer (the new capability)
-- Design a retrieval step: given program = BSIT, pull the canonical subject bank + top weak/strong skill coverage findings
-- Design a generation prompt/pipeline (LLM-based) that takes that retrieved context and drafts:
-  - Year/term structure
-  - Subject list per term
-  - Topics per subject (if syllabus-level data supports it)
-  - A short rationale per subject tying it to specific industry skill gaps it addresses
-- Output as structured data (not free text) so it can be stored in SQLite and rendered by the PHP front end
-- Treat generated output as a draft recommendation, always paired with the gap-analysis evidence behind each choice — not a final authoritative curriculum
-
-Phase 4 — Review & validation workflow
-- Human review step: subject-matter experts approve/edit/reject generated subjects
-- Version each generated curriculum run with a timestamp, so iterations can be compared
-- Add a comparison view: generated curriculum vs. each of the 8 source colleges, side by side
-
-Phase 5 — Dashboard integration
-- Extend the existing PHP viewer with a “Generate Curriculum” prompt/interface
-- Show generated output next to the underlying gap-analysis evidence (skills addressed, weak skills still unaddressed, which colleges informed each subject)
-- Carry forward planned improvements (filtering, admin/role-based access, export to Excel/CSV, REST API layer) — these apply equally to generated curricula, not just matching reports
-
-Open questions to resolve before building Phase 3
-1. Is topic-level syllabus data available for all 8 colleges, or just subject titles/descriptions? This caps how detailed “topics to learn in each subject” can realistically be.
-2. How should industry skill weighting work — recency of job postings, frequency, or role-seniority level?
-3. Should generated curricula respect CHED minimum unit/subject requirements for BSIT and other programs? If so, that is another data source to fold in.
-4. Where does the generation call happen — server-side script calling an LLM API, or kept as a separate offline step whose output gets loaded into SQLite?
-
-Recommended execution order
-
-1. Finish the current matching and SQLite/PHP dashboard baseline
-2. Build a structured subject bank from the college data
-3. Add retrieval and generation prompt scaffolding using the subject bank + skill coverage evidence
-4. Store generated curriculum drafts in SQLite with review metadata
-5. Add the browser workflow for prompt, review, export, and comparison
-
-This project is already strong as a prototype for analyzing curriculum gaps. The next strategic step is to move from a gap-analysis system into a curriculum-generation assistant that is evidence-driven, transparent, and reviewable by humans.
-
+- Do not fine-tune without a reviewed, labeled gold dataset.
+- Treat similarity as evidence, not a competency or quality measurement.
+- Keep API credentials out of source and documentation; use environment variables or supported settings files.
+- Keep Module 9 marked ongoing; continue browser approval/rejection and reviewer-notes workflow work while preserving SQLite compatibility.
+- Run focused tests after code changes. Some existing test database paths are hard-coded to a legacy absolute location, so check paths before running them from a different workspace.

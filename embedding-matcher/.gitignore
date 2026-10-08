@@ -7,3 +7,11 @@ hf_cache/
 .ipynb_checkpoints/
 .pytest_cache/
 .DS_Store
+settings.json
+*.db
+*.sqlite
+*.sqlite3
+.env
+*.env
+.venv/
+node_modules/

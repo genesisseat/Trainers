@@ -12,7 +12,7 @@ import torch
 from sentence_transformers import SentenceTransformer
 
 ROOT = Path(__file__).resolve().parent
-DATASET_PATH = Path(r"W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv")
+DATASET_PATH = Path(r"C:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv")
 HF_HOME = Path(os.environ.get("HF_HOME", ROOT / "hf_cache"))
 HF_HOME.mkdir(parents=True, exist_ok=True)
 os.environ["HF_HOME"] = str(HF_HOME)

@@ -5,8 +5,8 @@ This project is a local-first curriculum intelligence system built for the Train
 - curriculum-to-skill matching using pretrained sentence-transformer embeddings
 - subject normalization and canonical clustering
 - structured curriculum generation drafts
-- SQLite persistence for analysis, matching, and review history
-- a PHP browser UI for local review and operation
+- SQLite persistence for analysis, matching, generated/enhanced drafts, and assistant chat
+- a PHP browser UI for draft management and operation
 
 The project is designed to support curriculum gap analysis and evidence-based curriculum drafting without needing a large production stack.
 
@@ -25,7 +25,7 @@ This project is currently set up for a Windows workstation with:
 - Python 3.10+
 - virtual environment in W:\Trainers\embedding-matcher\venv
 - SQLite for local storage
-- PHP 8.3 for browser-based review
+- PHP 8.3 for the browser interface
 - Jupyter Notebook for experimentation and analysis
 - Hugging Face model downloads through the local cache
 
@@ -51,7 +51,7 @@ This provides a foundation for:
 - program-level curriculum recommendations
 - year/term structure drafts
 - rationale and source college tracking
-- review and approval workflow for generated drafts
+- self-service draft titles, personal notes, and Finalized tracking
 
 ## Quick start
 
@@ -85,11 +85,9 @@ python user_operations.py --model BAAI/bge-small-en-v1.5 --top-k 5
 python user_operations.py --generate --program BSIT --prompt "Generate a BSIT curriculum focused on software development, databases, and networking." --model BAAI/bge-small-en-v1.5 --top-k 5
 ```
 
-### 5) Review a generated draft
+### 5) Manage a saved draft
 
-```powershell
-python user_operations.py --review --run-id 1 --review-status approved --reviewer admin --review-notes "Approved for drafting review."
-```
+Open the Dashboard or the matching Generated/Enhanced drafts page. The run creator can edit its title and personal notes and mark it Finalized for their own tracking. Finalized does not imply approval or validation.
 
 ## Primary commands
 
@@ -135,13 +133,18 @@ Open:
 
 - http://127.0.0.1:8000/
 
-This UI is used for local review of:
+This UI is used locally for:
 
 - matching results
 - skill coverage
 - weak-skill gaps
 - generated curriculum drafts
-- review status and notes
+- saved enhancement results, with collapsible rows, client-side search and filters, and per-run assistant chat
+- per-run PDF downloads for generated drafts and enhancement results, including the completed enhanced curriculum
+- creator-owned draft title, personal notes, and Finalized tracking
+- super-admin dataset file preview; files are not uploaded, saved, or activated by this UI yet
+
+PDFs are generated in the browser using locally served jsPDF and jsPDF-AutoTable assets; there is no runtime CDN request or server-side PDF service. The suggested filename is downloaded according to the browser's download settings. See `assets/PDF_EXPORT_DEPENDENCIES.md` for bundled library versions and licenses.
 
 ## Important notes about model choice
 
@@ -159,9 +162,12 @@ Use pretrained embeddings as the base system. This project does not require fine
 - user_operations.py: user-friendly CLI entry point
 - database_setup.py: SQLite schema and import helper
 - curriculum_generator_foundation.py: subject clustering and canonical subject bank
-- curriculum_generator.py: draft generation and review logic
+- curriculum_generator.py: draft generation, enhancement assessment, and chat logic
 - weak_skills_report.py: weak skill export
 - index.php: PHP browser interface
+- generated_curriculum.php and enhanced_curriculum_generated.php: collapsible run histories and PDF exports
+- dataset_management.php: super-admin-only dataset selection preview (no upload or activation backend)
+- assets/pdf-export.js: browser-side PDF generation
 - tests/: validation tests for generator and subject-bank behavior
 - curriculum_matching.db: local SQLite database
 
@@ -172,16 +178,16 @@ Use pretrained embeddings as the base system. This project does not require fine
 3. Check the generated skill coverage output.
 4. Use weak skills and skill gaps to identify curriculum missing areas.
 5. Generate a curriculum draft using the subject bank and prompt context.
-6. Review the generated draft in SQLite or the PHP browser.
-7. Approve, reject, or request revision using the review workflow.
+6. Inspect the generated draft and evidence in the PHP browser.
+7. Optionally set a custom title, add personal notes, or mark the draft Finalized for personal tracking.
 
 ## Guardrails and design principles
 
 - Keep the tool grounded in retrieval evidence.
 - Keep the generated curriculum as a draft recommendation, not an authority.
-- Prefer structured output and human review over freeform unverified generation.
+- Prefer structured output and human verification over freeform unverified generation.
 - Reuse the subject bank and coverage reports as the evidence source.
-- Only add more advanced LLM integrations after the subject bank and review process are solid.
+- Only add more advanced LLM integrations after the subject bank and evidence/validation practices are solid.
 
 ## Troubleshooting
 
@@ -215,7 +221,8 @@ Check internet connectivity and ensure the local Hugging Face cache is accessibl
 - improve subject normalization and clustering quality
 - add richer review and version tracking
 - add saved API key support for external LLM generation later
-- expand the browser UI with export, filtering, and approval status views
+- add validated dataset upload, staging, activation, and rollback workflows behind the super-admin interface
+- improve self-service draft tracking and export options as workflow needs emerge
 
 ## Related documentation
 

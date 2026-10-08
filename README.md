@@ -1,224 +1,68 @@
 # Curriculum Matcher & Generator
 
-This project is a local-first curriculum intelligence system built for the Trainer workflow. It combines:
+Local-first curriculum analysis and evidence-based curriculum drafting for the Trainer workflow. The system matches courses to industry skills, reports coverage gaps, creates a canonical course directory, and generates structured curriculum recommendations for human review.
 
-- curriculum-to-skill matching using pretrained sentence-transformer embeddings
-- subject normalization and canonical clustering
-- structured curriculum generation drafts
-- SQLite persistence for analysis, matching, and review history
-- a PHP browser UI for local review and operation
+## Current setup
 
-The project is designed to support curriculum gap analysis and evidence-based curriculum drafting without needing a large production stack.
+- Workspace: `C:\Trainers`
+- App: `C:\Trainers\embedding-matcher`
+- Knowledge base: `C:\Trainers\curriculum-generator-kb`
+- Inputs: `curriculum-generator-kb/data/curriculum_dataset_with_ids.csv` and `curriculum-generator-kb/03_industry_skills_data.md`
+- Runtime: Python virtual environment, Hugging Face SentenceTransformers (`BAAI/bge-small-en-v1.5`), Gemini API with offline template fallback, SQLite (`curriculum_matching.db`), and a PHP browser interface.
 
-## Workplace and data locations
+## Module status
 
-- Project root: W:\Trainers\embedding-matcher
-- Knowledge base: W:\Trainers\curriculum-generator-kb
-- Course dataset: W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv
-- Skill list: W:\Trainers\curriculum-generator-kb\03_industry_skills_data.md
-- Local database: W:\Trainers\embedding-matcher\curriculum_matching.db
+| # | Module | Status |
+| --- | --- | --- |
+| 1 | Data Management | Completed |
+| 2 | Industry Skills | Completed |
+| 3 | Benchmarking | Completed |
+| 4 | Master Course List / Course Directory | Completed |
+| 5 | Matching | Completed |
+| 6 | Gap Analysis | Completed |
+| 7 | AI Generation | Completed |
+| 8 | Validation | Completed |
+| 9 | Browser Review, Approval/Rejection, Notes Tracking | Ongoing |
+| 10 | Reports and Dashboard | Completed |
 
-## Installed stack and services
+Module 9 is the current workstream. Review forms and database persistence are present; keep the module status ongoing while this workflow is being completed.
 
-This project is currently set up for a Windows workstation with:
+## Additional capabilities
 
-- Python 3.10+
-- virtual environment in W:\Trainers\embedding-matcher\venv
-- SQLite for local storage
-- PHP 8.3 for browser-based review
-- Jupyter Notebook for experimentation and analysis
-- Hugging Face model downloads through the local cache
+- Gemini generation with structured output checks, bounded retries, diagnostics, and deterministic offline fallback.
+- User-curriculum enhancement, plus chat for explaining or requesting validated changes to generated curricula and enhancement reports.
+- Browser histories for generated drafts and enhancement reviews use collapsible, client-filtered run lists; enhancement reports and assistant chats remain associated with their runs.
+- Generated drafts and enhancement reviews can be downloaded as PDFs with a preset filename; the browser controls the download destination.
+- Super admins can preview dataset file selections in the browser, but uploads and dataset activation are not implemented yet.
+- Traceable course variants/source colleges and mapped industry-skill evidence in generated results.
+- SQLite persistence for matches, coverage, generated runs, reviews, and chat history.
 
-## What the system does
+## Terminology
 
-### Matching and coverage analysis
+Use **Master Course List / Course Directory** instead of “Subject Bank Management.” Internally, exact normalized duplicates are removed, unique course titles are embedding-clustered at cosine similarity `>= 0.82`, and canonical groups are separated by normalized program. Variants and source metadata are retained; similarity grouping is heuristic and should not be treated as formal equivalency approval.
 
-The system reads the course dataset and skill list, embeds both using a model such as MiniLM or BGE-small, and computes similarity scores.
-
-Outputs include:
-
-- course_to_skill_matches.csv
-- skill_coverage.csv
-- weakest_skills_report.csv
-- curriculum_matching.db
-
-### Subject bank and curriculum generation
-
-The project also builds a canonical subject bank from curriculum data, clusters near-equivalent subject names, and generates structured curriculum drafts tied to relevant skill evidence.
-
-This provides a foundation for:
-
-- program-level curriculum recommendations
-- year/term structure drafts
-- rationale and source college tracking
-- review and approval workflow for generated drafts
-
-## Quick start
-
-### 1) Open a terminal in the project folder
+## Run locally
 
 ```powershell
-cd W:\Trainers\embedding-matcher
-```
-
-### 2) Activate the environment
-
-```powershell
+cd C:\Trainers\embedding-matcher
 .\venv\Scripts\Activate.ps1
-```
-
-If PowerShell blocks script execution, run:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
-```
-
-### 3) Run the standard skill-matching workflow
-
-```powershell
 python user_operations.py --model BAAI/bge-small-en-v1.5 --top-k 5
+python -m unittest discover -s tests
 ```
 
-### 4) Generate a draft curriculum
+Start the local PHP server with the installed PHP executable, then open `http://127.0.0.1:8000/`. Gemini is optional: configure `GEMINI_API_KEY` or `GOOGLE_API_KEY`, or save the key through the local PHP settings interface. Without a usable API, generation uses the marked template fallback.
 
-```powershell
-python user_operations.py --generate --program BSIT --prompt "Generate a BSIT curriculum focused on software development, databases, and networking." --model BAAI/bge-small-en-v1.5 --top-k 5
-```
+## Key files
 
-### 5) Review a generated draft
+- `embedding-matcher/user_operations.py`: matching, generation, enhancement, chat, and review CLI.
+- `embedding-matcher/curriculum_generator.py`: Gemini integration, fallback, validation, and persistence.
+- `embedding-matcher/curriculum_generator_foundation.py`: course normalization and canonical grouping.
+- `embedding-matcher/index.php`: coverage dashboard and browser operations.
+- `embedding-matcher/AI_CONTEXT.md`: detailed AI handoff and current implementation context.
 
-```powershell
-python user_operations.py --review --run-id 1 --review-status approved --reviewer admin --review-notes "Approved for drafting review."
-```
+## Guardrails
 
-## Primary commands
-
-### Run the raw matcher script
-
-```powershell
-python match_courses_to_skills.py --model all-MiniLM-L6-v2 --top-k 5
-python match_courses_to_skills.py --model BAAI/bge-small-en-v1.5 --top-k 5
-```
-
-### Build the SQLite database
-
-```powershell
-python database_setup.py
-```
-
-### Generate the weakest-skills report
-
-```powershell
-python weak_skills_report.py
-```
-
-### Open the notebook
-
-```powershell
-jupyter notebook
-```
-
-Then open the notebook file in the project folder:
-
-- curriculum_skill_matcher.ipynb
-
-## Browser UI
-
-Start the local PHP interface from the project folder:
-
-```powershell
-cd W:\Trainers\embedding-matcher
-& 'C:\Users\genes\AppData\Local\Microsoft\WinGet\Packages\PHP.PHP.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe' -S 127.0.0.1:8000 -t 'W:\Trainers\embedding-matcher'
-```
-
-Open:
-
-- http://127.0.0.1:8000/
-
-This UI is used for local review of:
-
-- matching results
-- skill coverage
-- weak-skill gaps
-- generated curriculum drafts
-- review status and notes
-
-## Important notes about model choice
-
-Recommended models for this project:
-
-- all-MiniLM-L6-v2: fast and lightweight
-- BAAI/bge-small-en-v1.5: strong practical default
-- BAAI/bge-base-en-v1.5: higher quality if needed
-
-Use pretrained embeddings as the base system. This project does not require fine-tuning for the current gap-analysis and draft-generation workflow.
-
-## Project structure
-
-- match_courses_to_skills.py: main semantic matching pipeline
-- user_operations.py: user-friendly CLI entry point
-- database_setup.py: SQLite schema and import helper
-- curriculum_generator_foundation.py: subject clustering and canonical subject bank
-- curriculum_generator.py: draft generation and review logic
-- weak_skills_report.py: weak skill export
-- index.php: PHP browser interface
-- tests/: validation tests for generator and subject-bank behavior
-- curriculum_matching.db: local SQLite database
-
-## Operating workflow for normal use
-
-1. Activate the virtual environment.
-2. Run the matching workflow with the preferred model.
-3. Check the generated skill coverage output.
-4. Use weak skills and skill gaps to identify curriculum missing areas.
-5. Generate a curriculum draft using the subject bank and prompt context.
-6. Review the generated draft in SQLite or the PHP browser.
-7. Approve, reject, or request revision using the review workflow.
-
-## Guardrails and design principles
-
-- Keep the tool grounded in retrieval evidence.
-- Keep the generated curriculum as a draft recommendation, not an authority.
-- Prefer structured output and human review over freeform unverified generation.
-- Reuse the subject bank and coverage reports as the evidence source.
-- Only add more advanced LLM integrations after the subject bank and review process are solid.
-
-## Troubleshooting
-
-### Missing data files
-
-Check that the following paths exist:
-
-- W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv
-- W:\Trainers\curriculum-generator-kb\03_industry_skills_data.md
-
-### Environment issues
-
-Activate the virtual environment before running Python scripts:
-
-```powershell
-cd W:\Trainers\embedding-matcher
-.\venv\Scripts\Activate.ps1
-```
-
-### PHP UI not loading
-
-Use the explicit PHP executable and start the server from the project folder.
-
-### Model downloads fail or are slow
-
-Check internet connectivity and ensure the local Hugging Face cache is accessible.
-
-## Recommended next steps
-
-- maintain the current evidence-first generation workflow
-- improve subject normalization and clustering quality
-- add richer review and version tracking
-- add saved API key support for external LLM generation later
-- expand the browser UI with export, filtering, and approval status views
-
-## Related documentation
-
-- USER_GUIDE.md
-- DEVELOPER_GUIDE.md
-- AI_CONTEXT.md
+- Embeddings are pretrained; there is no fine-tuned curriculum model.
+- Similarity scores are evidence signals, not competency measurements.
+- Generated curricula are drafts, not authoritative requirements; preserve source evidence and human review.
+- The PHP interface is for trusted local use, not production exposure.
