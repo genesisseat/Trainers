@@ -15,3 +15,5 @@ settings.json
 *.env
 .venv/
 node_modules/
+curriculum_matching.db
+curriculum_matching.zip
