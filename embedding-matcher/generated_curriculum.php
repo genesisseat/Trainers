@@ -506,7 +506,7 @@ if (!$isGuestMode) {
 
         <section class="card generation-form-panel" id="generate-curriculum">
             <div class="panel-body">
-                <form method="post" class="generation-form">
+                <form method="post" class="generation-form" data-loading="generate">
                     <?= csrf_token_field() ?>
                     <?php if ($isGuestMode): ?><input type="hidden" name="guest_tab_id" value=""><?php endif; ?>
                     <input type="hidden" name="generate_action" value="generate">
@@ -594,7 +594,7 @@ if (!$isGuestMode) {
                                 <?php if ($runOfflineFallback): ?><span class="fallback-badge">Offline template</span><?php endif; ?>
                             </span>
                             <span class="draft-date"><strong>Generated:</strong> <?= htmlspecialchars((string)$run['generated_at']) ?></span>
-                            <span class="draft-date"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span>
+                            <span class="draft-date draft-created-by"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span>
                             <span class="draft-prompt" title="<?= htmlspecialchars((string)$run['prompt'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string)$run['prompt']) ?></span>
                         </span>
                     </summary>
@@ -702,12 +702,13 @@ if (!$isGuestMode) {
                             <button type="button" class="suggested-prompt" data-chat-target="chat_message_<?= (int)$run['id'] ?>" data-prompt="<?= htmlspecialchars($suggestedPrompt, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($suggestedPrompt) ?></button>
                         <?php endforeach; ?>
                     </div>
-                    <form method="post" class="chat-form">
+                    <form method="post" class="chat-form" data-loading="chat">
                         <?= csrf_token_field() ?>
                         <input type="hidden" name="chat_action" value="send">
                         <input type="hidden" name="chat_run_id" value="<?= $runId ?>">
                         <textarea id="chat_message_<?= $runId ?>" name="chat_message" placeholder="Ask a question or request an edit..." required></textarea>
                         <button type="submit">Send Question / Request Edit</button>
+                        <p class="loading-inline" data-loading-status role="status" aria-live="polite" hidden>Working...</p>
                     </form>
                 </div>
                 <?php elseif (current_user() !== null): ?>
@@ -715,10 +716,12 @@ if (!$isGuestMode) {
                 <?php endif; ?>
                 </details>
         <?php endforeach; ?>
+<?php require __DIR__ . '/partials/loading_overlay.php'; ?>
 <?php require __DIR__ . '/partials/dashboard_shell_end.php'; ?>
     <script src="assets/jspdf.umd.min.js"></script>
     <script src="assets/jspdf.plugin.autotable.min.js"></script>
     <script src="assets/pdf-export.js"></script>
+    <script src="assets/loading-overlay.js"></script>
     <script>
         var draftItems = Array.prototype.slice.call(document.querySelectorAll('.draft-item'));
         var draftSearch = document.getElementById('draft-search');

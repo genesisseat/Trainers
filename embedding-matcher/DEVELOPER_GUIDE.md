@@ -68,20 +68,9 @@ The project has three major layers:
 
 ## Local environment setup
 
-From the project root:
+For new-machine setup on Windows, Linux, and macOS, follow the canonical [Setup on a new machine](README.md#setup-on-a-new-machine) instructions.
 
-```powershell
-cd C:\Trainers\embedding-matcher
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-If there is no requirements file yet, install the known working dependencies:
-
-```powershell
-pip install torch sentence-transformers pandas notebook jupyter
-```
+The tested Python version is 3.12.10. After activating the venv using the command for your OS, install dependencies with `python -m pip install -r requirements.txt`. For a complete version snapshot, use `requirements-lock.txt` instead. For CPU-only systems, install the CPU PyTorch build first as described in the README to avoid the very large CUDA download.
 
 ## Important paths
 

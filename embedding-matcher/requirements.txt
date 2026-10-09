@@ -1,0 +1,16 @@
+# Human-readable direct dependencies. See requirements-lock.txt for the full
+# installed dependency snapshot.
+
+# Core data processing
+pandas==3.0.6
+
+# Embeddings / ML
+sentence-transformers==6.1.0
+# PyTorch is a very large download. CPU-only machines (including typical cloud
+# VMs) should install the CPU build first to avoid downloading CUDA libraries:
+# python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+# NVIDIA GPU users should install the matching CUDA build from https://pytorch.org/
+torch==2.14.1
+
+# Optional workbook import tool
+openpyxl==3.1.5

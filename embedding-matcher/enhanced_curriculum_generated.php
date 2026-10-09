@@ -642,7 +642,7 @@ if ($enhancementRuns && !$isGuestMode) {
 
         <section class="card enhancement-form-panel" id="enhance-curriculum">
             <div class="panel-body">
-                <form method="post" class="enhancement-form">
+                <form method="post" class="enhancement-form" data-loading="enhance">
                     <?= csrf_token_field() ?>
                     <?php if ($isGuestMode): ?><input type="hidden" name="guest_tab_id" value=""><?php endif; ?>
                     <input type="hidden" name="enhance_action" value="enhance">
@@ -737,7 +737,7 @@ if ($enhancementRuns && !$isGuestMode) {
                             <span class="draft-run-number">Run #<?= $runId ?></span>
                             <span class="draft-badges"><span class="draft-status"><span class="status-dot status-dot-<?= htmlspecialchars($runStatusClass, ENT_QUOTES, 'UTF-8') ?>"></span><?= htmlspecialchars($runStatus) ?></span></span>
                             <span class="draft-date"><strong>Generated:</strong> <?= htmlspecialchars((string)$historyRun['generated_at']) ?></span>
-                            <span class="draft-date"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($historyRun['created_by_username'] ?? '')) !== '' ? (string)$historyRun['created_by_username'] : 'Unattributed') ?></span>
+                            <span class="draft-date draft-created-by"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($historyRun['created_by_username'] ?? '')) !== '' ? (string)$historyRun['created_by_username'] : 'Unattributed') ?></span>
                             <span class="draft-prompt" title="<?= htmlspecialchars((string)$historyRun['prompt'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string)$historyRun['prompt']) ?></span>
                         </span>
                     </summary>
@@ -985,12 +985,13 @@ if ($enhancementRuns && !$isGuestMode) {
                                 <button type="button" class="review-chat-prompt" data-chat-target="review_chat_message_<?= $runId ?>" data-review-prompt="<?= htmlspecialchars($reviewPrompt, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($reviewPrompt) ?></button>
                             <?php endforeach; ?>
                         </div>
-                        <form method="post" class="review-chat-form">
+                        <form method="post" class="review-chat-form" data-loading="chat">
                             <?= csrf_token_field() ?>
                             <input type="hidden" name="enhancement_chat_action" value="send">
                             <input type="hidden" name="enhancement_chat_run_id" value="<?= $runId ?>">
                             <textarea id="review_chat_message_<?= $runId ?>" name="enhancement_chat_message" placeholder="Ask about these results..." required></textarea>
                             <button type="submit">Ask about results</button>
+                            <p class="loading-inline" data-loading-status role="status" aria-live="polite" hidden>Working...</p>
                         </form>
                         <?php else: ?>
                             <p class="notice warning" role="status"><?= htmlspecialchars(GEMINI_API_KEY_REQUIRED_MESSAGE, ENT_QUOTES, 'UTF-8') ?> <a href="#api_key_value">Open key settings</a></p>
@@ -999,10 +1000,12 @@ if ($enhancementRuns && !$isGuestMode) {
                     <?php endif; ?>
                 </details>
             <?php endforeach; ?>
+<?php require __DIR__ . '/partials/loading_overlay.php'; ?>
 <?php require __DIR__ . '/partials/dashboard_shell_end.php'; ?>
     <script src="assets/jspdf.umd.min.js"></script>
     <script src="assets/jspdf.plugin.autotable.min.js"></script>
     <script src="assets/pdf-export.js"></script>
+    <script src="assets/loading-overlay.js"></script>
     <script>
         var enhancementItems = Array.prototype.slice.call(document.querySelectorAll('.enhancement-history-item'));
         var enhancementSearch = document.getElementById('enhancement-search');
