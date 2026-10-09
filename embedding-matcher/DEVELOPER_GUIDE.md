@@ -54,7 +54,7 @@ The project has three major layers:
   - super-admin-only account and role management; admin-created accounts remain supported alongside public sign-up
 
 - generated_curriculum.php and enhanced_curriculum_generated.php
-  - shared sidebar shell, ownership-scoped draft histories, creator-owned title/notes/finalized controls, and browser-generated PDF downloads
+  - shared sidebar shell, ownership-scoped histories, creator-owned title/notes controls, and browser-generated PDF downloads
 
 - skill_coverage.php
   - searchable, type-filterable, sortable view of saved skill-coverage evidence
@@ -95,7 +95,7 @@ The SQLite schema should store:
 - generated_curriculum_subjects
 - legacy generated_curriculum_reviews table/rows (preserved, no longer read or written)
 - generated_curriculum_chat, including nullable sender ID/name snapshots for user messages
-- generated_curriculum_runs.user_title, user_notes, is_finalized, and updated_at (additive draft-management fields)
+- generated_curriculum_runs.user_title, user_notes, generation_mode, and updated_at (additive run-management fields)
 - users.gemini_api_key for per-user Gemini key storage and nullable email for sign-up accounts
 
 ## Account creation and access
@@ -139,7 +139,7 @@ python user_operations.py --generate --program BSIT --prompt "Generate a BSIT cu
 
 ### Self-service draft management
 
-In the browser, the run creator can edit the draft title and personal notes and toggle Finalized. Finalized is personal tracking only; it is not approval or validation. The update handler enforces ownership and CSRF, limits titles to 150 characters and notes to 5000 characters, and records `updated_at`. Super admins can update unattributed drafts.
+In the browser, the run creator can edit the run title and personal notes. The update handler enforces ownership and CSRF, limits titles to 150 characters and notes to 5000 characters, and records `updated_at`. Super admins can update unattributed runs. A run's nullable `generation_mode` is set only from explicit generation outcomes: Online Template when a Gemini-backed stage is confirmed successful, Offline template when every applicable stage confirms fallback, otherwise Not recorded. Never infer online mode from the model name or from a missing fallback marker.
 
 ## Coding principles
 
@@ -177,8 +177,9 @@ The browser app is served through PHP and is suitable for local draft-management
 
 - show skill coverage
 - show weak skills summary
-- show Draft or Finalized only; legacy approval/rejection status values must display as Draft without rewriting storage
-- restrict title, personal notes, and Finalized updates to the run creator or super_admin (super_admin only for unattributed runs)
+- show Online Template, Offline template, or Not recorded with a visible text label and contrasting dot
+- restrict title and personal-notes updates to the run creator or super_admin (super_admin only for unattributed runs)
+- preserve the `is_finalized` column without reading or writing it
 - keep the visible advisory disclaimer on generated pages and exported PDFs
 - keep PDF downloads scoped to the selected run and avoid sending curriculum data to external services
 - preserve the explicit preview-only boundary on dataset management until a validated backend workflow is implemented

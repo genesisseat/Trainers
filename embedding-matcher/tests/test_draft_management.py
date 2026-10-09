@@ -23,6 +23,7 @@ class DraftManagementTests(unittest.TestCase):
                         id INTEGER PRIMARY KEY,
                         program TEXT,
                         status TEXT,
+                        is_finalized INTEGER NOT NULL DEFAULT 0,
                         generated_at TEXT DEFAULT CURRENT_TIMESTAMP
                     )
                     """
@@ -47,17 +48,83 @@ class DraftManagementTests(unittest.TestCase):
                 )
                 curriculum_generator._ensure_draft_management_columns(connection)
                 curriculum_generator._ensure_draft_management_columns(connection)
-                status, finalized, title = connection.execute(
-                    "SELECT status, is_finalized, user_title FROM generated_curriculum_runs WHERE id = 1"
+                status, title, generation_mode = connection.execute(
+                    "SELECT status, user_title, generation_mode FROM generated_curriculum_runs WHERE id = 1"
                 ).fetchone()
                 review = connection.execute(
                     "SELECT status, notes FROM generated_curriculum_reviews WHERE id = 1"
                 ).fetchone()
+                run_columns = {
+                    column[1]
+                    for column in connection.execute("PRAGMA table_info(generated_curriculum_runs)")
+                }
+                open_run = connection.execute(
+                    "SELECT id, program FROM generated_curriculum_runs WHERE id = 1"
+                ).fetchone()
             finally:
                 connection.close()
 
-        self.assertEqual((status, finalized, title), ("approved", 0, None))
+        self.assertEqual((status, title, generation_mode), ("approved", None, None))
         self.assertEqual(review, ("approved", "legacy"))
+        self.assertIn("is_finalized", run_columns)
+        self.assertEqual(open_run, (1, "BSIT"))
+
+    def test_generation_mode_backfill_requires_explicit_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            connection = sqlite3.connect(Path(directory) / "legacy_modes.db", timeout=30)
+            try:
+                connection.executescript(
+                    """
+                    CREATE TABLE generated_curriculum_runs (
+                        id INTEGER PRIMARY KEY,
+                        source TEXT,
+                        notes TEXT,
+                        is_finalized INTEGER NOT NULL DEFAULT 0
+                    );
+                    CREATE TABLE generated_curriculum_subjects (
+                        id INTEGER PRIMARY KEY,
+                        run_id INTEGER,
+                        rationale TEXT
+                    );
+                    INSERT INTO generated_curriculum_runs (id, source, notes) VALUES
+                        (1, 'generated', ''),
+                        (2, 'generated', ''),
+                        (3, 'enhanced', '{"fallback":true,"draft_fallback":true}'),
+                        (4, 'enhanced', '{"fallback":false,"draft_fallback":true}'),
+                        (5, 'enhanced', '{"fallback":true}');
+                    INSERT INTO generated_curriculum_subjects (run_id, rationale) VALUES
+                            (1, '[offline template fallback] Evidence preserved.'),
+                        (2, 'No mode marker.');
+                    """
+                )
+                curriculum_generator._ensure_draft_management_columns(connection)
+                curriculum_generator._ensure_draft_management_columns(connection)
+                modes = dict(
+                    connection.execute(
+                        "SELECT id, generation_mode FROM generated_curriculum_runs ORDER BY id"
+                    ).fetchall()
+                )
+            finally:
+                connection.close()
+
+        self.assertEqual(modes, {1: "offline", 2: None, 3: "offline", 4: "online", 5: None})
+
+    def test_history_and_run_pages_expose_generation_mode_filters(self):
+        history = (PROJECT_ROOT / "draft_history.php").read_text(encoding="utf-8")
+        self.assertIn('id="draft-history-source"', history)
+        self.assertIn('id="draft-history-mode"', history)
+        self.assertIn("item.dataset.historySource !== sourceFilter.value", history)
+        self.assertIn("item.dataset.generationMode !== modeFilter.value", history)
+        self.assertIn('data-generation-mode=', history)
+
+        for page, filter_id in (
+            ("generated_curriculum.php", 'id="draft-mode-filter"'),
+            ("enhanced_curriculum_generated.php", 'id="enhancement-mode-filter"'),
+        ):
+            with self.subTest(page=page):
+                source = (PROJECT_ROOT / page).read_text(encoding="utf-8")
+                self.assertIn(filter_id, source)
+                self.assertIn("dataset.generationMode === selectedMode", source)
 
     def test_php_update_validation_and_authorization_helpers(self):
         php = shutil.which("php")

@@ -92,7 +92,8 @@ draft_management_ensure_columns($db);
 $runScope = run_access_sql_scope($currentUser);
 $countStmt = $db->prepare(
     "SELECT COUNT(*) AS total,
-            SUM(CASE WHEN is_finalized = 1 THEN 1 ELSE 0 END) AS finalized,
+            SUM(CASE WHEN generation_mode = 'online' THEN 1 ELSE 0 END) AS online,
+            SUM(CASE WHEN generation_mode = 'offline' THEN 1 ELSE 0 END) AS offline,
             SUM(CASE WHEN source IS NULL OR source <> 'enhanced' THEN 1 ELSE 0 END) AS generated,
             SUM(CASE WHEN source = 'enhanced' THEN 1 ELSE 0 END) AS enhanced
      FROM generated_curriculum_runs r
@@ -101,13 +102,14 @@ $countStmt = $db->prepare(
 run_access_bind_scope($countStmt, $runScope);
 $draftCounts = $countStmt->execute()->fetchArray(SQLITE3_ASSOC) ?: [];
 $totalDrafts = (int)($draftCounts['total'] ?? 0);
-$finalizedDrafts = (int)($draftCounts['finalized'] ?? 0);
+$onlineDrafts = (int)($draftCounts['online'] ?? 0);
+$offlineDrafts = (int)($draftCounts['offline'] ?? 0);
 $generatedDrafts = (int)($draftCounts['generated'] ?? 0);
 $enhancedDrafts = (int)($draftCounts['enhanced'] ?? 0);
 
 $historyRuns = [];
 $historyStmt = $db->prepare(
-    "SELECT id, program, prompt, status, generated_at, source, user_title, is_finalized
+    "SELECT id, program, prompt, status, generated_at, source, user_title, generation_mode
      FROM generated_curriculum_runs r
      WHERE {$runScope['sql']}
      ORDER BY generated_at DESC, id DESC
@@ -126,7 +128,7 @@ $db->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard · Curriculum Enhancer</title>
+    <title>Dashboard · Curri'KoToh</title>
     <link rel="stylesheet" href="assets/theme.css">
 </head>
     <?php $activePage = 'dashboard'; require __DIR__ . '/partials/dashboard_shell_start.php'; ?>
@@ -135,8 +137,9 @@ $db->close();
                 <h1>Dashboard</h1>
             </div>
             <section class="stat-grid" aria-label="Curriculum overview">
-                <article class="stat-card"><span class="stat-label">Total drafts</span><strong><?= $totalDrafts ?></strong><span class="stat-caption">Generated and enhanced runs</span></article>
-                <article class="stat-card"><span class="stat-label">Finalized</span><strong><?= $finalizedDrafts ?></strong><span class="stat-caption">Your own tracking only</span></article>
+                <article class="stat-card"><span class="stat-label">Total</span><strong><?= $totalDrafts ?></strong><span class="stat-caption">Generated and enhanced runs</span></article>
+                <article class="stat-card"><span class="stat-label">Online Template</span><strong><?= $onlineDrafts ?></strong><span class="stat-caption">Gemini-confirmed generation</span></article>
+                <article class="stat-card"><span class="stat-label">Offline template</span><strong><?= $offlineDrafts ?></strong><span class="stat-caption">Template fallback confirmed</span></article>
                 <article class="stat-card"><span class="stat-label">Generated</span><strong><?= $generatedDrafts ?></strong><span class="stat-caption">Generated drafts</span></article>
                 <article class="stat-card"><span class="stat-label">Enhanced</span><strong><?= $enhancedDrafts ?></strong><span class="stat-caption">Enhanced drafts</span></article>
             </section>
@@ -145,6 +148,11 @@ $db->close();
                     <div class="dashboard-panel-heading"><div><p class="eyebrow">Latest activity</p><h2>Recent drafts</h2></div><a href="draft_history.php">View draft history</a></div>
                     <label for="history-source-filter">Filter by source</label>
                     <select id="history-source-filter"><option value="">All drafts</option><option value="generated">Generated</option><option value="enhanced">Enhanced</option></select>
+                    <div class="generation-mode-legend" aria-label="Generation mode legend">
+                        <span class="generation-mode"><span class="generation-mode-dot generation-mode-offline" aria-hidden="true"></span>Offline template</span>
+                        <span class="generation-mode"><span class="generation-mode-dot generation-mode-online" aria-hidden="true"></span>Online Template</span>
+                        <span class="generation-mode"><span class="generation-mode-dot generation-mode-unknown" aria-hidden="true"></span>Not recorded</span>
+                    </div>
                     <?php if ($historyRuns): ?>
                         <ul class="recent-drafts">
                             <?php foreach ($historyRuns as $historyRun): ?>
@@ -153,15 +161,17 @@ $db->close();
                                     $historyHref = $historySource === 'enhanced'
                                         ? 'enhanced_curriculum_generated.php?run_id=' . (int)$historyRun['id'] . '#run-' . (int)$historyRun['id']
                                         : 'generated_curriculum.php?run_id=' . (int)$historyRun['id'] . '#run-' . (int)$historyRun['id'];
-                                    $draftStatus = draft_management_status_label($historyRun['is_finalized'] ?? 0);
-                                    $statusClass = strtolower($draftStatus);
+                                    $historyGenerationMode = in_array($historyRun['generation_mode'] ?? null, ['online', 'offline'], true)
+                                        ? (string)$historyRun['generation_mode']
+                                        : 'unknown';
+                                    $historyGenerationLabel = draft_management_generation_mode_label($historyRun['generation_mode'] ?? null);
                                     $historyTitle = trim((string)($historyRun['user_title'] ?? '')) ?: (string)$historyRun['program'];
                                 ?>
                                 <li data-history-source="<?= htmlspecialchars($historySource, ENT_QUOTES, 'UTF-8') ?>">
                                     <a href="<?= htmlspecialchars($historyHref, ENT_QUOTES, 'UTF-8') ?>">
                                         <span class="source-dot source-<?= htmlspecialchars($historySource, ENT_QUOTES, 'UTF-8') ?>" title="<?= $historySource === 'enhanced' ? 'Enhanced' : 'Generated' ?>" aria-label="<?= $historySource === 'enhanced' ? 'Enhanced' : 'Generated' ?>"></span>
                                         <span class="recent-draft-copy"><strong><?= htmlspecialchars($historyTitle, ENT_QUOTES, 'UTF-8') ?> · Run #<?= (int)$historyRun['id'] ?></strong><small><?= htmlspecialchars((string)$historyRun['prompt']) ?></small></span>
-                                        <span class="draft-status"><span class="status-dot status-dot-<?= htmlspecialchars($statusClass, ENT_QUOTES, 'UTF-8') ?>"></span><?= htmlspecialchars($draftStatus) ?></span>
+                                        <span class="generation-mode"><span class="generation-mode-dot generation-mode-<?= htmlspecialchars($historyGenerationMode, ENT_QUOTES, 'UTF-8') ?>" aria-hidden="true"></span><?= htmlspecialchars($historyGenerationLabel, ENT_QUOTES, 'UTF-8') ?></span>
                                         <time><?= htmlspecialchars((string)$historyRun['generated_at']) ?></time>
                                     </a>
                                 </li>

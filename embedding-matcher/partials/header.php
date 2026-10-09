@@ -9,9 +9,9 @@ $navigation = [
 ?>
 <header class="app-header">
     <div class="brand-row">
-        <a class="wordmark" href="index.php" aria-label="Curriculum Enhancer home">
-            <span class="wordmark-mark" aria-hidden="true">C</span>
-            <span>Curriculum Enhancer</span>
+        <a class="wordmark" href="index.php" aria-label="Curri'KoToh home">
+            <img class="brand-logo" src="assets/curri-kotoh-logo.png" alt="">
+            <span>Curri'KoToh</span>
         </a>
         <span class="brand-context">Academic planning workspace</span>
     </div>

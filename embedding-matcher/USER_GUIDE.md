@@ -1,6 +1,6 @@
 # User Guide
 
-This guide explains how to use Curriculum Enhancer's curriculum matching, generation, and enhancement features in normal day-to-day work.
+This guide explains how to use Curri'KoToh's curriculum matching, generation, and enhancement features in normal day-to-day work.
 
 ## Goal of the project
 
@@ -70,7 +70,7 @@ This uses the subject bank and coverage evidence to build a structured draft.
 
 ## Step 6: Manage the generated draft
 
-On the draft page, the creator can set a custom title, add personal notes, and mark the draft Finalized for personal tracking. This status does not mean the draft is approved or validated. All generated and enhanced content is advisory and must be verified before use.
+On the draft page, the creator can set a custom title and add personal notes. Each run shows its recorded generation mode: Online Template, Offline template, or Not recorded when legacy provenance cannot be proven. All generated and enhanced content is advisory and must be verified before use.
 
 ## Step 7: Use the browser UI
 
@@ -107,7 +107,7 @@ Super admins can open **Dataset Management** from the navigation, choose a datas
 
 - start with the coverage file before changing a curriculum
 - compare a few models when quality matters
-- verify advisory recommendations before use; Finalized is personal tracking only
+- verify advisory recommendations before use; generation mode reports which generation path was recorded
 - preserve the evidence trail from skill coverage to subject content
 
 ## Typical user questions this project answers

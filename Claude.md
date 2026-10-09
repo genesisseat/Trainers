@@ -1,4 +1,4 @@
-# Curriculum Matcher & Generator: AI Handoff
+# Curri'KoToh: AI Handoff
 
 Use this note for current project status. The implementation and detailed AI context live in `embedding-matcher/`; the active workspace is `C:\Trainers`.
 

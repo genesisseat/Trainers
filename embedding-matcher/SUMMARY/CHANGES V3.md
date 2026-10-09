@@ -1,8 +1,8 @@
 # Changes V3
 
-## 2026-10-06 - Rebrand interface as Curriculum Enhancer
+## 2026-10-06 - Prior interface rebrand (superseded)
 
-- Updated the landing page, shared navigation and dashboard wordmarks, dashboard document title, copyright, and exported PDF metadata/footers to use "Curriculum Enhancer". The wordmark monogram remains "C".
+- Updated the landing page, shared navigation and dashboard wordmarks, dashboard document title, copyright, and exported PDF metadata/footers with the previous product branding. The current Curri'KoToh logo and wordmark replace that treatment.
 
 ## 2026-10-06 - Landing page rhythm and evidence statement
 

@@ -300,24 +300,18 @@ if ($draftUpdateAction === 'save') {
 
     $userTitle = draft_management_clean_text($_POST['user_title'] ?? null, 150);
     $userNotes = draft_management_clean_text($_POST['user_notes'] ?? null, 5000);
-    $finalizedValue = draft_management_finalized_value($_POST['is_finalized'] ?? null);
-    if ($userTitle === null || $userNotes === null || $finalizedValue === null) {
+    if ($userTitle === null || $userNotes === null) {
         $updateDb->close();
         http_response_code(400);
-        exit('Invalid draft update. Check the title, notes, and finalized value.');
+        exit('Invalid draft update. Check the title and notes.');
     }
 
-    $updateStmt = $updateDb->prepare(
-        'UPDATE generated_curriculum_runs
-         SET user_title = :title, user_notes = :notes, is_finalized = :finalized,
-             updated_at = CURRENT_TIMESTAMP
-         WHERE id = :id'
+    draft_management_update_details(
+        $updateDb,
+        $draftUpdateRunId,
+        $userTitle !== '' ? $userTitle : null,
+        $userNotes
     );
-    $updateStmt->bindValue(':title', $userTitle !== '' ? $userTitle : null, $userTitle !== '' ? SQLITE3_TEXT : SQLITE3_NULL);
-    $updateStmt->bindValue(':notes', $userNotes, SQLITE3_TEXT);
-    $updateStmt->bindValue(':finalized', $finalizedValue, SQLITE3_INTEGER);
-    $updateStmt->bindValue(':id', $draftUpdateRunId, SQLITE3_INTEGER);
-    $updateStmt->execute();
     $updateDb->close();
 
     $_SESSION['enhance_flash_success'] = 'Draft details updated.';
@@ -530,7 +524,7 @@ if (!$isGuestMode) {
     $runScope = run_access_sql_scope($currentUser);
     $historyStmt = $historyDb->prepare(
         'SELECT id, program, prompt, model_name, status, generated_at, notes, created_by_user_id,
-                created_by_username, user_title, user_notes, is_finalized, updated_at
+                created_by_username, user_title, user_notes, generation_mode, updated_at
          FROM generated_curriculum_runs r
          WHERE r.source = \'enhanced\' AND ' . $runScope['sql'] . '
          ORDER BY id DESC'
@@ -565,7 +559,7 @@ if (!$isGuestMode) {
             'status' => 'draft',
             'generated_at' => date('Y-m-d H:i:s'),
             'created_by_username' => 'Guest trial',
-            'is_finalized' => 0,
+            'generation_mode' => draft_management_enhancement_generation_mode($guestDraft['report']),
             'enhancement_report' => $guestDraft['report'],
         ];
         $enhancementCoursesByRun[$guestRunId] = $guestDraft['enhanced_curriculum'];
@@ -717,11 +711,11 @@ if ($enhancementRuns && !$isGuestMode) {
                     <input id="enhancement-search" type="search" placeholder="Run number, program, specialization, or prompt">
                 </div>
                 <div class="field">
-                    <label for="enhancement-status-filter">Status</label>
-                    <select id="enhancement-status-filter">
-                        <option value="">All statuses</option>
-                        <option value="draft">Draft</option>
-                        <option value="finalized">Finalized</option>
+                    <label for="enhancement-mode-filter">Generation mode</label>
+                    <select id="enhancement-mode-filter">
+                        <option value="">All modes</option>
+                        <option value="online">Online Template</option>
+                        <option value="offline">Offline template</option>
                     </select>
                 </div>
                 <div class="field">
@@ -741,8 +735,10 @@ if ($enhancementRuns && !$isGuestMode) {
                     $runId = (int)$historyRun['id'];
                     $report = $historyRun['enhancement_report'];
                     $specialization = trim((string)($report['specialization'] ?? ''));
-                    $runStatus = draft_management_status_label($historyRun['is_finalized'] ?? 0);
-                    $runStatusClass = strtolower($runStatus);
+                    $runGenerationMode = in_array($historyRun['generation_mode'] ?? null, ['online', 'offline'], true)
+                        ? (string)$historyRun['generation_mode']
+                        : 'unknown';
+                    $runGenerationLabel = draft_management_generation_mode_label($historyRun['generation_mode'] ?? null);
                     $runTitle = trim((string)($historyRun['user_title'] ?? '')) ?: (string)$historyRun['program'];
                     $runIsOpen = $runId === $enhancedRunId;
                     $runSearchText = 'Run #' . $runId . ' ' . $runTitle . ' ' . (string)$historyRun['program'] . ' ' . $specialization . ' ' . (string)$historyRun['prompt'];
@@ -753,13 +749,13 @@ if ($enhancementRuns && !$isGuestMode) {
                         $completedSubjectsByYear[(string)$completedSubject['year']][(string)$completedSubject['term']][] = $completedSubject;
                     }
                 ?>
-                <details class="card draft-item enhancement-history-item" id="run-<?= $runId ?>" data-status="<?= htmlspecialchars(strtolower($runStatus), ENT_QUOTES, 'UTF-8') ?>" data-program="<?= htmlspecialchars((string)$historyRun['program'], ENT_QUOTES, 'UTF-8') ?>" data-search="<?= htmlspecialchars($runSearchText, ENT_QUOTES, 'UTF-8') ?>" <?= $runIsOpen ? 'open' : '' ?>>
+                <details class="card draft-item enhancement-history-item" id="run-<?= $runId ?>" data-generation-mode="<?= htmlspecialchars($runGenerationMode, ENT_QUOTES, 'UTF-8') ?>" data-program="<?= htmlspecialchars((string)$historyRun['program'], ENT_QUOTES, 'UTF-8') ?>" data-search="<?= htmlspecialchars($runSearchText, ENT_QUOTES, 'UTF-8') ?>" <?= $runIsOpen ? 'open' : '' ?>>
                     <summary class="draft-summary">
                         <span class="draft-chevron" aria-hidden="true"></span>
                         <span class="draft-summary-main">
                             <span class="draft-program"><?= htmlspecialchars($runTitle, ENT_QUOTES, 'UTF-8') ?><?php if ($specialization !== ''): ?> <span class="draft-specialization">· <?= htmlspecialchars($specialization) ?></span><?php endif; ?></span>
                             <span class="draft-run-number">Run #<?= $runId ?></span>
-                            <span class="draft-badges"><span class="draft-status"><span class="status-dot status-dot-<?= htmlspecialchars($runStatusClass, ENT_QUOTES, 'UTF-8') ?>"></span><?= htmlspecialchars($runStatus) ?></span></span>
+                            <span class="draft-badges"><span class="generation-mode"><span class="generation-mode-dot generation-mode-<?= htmlspecialchars($runGenerationMode, ENT_QUOTES, 'UTF-8') ?>" aria-hidden="true"></span><?= htmlspecialchars($runGenerationLabel, ENT_QUOTES, 'UTF-8') ?></span></span>
                             <span class="draft-date"><strong>Generated:</strong> <?= htmlspecialchars((string)$historyRun['generated_at']) ?></span>
                             <span class="draft-date draft-created-by"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($historyRun['created_by_username'] ?? '')) !== '' ? (string)$historyRun['created_by_username'] : 'Unattributed') ?></span>
                             <span class="draft-prompt" title="<?= htmlspecialchars((string)$historyRun['prompt'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string)$historyRun['prompt']) ?></span>
@@ -768,7 +764,7 @@ if ($enhancementRuns && !$isGuestMode) {
                     <div class="output-header">
                         <p class="eyebrow">Enhancement results</p>
                         <h2 id="enhanced-output-title-<?= $runId ?>"><?= htmlspecialchars($runTitle, ENT_QUOTES, 'UTF-8') ?><?php if ($specialization !== ''): ?> · <?= htmlspecialchars($specialization) ?><?php endif; ?></h2>
-                        <div class="output-meta meta"><span><strong>Program:</strong> <?= htmlspecialchars((string)$historyRun['program']) ?></span><span><strong>Run #<?= $runId ?></strong></span><span><strong>Generated:</strong> <?= htmlspecialchars((string)$historyRun['generated_at']) ?></span><?php if (!empty($historyRun['updated_at'])): ?><span><strong>Updated:</strong> <?= htmlspecialchars((string)$historyRun['updated_at']) ?></span><?php endif; ?><span><strong>Status:</strong> <?= htmlspecialchars($runStatus) ?></span><span><strong>Prompt:</strong> <?= htmlspecialchars((string)$historyRun['prompt']) ?></span></div>
+                        <div class="output-meta meta"><span><strong>Program:</strong> <?= htmlspecialchars((string)$historyRun['program']) ?></span><span><strong>Run #<?= $runId ?></strong></span><span><strong>Generation:</strong> <?= htmlspecialchars($runGenerationLabel, ENT_QUOTES, 'UTF-8') ?></span><span><strong>Generated:</strong> <?= htmlspecialchars((string)$historyRun['generated_at']) ?></span><?php if (!empty($historyRun['updated_at'])): ?><span><strong>Updated:</strong> <?= htmlspecialchars((string)$historyRun['updated_at']) ?></span><?php endif; ?><span><strong>Prompt:</strong> <?= htmlspecialchars((string)$historyRun['prompt']) ?></span></div>
                     </div>
                     <p class="notice warning advisory-disclaimer">Advisory recommendations only: verify all content before any use.</p>
                     <?php if (draft_management_can_update(current_user(), $historyRun)): ?>
@@ -776,11 +772,9 @@ if ($enhancementRuns && !$isGuestMode) {
                         <?= csrf_token_field() ?>
                         <input type="hidden" name="draft_update_action" value="save">
                         <input type="hidden" name="draft_update_run_id" value="<?= $runId ?>">
-                        <div class="field"><label for="user_title_<?= $runId ?>">Draft title (optional)</label><input id="user_title_<?= $runId ?>" name="user_title" maxlength="150" value="<?= htmlspecialchars((string)($historyRun['user_title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"></div>
+                        <div class="field"><label for="user_title_<?= $runId ?>">Title (optional)</label><input id="user_title_<?= $runId ?>" name="user_title" maxlength="150" value="<?= htmlspecialchars((string)($historyRun['user_title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"></div>
                         <div class="field notes"><label for="user_notes_<?= $runId ?>">Personal notes</label><textarea id="user_notes_<?= $runId ?>" name="user_notes" maxlength="5000"><?= htmlspecialchars((string)($historyRun['user_notes'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea></div>
-                        <input type="hidden" name="is_finalized" value="0">
-                        <label class="field checkbox-field"><input type="checkbox" name="is_finalized" value="1" <?= (int)($historyRun['is_finalized'] ?? 0) === 1 ? 'checked' : '' ?>> Finalized (your own tracking only; not approval or validation)</label>
-                        <button type="submit">Save draft details</button>
+                        <button type="submit">Save details</button>
                     </form>
                     <?php endif; ?>
                     <div class="draft-actions pdf-export-hide">
@@ -958,6 +952,10 @@ if ($enhancementRuns && !$isGuestMode) {
                                                         $subjectPrerequisites = is_array($prerequisiteValue)
                                                             ? implode(', ', array_filter(array_map('strval', $prerequisiteValue)))
                                                             : (is_scalar($prerequisiteValue) ? (string)$prerequisiteValue : '');
+                                                        $completedToolsByTitle = is_array($report['completed_course_tools'] ?? null)
+                                                            ? $report['completed_course_tools']
+                                                            : [];
+                                                        $completedToolRecommendations = $completedToolsByTitle[(string)($subject['subject_title'] ?? '')] ?? [];
                                                     ?>
                                                     <tr>
                                                         <td><span class="course-code"><?= htmlspecialchars((string)$subject['subject_code']) ?></span></td>
@@ -967,6 +965,7 @@ if ($enhancementRuns && !$isGuestMode) {
                                                             <?php if (trim($subjectPrerequisites) !== ''): ?><div class="course-description course-description-labeled"><strong>Prerequisite:</strong><span><?= htmlspecialchars($subjectPrerequisites) ?></span></div><?php endif; ?>
                                                             <?php if (trim((string)($subject['rationale'] ?? '')) !== ''): ?><div class="course-description course-description-labeled"><strong>Why it is taught:</strong><span><?= htmlspecialchars((string)$subject['rationale']) ?></span></div><?php endif; ?>
                                                             <?php if ($subjectTopics): ?><div class="course-description course-description-labeled"><strong>Topics and practical work:</strong><span><?= htmlspecialchars(implode('; ', array_map('strval', $subjectTopics))) ?></span></div><?php endif; ?>
+                                                            <?php if (is_array($completedToolRecommendations) && $completedToolRecommendations): ?><div class="course-description course-description-labeled"><strong>Recommended tools/apps:</strong><span><?php foreach ($completedToolRecommendations as $toolRecommendation): ?><?= htmlspecialchars((string)($toolRecommendation['tool'] ?? ''), ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars((string)($toolRecommendation['reason'] ?? ''), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($toolRecommendation['documentation']) && is_array($toolRecommendation['documentation'])): ?> (<?php foreach ($toolRecommendation['documentation'] as $documentationIndex => $documentation): ?><?= $documentationIndex > 0 ? '; ' : '' ?><a href="<?= htmlspecialchars((string)($documentation['url'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars((string)($documentation['label'] ?? 'Documentation'), ENT_QUOTES, 'UTF-8') ?></a><?php endforeach; ?>)<?php endif; ?><br><?php endforeach; ?></span></div><?php endif; ?>
                                                             <?php if ($subjectSkills): ?><div class="course-description course-description-labeled"><strong>Industry skills:</strong><span><?= htmlspecialchars(implode(', ', array_map('strval', $subjectSkills))) ?></span></div><?php endif; ?>
                                                             <?php if ($subjectSources): ?><div class="course-description course-description-labeled"><strong>Benchmark institutions:</strong><span><?= htmlspecialchars(implode(', ', array_map('strval', $subjectSources))) ?></span></div><?php endif; ?>
                                                         </td>
@@ -1033,20 +1032,20 @@ if ($enhancementRuns && !$isGuestMode) {
     <script>
         var enhancementItems = Array.prototype.slice.call(document.querySelectorAll('.enhancement-history-item'));
         var enhancementSearch = document.getElementById('enhancement-search');
-        var enhancementStatusFilter = document.getElementById('enhancement-status-filter');
+        var enhancementModeFilter = document.getElementById('enhancement-mode-filter');
         var enhancementProgramFilter = document.getElementById('enhancement-program-filter');
         var enhancementCount = document.getElementById('enhancement-count');
         var enhancementEmpty = document.getElementById('enhancement-empty');
 
         function filterEnhancementReviews() {
             var searchTerm = enhancementSearch.value.trim().toLowerCase();
-            var selectedStatus = enhancementStatusFilter.value;
+            var selectedMode = enhancementModeFilter.value;
             var selectedProgram = enhancementProgramFilter.value;
             var visibleCount = 0;
 
             enhancementItems.forEach(function (item) {
                 var matches = item.dataset.search.toLowerCase().indexOf(searchTerm) !== -1
-                    && (!selectedStatus || item.dataset.status === selectedStatus)
+                    && (!selectedMode || item.dataset.generationMode === selectedMode)
                     && (!selectedProgram || item.dataset.program === selectedProgram);
                 item.hidden = !matches;
                 if (matches) {
@@ -1058,9 +1057,9 @@ if ($enhancementRuns && !$isGuestMode) {
             enhancementEmpty.hidden = visibleCount !== 0;
         }
 
-        if (enhancementSearch && enhancementStatusFilter && enhancementProgramFilter && enhancementCount && enhancementEmpty) {
+        if (enhancementSearch && enhancementModeFilter && enhancementProgramFilter && enhancementCount && enhancementEmpty) {
             enhancementSearch.addEventListener('input', filterEnhancementReviews);
-            enhancementStatusFilter.addEventListener('change', filterEnhancementReviews);
+            enhancementModeFilter.addEventListener('change', filterEnhancementReviews);
             enhancementProgramFilter.addEventListener('change', filterEnhancementReviews);
 
             var linkedReview = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;

@@ -1,4 +1,4 @@
-# Curriculum Matcher & Generator
+# Curri'KoToh
 
 This project is a local-first curriculum intelligence system built for the Trainer workflow. It combines:
 
@@ -110,7 +110,7 @@ This provides a foundation for:
 - program-level curriculum recommendations
 - year/term structure drafts
 - rationale and source college tracking
-- self-service draft titles, personal notes, and Finalized tracking
+- self-service run titles and personal notes
 
 ## Quick start
 
@@ -136,7 +136,7 @@ python user_operations.py --generate --program BSIT --prompt "Generate a BSIT cu
 
 ### 5) Manage a saved draft
 
-Open the Dashboard or the matching Generated/Enhanced drafts page. The run creator can edit its title and personal notes and mark it Finalized for their own tracking. Finalized does not imply approval or validation.
+Open the Dashboard or the matching Generated/Enhanced drafts page. The run creator can edit the run title and personal notes. Each run also displays its recorded generation mode: Online Template, Offline template, or Not recorded when legacy provenance is unavailable.
 
 ## Primary commands
 
@@ -188,8 +188,9 @@ This UI is used locally for:
 - weak-skill gaps
 - generated curriculum drafts
 - saved enhancement results, with collapsible rows, client-side search and filters, and per-run assistant chat
+- deterministic per-course recommended tools/apps with reasons and curated documentation links; generated runs calculate these at display time, while new enhanced runs save a recommendation snapshot
 - per-run PDF downloads for generated drafts and enhancement results, including the completed enhanced curriculum
-- creator-owned draft title, personal notes, and Finalized tracking
+- creator-owned run title and personal notes
 - super-admin dataset file preview; files are not uploaded, saved, or activated by this UI yet
 
 PDFs are generated in the browser using locally served jsPDF and jsPDF-AutoTable assets; there is no runtime CDN request or server-side PDF service. The suggested filename is downloaded according to the browser's download settings. See `assets/PDF_EXPORT_DEPENDENCIES.md` for bundled library versions and licenses.
@@ -211,6 +212,7 @@ Use pretrained embeddings as the base system. This project does not require fine
 - database_setup.py: SQLite schema and import helper
 - curriculum_generator_foundation.py: subject clustering and canonical subject bank
 - curriculum_generator.py: draft generation, enhancement assessment, and chat logic
+- recommended_tools.py: shared deterministic course-title tool recommendations
 - weak_skills_report.py: weak skill export
 - index.php: PHP browser interface
 - generated_curriculum.php and enhanced_curriculum_generated.php: collapsible run histories and PDF exports
@@ -227,7 +229,7 @@ Use pretrained embeddings as the base system. This project does not require fine
 4. Use weak skills and skill gaps to identify curriculum missing areas.
 5. Generate a curriculum draft using the subject bank and prompt context.
 6. Inspect the generated draft and evidence in the PHP browser.
-7. Optionally set a custom title, add personal notes, or mark the draft Finalized for personal tracking.
+7. Optionally set a custom title or add personal notes.
 
 ## Guardrails and design principles
 

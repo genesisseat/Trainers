@@ -15,6 +15,7 @@ match outputs if they already exist.
 from __future__ import annotations
 
 import csv
+import json
 import sqlite3
 from datetime import datetime
 from pathlib import Path
@@ -31,6 +32,53 @@ COURSES_CSV = KB_DIR / "data" / "curriculum_dataset_with_ids.csv"
 SKILLS_MD = KB_DIR / "03_industry_skills_data.md"
 MATCH_CSV = ROOT / "course_to_skill_matches.csv"
 COVERAGE_CSV = ROOT / "skill_coverage.csv"
+
+
+def _backfill_generation_modes(conn: sqlite3.Connection) -> None:
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(generated_curriculum_runs)")}
+    has_subjects = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'generated_curriculum_subjects'"
+    ).fetchone()
+    if has_subjects and "source" in columns:
+        conn.execute(
+            """
+            UPDATE generated_curriculum_runs
+            SET generation_mode = 'offline'
+            WHERE generation_mode IS NULL
+              AND COALESCE(source, 'generated') <> 'enhanced'
+              AND EXISTS (
+                  SELECT 1 FROM generated_curriculum_subjects s
+                  WHERE s.run_id = generated_curriculum_runs.id
+                    AND instr(COALESCE(s.rationale, ''), '[offline template fallback]') = 1
+              )
+            """
+        )
+    if "source" not in columns:
+        return
+    for run_id, notes in conn.execute(
+        """
+        SELECT id, notes FROM generated_curriculum_runs
+        WHERE generation_mode IS NULL AND source = 'enhanced'
+        """
+    ).fetchall():
+        try:
+            report = json.loads(notes or "")
+        except (TypeError, json.JSONDecodeError):
+            continue
+        if not isinstance(report, dict):
+            continue
+        review_fallback = report.get("fallback")
+        curriculum_fallback = report.get("draft_fallback")
+        if review_fallback is False or curriculum_fallback is False:
+            mode = "online"
+        elif review_fallback is True and curriculum_fallback is True:
+            mode = "offline"
+        else:
+            continue
+        conn.execute(
+            "UPDATE generated_curriculum_runs SET generation_mode = ? WHERE id = ? AND generation_mode IS NULL",
+            (mode, run_id),
+        )
 
 
 def get_connection() -> sqlite3.Connection:
@@ -138,8 +186,8 @@ def create_tables(conn: sqlite3.Connection) -> None:
             created_by_username TEXT,
             user_title TEXT,
             user_notes TEXT,
-            is_finalized INTEGER NOT NULL DEFAULT 0,
-            updated_at TEXT
+            updated_at TEXT,
+            generation_mode TEXT
         )
         """
     )
@@ -154,11 +202,13 @@ def create_tables(conn: sqlite3.Connection) -> None:
     for column, definition in {
         "user_title": "TEXT",
         "user_notes": "TEXT",
-        "is_finalized": "INTEGER NOT NULL DEFAULT 0",
         "updated_at": "TEXT",
+        "generation_mode": "TEXT",
     }.items():
         if column not in run_columns:
             conn.execute(f"ALTER TABLE generated_curriculum_runs ADD COLUMN {column} {definition}")
+            if column == "generation_mode":
+                _backfill_generation_modes(conn)
 
     conn.execute(
         """

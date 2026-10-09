@@ -35,7 +35,7 @@ if ($currentUser !== null) {
     <div class="dashboard-shell">
         <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Dashboard sidebar">
             <div class="dashboard-brand">
-                <a class="dashboard-wordmark" href="<?= $isGuestShell ? 'generated_curriculum.php?guest=1' : 'index.php' ?>"><span class="dashboard-mark" aria-hidden="true">C</span><span>Curriculum Enhancer</span></a>
+                <a class="dashboard-wordmark" href="<?= $isGuestShell ? 'generated_curriculum.php?guest=1' : 'index.php' ?>"><img class="brand-logo" src="assets/curri-kotoh-logo.png" alt=""><span>Curri'KoToh</span></a>
             </div>
             <nav class="sidebar-nav" aria-label="Primary navigation">
                 <?php if (!$isGuestShell): ?>
@@ -144,6 +144,6 @@ if ($currentUser !== null) {
         <button class="sidebar-backdrop" type="button" aria-label="Close navigation" tabindex="-1"></button>
         <main class="dashboard-main" id="dashboard">
             <header class="dashboard-topbar">
-                <a class="topbar-wordmark" href="<?= $isGuestShell ? 'landing.php' : 'index.php' ?>"><span class="dashboard-mark" aria-hidden="true">C</span><span>Curriculum Enhancer</span></a>
-                <span class="topbar-context">Academic planning workspace</span>
+                <a class="topbar-wordmark" href="<?= $isGuestShell ? 'landing.php' : 'index.php' ?>"><img class="brand-logo" src="assets/curri-kotoh-logo.png" alt=""><span>Curri'KoToh</span></a>
+                <span class="topbar-context">Curriculum ko to eh!</span>
             </header>

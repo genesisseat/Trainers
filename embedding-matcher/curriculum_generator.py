@@ -17,6 +17,7 @@ from typing import Any, Dict, Iterable, List
 from runtime_paths import knowledge_base_dir
 
 from curriculum_generator_foundation import build_subject_bank, load_course_rows, normalize_subject_name
+from recommended_tools import recommend_tools
 
 
 GEMINI_MAX_ATTEMPTS = 3
@@ -129,12 +130,64 @@ def _ensure_draft_management_columns(conn: sqlite3.Connection) -> None:
     definitions = {
         "user_title": "TEXT NULL",
         "user_notes": "TEXT NULL",
-        "is_finalized": "INTEGER NOT NULL DEFAULT 0",
         "updated_at": "TEXT NULL",
+        "generation_mode": "TEXT NULL",
     }
     for name, definition in definitions.items():
         if name not in columns:
             conn.execute(f"ALTER TABLE generated_curriculum_runs ADD COLUMN {name} {definition}")
+            if name == "generation_mode":
+                _backfill_generation_modes(conn)
+
+
+def _backfill_generation_modes(conn: sqlite3.Connection) -> None:
+    subject_table = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'generated_curriculum_subjects'"
+    ).fetchone()
+    run_columns = {row[1] for row in conn.execute("PRAGMA table_info(generated_curriculum_runs)")}
+    if subject_table and "source" in run_columns:
+        conn.execute(
+            """
+            UPDATE generated_curriculum_runs
+            SET generation_mode = 'offline'
+            WHERE generation_mode IS NULL
+              AND COALESCE(source, 'generated') <> 'enhanced'
+              AND EXISTS (
+                  SELECT 1
+                  FROM generated_curriculum_subjects s
+                  WHERE s.run_id = generated_curriculum_runs.id
+                    AND instr(COALESCE(s.rationale, ''), '[offline template fallback]') = 1
+              )
+            """
+        )
+    if "source" not in run_columns:
+        return
+    rows = conn.execute(
+        """
+        SELECT id, notes
+        FROM generated_curriculum_runs
+        WHERE generation_mode IS NULL AND source = 'enhanced'
+        """
+    )
+    for run_id, notes in rows.fetchall():
+        try:
+            report = json.loads(notes or "")
+        except (TypeError, json.JSONDecodeError):
+            continue
+        if not isinstance(report, dict):
+            continue
+        review_fallback = report.get("fallback")
+        curriculum_fallback = report.get("draft_fallback")
+        if review_fallback is False or curriculum_fallback is False:
+            mode = "online"
+        elif review_fallback is True and curriculum_fallback is True:
+            mode = "offline"
+        else:
+            continue
+        conn.execute(
+            "UPDATE generated_curriculum_runs SET generation_mode = ? WHERE id = ? AND generation_mode IS NULL",
+            (mode, run_id),
+        )
 
 
 def _ensure_chat_attribution_columns(conn: sqlite3.Connection) -> None:
@@ -1164,6 +1217,7 @@ def generate_program_curriculum(
     )[: max(limit, 6)]
 
     fallback_reason = "unknown Gemini failure"
+    generation_mode = "online"
     try:
         draft = call_gemini_for_curriculum(
             program=program,
@@ -1172,6 +1226,7 @@ def generate_program_curriculum(
             skill_evidence=evidence,
         )
     except GeminiGenerationError as error:
+        generation_mode = "offline"
         fallback_reason = str(error)
         print(f"API Error: {error}", file=sys.stderr, flush=True)
         if error.raw_response:
@@ -1194,6 +1249,7 @@ def generate_program_curriculum(
         for subject in draft:
             subject["rationale"] = f"[offline template fallback] {subject['rationale']}"
     except urllib.error.HTTPError as error:
+        generation_mode = "offline"
         fallback_reason = f"Gemini HTTP error {error.code}: {error.reason}"
         response_body = error.read().decode("utf-8", errors="replace")
         print(f"API Error: {fallback_reason}", file=sys.stderr, flush=True)
@@ -1211,6 +1267,7 @@ def generate_program_curriculum(
         for subject in draft:
             subject["rationale"] = f"[offline template fallback] {subject['rationale']}"
     except (urllib.error.URLError, TimeoutError, OSError) as error:
+        generation_mode = "offline"
         fallback_reason = f"{type(error).__name__}: {error}"
         print(f"API Error: {fallback_reason}", file=sys.stderr, flush=True)
         print(f"Gemini curriculum generation failed: {fallback_reason}", file=sys.stderr)
@@ -1225,6 +1282,7 @@ def generate_program_curriculum(
         for subject in draft:
             subject["rationale"] = f"[offline template fallback] {subject['rationale']}"
     except Exception as error:
+        generation_mode = "offline"
         fallback_reason = f"{type(error).__name__}: {error}"
         print(f"API Error: {fallback_reason}", file=sys.stderr, flush=True)
         if os.environ.get("CURRICULUM_DEBUG_API", "").lower() in {"1", "true", "yes"}:
@@ -1241,6 +1299,7 @@ def generate_program_curriculum(
             subject["rationale"] = f"[offline template fallback] {subject['rationale']}"
 
     for subject in draft:
+        subject["_generation_mode"] = generation_mode
         subject_title = str(subject.get("subject_title") or subject.get("display_name") or subject.get("canonical_subject") or "")
         subject_evidence = _subject_skill_evidence(subject_title, course_matches)
         subject["skill_evidence"] = subject_evidence
@@ -1792,36 +1851,17 @@ def _practical_guidance(
     subject_bank: Iterable[Dict[str, Any]],
     course_skill_matches: Iterable[Dict[str, Any]],
 ) -> Dict[str, Any]:
-    title = subject_title.casefold()
-    tool_groups = [
-        (("cyber", "security", "forensic", "cryptography"), ["OWASP Juice Shop", "Wireshark", "OWASP Top 10"], ["OWASP Juice Shop: https://owasp.org/www-project-juice-shop/", "OWASP Top 10: https://owasp.org/www-project-top-ten/", "Wireshark documentation: https://www.wireshark.org/docs/"], ["Provides a safe practice environment for common web security testing.", "Supports inspection of network traffic and security-relevant protocols.", "Provides a reference for common web application security risks."]),
-        (("database", "sql", "data management"), ["PostgreSQL", "pgAdmin", "MySQL Workbench"], ["PostgreSQL documentation: https://www.postgresql.org/docs/", "pgAdmin documentation: https://www.pgadmin.org/docs/", "MySQL documentation: https://dev.mysql.com/doc/"], ["Enables hands-on relational database design and SQL practice.", "Provides a visual interface for administering PostgreSQL databases.", "Supports schema design and query practice with MySQL."]),
-        (("data science", "analytics", "machine learning", "artificial intelligence", " AI "), ["Python", "Jupyter Notebook", "pandas", "scikit-learn"], ["Python documentation: https://docs.python.org/3/", "Jupyter documentation: https://docs.jupyter.org/", "pandas documentation: https://pandas.pydata.org/docs/", "scikit-learn documentation: https://scikit-learn.org/stable/user_guide.html"], ["Provides a widely used language for data analysis and machine learning.", "Supports interactive experiments and reproducible analysis.", "Provides practical tabular data cleaning and transformation tools.", "Supports supervised learning workflows and model evaluation practice."]),
-        (("network", "routing", "switching", "infrastructure"), ["Cisco Packet Tracer", "Wireshark"], ["Cisco Packet Tracer: https://www.netacad.com/courses/packet-tracer", "Wireshark documentation: https://www.wireshark.org/docs/"], ["Allows network configuration and troubleshooting practice in a simulator.", "Supports inspection of packets and network behavior."]),
-        (("web", "html", "css", "javascript", "mobile application"), ["HTML, CSS, and JavaScript", "Visual Studio Code", "Browser developer tools"], ["MDN Web Docs: https://developer.mozilla.org/", "Visual Studio Code documentation: https://code.visualstudio.com/docs"], ["Provides the core technologies for building and testing interactive interfaces.", "Supports editing, running, and debugging the course projects.", "Lets students inspect and troubleshoot pages in a browser."]),
-        (("cloud", "virtualization", "devops", "container"), ["Docker", "GitHub Actions", "AWS or Azure student environments"], ["Docker documentation: https://docs.docker.com/", "GitHub Actions documentation: https://docs.github.com/actions", "Microsoft Learn: https://learn.microsoft.com/"], ["Supports repeatable containerized development and deployment practice.", "Automates build, test, and deployment workflows.", "Provides a managed environment for cloud deployment exercises."]),
-        (("programming", "coding", "software development", "algorithm", "data structure"), ["Python or Java", "Visual Studio Code", "Git and GitHub"], ["Python tutorial: https://docs.python.org/3/tutorial/", "Java learning: https://dev.java/learn/", "Visual Studio Code documentation: https://code.visualstudio.com/docs", "Git documentation: https://git-scm.com/doc"], ["Offers common language options for implementing course algorithms and programs.", "Supports editing, running, and debugging programming exercises.", "Supports version control, collaboration, and review of code changes."]),
-        (("software engineering", "systems analysis", "project management", "capstone"), ["Git and GitHub", "Issue tracking board", "UML diagramming tool"], ["Git documentation: https://git-scm.com/doc", "GitHub documentation: https://docs.github.com/", "OMG UML specification: https://www.omg.org/spec/UML/"], ["Supports version history and collaborative project work.", "Helps organize requirements, tasks, and defects.", "Helps model system structure and behavior."]),
-    ]
-    tools_and_apps = ["Visual Studio Code", "Git and GitHub"]
+    tool_recommendations = recommend_tools(subject_title)
+    tools_and_apps = [item["tool"] for item in tool_recommendations]
     tool_reasons = [
-        {"tool": "Visual Studio Code", "reason": "Supports editing, running, and debugging course projects."},
-        {"tool": "Git and GitHub", "reason": "Supports version control and collaborative project work."},
+        {"tool": item["tool"], "reason": item["reason"]}
+        for item in tool_recommendations
     ]
     tool_sources = [
-        "Visual Studio Code documentation: https://code.visualstudio.com/docs",
-        "Git documentation: https://git-scm.com/doc",
-        "GitHub documentation: https://docs.github.com/",
+        f"{documentation['label']}: {documentation['url']}"
+        for item in tool_recommendations
+        for documentation in item["documentation"]
     ]
-    for keywords, tools, sources, reasons in tool_groups:
-        if any(keyword in title for keyword in keywords):
-            tools_and_apps = tools
-            tool_sources = sources
-            tool_reasons = [
-                {"tool": tool, "reason": reason}
-                for tool, reason in zip(tools, reasons)
-            ]
-            break
 
     year_focus = {
         "1": "establishes foundational computing and problem-solving skills needed by later core subjects",
@@ -1877,6 +1917,7 @@ def _practical_guidance(
         sources.append(citation)
     sources.extend(tool_sources)
     return {
+        "tools_and_apps_recommendations": tool_recommendations,
         "tools_and_apps": tools_and_apps,
         "tools_and_apps_reasons": tool_reasons,
         "instructional_reason": instruction_reason + ".",
@@ -1906,6 +1947,7 @@ def _enrich_enhancement_report(
         )
         assessment["tools_and_apps"] = guidance["tools_and_apps"]
         assessment["tools_and_apps_reasons"] = guidance["tools_and_apps_reasons"]
+        assessment["tools_and_apps_recommendations"] = guidance["tools_and_apps_recommendations"]
         assessment["instructional_reason"] = guidance["instructional_reason"]
         assessment["sources"] = guidance["sources"]
     for recommendation in report.get("recommendations", []):
@@ -1918,6 +1960,7 @@ def _enrich_enhancement_report(
         )
         recommendation["tools_and_apps"] = guidance["tools_and_apps"]
         recommendation["tools_and_apps_reasons"] = guidance["tools_and_apps_reasons"]
+        recommendation["tools_and_apps_recommendations"] = guidance["tools_and_apps_recommendations"]
         recommendation["instructional_reason"] = guidance["instructional_reason"]
         recommendation["sources"] = guidance["sources"]
     return report
@@ -2008,6 +2051,17 @@ def enhance_user_curriculum(
         review = _fallback_enhancement_review(program, normalized_subjects, str(error))
         review["selected_years"] = requested_years
         return _enrich_enhancement_report(review, program, bank, course_skill_matches or [])
+
+
+def _attach_completed_course_tools(
+    report: Dict[str, Any],
+    curriculum: Iterable[Dict[str, Any]],
+) -> None:
+    report["completed_course_tools"] = {
+        title: recommend_tools(title)
+        for subject in curriculum
+        if (title := str(subject.get("subject_title") or "").strip())
+    }
 
 
 def generate_enhanced_curriculum(
@@ -2128,6 +2182,8 @@ def generate_enhanced_curriculum(
             allowed_added_titles=allowed_added_titles,
             allowed_years=target_years if selected_years is not None else None,
         )
+        enhancement_report["draft_fallback"] = False
+        _attach_completed_course_tools(enhancement_report, curriculum)
         return curriculum
     except Exception as error:
         print(f"Gemini enhanced curriculum generation failed: {error}", file=sys.stderr, flush=True)
@@ -2146,6 +2202,7 @@ def generate_enhanced_curriculum(
         )
         if selected_years is not None:
             fallback = [subject for subject in fallback if str(subject.get("year") or "").strip() in target_years]
+        _attach_completed_course_tools(enhancement_report, fallback)
         return fallback
 
 
@@ -2160,6 +2217,18 @@ def save_generated_curriculum(
     created_by_username: str | None = None,
     return_run_id: bool = False,
 ) -> int:
+    draft_subjects = list(draft)
+    subject_modes = [
+        item.get("_generation_mode") if isinstance(item, dict) else None
+        for item in draft_subjects
+    ]
+    generation_mode = (
+        subject_modes[0]
+        if subject_modes
+        and subject_modes[0] in {"online", "offline"}
+        and all(mode == subject_modes[0] for mode in subject_modes)
+        else None
+    )
     db_file = Path(db_path)
     db_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -2174,7 +2243,8 @@ def save_generated_curriculum(
                 status TEXT,
                 generated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 notes TEXT,
-                source TEXT NOT NULL DEFAULT 'generated'
+                source TEXT NOT NULL DEFAULT 'generated',
+                generation_mode TEXT NULL
             )
             """
         )
@@ -2229,17 +2299,18 @@ def save_generated_curriculum(
         run_id = conn.execute(
             """
             INSERT INTO generated_curriculum_runs (
-                program, prompt, model_name, status, notes, source, created_by_user_id, created_by_username
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                program, prompt, model_name, status, notes, source, created_by_user_id, created_by_username,
+                generation_mode
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 program, prompt, model_name, status, "Generated from retrieval-based subject bank", "generated",
-                created_by_user_id, created_by_username or None,
+                created_by_user_id, created_by_username or None, generation_mode,
             ),
         ).lastrowid
 
         inserted = 0
-        for item in draft:
+        for item in draft_subjects:
             conn.execute(
                 """
                 INSERT INTO generated_curriculum_subjects (
@@ -2286,8 +2357,17 @@ def save_enhancement_report(
     original_subjects = list(user_subjects)
     completed_subjects = list(enhanced_curriculum)
     stored_report = dict(report)
+    _attach_completed_course_tools(stored_report, completed_subjects)
     stored_report["submitted_subjects"] = original_subjects
     stored_report["enhanced_subject_count"] = len(completed_subjects)
+    review_fallback = stored_report.get("fallback")
+    curriculum_fallback = stored_report.get("draft_fallback")
+    if review_fallback is False or curriculum_fallback is False:
+        generation_mode = "online"
+    elif review_fallback is True and curriculum_fallback is True:
+        generation_mode = "offline"
+    else:
+        generation_mode = None
 
     with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
@@ -2300,7 +2380,8 @@ def save_enhancement_report(
                 status TEXT,
                 generated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 notes TEXT,
-                source TEXT NOT NULL DEFAULT 'generated'
+                source TEXT NOT NULL DEFAULT 'generated',
+                generation_mode TEXT NULL
             )
             """
         )
@@ -2339,8 +2420,9 @@ def save_enhancement_report(
         run_id = conn.execute(
             """
             INSERT INTO generated_curriculum_runs (
-                program, prompt, model_name, status, notes, source, created_by_user_id, created_by_username
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                program, prompt, model_name, status, notes, source, created_by_user_id, created_by_username,
+                generation_mode
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 program,
@@ -2351,6 +2433,7 @@ def save_enhancement_report(
                 "enhanced",
                 created_by_user_id,
                 created_by_username or None,
+                generation_mode,
             ),
         ).lastrowid
 
