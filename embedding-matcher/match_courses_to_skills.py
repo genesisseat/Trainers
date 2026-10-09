@@ -22,20 +22,18 @@ import re
 from pathlib import Path
 from typing import Iterable, List, Sequence
 
+from runtime_paths import configure_huggingface_cache, knowledge_base_dir
+
+ROOT = Path(__file__).resolve().parent
+KB_DIR = knowledge_base_dir(ROOT)
+COURSES_CSV = KB_DIR / "data" / "curriculum_dataset_with_ids.csv"
+SKILLS_MD = KB_DIR / "03_industry_skills_data.md"
+OUTPUT_DIR = ROOT
+HF_HOME = configure_huggingface_cache(ROOT)
+
 import pandas as pd
 import torch
 from sentence_transformers import SentenceTransformer
-
-
-ROOT = Path(__file__).resolve().parent
-WORKSPACE = ROOT.parent
-COURSES_CSV = WORKSPACE / "curriculum-generator-kb" / "data" / "curriculum_dataset_with_ids.csv"
-SKILLS_MD = WORKSPACE / "curriculum-generator-kb" / "03_industry_skills_data.md"
-OUTPUT_DIR = ROOT
-HF_HOME = Path(os.environ.get("HF_HOME", ROOT / "hf_cache"))
-HF_HOME.mkdir(parents=True, exist_ok=True)
-os.environ["HF_HOME"] = str(HF_HOME)
-
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Match curriculum courses to industry skills with sentence embeddings.")

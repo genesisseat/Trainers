@@ -155,6 +155,7 @@ if (
     && ($requestedRunId !== null || $enhanceDeleteAction === 'delete' || $draftUpdateAction === 'save' || $enhancementChatAction === 'send')
 ) {
     $accessDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $accessDb->busyTimeout(30000);
     $accessDb->enableExceptions(true);
     $requestedRun = run_access_require($accessDb, $requestedRunId, $currentUser);
     if (($requestedRun['source'] ?? '') !== 'enhanced') {
@@ -199,6 +200,7 @@ if ($enhancementChatAction === 'send' && current_user() === null) {
 if ($enhanceDeleteAction === 'delete') {
     try {
         $deleteDb = new SQLite3($dbPath);
+        $deleteDb->busyTimeout(30000);
         $deleteDb->enableExceptions(true);
         $deleteRun = run_access_require($deleteDb, $enhanceDeleteRunId, $currentUser);
         if (($deleteRun['source'] ?? '') !== 'enhanced') {
@@ -236,6 +238,7 @@ $formSubjects = [
 
 if (!$isGuestMode) {
     $schemaDb = new SQLite3($dbPath);
+    $schemaDb->busyTimeout(30000);
     $schemaDb->enableExceptions(true);
 $subjectColumns = [];
 $subjectColumnResult = $schemaDb->query('PRAGMA table_info(generated_curriculum_subjects)');
@@ -286,6 +289,7 @@ if ($draftUpdateAction === 'save') {
         run_access_not_found();
     }
     $updateDb = new SQLite3($dbPath);
+    $updateDb->busyTimeout(30000);
     $updateDb->enableExceptions(true);
     $draftOwner = run_access_require($updateDb, $draftUpdateRunId, $currentUser);
     if (($draftOwner['source'] ?? '') !== 'enhanced'
@@ -383,7 +387,8 @@ if ($enhanceAction === 'enhance') {
                 $targetYears
             );
         } catch (RuntimeException $error) {
-            error_log('Guest curriculum enhancement subprocess failed: ' . $error->getMessage());
+            error_log('Guest curriculum enhancement subprocess failed.');
+            $enhanceError = python_job_failure_message($error, 'The guest trial could not complete an enhancement review. Please try again.');
             $guestEnhancement = null;
         }
 
@@ -410,15 +415,24 @@ if ($enhanceAction === 'enhance') {
             $enhanceError = 'The guest trial could not complete an enhancement review. Please try again.';
         }
     } else {
-        $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
         $script = __DIR__ . '/user_operations.py';
         $subjectsFile = tempnam(sys_get_temp_dir(), 'curriculum_subjects_');
-        if ($subjectsFile === false || !file_put_contents($subjectsFile, json_encode($userSubjects, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))) {
-            $enhanceError = 'The curriculum input could not be prepared for processing.';
-        } elseif (!file_exists($pythonExe) || !file_exists($script)) {
-            $enhanceError = 'The curriculum enhancement runtime is not available.';
-        } else {
+        try {
+            $pythonExe = null;
+            try {
+                $pythonExe = python_executable();
+            } catch (RuntimeException $error) {
+                $enhanceError = python_job_failure_message($error, 'The curriculum enhancement runtime is not available.');
+            }
+            if ($subjectsFile === false || !file_put_contents($subjectsFile, json_encode($userSubjects, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))) {
+                $enhanceError = 'The curriculum input could not be prepared for processing.';
+            } elseif ($pythonExe === null || !file_exists($script)) {
+                if ($enhanceError === '') {
+                    $enhanceError = 'The curriculum enhancement runtime is not available.';
+                }
+            } else {
             $runDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+            $runDb->busyTimeout(30000);
             $previousStmt = $runDb->prepare(
                 'SELECT COALESCE(MAX(id), 0)
                  FROM generated_curriculum_runs
@@ -428,24 +442,27 @@ if ($enhanceAction === 'enhance') {
             $previousRunId = (int)$previousStmt->execute()->fetchArray(SQLITE3_NUM)[0];
             $runDb->close();
 
-            $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-                ' --enhance --program ' . escapeshellarg($enhanceProgram) .
-                ' --specialization ' . escapeshellarg($enhanceSpecialization) .
-                ' --years ' . escapeshellarg(implode(',', $targetYears)) .
-                ' --prompt ' . escapeshellarg($enhancePrompt) .
-                ' --user-subjects-json ' . escapeshellarg($subjectsFile) .
-                ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
-                ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
-                ' --output-db ' . escapeshellarg($dbPath) . ' 2>&1';
+            $command = [
+                $pythonExe, $script,
+                '--enhance', '--program', $enhanceProgram,
+                '--specialization', $enhanceSpecialization,
+                '--years', implode(',', $targetYears),
+                '--prompt', $enhancePrompt,
+                '--user-subjects-json', $subjectsFile,
+                '--actor-user-id', (string)$currentUser['id'],
+                '--actor-username', (string)$currentUser['username'],
+                '--output-db', $dbPath,
+            ];
             try {
                 run_command_with_api_key($command, $currentUserApiKey);
             } catch (RuntimeException $error) {
-                error_log('Curriculum enhancement subprocess failed to start: ' . $error->getMessage());
-                $enhanceError = 'The curriculum enhancement process could not be started.';
+                error_log('Curriculum enhancement subprocess failed.');
+                $enhanceError = python_job_failure_message($error, 'The curriculum enhancement process could not be started.');
             }
 
             if ($enhanceError === '') {
                 $runDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+                $runDb->busyTimeout(30000);
                 $createdRunStmt = $runDb->prepare(
                     "SELECT id FROM generated_curriculum_runs
                      WHERE id > :previous_run_id
@@ -463,9 +480,11 @@ if ($enhanceAction === 'enhance') {
                 }
                 $enhanceError = 'The curriculum could not be enhanced. No new results were saved.';
             }
-        }
-        if (is_string($subjectsFile) && file_exists($subjectsFile)) {
-            @unlink($subjectsFile);
+            }
+        } finally {
+            if (is_string($subjectsFile) && file_exists($subjectsFile)) {
+                @unlink($subjectsFile);
+            }
         }
     }
 }
@@ -478,32 +497,35 @@ if ($enhancementChatAction === 'send' && $enhancementChatRunId !== null && $enha
         $_SESSION['enhance_flash_error'] = GEMINI_API_KEY_REQUIRED_MESSAGE;
         $_SESSION['open_api_key_settings'] = true;
     } else {
-        $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
         $script = __DIR__ . '/user_operations.py';
-        if (file_exists($pythonExe) && file_exists($script)) {
-            $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-                ' --enhancement-chat --run-id ' . escapeshellarg((string)$enhancementChatRunId) .
-                ' --message ' . escapeshellarg($enhancementChatMessage) .
-                ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
-                ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
-                ' --admin-access-policy ' . escapeshellarg(RUN_ACCESS_ADMIN_POLICY) .
-                ' --output-db ' . escapeshellarg($dbPath) . ' 2>&1';
-            try {
+        try {
+            $pythonExe = python_executable();
+            if (file_exists($script)) {
+                $command = [
+                    $pythonExe, $script,
+                    '--enhancement-chat', '--run-id', (string)$enhancementChatRunId,
+                    '--message', $enhancementChatMessage,
+                    '--actor-user-id', (string)$currentUser['id'],
+                    '--actor-username', (string)$currentUser['username'],
+                    '--admin-access-policy', RUN_ACCESS_ADMIN_POLICY,
+                    '--output-db', $dbPath,
+                ];
                 run_command_with_api_key($command, $currentUserApiKey);
                 header('Location: enhanced_curriculum_generated.php?run_id=' . $enhancementChatRunId);
                 exit;
-            } catch (RuntimeException $error) {
-                error_log('Enhancement chat subprocess failed to start: ' . $error->getMessage());
-                $enhancementChatError = 'The enhancement assistant could not be started.';
+            } else {
+                throw new RuntimeException('The enhancement results assistant is not available.');
             }
-        } else {
-            $enhancementChatError = 'The enhancement results assistant is not available.';
+        } catch (RuntimeException $error) {
+            error_log('Enhancement chat subprocess failed.');
+            $enhancementChatError = python_job_failure_message($error, 'The enhancement assistant could not be started.');
         }
     }
 }
 
 if (!$isGuestMode) {
     $historyDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $historyDb->busyTimeout(30000);
     $historyDb->enableExceptions(true);
     $runScope = run_access_sql_scope($currentUser);
     $historyStmt = $historyDb->prepare(
@@ -583,6 +605,7 @@ if ($enhancementRuns && !$isGuestMode) {
     $runIds = implode(',', array_map('intval', array_keys($enhancementRuns)));
     $runScope = run_access_sql_scope($currentUser);
     $chatDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $chatDb->busyTimeout(30000);
     $chatDb->enableExceptions(true);
     $chatStmt = $chatDb->prepare(
         'SELECT c.run_id, c.role, c.message, c.created_at, c.sender_username
@@ -599,6 +622,7 @@ if ($enhancementRuns && !$isGuestMode) {
     $chatDb->close();
 
     $courseDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $courseDb->busyTimeout(30000);
     $courseDb->enableExceptions(true);
     $courseStmt = $courseDb->prepare(
         'SELECT s.run_id, s.year, s.term, s.subject_code, s.subject_title, s.units, s.description, s.prerequisites,

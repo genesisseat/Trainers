@@ -86,6 +86,7 @@ if ($apiKeyAction === 'save') {
 }
 
 $db = new SQLite3($dbPath);
+$db->busyTimeout(30000);
 $db->enableExceptions(true);
 draft_management_ensure_columns($db);
 $runScope = run_access_sql_scope($currentUser);

@@ -12,8 +12,9 @@ from pathlib import Path
 from unittest.mock import patch
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-WORKSPACE_ROOT = PROJECT_ROOT.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from runtime_paths import knowledge_base_dir
 
 import curriculum_generator
 from job_postings import (
@@ -24,8 +25,9 @@ from job_postings import (
     select_job_postings,
 )
 
-POSTINGS_CSV = WORKSPACE_ROOT / "curriculum-generator-kb" / "data" / "job_postings.csv"
-TOPIC_MAP_CSV = WORKSPACE_ROOT / "curriculum-generator-kb" / "data" / "job_topic_map.csv"
+KB_DATA_ROOT = knowledge_base_dir(PROJECT_ROOT) / "data"
+POSTINGS_CSV = KB_DATA_ROOT / "job_postings.csv"
+TOPIC_MAP_CSV = KB_DATA_ROOT / "job_topic_map.csv"
 SUBJECT_BANK_CSV = PROJECT_ROOT / "canonical_subject_bank.csv"
 
 

@@ -79,9 +79,14 @@ Open `http://127.0.0.1:8000/`. The first account created becomes `super_admin`. 
 
 The virtual environment (`venv/`), SQLite database files (including `curriculum_matching.db`), and `settings.json` are local-only and are not stored in the repository.
 
-### Known limitations for Linux
+### Runtime configuration
 
-**Not yet fixed:** `curriculum_generator_foundation.py` and the direct-run block in `curriculum_generator.py` contain the hard-coded Windows path `C:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv`. PHP request handlers also expect the Python interpreter at `__DIR__ . '/venv/Scripts/python.exe'` (that is, `embedding-matcher/venv/Scripts/python.exe` on Windows). These Windows-specific paths prevent the current code from being considered Linux-ready without later application changes.
+- `PYTHON_BIN` optionally selects an existing Python executable. If it is unset or points to a missing file, PHP uses `venv\Scripts\python.exe` on Windows or `venv/bin/python` on Linux/macOS.
+- `KB_DIR` optionally selects the knowledge-base directory. Without it, the app uses the sibling `curriculum-generator-kb` directory. A relative override is resolved from the workspace root.
+- The app respects an externally set `HF_HOME`, `HF_HUB_CACHE`, `HUGGINGFACE_HUB_CACHE`, `TRANSFORMERS_CACHE`, `SENTENCE_TRANSFORMERS_HOME`, or `HF_DATASETS_CACHE`. If none is set, Python uses `embedding-matcher/hf_cache`.
+- Python jobs are serialized across users with an OS file lock in the system temporary directory. A request waits up to 45 seconds for the lock, then returns a friendly busy message. Once started, a job is limited to 240 seconds; lock waiting plus processing is bounded to less than 300 seconds.
+- For nginx/PHP-FPM deployments, allow at least 300 seconds for the PHP request and upstream response so the browser can receive the completed result or timeout message.
+- On a server shell, run `php tools/check_runtime.php` from `embedding-matcher` to report the resolved interpreter, knowledge-base files, effective Hugging Face cache location, and database writability. The diagnostic does not print API keys.
 
 ## What the system does
 

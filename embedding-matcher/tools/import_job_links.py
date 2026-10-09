@@ -16,8 +16,10 @@ from urllib.parse import urlsplit
 from openpyxl import load_workbook
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-WORKSPACE_ROOT = PROJECT_ROOT.parent
-DATA_ROOT = WORKSPACE_ROOT / "curriculum-generator-kb" / "data"
+sys.path.insert(0, str(PROJECT_ROOT))
+from runtime_paths import knowledge_base_dir
+
+DATA_ROOT = knowledge_base_dir(PROJECT_ROOT) / "data"
 WORKBOOK_PATH = DATA_ROOT / "final_master_industry_skills_dataset.xlsx"
 POSTINGS_PATH = DATA_ROOT / "job_postings.csv"
 ROLE_TOPIC_MAP_PATH = DATA_ROOT / "role_cluster_topic_map.csv"

@@ -12,6 +12,7 @@ $apiKeyMessageType = $apiKeyMessageType ?? 'info';
 $shellHistory = [];
 if ($currentUser !== null) {
     $shellDb = new SQLite3(__DIR__ . '/../curriculum_matching.db', SQLITE3_OPEN_READONLY);
+    $shellDb->busyTimeout(30000);
     $shellDb->enableExceptions(true);
     $shellHistoryScope = run_access_sql_scope($currentUser);
     $shellHistoryStmt = $shellDb->prepare(

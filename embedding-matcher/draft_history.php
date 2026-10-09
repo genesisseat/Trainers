@@ -4,6 +4,7 @@ require_once __DIR__ . '/draft_management.php';
 require_login();
 
 $db = new SQLite3(__DIR__ . '/curriculum_matching.db');
+$db->busyTimeout(30000);
 $db->enableExceptions(true);
 draft_management_ensure_columns($db);
 $runScope = run_access_sql_scope(current_user());

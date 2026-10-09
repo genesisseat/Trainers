@@ -98,15 +98,20 @@ if ($requestMethod === 'POST') {
                             $newUserId = (int)($user['id'] ?? 0);
                             $newUsername = (string)($user['username'] ?? '');
                             $dbPath = __DIR__ . '/curriculum_matching.db';
-                            $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
                             $script = __DIR__ . '/user_operations.py';
                             $draftFile = tempnam(sys_get_temp_dir(), 'guest_draft_');
                             $draftJson = json_encode($guestDraft, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                            $pythonExe = null;
+                            try {
+                                $pythonExe = python_executable();
+                            } catch (RuntimeException $runtimeError) {
+                                error_log('Guest draft signup import runtime is unavailable.');
+                            }
 
                             if ($draftFile === false
                                 || $draftJson === false
                                 || file_put_contents($draftFile, $draftJson) === false
-                                || !is_file($pythonExe)
+                                || $pythonExe === null
                                 || !is_file($script)) {
                                 if (is_string($draftFile) && file_exists($draftFile)) {
                                     unlink($draftFile);

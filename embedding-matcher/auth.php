@@ -6,6 +6,14 @@ const RUN_ACCESS_NOT_FOUND_BODY = 'Not found.';
 const GEMINI_API_KEY_REQUIRED_MESSAGE = 'You need an API key. Add your Gemini API key in your profile to use this feature.';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
+    $isHttpsRequest = isset($_SERVER['HTTPS'])
+        && $_SERVER['HTTPS'] !== ''
+        && strtolower((string)$_SERVER['HTTPS']) !== 'off';
+    session_set_cookie_params([
+        'httponly' => true,
+        'samesite' => 'Lax',
+        'secure' => $isHttpsRequest,
+    ]);
     session_start();
 }
 
@@ -33,6 +41,124 @@ function csrf_token_field(): string
         htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') . '">';
 }
 
+function resolve_python_executable(string $platform, string $projectRoot, ?string $configuredPath): ?string
+{
+    $configuredPath = $configuredPath === null ? null : trim($configuredPath);
+    if ($configuredPath !== null && $configuredPath !== '' && is_file($configuredPath)) {
+        return $configuredPath;
+    }
+
+    $relativePath = strtolower($platform) === 'windows'
+        ? '/venv/Scripts/python.exe'
+        : '/venv/bin/python';
+    $virtualEnvironmentPath = rtrim($projectRoot, '/\\') . $relativePath;
+    return is_file($virtualEnvironmentPath) ? $virtualEnvironmentPath : null;
+}
+
+function python_executable(): string
+{
+    $configuredPath = getenv('PYTHON_BIN');
+    $executable = resolve_python_executable(
+        PHP_OS_FAMILY,
+        __DIR__,
+        $configuredPath === false ? null : $configuredPath
+    );
+    if ($executable === null) {
+        error_log('Python interpreter resolution failed: PYTHON_BIN and the platform venv interpreter are unavailable.');
+        throw new RuntimeException('The Python runtime is unavailable. Please contact the system administrator.');
+    }
+
+    return $executable;
+}
+
+function curriculum_kb_dir(): string
+{
+    $configuredPath = getenv('KB_DIR');
+    if ($configuredPath !== false && trim($configuredPath) !== '') {
+        $path = trim($configuredPath);
+        if (!preg_match('/^(?:[A-Za-z]:[\\\\\\/]|[\\\\\\/])/', $path)) {
+            $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . $path;
+        }
+        return rtrim($path, '/\\');
+    }
+    return dirname(__DIR__) . DIRECTORY_SEPARATOR . 'curriculum-generator-kb';
+}
+
+function python_job_failure_message(Throwable $error, string $fallback): string
+{
+    $message = $error->getMessage();
+    if ($message === 'The system is busy, please try again in a minute.'
+        || $message === 'The request took too long. Please try again.') {
+        return $message;
+    }
+    return $fallback;
+}
+
+function terminate_python_process($process, int $processId, bool $hasProcessGroup): void
+{
+    if (PHP_OS_FAMILY === 'Windows') {
+        $descriptors = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ];
+        $killer = @proc_open(
+            ['taskkill', '/PID', (string)$processId, '/T', '/F'],
+            $descriptors,
+            $pipes
+        );
+        if (is_resource($killer)) {
+            fclose($pipes[0]);
+            stream_get_contents($pipes[1]);
+            stream_get_contents($pipes[2]);
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+            proc_close($killer);
+        } else {
+            @proc_terminate($process);
+        }
+        return;
+    }
+
+    if ($hasProcessGroup) {
+        $termSent = signal_python_process_group($processId, 15);
+        usleep(300000);
+        $killSent = signal_python_process_group($processId, 9);
+        if ($termSent || $killSent) {
+            return;
+        }
+    }
+
+    @proc_terminate($process, 9);
+}
+
+function signal_python_process_group(int $processId, int $signal): bool
+{
+    if ($processId < 1) {
+        return false;
+    }
+    if (function_exists('posix_kill')) {
+        return @posix_kill(-$processId, $signal);
+    }
+
+    $signalName = $signal === 15 ? 'TERM' : 'KILL';
+    $descriptors = [
+        0 => ['file', '/dev/null', 'r'],
+        1 => ['file', '/dev/null', 'w'],
+        2 => ['redirect', 1],
+    ];
+    $killer = @proc_open(
+        ['kill', '-' . $signalName, '--', '-' . $processId],
+        $descriptors,
+        $pipes
+    );
+    if (!is_resource($killer)) {
+        return false;
+    }
+
+    return proc_close($killer) === 0;
+}
+
 function auth_db(): SQLite3
 {
     static $db = null;
@@ -41,6 +167,7 @@ function auth_db(): SQLite3
     }
 
     $db = new SQLite3(__DIR__ . '/curriculum_matching.db');
+    $db->busyTimeout(30000);
     $db->enableExceptions(true);
     $db->exec(
         "CREATE TABLE IF NOT EXISTS users (
@@ -167,36 +294,140 @@ function has_shared_api_key(): bool
     return false;
 }
 
-function run_command_with_api_key(string|array $command, ?string $apiKey = null): string
+function run_command_with_api_key(
+    array $command,
+    ?string $apiKey = null,
+    float $lockWaitSeconds = 45,
+    float $processTimeoutSeconds = 240,
+    ?string $lockPathOverride = null
+): string
 {
-    $environment = getenv();
-    if (!is_array($environment)) {
-        throw new RuntimeException('Unable to read the process environment.');
-    }
-    if ($apiKey !== null && trim($apiKey) !== '') {
-        $environment['GEMINI_API_KEY'] = $apiKey;
-    }
-
-    $descriptors = [
-        0 => ['pipe', 'r'],
-        1 => ['pipe', 'w'],
-        2 => ['redirect', 1],
-    ];
-    $process = proc_open($command, $descriptors, $pipes, null, $environment);
-    if (!is_resource($process)) {
-        throw new RuntimeException('Unable to start the Python subprocess.');
+    @set_time_limit(300);
+    $lockPath = $lockPathOverride
+        ?? (rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'curriculum-matcher-python.lock');
+    $lockFile = @fopen($lockPath, 'c');
+    if ($lockFile === false) {
+        error_log('Unable to open the Python job lock file.');
+        throw new RuntimeException('The Python service is temporarily unavailable. Please try again.');
     }
 
-    fclose($pipes[0]);
-    $output = stream_get_contents($pipes[1]);
-    fclose($pipes[1]);
-    proc_close($process);
+    $lockAcquired = false;
+    $process = null;
+    $stdin = null;
+    $outputPath = null;
+    $hasProcessGroup = false;
+    try {
+        @chmod($lockPath, 0600);
+        $lockDeadline = microtime(true) + max(0, $lockWaitSeconds);
+        do {
+            if (flock($lockFile, LOCK_EX | LOCK_NB)) {
+                $lockAcquired = true;
+                break;
+            }
+            if (microtime(true) >= $lockDeadline) {
+                throw new RuntimeException('The system is busy, please try again in a minute.');
+            }
+            usleep(100000);
+        } while (true);
 
-    if ($output === false) {
-        throw new RuntimeException('Unable to read the Python subprocess output.');
+        $environment = getenv();
+        if (!is_array($environment)) {
+            throw new RuntimeException('Unable to read the process environment.');
+        }
+        $sensitiveValues = [];
+        foreach (['GEMINI_API_KEY', 'GOOGLE_API_KEY'] as $environmentName) {
+            if (isset($environment[$environmentName]) && trim($environment[$environmentName]) !== '') {
+                $sensitiveValues[] = $environment[$environmentName];
+            }
+        }
+        if ($apiKey !== null && trim($apiKey) !== '') {
+            $environment['GEMINI_API_KEY'] = $apiKey;
+            $sensitiveValues[] = $apiKey;
+        }
+
+        $processCommand = $command;
+        if (PHP_OS_FAMILY !== 'Windows') {
+            foreach (['/usr/bin/setsid', '/bin/setsid'] as $setsidPath) {
+                if (is_executable($setsidPath)) {
+                    $processCommand = array_merge([$setsidPath], $command);
+                    $hasProcessGroup = true;
+                    break;
+                }
+            }
+        }
+
+        $outputPath = tempnam(sys_get_temp_dir(), 'curriculum-python-output-');
+        if ($outputPath === false) {
+            $outputPath = null;
+            error_log('Unable to create a temporary Python job output file.');
+            throw new RuntimeException('Unable to prepare the Python job.');
+        }
+        $descriptors = [
+            0 => ['pipe', 'r'],
+            1 => ['file', $outputPath, 'w'],
+            2 => ['redirect', 1],
+        ];
+        $process = @proc_open($processCommand, $descriptors, $pipes, null, $environment);
+        if (!is_resource($process)) {
+            error_log('Unable to start the Python subprocess.');
+            throw new RuntimeException('Unable to start the Python subprocess.');
+        }
+
+        $stdin = $pipes[0];
+        fclose($stdin);
+        $stdin = null;
+        $processDeadline = microtime(true) + max(0, $processTimeoutSeconds);
+        $processId = 0;
+        $timedOut = false;
+        do {
+            $status = proc_get_status($process);
+            $processId = (int)$status['pid'];
+            if (!$status['running']) {
+                break;
+            }
+            if (microtime(true) >= $processDeadline) {
+                $timedOut = true;
+                break;
+            }
+            usleep(100000);
+        } while (true);
+
+        if ($timedOut) {
+            terminate_python_process($process, $processId, $hasProcessGroup);
+            throw new RuntimeException('The request took too long. Please try again.');
+        }
+
+        proc_close($process);
+        $process = null;
+
+        $output = file_get_contents($outputPath);
+        if ($output === false) {
+            error_log('Unable to read the Python subprocess output.');
+            throw new RuntimeException('Unable to read the Python subprocess result.');
+        }
+        foreach (array_unique(array_filter($sensitiveValues, static fn(string $value): bool => $value !== '')) as $sensitiveValue) {
+            $output = str_replace($sensitiveValue, '[redacted]', $output);
+        }
+        return $output;
+    } finally {
+        if (is_resource($stdin)) {
+            fclose($stdin);
+        }
+        if (is_resource($process)) {
+            $status = proc_get_status($process);
+            if ($status['running']) {
+                terminate_python_process($process, (int)$status['pid'], $hasProcessGroup);
+            }
+            proc_close($process);
+        }
+        if (is_string($outputPath) && is_file($outputPath)) {
+            @unlink($outputPath);
+        }
+        if ($lockAcquired) {
+            flock($lockFile, LOCK_UN);
+        }
+        fclose($lockFile);
     }
-
-    return $output;
 }
 
 function save_user_api_key(int $userId, string $apiKey): bool
@@ -530,15 +761,16 @@ function decode_guest_python_output(string $output): ?array
 
 function guest_generate_program(string $program, string $prompt): ?array
 {
-    $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
-    $projectRoot = __DIR__;
-    $coursesCsv = dirname(__DIR__) . '/curriculum-generator-kb/data/curriculum_dataset_with_ids.csv';
-    $skillCoverageCsv = $projectRoot . '/skill_coverage.csv';
-    $courseSkillMatchesCsv = $projectRoot . '/course_to_skill_matches.csv';
-
-    if (!file_exists($pythonExe) || !is_file($pythonExe)) {
+    try {
+        $pythonExe = python_executable();
+    } catch (RuntimeException $error) {
+        error_log('Guest curriculum generation runtime is unavailable.');
         return null;
     }
+    $projectRoot = __DIR__;
+    $coursesCsv = curriculum_kb_dir() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'curriculum_dataset_with_ids.csv';
+    $skillCoverageCsv = $projectRoot . '/skill_coverage.csv';
+    $courseSkillMatchesCsv = $projectRoot . '/course_to_skill_matches.csv';
 
     $pythonProjectRoot = json_encode($projectRoot, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     $pythonCoursesCsv = json_encode($coursesCsv, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -561,15 +793,16 @@ function guest_generate_program(string $program, string $prompt): ?array
 
 function guest_enhance_curriculum(string $program, string $specialization, string $prompt, array $userSubjects, array $selectedYears): ?array
 {
-    $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
-    $projectRoot = __DIR__;
-    $coursesCsv = dirname(__DIR__) . '/curriculum-generator-kb/data/curriculum_dataset_with_ids.csv';
-    $skillCoverageCsv = $projectRoot . '/skill_coverage.csv';
-    $courseSkillMatchesCsv = $projectRoot . '/course_to_skill_matches.csv';
-
-    if (!file_exists($pythonExe) || !is_file($pythonExe)) {
+    try {
+        $pythonExe = python_executable();
+    } catch (RuntimeException $error) {
+        error_log('Guest curriculum enhancement runtime is unavailable.');
         return null;
     }
+    $projectRoot = __DIR__;
+    $coursesCsv = curriculum_kb_dir() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'curriculum_dataset_with_ids.csv';
+    $skillCoverageCsv = $projectRoot . '/skill_coverage.csv';
+    $courseSkillMatchesCsv = $projectRoot . '/course_to_skill_matches.csv';
 
     $pythonProjectRoot = json_encode($projectRoot, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     $pythonCoursesCsv = json_encode($coursesCsv, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

@@ -15,7 +15,7 @@ class DraftManagementTests(unittest.TestCase):
     def test_additive_migration_preserves_legacy_status_and_review_rows(self):
         with tempfile.TemporaryDirectory() as directory:
             database = Path(directory) / "legacy.db"
-            connection = sqlite3.connect(database)
+            connection = sqlite3.connect(database, timeout=30)
             try:
                 connection.execute(
                     """

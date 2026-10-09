@@ -72,12 +72,14 @@ For new-machine setup on Windows, Linux, and macOS, follow the canonical [Setup 
 
 The tested Python version is 3.12.10. After activating the venv using the command for your OS, install dependencies with `python -m pip install -r requirements.txt`. For a complete version snapshot, use `requirements-lock.txt` instead. For CPU-only systems, install the CPU PyTorch build first as described in the README to avoid the very large CUDA download.
 
+At runtime, set `PYTHON_BIN` to override the platform venv interpreter and `KB_DIR` to override the sibling knowledge-base directory. Relative `KB_DIR` values are resolved from the workspace root. Hugging Face and Transformers cache environment variables are honored; `embedding-matcher/hf_cache` is used only when no supported cache variable is set. Python-backed web jobs share a temp-directory file lock, wait at most 45 seconds, and have a 240-second process timeout. Keep nginx/PHP-FPM request and upstream response timeouts at least 300 seconds for these actions. Use `php tools/check_runtime.php` to check deployment paths, cache selection, interpreter execution, source-file presence, and database writability without displaying secrets.
+
 ## Important paths
 
-- Project root: C:\Trainers\embedding-matcher
-- Curriculum data: C:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv
-- Skill list: C:\Trainers\curriculum-generator-kb\03_industry_skills_data.md
-- Local DB: C:\Trainers\embedding-matcher\curriculum_matching.db
+- Project root: `embedding-matcher/`
+- Curriculum data: sibling `curriculum-generator-kb/data/curriculum_dataset_with_ids.csv` (or `KB_DIR`)
+- Skill list: sibling `curriculum-generator-kb/03_industry_skills_data.md` (or `KB_DIR`)
+- Local DB: `embedding-matcher/curriculum_matching.db`
 
 ## Database design
 

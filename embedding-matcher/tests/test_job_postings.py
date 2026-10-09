@@ -289,7 +289,7 @@ class JobPostingTests(unittest.TestCase):
                 model_name="legacy",
                 db_path=db_path,
             )
-            with contextlib.closing(sqlite3.connect(db_path)) as connection:
+            with contextlib.closing(sqlite3.connect(db_path, timeout=30)) as connection:
                 loaded_report = json.loads(
                     connection.execute(
                         "SELECT notes FROM generated_curriculum_runs WHERE id = ?",
@@ -319,7 +319,7 @@ class JobPostingTests(unittest.TestCase):
                 model_name="test",
                 db_path=db_path,
             )
-            with contextlib.closing(sqlite3.connect(db_path)) as connection:
+            with contextlib.closing(sqlite3.connect(db_path, timeout=30)) as connection:
                 saved = json.loads(
                     connection.execute(
                         "SELECT notes FROM generated_curriculum_runs WHERE id = ?",

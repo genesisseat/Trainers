@@ -16,6 +16,8 @@ import csv
 import json
 from pathlib import Path
 
+from runtime_paths import knowledge_base_dir
+
 from curriculum_generator import (
     chat_about_curriculum,
     chat_about_enhancement_review,
@@ -40,11 +42,11 @@ from match_courses_to_skills import (
 # from the working implementation when available.
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-WORKSPACE = PROJECT_ROOT.parent
-COURSES_CSV = WORKSPACE / "curriculum-generator-kb" / "data" / "curriculum_dataset_with_ids.csv"
-SKILLS_MD = WORKSPACE / "curriculum-generator-kb" / "03_industry_skills_data.md"
-JOB_POSTINGS_CSV = WORKSPACE / "curriculum-generator-kb" / "data" / "job_postings.csv"
-JOB_TOPIC_MAP_CSV = WORKSPACE / "curriculum-generator-kb" / "data" / "job_topic_map.csv"
+KB_DIR = knowledge_base_dir(PROJECT_ROOT)
+COURSES_CSV = KB_DIR / "data" / "curriculum_dataset_with_ids.csv"
+SKILLS_MD = KB_DIR / "03_industry_skills_data.md"
+JOB_POSTINGS_CSV = KB_DIR / "data" / "job_postings.csv"
+JOB_TOPIC_MAP_CSV = KB_DIR / "data" / "job_topic_map.csv"
 
 
 def parse_args() -> argparse.Namespace:

@@ -197,7 +197,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         self.assertTrue(inserted > 0)
         self.assertTrue(db_path.exists())
 
-        with closing(sqlite3.connect(db_path)) as conn, conn:
+        with closing(sqlite3.connect(db_path, timeout=30)) as conn, conn:
             table_count = conn.execute(
                 "SELECT COUNT(*) FROM generated_curriculum_subjects"
             ).fetchone()[0]
@@ -218,7 +218,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 return_run_id=True,
             )
 
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             try:
                 run = conn.execute(
                     "SELECT id, created_by_user_id, created_by_username FROM generated_curriculum_runs"
@@ -236,7 +236,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as temp_dir:
             db_path = Path(temp_dir) / "attribution.db"
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             conn.execute(
                 """CREATE TABLE generated_curriculum_runs (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -276,7 +276,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 created_by_user_id=21,
                 created_by_username="draft-owner",
             )
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             generated_run_id = conn.execute(
                 """SELECT id FROM generated_curriculum_runs
                    WHERE created_by_username = 'draft-owner'"""
@@ -329,7 +329,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                     sender_username="enhancement-chat-user",
                 )
 
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             runs = conn.execute(
                 """SELECT source, created_by_username FROM generated_curriculum_runs
                    WHERE id IN (?, ?) ORDER BY id""",
@@ -353,7 +353,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         )
 
     def test_run_access_denies_other_users_and_unattributed_runs(self):
-        conn = sqlite3.connect(":memory:")
+        conn = sqlite3.connect(":memory:", timeout=30)
         self.addCleanup(conn.close)
         conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, role TEXT NOT NULL)")
         conn.executemany(
@@ -377,7 +377,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                     curriculum_generator._require_run_access(conn, run_id, actor_id)
 
     def test_chat_rejects_cross_user_run_before_read_or_write(self):
-        with closing(sqlite3.connect(self.test_db_path)) as conn:
+        with closing(sqlite3.connect(self.test_db_path, timeout=30)) as conn:
             conn.execute(
                 "CREATE TABLE users (id INTEGER PRIMARY KEY, role TEXT NOT NULL, gemini_api_key TEXT)"
             )
@@ -401,7 +401,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 )
         gemini_call.assert_not_called()
 
-        with closing(sqlite3.connect(self.test_db_path)) as conn:
+        with closing(sqlite3.connect(self.test_db_path, timeout=30)) as conn:
             chat_count = conn.execute(
                 "SELECT COUNT(*) FROM generated_curriculum_chat"
             ).fetchone()[0]
@@ -410,7 +410,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
     def test_web_actor_key_policy_blocks_keyless_user_and_admin_actions_before_gemini(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             db_path = Path(temp_dir) / "api-policy.db"
-            with closing(sqlite3.connect(db_path)) as conn:
+            with closing(sqlite3.connect(db_path, timeout=30)) as conn:
                 conn.execute(
                     """CREATE TABLE users (
                         id INTEGER PRIMARY KEY,
@@ -452,7 +452,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
     def test_web_actor_personal_key_and_super_admin_shared_fallback(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             db_path = Path(temp_dir) / "api-policy.db"
-            with closing(sqlite3.connect(db_path)) as conn:
+            with closing(sqlite3.connect(db_path, timeout=30)) as conn:
                 conn.execute(
                     """CREATE TABLE users (
                         id INTEGER PRIMARY KEY,
@@ -493,7 +493,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
             db_path = temp_path / "api-policy.db"
-            with closing(sqlite3.connect(db_path)) as conn:
+            with closing(sqlite3.connect(db_path, timeout=30)) as conn:
                 conn.execute(
                     """CREATE TABLE users (
                         id INTEGER PRIMARY KEY,
@@ -738,7 +738,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
             db_path=self.test_db_path,
             return_run_id=True,
         )
-        connection = sqlite3.connect(self.test_db_path)
+        connection = sqlite3.connect(self.test_db_path, timeout=30)
         try:
             connection.execute("PRAGMA foreign_keys = ON")
             connection.execute(
@@ -901,7 +901,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 model_name="test-model",
                 db_path=db_path,
             )
-            connection = sqlite3.connect(db_path)
+            connection = sqlite3.connect(db_path, timeout=30)
             try:
                 saved_titles = [
                     row[0]
@@ -919,7 +919,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
             finally:
                 connection.close()
 
-            connection = sqlite3.connect(db_path)
+            connection = sqlite3.connect(db_path, timeout=30)
             try:
                 run_status, preserved_notes = connection.execute(
                     "SELECT status, notes FROM generated_curriculum_runs WHERE id = ?",

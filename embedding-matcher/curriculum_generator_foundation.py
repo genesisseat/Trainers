@@ -8,14 +8,15 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
 
+from runtime_paths import configure_huggingface_cache, knowledge_base_dir
+
+ROOT = Path(__file__).resolve().parent
+DATASET_PATH = knowledge_base_dir(ROOT) / "data" / "curriculum_dataset_with_ids.csv"
+HF_HOME = configure_huggingface_cache(ROOT)
+
 import torch
 from sentence_transformers import SentenceTransformer
 
-ROOT = Path(__file__).resolve().parent
-DATASET_PATH = Path(r"C:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv")
-HF_HOME = Path(os.environ.get("HF_HOME", ROOT / "hf_cache"))
-HF_HOME.mkdir(parents=True, exist_ok=True)
-os.environ["HF_HOME"] = str(HF_HOME)
 DEFAULT_EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 
 

@@ -22,18 +22,22 @@ from pathlib import Path
 import pandas as pd
 
 from match_courses_to_skills import build_course_rows, parse_skill_rows
+from runtime_paths import knowledge_base_dir
 
 ROOT = Path(__file__).resolve().parent
-WORKSPACE = ROOT.parent
 DB_PATH = ROOT / "curriculum_matching.db"
-COURSES_CSV = WORKSPACE / "curriculum-generator-kb" / "data" / "curriculum_dataset_with_ids.csv"
-SKILLS_MD = WORKSPACE / "curriculum-generator-kb" / "03_industry_skills_data.md"
+KB_DIR = knowledge_base_dir(ROOT)
+COURSES_CSV = KB_DIR / "data" / "curriculum_dataset_with_ids.csv"
+SKILLS_MD = KB_DIR / "03_industry_skills_data.md"
 MATCH_CSV = ROOT / "course_to_skill_matches.csv"
 COVERAGE_CSV = ROOT / "skill_coverage.csv"
 
 
 def get_connection() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
+    is_new_database = not DB_PATH.exists()
+    conn = sqlite3.connect(DB_PATH, timeout=30)
+    if is_new_database:
+        conn.execute("PRAGMA journal_mode=WAL")
     conn.row_factory = sqlite3.Row
     return conn
 

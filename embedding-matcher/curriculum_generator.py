@@ -14,6 +14,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
 
+from runtime_paths import knowledge_base_dir
+
 from curriculum_generator_foundation import build_subject_bank, load_course_rows, normalize_subject_name
 
 
@@ -45,7 +47,7 @@ def configure_web_actor_api_key(db_path: str | Path, actor_user_id: int | None) 
     if actor_user_id is None or actor_user_id < 1:
         raise ValueError(GEMINI_API_KEY_REQUIRED_MESSAGE)
 
-    with closing(sqlite3.connect(Path(db_path))) as conn:
+    with closing(sqlite3.connect(Path(db_path), timeout=30)) as conn:
         try:
             actor = conn.execute(
                 "SELECT role, gemini_api_key FROM users WHERE id = ?",
@@ -720,7 +722,7 @@ def chat_about_curriculum(
         configure_web_actor_api_key(db_path, sender_user_id)
 
     db_file = Path(db_path)
-    with closing(sqlite3.connect(db_file)) as conn, conn:
+    with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS generated_curriculum_chat (
@@ -847,7 +849,7 @@ User follow-up:
 
     updated_curriculum = chat_result.get("updated_curriculum")
     if chat_result["action"] == "modify" and _validate_updated_curriculum(updated_curriculum):
-        with closing(sqlite3.connect(db_file)) as conn, conn:
+        with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
             conn.execute("DELETE FROM generated_curriculum_subjects WHERE run_id = ?", (run_id,))
             for subject in updated_curriculum:
                 conn.execute(
@@ -881,7 +883,7 @@ User follow-up:
             "I could not save the requested edit because Gemini did not return a valid full curriculum list."
         )
 
-    with closing(sqlite3.connect(db_file)) as conn, conn:
+    with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
             "INSERT INTO generated_curriculum_chat (run_id, role, message) VALUES (?, ?, ?)",
             (run_id, "assistant", chat_result["message"]),
@@ -908,7 +910,7 @@ def chat_about_enhancement_review(
         configure_web_actor_api_key(db_path, sender_user_id)
 
     db_file = Path(db_path)
-    with closing(sqlite3.connect(db_file)) as conn, conn:
+    with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS generated_curriculum_chat (
@@ -1006,7 +1008,7 @@ Editor question:
         print(f"Gemini enhancement review chat failed: {error}", file=sys.stderr, flush=True)
         answer = f"Unable to contact Gemini for this review question: {error}"
 
-    with closing(sqlite3.connect(db_file)) as conn, conn:
+    with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
             "INSERT INTO generated_curriculum_chat (run_id, role, message) VALUES (?, ?, ?)",
             (run_id, "assistant", answer),
@@ -2161,7 +2163,7 @@ def save_generated_curriculum(
     db_file = Path(db_path)
     db_file.parent.mkdir(parents=True, exist_ok=True)
 
-    with closing(sqlite3.connect(db_file)) as conn, conn:
+    with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS generated_curriculum_runs (
@@ -2287,7 +2289,7 @@ def save_enhancement_report(
     stored_report["submitted_subjects"] = original_subjects
     stored_report["enhanced_subject_count"] = len(completed_subjects)
 
-    with closing(sqlite3.connect(db_file)) as conn, conn:
+    with closing(sqlite3.connect(db_file, timeout=30)) as conn, conn:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS generated_curriculum_runs (
@@ -2383,7 +2385,7 @@ def save_enhancement_report(
 
 
 if __name__ == "__main__":
-    rows = load_course_rows(Path(r"C:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv"))
+    rows = load_course_rows(knowledge_base_dir() / "data" / "curriculum_dataset_with_ids.csv")
     bank = build_subject_bank(rows)
     program = os.environ.get("CURRICULUM_PROGRAM", "BSIT").strip() or "BSIT"
     prompt = os.environ.get(

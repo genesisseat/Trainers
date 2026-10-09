@@ -96,6 +96,7 @@ if (
     && ($requestedRunId !== null || $deleteAction === 'delete' || $draftUpdateAction === 'save' || $chatAction === 'send')
 ) {
     $accessDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $accessDb->busyTimeout(30000);
     $accessDb->enableExceptions(true);
     $requestedRun = run_access_require($accessDb, $requestedRunId, $currentUser);
     if ($deleteAction === 'delete' && !run_access_can_delete($currentUser, $requestedRun)) {
@@ -146,6 +147,7 @@ if ($chatAction === 'send' && current_user() === null) {
 if ($deleteAction === 'delete') {
     try {
         $deleteDb = new SQLite3($dbPath);
+        $deleteDb->busyTimeout(30000);
         $deleteDb->enableExceptions(true);
         run_access_delete($deleteDb, $deleteRunId, $currentUser);
         $deleteDb->close();
@@ -168,6 +170,7 @@ if ($deleteAction === 'delete') {
 $schemaDb = null;
 if (!$isGuestMode) {
     $schemaDb = new SQLite3($dbPath);
+    $schemaDb->busyTimeout(30000);
     $schemaDb->enableExceptions(true);
 $schemaDb->exec(
     "CREATE TABLE IF NOT EXISTS generated_curriculum_chat (
@@ -224,6 +227,7 @@ if ($draftUpdateAction === 'save') {
         run_access_not_found();
     }
     $updateDb = new SQLite3($dbPath);
+    $updateDb->busyTimeout(30000);
     $updateDb->enableExceptions(true);
     $draftOwner = run_access_require($updateDb, $draftUpdateRunId, $currentUser);
     if (!run_access_can_update($currentUser, $draftOwner)) {
@@ -267,24 +271,27 @@ if ($chatAction === 'send' && $chatRunId !== null && $chatMessage !== '') {
         $_SESSION['flash_error'] = GEMINI_API_KEY_REQUIRED_MESSAGE;
         $_SESSION['open_api_key_settings'] = true;
     } else {
-        $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
         $script = __DIR__ . '/user_operations.py';
-        if (file_exists($pythonExe) && file_exists($script)) {
-            $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-                ' --chat --run-id ' . escapeshellarg((string)$chatRunId) .
-                ' --message ' . escapeshellarg($chatMessage) .
-                    ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
-                    ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
-                    ' --admin-access-policy ' . escapeshellarg(RUN_ACCESS_ADMIN_POLICY) .
-                    ' --output-db ' . escapeshellarg($dbPath) . ' 2>&1';
-            try {
+        try {
+            $pythonExe = python_executable();
+            if (file_exists($script)) {
+                $command = [
+                    $pythonExe,
+                    $script,
+                    '--chat', '--run-id', (string)$chatRunId,
+                    '--message', $chatMessage,
+                    '--actor-user-id', (string)$currentUser['id'],
+                    '--actor-username', (string)$currentUser['username'],
+                    '--admin-access-policy', RUN_ACCESS_ADMIN_POLICY,
+                    '--output-db', $dbPath,
+                ];
                 run_command_with_api_key($command, $currentUserApiKey);
-            } catch (RuntimeException $error) {
-                error_log('Curriculum chat subprocess failed to start: ' . $error->getMessage());
-                $_SESSION['flash_error'] = 'The curriculum assistant could not be started.';
+            } else {
+                throw new RuntimeException('The curriculum assistant is not available.');
             }
-        } else {
-            $_SESSION['flash_error'] = 'The curriculum assistant is not available.';
+        } catch (RuntimeException $error) {
+            error_log('Curriculum chat subprocess failed to start.');
+            $_SESSION['flash_error'] = python_job_failure_message($error, 'The curriculum assistant could not be started.');
         }
     }
 
@@ -325,41 +332,43 @@ if ($generateAction === 'generate') {
                 $generationError = 'The guest trial could not generate a curriculum draft. Please try again.';
             }
         } else {
-            $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
             $script = __DIR__ . '/user_operations.py';
-            $coursesCsv = __DIR__ . '/../curriculum-generator-kb/data/curriculum_dataset_with_ids.csv';
+            $coursesCsv = curriculum_kb_dir() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'curriculum_dataset_with_ids.csv';
             $coverageCsv = __DIR__ . '/skill_coverage.csv';
 
-            if (file_exists($pythonExe) && file_exists($script)) {
-                $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-                    ' --generate --program ' . escapeshellarg($program) .
-                    ' --prompt ' . escapeshellarg($prompt) .
-                    ' --courses-csv ' . escapeshellarg($coursesCsv) .
-                    ' --skill-coverage ' . escapeshellarg($coverageCsv) .
-                    ' --output-db ' . escapeshellarg($dbPath) .
-                    ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
-                    ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
-                    ' --limit 6 2>&1';
+            try {
+                $pythonExe = python_executable();
+                if (!file_exists($script)) {
+                    throw new RuntimeException('The curriculum generation runtime is unavailable.');
+                }
+                $command = [
+                    $pythonExe, $script,
+                    '--generate', '--program', $program,
+                    '--prompt', $prompt,
+                    '--courses-csv', $coursesCsv,
+                    '--skill-coverage', $coverageCsv,
+                    '--output-db', $dbPath,
+                    '--actor-user-id', (string)$currentUser['id'],
+                    '--actor-username', (string)$currentUser['username'],
+                    '--limit', '6',
+                ];
                 set_time_limit(180);
-                try {
-                    $generationOutput = run_command_with_api_key($command, $currentUserApiKey);
-                } catch (RuntimeException $error) {
-                    error_log('Curriculum generation subprocess failed to start: ' . $error->getMessage());
-                    $generationOutput = null;
+                $generationOutput = run_command_with_api_key($command, $currentUserApiKey);
+            } catch (RuntimeException $error) {
+                error_log('Curriculum generation subprocess failed.');
+                $generationError = python_job_failure_message($error, 'Draft generation could not be completed. Please try again.');
+                $generationOutput = null;
+            }
+            if ($generationError === '' && $generationOutput !== null && strpos($generationOutput, '[Offline Fallback]') !== false) {
+                $failureDetail = 'Gemini API request failed. The offline template was used for this draft.';
+                if (preg_match('/Gemini curriculum generation failed:\s*(.+)/', $generationOutput, $failureMatch)) {
+                    $failureDetail = 'Generation unavailable: ' . trim($failureMatch[1]);
                 }
-                if ($generationOutput !== null && strpos($generationOutput, '[Offline Fallback]') !== false) {
-                    $failureDetail = 'Gemini API request failed. The offline template was used for this draft.';
-                    if (preg_match('/Gemini curriculum generation failed:\s*(.+)/', $generationOutput, $failureMatch)) {
-                        $failureDetail = 'Generation unavailable: ' . trim($failureMatch[1]);
-                    }
-                    $generationMessage = $failureDetail . ' Review the draft below.';
-                } elseif ($generationOutput !== null && $generationOutput !== '') {
-                    $generationMessage = 'Draft generated for ' . $program . '. Review the curriculum section below.';
-                } else {
-                    $generationError = 'Draft generation could not be completed. Please try again.';
-                }
-            } else {
-                $generationError = 'Python environment not found. Please activate the project venv first.';
+                $generationMessage = $failureDetail . ' Review the draft below.';
+            } elseif ($generationError === '' && $generationOutput !== null && $generationOutput !== '') {
+                $generationMessage = 'Draft generated for ' . $program . '. Review the curriculum section below.';
+            } elseif ($generationError === '') {
+                $generationError = 'Draft generation could not be completed. Please try again.';
             }
         }
     }
@@ -369,6 +378,7 @@ $runs = [];
 $chatByRun = [];
 if (!$isGuestMode) {
     $db = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $db->busyTimeout(30000);
     $db->enableExceptions(true);
 
     $runScope = run_access_sql_scope($currentUser);
