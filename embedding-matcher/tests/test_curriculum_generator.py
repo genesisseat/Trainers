@@ -122,6 +122,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         self.assertEqual({subject["year"] for subject in completed}, {"3"})
         self.assertTrue(any(subject["subject_title"] == "Network Security" for subject in completed))
         self.assertFalse(any(subject["subject_title"] == "Programming Fundamentals" for subject in completed))
+        self.assertIn("Network Security", report["completed_course_tools"])
 
     def test_practical_guidance_adds_programming_tools_and_sources(self):
         guidance = curriculum_generator._practical_guidance(
@@ -197,11 +198,102 @@ class CurriculumGeneratorTests(unittest.TestCase):
         self.assertTrue(inserted > 0)
         self.assertTrue(db_path.exists())
 
-        with closing(sqlite3.connect(db_path)) as conn, conn:
+        with closing(sqlite3.connect(db_path, timeout=30)) as conn, conn:
             table_count = conn.execute(
                 "SELECT COUNT(*) FROM generated_curriculum_subjects"
             ).fetchone()[0]
             self.assertGreater(table_count, 0)
+
+    def test_generated_run_mode_is_set_only_from_explicit_generation_outcome(self):
+            generated = [{"subject_title": "Gemini-generated course", "year": "1", "term": "1"}]
+            with patch("curriculum_generator.call_gemini_for_curriculum", return_value=generated):
+                online_draft = generate_program_curriculum("BSIT", "Generate.", self.subject_bank)
+            online_run = save_generated_curriculum(
+                online_draft,
+                "BSIT",
+                "BAAI/bge-small-en-v1.5",
+                db_path=Path(self._test_directory.name) / "online.db",
+                return_run_id=True,
+            )
+            with closing(sqlite3.connect(Path(self._test_directory.name) / "online.db")) as connection:
+                online_mode = connection.execute(
+                    "SELECT generation_mode FROM generated_curriculum_runs WHERE id = ?",
+                    (online_run,),
+                ).fetchone()[0]
+            self.assertEqual(online_mode, "online")
+            self.assertTrue(all(item["_generation_mode"] == "online" for item in online_draft))
+
+            template = [
+                {
+                    "subject_title": "Template course",
+                    "year": "1",
+                    "term": "1",
+                    "rationale": "Template rationale.",
+                }
+            ]
+            with patch(
+                "curriculum_generator.call_gemini_for_curriculum",
+                side_effect=curriculum_generator.GeminiGenerationError("Gemini unavailable"),
+            ), patch("curriculum_generator.generate_curriculum_draft", return_value=template):
+                offline_draft = generate_program_curriculum("BSIT", "Generate.", self.subject_bank)
+            offline_run = save_generated_curriculum(
+                offline_draft,
+                "BSIT",
+                "BAAI/bge-small-en-v1.5",
+                db_path=Path(self._test_directory.name) / "offline.db",
+                return_run_id=True,
+            )
+            with closing(sqlite3.connect(Path(self._test_directory.name) / "offline.db")) as connection:
+                offline_mode = connection.execute(
+                    "SELECT generation_mode FROM generated_curriculum_runs WHERE id = ?",
+                    (offline_run,),
+                ).fetchone()[0]
+            self.assertEqual(offline_mode, "offline")
+            self.assertTrue(all(item["_generation_mode"] == "offline" for item in offline_draft))
+
+            unknown_run = save_generated_curriculum(
+                [{"subject_title": "Unmarked legacy course", "year": "1", "term": "1"}],
+                "BSIT",
+                "gemini-3.5-flash-lite",
+                db_path=Path(self._test_directory.name) / "unknown.db",
+                return_run_id=True,
+            )
+            with closing(sqlite3.connect(Path(self._test_directory.name) / "unknown.db")) as connection:
+                unknown_mode = connection.execute(
+                    "SELECT generation_mode FROM generated_curriculum_runs WHERE id = ?",
+                    (unknown_run,),
+                ).fetchone()[0]
+            self.assertIsNone(unknown_mode)
+
+    def test_enhanced_run_mode_uses_explicit_review_and_course_outcomes(self):
+            cases = [
+                ({"fallback": False, "draft_fallback": True}, "online"),
+                ({"fallback": True, "draft_fallback": False}, "online"),
+                ({"fallback": True, "draft_fallback": True}, "offline"),
+                ({"fallback": True}, None),
+            ]
+            for index, (outcomes, expected_mode) in enumerate(cases):
+                with self.subTest(outcomes=outcomes):
+                    db_path = Path(self._test_directory.name) / f"enhanced-{index}.db"
+                    run_id = save_enhancement_report(
+                        {
+                            **outcomes,
+                            "summary": "Review",
+                            "subjects": [],
+                            "recommendations": [],
+                        },
+                        enhanced_curriculum=[],
+                        user_subjects=[],
+                        program="BSIT",
+                        model_name="gemini-3.5-flash-lite",
+                        db_path=db_path,
+                    )
+                    with closing(sqlite3.connect(db_path)) as connection:
+                        mode = connection.execute(
+                            "SELECT generation_mode FROM generated_curriculum_runs WHERE id = ?",
+                            (run_id,),
+                        ).fetchone()[0]
+                    self.assertEqual(mode, expected_mode)
 
     def test_save_generated_curriculum_can_return_run_id(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -218,7 +310,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 return_run_id=True,
             )
 
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             try:
                 run = conn.execute(
                     "SELECT id, created_by_user_id, created_by_username FROM generated_curriculum_runs"
@@ -236,7 +328,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as temp_dir:
             db_path = Path(temp_dir) / "attribution.db"
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             conn.execute(
                 """CREATE TABLE generated_curriculum_runs (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -276,7 +368,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 created_by_user_id=21,
                 created_by_username="draft-owner",
             )
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             generated_run_id = conn.execute(
                 """SELECT id FROM generated_curriculum_runs
                    WHERE created_by_username = 'draft-owner'"""
@@ -329,7 +421,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                     sender_username="enhancement-chat-user",
                 )
 
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(db_path, timeout=30)
             runs = conn.execute(
                 """SELECT source, created_by_username FROM generated_curriculum_runs
                    WHERE id IN (?, ?) ORDER BY id""",
@@ -353,7 +445,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         )
 
     def test_run_access_denies_other_users_and_unattributed_runs(self):
-        conn = sqlite3.connect(":memory:")
+        conn = sqlite3.connect(":memory:", timeout=30)
         self.addCleanup(conn.close)
         conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, role TEXT NOT NULL)")
         conn.executemany(
@@ -377,7 +469,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                     curriculum_generator._require_run_access(conn, run_id, actor_id)
 
     def test_chat_rejects_cross_user_run_before_read_or_write(self):
-        with closing(sqlite3.connect(self.test_db_path)) as conn:
+        with closing(sqlite3.connect(self.test_db_path, timeout=30)) as conn:
             conn.execute(
                 "CREATE TABLE users (id INTEGER PRIMARY KEY, role TEXT NOT NULL, gemini_api_key TEXT)"
             )
@@ -401,7 +493,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 )
         gemini_call.assert_not_called()
 
-        with closing(sqlite3.connect(self.test_db_path)) as conn:
+        with closing(sqlite3.connect(self.test_db_path, timeout=30)) as conn:
             chat_count = conn.execute(
                 "SELECT COUNT(*) FROM generated_curriculum_chat"
             ).fetchone()[0]
@@ -410,7 +502,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
     def test_web_actor_key_policy_blocks_keyless_user_and_admin_actions_before_gemini(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             db_path = Path(temp_dir) / "api-policy.db"
-            with closing(sqlite3.connect(db_path)) as conn:
+            with closing(sqlite3.connect(db_path, timeout=30)) as conn:
                 conn.execute(
                     """CREATE TABLE users (
                         id INTEGER PRIMARY KEY,
@@ -452,7 +544,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
     def test_web_actor_personal_key_and_super_admin_shared_fallback(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             db_path = Path(temp_dir) / "api-policy.db"
-            with closing(sqlite3.connect(db_path)) as conn:
+            with closing(sqlite3.connect(db_path, timeout=30)) as conn:
                 conn.execute(
                     """CREATE TABLE users (
                         id INTEGER PRIMARY KEY,
@@ -493,7 +585,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
             db_path = temp_path / "api-policy.db"
-            with closing(sqlite3.connect(db_path)) as conn:
+            with closing(sqlite3.connect(db_path, timeout=30)) as conn:
                 conn.execute(
                     """CREATE TABLE users (
                         id INTEGER PRIMARY KEY,
@@ -590,6 +682,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
         self.assertNotEqual(draft[0]["skill_evidence"], draft[1]["skill_evidence"])
         self.assertEqual(draft[0]["skill_evidence"][0]["score"], 0.72)
         self.assertEqual(draft[0]["mapped_industry_skills"], ["Network Routing"])
+        self.assertTrue(all(item["_generation_mode"] == "online" for item in draft))
 
     def test_subject_skill_evidence_reports_no_match_honestly(self):
         unrelated_matches = [
@@ -738,7 +831,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
             db_path=self.test_db_path,
             return_run_id=True,
         )
-        connection = sqlite3.connect(self.test_db_path)
+        connection = sqlite3.connect(self.test_db_path, timeout=30)
         try:
             connection.execute("PRAGMA foreign_keys = ON")
             connection.execute(
@@ -901,7 +994,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
                 model_name="test-model",
                 db_path=db_path,
             )
-            connection = sqlite3.connect(db_path)
+            connection = sqlite3.connect(db_path, timeout=30)
             try:
                 saved_titles = [
                     row[0]
@@ -919,7 +1012,7 @@ class CurriculumGeneratorTests(unittest.TestCase):
             finally:
                 connection.close()
 
-            connection = sqlite3.connect(db_path)
+            connection = sqlite3.connect(db_path, timeout=30)
             try:
                 run_status, preserved_notes = connection.execute(
                     "SELECT status, notes FROM generated_curriculum_runs WHERE id = ?",

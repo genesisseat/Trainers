@@ -4,6 +4,7 @@ require_once __DIR__ . '/auth.php';
 require_login();
 
 $db = new SQLite3(__DIR__ . '/curriculum_matching.db', SQLITE3_OPEN_READONLY);
+$db->busyTimeout(30000);
 $db->enableExceptions(true);
 
 $skillTypes = [];

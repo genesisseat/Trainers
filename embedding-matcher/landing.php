@@ -15,7 +15,7 @@ if ($isGuestMode) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum Enhancer</title>
+    <title>Curri'KoToh</title>
     <link rel="stylesheet" href="assets/theme.css">
     <?php require __DIR__ . '/partials/guest_draft_lifecycle_head.php'; ?>
 </head>
@@ -24,7 +24,7 @@ if ($isGuestMode) {
         <section class="landing-hero" aria-labelledby="landing-title">
             <header class="landing-header">
                 <nav class="landing-nav" aria-label="Main navigation">
-                    <a class="landing-brand" href="landing.php"><span class="wordmark-mark" aria-hidden="true">C</span><span>Curriculum Enhancer</span></a>
+                    <a class="landing-brand" href="landing.php"><img class="brand-logo" src="assets/curri-kotoh-logo.png" alt=""><span>Curri'KoToh</span></a>
                     <div class="landing-nav-actions">
                         <a href="#landing-pipeline">How it works</a>
                         <a href="login.php">Log in</a>
@@ -128,8 +128,8 @@ if ($isGuestMode) {
         </div>
 
         <footer class="landing-footer">
-            <a class="landing-brand" href="landing.php"><span class="wordmark-mark" aria-hidden="true">C</span><span>Curriculum Enhancer</span></a>
-            <p>&copy; 2026 Curriculum Enhancer. All rights reserved.</p>
+            <a class="landing-brand" href="landing.php"><img class="brand-logo" src="assets/curri-kotoh-logo.png" alt=""><span>Curri'KoToh</span></a>
+            <p>&copy; 2026 Curri'KoToh. All rights reserved.</p>
         </footer>
     </main>
 </body>

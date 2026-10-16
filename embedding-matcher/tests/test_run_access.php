@@ -16,6 +16,7 @@ if ($databasePath === false) {
 
 try {
     $db = new SQLite3($databasePath);
+    $db->busyTimeout(30000);
     $db->enableExceptions(true);
     $db->exec('CREATE TABLE users (id INTEGER PRIMARY KEY, role TEXT NOT NULL)');
     $db->exec('CREATE TABLE generated_curriculum_runs (id INTEGER PRIMARY KEY, created_by_user_id INTEGER)');

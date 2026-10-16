@@ -96,6 +96,7 @@ if (
     && ($requestedRunId !== null || $deleteAction === 'delete' || $draftUpdateAction === 'save' || $chatAction === 'send')
 ) {
     $accessDb = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $accessDb->busyTimeout(30000);
     $accessDb->enableExceptions(true);
     $requestedRun = run_access_require($accessDb, $requestedRunId, $currentUser);
     if ($deleteAction === 'delete' && !run_access_can_delete($currentUser, $requestedRun)) {
@@ -111,7 +112,6 @@ if (
 $guestTrialLimitReached = $isGuestMode && guest_trial_limit_reached();
 $generationMessage = '';
 $generationError = '';
-$offlineFallbackDetected = false;
 $apiKeyMessage = '';
 $accountMenuOpen = false;
 $apiKeyMessageType = 'warning';
@@ -146,6 +146,7 @@ if ($chatAction === 'send' && current_user() === null) {
 if ($deleteAction === 'delete') {
     try {
         $deleteDb = new SQLite3($dbPath);
+        $deleteDb->busyTimeout(30000);
         $deleteDb->enableExceptions(true);
         run_access_delete($deleteDb, $deleteRunId, $currentUser);
         $deleteDb->close();
@@ -168,6 +169,7 @@ if ($deleteAction === 'delete') {
 $schemaDb = null;
 if (!$isGuestMode) {
     $schemaDb = new SQLite3($dbPath);
+    $schemaDb->busyTimeout(30000);
     $schemaDb->enableExceptions(true);
 $schemaDb->exec(
     "CREATE TABLE IF NOT EXISTS generated_curriculum_chat (
@@ -224,6 +226,7 @@ if ($draftUpdateAction === 'save') {
         run_access_not_found();
     }
     $updateDb = new SQLite3($dbPath);
+    $updateDb->busyTimeout(30000);
     $updateDb->enableExceptions(true);
     $draftOwner = run_access_require($updateDb, $draftUpdateRunId, $currentUser);
     if (!run_access_can_update($currentUser, $draftOwner)) {
@@ -233,24 +236,18 @@ if ($draftUpdateAction === 'save') {
 
     $userTitle = draft_management_clean_text($_POST['user_title'] ?? null, 150);
     $userNotes = draft_management_clean_text($_POST['user_notes'] ?? null, 5000);
-    $finalizedValue = draft_management_finalized_value($_POST['is_finalized'] ?? null);
-    if ($userTitle === null || $userNotes === null || $finalizedValue === null) {
+    if ($userTitle === null || $userNotes === null) {
         $updateDb->close();
         http_response_code(400);
-        exit('Invalid draft update. Check the title, notes, and finalized value.');
+        exit('Invalid draft update. Check the title and notes.');
     }
 
-    $updateStmt = $updateDb->prepare(
-        'UPDATE generated_curriculum_runs
-         SET user_title = :title, user_notes = :notes, is_finalized = :finalized,
-             updated_at = CURRENT_TIMESTAMP
-         WHERE id = :id'
+    draft_management_update_details(
+        $updateDb,
+        $draftUpdateRunId,
+        $userTitle !== '' ? $userTitle : null,
+        $userNotes
     );
-    $updateStmt->bindValue(':title', $userTitle !== '' ? $userTitle : null, $userTitle !== '' ? SQLITE3_TEXT : SQLITE3_NULL);
-    $updateStmt->bindValue(':notes', $userNotes, SQLITE3_TEXT);
-    $updateStmt->bindValue(':finalized', $finalizedValue, SQLITE3_INTEGER);
-    $updateStmt->bindValue(':id', $draftUpdateRunId, SQLITE3_INTEGER);
-    $updateStmt->execute();
     $updateDb->close();
 
     $_SESSION['flash_success'] = 'Draft details updated.';
@@ -267,24 +264,27 @@ if ($chatAction === 'send' && $chatRunId !== null && $chatMessage !== '') {
         $_SESSION['flash_error'] = GEMINI_API_KEY_REQUIRED_MESSAGE;
         $_SESSION['open_api_key_settings'] = true;
     } else {
-        $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
         $script = __DIR__ . '/user_operations.py';
-        if (file_exists($pythonExe) && file_exists($script)) {
-            $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-                ' --chat --run-id ' . escapeshellarg((string)$chatRunId) .
-                ' --message ' . escapeshellarg($chatMessage) .
-                    ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
-                    ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
-                    ' --admin-access-policy ' . escapeshellarg(RUN_ACCESS_ADMIN_POLICY) .
-                    ' --output-db ' . escapeshellarg($dbPath) . ' 2>&1';
-            try {
+        try {
+            $pythonExe = python_executable();
+            if (file_exists($script)) {
+                $command = [
+                    $pythonExe,
+                    $script,
+                    '--chat', '--run-id', (string)$chatRunId,
+                    '--message', $chatMessage,
+                    '--actor-user-id', (string)$currentUser['id'],
+                    '--actor-username', (string)$currentUser['username'],
+                    '--admin-access-policy', RUN_ACCESS_ADMIN_POLICY,
+                    '--output-db', $dbPath,
+                ];
                 run_command_with_api_key($command, $currentUserApiKey);
-            } catch (RuntimeException $error) {
-                error_log('Curriculum chat subprocess failed to start: ' . $error->getMessage());
-                $_SESSION['flash_error'] = 'The curriculum assistant could not be started.';
+            } else {
+                throw new RuntimeException('The curriculum assistant is not available.');
             }
-        } else {
-            $_SESSION['flash_error'] = 'The curriculum assistant is not available.';
+        } catch (RuntimeException $error) {
+            error_log('Curriculum chat subprocess failed to start.');
+            $_SESSION['flash_error'] = python_job_failure_message($error, 'The curriculum assistant could not be started.');
         }
     }
 
@@ -314,6 +314,10 @@ if ($generateAction === 'generate') {
                     'type' => 'generated',
                     'program' => $program,
                     'model_name' => 'gemini-3.5-flash-lite',
+                    'generation_mode' => is_array($requestedDraft[0] ?? null)
+                        && in_array($requestedDraft[0]['_generation_mode'] ?? null, ['online', 'offline'], true)
+                        ? $requestedDraft[0]['_generation_mode']
+                        : null,
                     'prompt' => $prompt,
                     'draft' => $requestedDraft,
                 ];
@@ -325,41 +329,43 @@ if ($generateAction === 'generate') {
                 $generationError = 'The guest trial could not generate a curriculum draft. Please try again.';
             }
         } else {
-            $pythonExe = __DIR__ . '/venv/Scripts/python.exe';
             $script = __DIR__ . '/user_operations.py';
-            $coursesCsv = __DIR__ . '/../curriculum-generator-kb/data/curriculum_dataset_with_ids.csv';
+            $coursesCsv = curriculum_kb_dir() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'curriculum_dataset_with_ids.csv';
             $coverageCsv = __DIR__ . '/skill_coverage.csv';
 
-            if (file_exists($pythonExe) && file_exists($script)) {
-                $command = escapeshellarg($pythonExe) . ' ' . escapeshellarg($script) .
-                    ' --generate --program ' . escapeshellarg($program) .
-                    ' --prompt ' . escapeshellarg($prompt) .
-                    ' --courses-csv ' . escapeshellarg($coursesCsv) .
-                    ' --skill-coverage ' . escapeshellarg($coverageCsv) .
-                    ' --output-db ' . escapeshellarg($dbPath) .
-                    ' --actor-user-id ' . escapeshellarg((string)$currentUser['id']) .
-                    ' --actor-username ' . escapeshellarg((string)$currentUser['username']) .
-                    ' --limit 6 2>&1';
+            try {
+                $pythonExe = python_executable();
+                if (!file_exists($script)) {
+                    throw new RuntimeException('The curriculum generation runtime is unavailable.');
+                }
+                $command = [
+                    $pythonExe, $script,
+                    '--generate', '--program', $program,
+                    '--prompt', $prompt,
+                    '--courses-csv', $coursesCsv,
+                    '--skill-coverage', $coverageCsv,
+                    '--output-db', $dbPath,
+                    '--actor-user-id', (string)$currentUser['id'],
+                    '--actor-username', (string)$currentUser['username'],
+                    '--limit', '6',
+                ];
                 set_time_limit(180);
-                try {
-                    $generationOutput = run_command_with_api_key($command, $currentUserApiKey);
-                } catch (RuntimeException $error) {
-                    error_log('Curriculum generation subprocess failed to start: ' . $error->getMessage());
-                    $generationOutput = null;
+                $generationOutput = run_command_with_api_key($command, $currentUserApiKey);
+            } catch (RuntimeException $error) {
+                error_log('Curriculum generation subprocess failed.');
+                $generationError = python_job_failure_message($error, 'Draft generation could not be completed. Please try again.');
+                $generationOutput = null;
+            }
+            if ($generationError === '' && $generationOutput !== null && strpos($generationOutput, '[Offline Fallback]') !== false) {
+                $failureDetail = 'Gemini API request failed. The offline template was used for this draft.';
+                if (preg_match('/Gemini curriculum generation failed:\s*(.+)/', $generationOutput, $failureMatch)) {
+                    $failureDetail = 'Generation unavailable: ' . trim($failureMatch[1]);
                 }
-                if ($generationOutput !== null && strpos($generationOutput, '[Offline Fallback]') !== false) {
-                    $failureDetail = 'Gemini API request failed. The offline template was used for this draft.';
-                    if (preg_match('/Gemini curriculum generation failed:\s*(.+)/', $generationOutput, $failureMatch)) {
-                        $failureDetail = 'Generation unavailable: ' . trim($failureMatch[1]);
-                    }
-                    $generationMessage = $failureDetail . ' Review the draft below.';
-                } elseif ($generationOutput !== null && $generationOutput !== '') {
-                    $generationMessage = 'Draft generated for ' . $program . '. Review the curriculum section below.';
-                } else {
-                    $generationError = 'Draft generation could not be completed. Please try again.';
-                }
-            } else {
-                $generationError = 'Python environment not found. Please activate the project venv first.';
+                $generationMessage = $failureDetail . ' Review the draft below.';
+            } elseif ($generationError === '' && $generationOutput !== null && $generationOutput !== '') {
+                $generationMessage = 'Draft generated for ' . $program . '. Review the curriculum section below.';
+            } elseif ($generationError === '') {
+                $generationError = 'Draft generation could not be completed. Please try again.';
             }
         }
     }
@@ -369,13 +375,14 @@ $runs = [];
 $chatByRun = [];
 if (!$isGuestMode) {
     $db = new SQLite3($dbPath, SQLITE3_OPEN_READONLY);
+    $db->busyTimeout(30000);
     $db->enableExceptions(true);
 
     $runScope = run_access_sql_scope($currentUser);
     $query = "
         SELECT r.id, r.program, r.prompt, r.model_name, r.status, r.generated_at,
                r.created_by_user_id, r.created_by_username, r.user_title, r.user_notes,
-               r.is_finalized, r.updated_at,
+               r.generation_mode, r.updated_at,
                s.id as subject_id, s.year, s.term, s.subject_code, s.subject_title,
                s.units, s.prerequisites, s.topics, s.rationale, s.description, s.source_colleges,
                s.mapped_industry_skills, s.source
@@ -391,9 +398,6 @@ if (!$isGuestMode) {
     $result = $runStmt->execute();
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         $runRows[] = $row;
-        if (strpos(strtolower((string)($row['rationale'] ?? '')), '[offline template fallback]') !== false) {
-            $offlineFallbackDetected = true;
-        }
     }
 
     $chatStmt = $db->prepare(
@@ -473,9 +477,54 @@ if (!$isGuestMode) {
                 'status' => 'draft',
                 'generated_at' => date('Y-m-d H:i:s'),
                 'created_by_username' => 'Guest trial',
+                'generation_mode' => $guestDraft['generation_mode'] ?? null,
             ],
             'subjects' => $guestSubjectRows,
         ];
+    }
+}
+
+$toolsByCourseTitle = [];
+$toolsRecommendationError = '';
+$courseTitles = [];
+foreach ($runs as $runData) {
+    foreach ($runData['subjects'] as $subject) {
+        $title = trim((string)($subject['subject_title'] ?? ''));
+        if ($title !== '') {
+            $courseTitles[$title] = true;
+        }
+    }
+}
+if ($courseTitles) {
+    $titlesFile = tempnam(sys_get_temp_dir(), 'curriculum-course-titles-');
+    try {
+        $pythonExe = python_executable();
+        $encodedTitles = json_encode(array_keys($courseTitles), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if ($titlesFile === false || $encodedTitles === false
+            || file_put_contents($titlesFile, $encodedTitles) === false) {
+            throw new RuntimeException('Course tool recommendations could not be prepared.');
+        }
+        $recommendationOutput = run_command_with_api_key(
+            [$pythonExe, __DIR__ . '/recommended_tools.py', '--titles-file', $titlesFile],
+            null
+        );
+        $decodedRecommendations = json_decode($recommendationOutput, true);
+        if (!is_array($decodedRecommendations)) {
+            throw new RuntimeException('Course tool recommendations returned invalid data.');
+        }
+        foreach (array_keys($courseTitles) as $courseTitle) {
+            if (!isset($decodedRecommendations[$courseTitle]) || !is_array($decodedRecommendations[$courseTitle])) {
+                throw new RuntimeException('Course tool recommendations returned an incomplete result.');
+            }
+        }
+        $toolsByCourseTitle = $decodedRecommendations;
+    } catch (RuntimeException $error) {
+        error_log('Generated curriculum tool recommendations failed: ' . $error->getMessage());
+        $toolsRecommendationError = 'Recommended tools could not be loaded. Please reload the page to try again.';
+    } finally {
+        if (is_string($titlesFile) && file_exists($titlesFile)) {
+            @unlink($titlesFile);
+        }
     }
 }
 ?>
@@ -503,10 +552,13 @@ if (!$isGuestMode) {
                 <?= htmlspecialchars($generationError) ?>
             </div>
         <?php endif; ?>
+        <?php if ($toolsRecommendationError !== ''): ?>
+            <div class="alert error" role="alert"><?= htmlspecialchars($toolsRecommendationError, ENT_QUOTES, 'UTF-8') ?></div>
+        <?php endif; ?>
 
         <section class="card generation-form-panel" id="generate-curriculum">
             <div class="panel-body">
-                <form method="post" class="generation-form">
+                <form method="post" class="generation-form" data-loading="generate">
                     <?= csrf_token_field() ?>
                     <?php if ($isGuestMode): ?><input type="hidden" name="guest_tab_id" value=""><?php endif; ?>
                     <input type="hidden" name="generate_action" value="generate">
@@ -537,11 +589,11 @@ if (!$isGuestMode) {
                     <input id="draft-search" type="search" placeholder="Run number, program, or prompt">
                 </div>
                 <div class="field">
-                    <label for="draft-status-filter">Status</label>
-                    <select id="draft-status-filter">
-                        <option value="">All statuses</option>
-                        <option value="draft">Draft</option>
-                        <option value="finalized">Finalized</option>
+                    <label for="draft-mode-filter">Generation mode</label>
+                    <select id="draft-mode-filter">
+                        <option value="">All modes</option>
+                        <option value="online">Online Template</option>
+                        <option value="offline">Offline template</option>
                     </select>
                 </div>
                 <div class="field">
@@ -572,8 +624,10 @@ if (!$isGuestMode) {
                         ksort($yearTerms, SORT_NUMERIC);
                     }
                     unset($yearTerms);
-                    $runStatus = draft_management_status_label($run['is_finalized'] ?? 0);
-                    $runStatusClass = strtolower($runStatus);
+                    $runGenerationMode = in_array($run['generation_mode'] ?? null, ['online', 'offline'], true)
+                        ? (string)$run['generation_mode']
+                        : 'unknown';
+                    $runGenerationLabel = draft_management_generation_mode_label($run['generation_mode'] ?? null);
                     $runId = (int)$run['id'];
                     $runTitle = trim((string)($run['user_title'] ?? '')) ?: (string)$run['program'];
                     $chatTargetedRun = isset($_GET['chat_run_id']) && (int)$_GET['chat_run_id'] === $runId;
@@ -583,18 +637,17 @@ if (!$isGuestMode) {
                     $runIsOpen = $chatTargetedRun || $updateTargetedRun || (!$hasRequestedRun && $isNewestRun);
                     $runSearchText = 'Run #' . $runId . ' ' . $runTitle . ' ' . (string)$run['program'] . ' ' . (string)$run['prompt'];
                 ?>
-                <details class="card draft-item" id="run-<?= $runId ?>" data-status="<?= htmlspecialchars(strtolower($runStatus), ENT_QUOTES, 'UTF-8') ?>" data-program="<?= htmlspecialchars((string)$run['program'], ENT_QUOTES, 'UTF-8') ?>" data-search="<?= htmlspecialchars($runSearchText, ENT_QUOTES, 'UTF-8') ?>" <?= $runIsOpen ? 'open' : '' ?>>
+                <details class="card draft-item" id="run-<?= $runId ?>" data-generation-mode="<?= htmlspecialchars($runGenerationMode, ENT_QUOTES, 'UTF-8') ?>" data-program="<?= htmlspecialchars((string)$run['program'], ENT_QUOTES, 'UTF-8') ?>" data-search="<?= htmlspecialchars($runSearchText, ENT_QUOTES, 'UTF-8') ?>" <?= $runIsOpen ? 'open' : '' ?>>
                     <summary class="draft-summary">
                         <span class="draft-chevron" aria-hidden="true"></span>
                         <span class="draft-summary-main">
                             <span class="draft-program"><?= htmlspecialchars($runTitle, ENT_QUOTES, 'UTF-8') ?></span>
                             <span class="draft-run-number">Run #<?= $runId ?></span>
                             <span class="draft-badges">
-                                <span class="draft-status"><span class="status-dot status-dot-<?= htmlspecialchars($runStatusClass, ENT_QUOTES, 'UTF-8') ?>"></span><?= htmlspecialchars($runStatus) ?></span>
-                                <?php if ($runOfflineFallback): ?><span class="fallback-badge">Offline template</span><?php endif; ?>
+                                <span class="generation-mode"><span class="generation-mode-dot generation-mode-<?= htmlspecialchars($runGenerationMode, ENT_QUOTES, 'UTF-8') ?>" aria-hidden="true"></span><?= htmlspecialchars($runGenerationLabel, ENT_QUOTES, 'UTF-8') ?></span>
                             </span>
                             <span class="draft-date"><strong>Generated:</strong> <?= htmlspecialchars((string)$run['generated_at']) ?></span>
-                            <span class="draft-date"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span>
+                            <span class="draft-date draft-created-by"><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span>
                             <span class="draft-prompt" title="<?= htmlspecialchars((string)$run['prompt'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string)$run['prompt']) ?></span>
                         </span>
                     </summary>
@@ -634,14 +687,14 @@ if (!$isGuestMode) {
                         <?php endif; ?>
                     </div>
                     <?php if ($runOfflineFallback): ?>
-                        <div class="alert warning draft-fallback-warning" role="status">This draft used the offline template because the Gemini API request was unavailable. Review its content before approval.</div>
+                        <div class="alert warning draft-fallback-warning" role="status">This run used an offline template because a Gemini request was unavailable. Review its content before use.</div>
                     <?php endif; ?>
                     <div class="run-header">
                         <div class="run-title">
                             <h2><?= htmlspecialchars($runTitle, ENT_QUOTES, 'UTF-8') ?></h2>
-                            <span class="meta">Run #<?= $runId ?> · <span class="status-badge <?= htmlspecialchars(strtolower($runStatus), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($runStatus) ?></span></span>
+                            <span class="meta">Run #<?= $runId ?></span>
                         </div>
-                        <div class="run-meta meta"><span><strong>Program:</strong> <?= htmlspecialchars((string)$run['program']) ?></span><span><strong>Generated:</strong> <?= htmlspecialchars($run['generated_at']) ?></span><?php if (!empty($run['updated_at'])): ?><span><strong>Updated:</strong> <?= htmlspecialchars((string)$run['updated_at']) ?></span><?php endif; ?><span><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span><span><strong>Prompt:</strong> <?= htmlspecialchars($run['prompt']) ?></span></div>
+                        <div class="run-meta meta"><span><strong>Program:</strong> <?= htmlspecialchars((string)$run['program']) ?></span><span><strong>Generation:</strong> <?= htmlspecialchars($runGenerationLabel, ENT_QUOTES, 'UTF-8') ?></span><span><strong>Generated:</strong> <?= htmlspecialchars($run['generated_at']) ?></span><?php if (!empty($run['updated_at'])): ?><span><strong>Updated:</strong> <?= htmlspecialchars((string)$run['updated_at']) ?></span><?php endif; ?><span><strong>Created by:</strong> <?= htmlspecialchars(trim((string)($run['created_by_username'] ?? '')) !== '' ? (string)$run['created_by_username'] : 'Unattributed') ?></span><span><strong>Prompt:</strong> <?= htmlspecialchars($run['prompt']) ?></span></div>
                     </div>
                     <p class="notice warning advisory-disclaimer">Advisory recommendations only: verify all content before any use.</p>
                     <?php if (draft_management_can_update(current_user(), $run)): ?>
@@ -649,11 +702,9 @@ if (!$isGuestMode) {
                         <?= csrf_token_field() ?>
                         <input type="hidden" name="draft_update_action" value="save">
                         <input type="hidden" name="draft_update_run_id" value="<?= $runId ?>">
-                        <div class="field"><label for="user_title_<?= $runId ?>">Draft title (optional)</label><input id="user_title_<?= $runId ?>" name="user_title" maxlength="150" value="<?= htmlspecialchars((string)($run['user_title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"></div>
+                        <div class="field"><label for="user_title_<?= $runId ?>">Title (optional)</label><input id="user_title_<?= $runId ?>" name="user_title" maxlength="150" value="<?= htmlspecialchars((string)($run['user_title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"></div>
                         <div class="field notes"><label for="user_notes_<?= $runId ?>">Personal notes</label><textarea id="user_notes_<?= $runId ?>" name="user_notes" maxlength="5000"><?= htmlspecialchars((string)($run['user_notes'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea></div>
-                        <input type="hidden" name="is_finalized" value="0">
-                        <label class="field checkbox-field"><input type="checkbox" name="is_finalized" value="1" <?= (int)($run['is_finalized'] ?? 0) === 1 ? 'checked' : '' ?>> Finalized (your own tracking only; not approval or validation)</label>
-                        <button type="submit">Save draft details</button>
+                        <button type="submit">Save details</button>
                     </form>
                     <?php endif; ?>
                     <div class="curriculum">
@@ -667,7 +718,7 @@ if (!$isGuestMode) {
                                             <table class="course-table"><thead><tr><th>Code</th><th>Course title</th><th class="units">Units</th></tr></thead><tbody>
                                                 <?php foreach ($subjects as $subject): ?>
                                                     <?php $prerequisites = trim((string)$subject['prerequisites']); $skillValue = $subject['mapped_industry_skills'] ?? []; $skills = is_array($skillValue) ? $skillValue : json_decode((string)$skillValue, true); $topicValue = $subject['topics'] ?? []; $topics = is_array($topicValue) ? $topicValue : json_decode((string)$topicValue, true); if (!is_array($skills)) { $skills = []; } if (!is_array($topics)) { $topics = []; } $description = trim((string)($subject['description'] ?? '')); if ($description === '') { $description = trim((string)$subject['rationale']); } ?>
-                                                    <tr><td><span class="course-code"><?= htmlspecialchars((string)$subject['subject_code']) ?></span></td><td><div class="course-title"><?= htmlspecialchars((string)$subject['subject_title']) ?></div><?php if (current_user() !== null): ?><button type="button" class="ask-subject" data-chat-target="chat_message_<?= $runId ?>" data-prompt="<?= htmlspecialchars('Why did you place "' . (string)$subject['subject_title'] . '" in Year ' . (string)$subject['year'] . ' Term ' . (string)$subject['term'] . '?', ENT_QUOTES, 'UTF-8') ?>">Ask about this subject</button><?php endif; ?><div class="course-description"><?= htmlspecialchars($description) ?></div><?php if (!empty($topics)): ?><ul class="course-topics"><?php foreach ($topics as $topic): ?><li><?= htmlspecialchars((string)$topic) ?></li><?php endforeach; ?></ul><?php endif; ?><div class="course-meta"><span><strong>Prerequisite:</strong> <?= $prerequisites !== '' ? htmlspecialchars($prerequisites) : 'None' ?></span><?php if (!empty($skills)): ?><span><strong>Mapped skills:</strong> <?php foreach ($skills as $skillIndex => $skill): ?><?= $skillIndex > 0 ? ', ' : '' ?><?= htmlspecialchars((string)$skill) ?><?php endforeach; ?></span><?php endif; ?></div></td><td class="units"><?= htmlspecialchars((string)$subject['units']) ?></td></tr>
+                                                    <tr><td><span class="course-code"><?= htmlspecialchars((string)$subject['subject_code']) ?></span></td><td><div class="course-title"><?= htmlspecialchars((string)$subject['subject_title']) ?></div><?php if (current_user() !== null): ?><button type="button" class="ask-subject" data-chat-target="chat_message_<?= $runId ?>" data-prompt="<?= htmlspecialchars('Why did you place "' . (string)$subject['subject_title'] . '" in Year ' . (string)$subject['year'] . ' Term ' . (string)$subject['term'] . '?', ENT_QUOTES, 'UTF-8') ?>">Ask about this subject</button><?php endif; ?><div class="course-description"><?= htmlspecialchars($description) ?></div><?php if (!empty($topics)): ?><ul class="course-topics"><?php foreach ($topics as $topic): ?><li><?= htmlspecialchars((string)$topic) ?></li><?php endforeach; ?></ul><?php endif; ?><?php $toolRecommendations = $toolsByCourseTitle[trim((string)$subject['subject_title'])] ?? []; if (is_array($toolRecommendations) && $toolRecommendations): ?><div class="course-description course-description-labeled"><strong>Recommended tools/apps:</strong><span><?php foreach ($toolRecommendations as $toolRecommendation): ?><?= htmlspecialchars((string)($toolRecommendation['tool'] ?? ''), ENT_QUOTES, 'UTF-8') ?> — <?= htmlspecialchars((string)($toolRecommendation['reason'] ?? ''), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($toolRecommendation['documentation']) && is_array($toolRecommendation['documentation'])): ?> (<?php foreach ($toolRecommendation['documentation'] as $documentationIndex => $documentation): ?><?= $documentationIndex > 0 ? '; ' : '' ?><a href="<?= htmlspecialchars((string)($documentation['url'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars((string)($documentation['label'] ?? 'Documentation'), ENT_QUOTES, 'UTF-8') ?></a><?php endforeach; ?>)<?php endif; ?><br><?php endforeach; ?></span></div><?php endif; ?><div class="course-meta"><span><strong>Prerequisite:</strong> <?= $prerequisites !== '' ? htmlspecialchars($prerequisites) : 'None' ?></span><?php if (!empty($skills)): ?><span><strong>Mapped skills:</strong> <?php foreach ($skills as $skillIndex => $skill): ?><?= $skillIndex > 0 ? ', ' : '' ?><?= htmlspecialchars((string)$skill) ?><?php endforeach; ?></span><?php endif; ?></div></td><td class="units"><?= htmlspecialchars((string)$subject['units']) ?></td></tr>
                                                 <?php endforeach; ?>
                                             </tbody></table>
                                         </div>
@@ -702,12 +753,13 @@ if (!$isGuestMode) {
                             <button type="button" class="suggested-prompt" data-chat-target="chat_message_<?= (int)$run['id'] ?>" data-prompt="<?= htmlspecialchars($suggestedPrompt, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($suggestedPrompt) ?></button>
                         <?php endforeach; ?>
                     </div>
-                    <form method="post" class="chat-form">
+                    <form method="post" class="chat-form" data-loading="chat">
                         <?= csrf_token_field() ?>
                         <input type="hidden" name="chat_action" value="send">
                         <input type="hidden" name="chat_run_id" value="<?= $runId ?>">
                         <textarea id="chat_message_<?= $runId ?>" name="chat_message" placeholder="Ask a question or request an edit..." required></textarea>
                         <button type="submit">Send Question / Request Edit</button>
+                        <p class="loading-inline" data-loading-status role="status" aria-live="polite" hidden>Working...</p>
                     </form>
                 </div>
                 <?php elseif (current_user() !== null): ?>
@@ -715,27 +767,29 @@ if (!$isGuestMode) {
                 <?php endif; ?>
                 </details>
         <?php endforeach; ?>
+<?php require __DIR__ . '/partials/loading_overlay.php'; ?>
 <?php require __DIR__ . '/partials/dashboard_shell_end.php'; ?>
     <script src="assets/jspdf.umd.min.js"></script>
     <script src="assets/jspdf.plugin.autotable.min.js"></script>
     <script src="assets/pdf-export.js"></script>
+    <script src="assets/loading-overlay.js"></script>
     <script>
         var draftItems = Array.prototype.slice.call(document.querySelectorAll('.draft-item'));
         var draftSearch = document.getElementById('draft-search');
-        var draftStatusFilter = document.getElementById('draft-status-filter');
+        var draftModeFilter = document.getElementById('draft-mode-filter');
         var draftProgramFilter = document.getElementById('draft-program-filter');
         var draftCount = document.getElementById('draft-count');
         var draftEmpty = document.getElementById('draft-empty');
 
         function filterDrafts() {
             var searchTerm = draftSearch.value.trim().toLowerCase();
-            var selectedStatus = draftStatusFilter.value;
+            var selectedMode = draftModeFilter.value;
             var selectedProgram = draftProgramFilter.value;
             var visibleCount = 0;
 
             draftItems.forEach(function (draft) {
                 var matches = draft.dataset.search.toLowerCase().indexOf(searchTerm) !== -1
-                    && (!selectedStatus || draft.dataset.status === selectedStatus)
+                    && (!selectedMode || draft.dataset.generationMode === selectedMode)
                     && (!selectedProgram || draft.dataset.program === selectedProgram);
                 draft.hidden = !matches;
                 if (matches) {
@@ -747,9 +801,9 @@ if (!$isGuestMode) {
             draftEmpty.hidden = visibleCount !== 0;
         }
 
-        if (draftSearch && draftStatusFilter && draftProgramFilter && draftCount && draftEmpty) {
+        if (draftSearch && draftModeFilter && draftProgramFilter && draftCount && draftEmpty) {
             draftSearch.addEventListener('input', filterDrafts);
-            draftStatusFilter.addEventListener('change', filterDrafts);
+            draftModeFilter.addEventListener('change', filterDrafts);
             draftProgramFilter.addEventListener('change', filterDrafts);
 
             var deepLinkDraft = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;

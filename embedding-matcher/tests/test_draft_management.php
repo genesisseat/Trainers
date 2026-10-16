@@ -17,13 +17,21 @@ expect_true(draft_management_clean_text(str_repeat('n', 5001), 5000) === null, '
 expect_true(draft_management_clean_text("safe\x01text", 20) === 'safetext', 'Control characters should be stripped.');
 expect_true(draft_management_clean_text("safe\xC2\x85text", 20) === 'safetext', 'Unicode control characters should be stripped.');
 expect_true(draft_management_clean_text([], 20) === null, 'Non-string input should be rejected.');
-expect_true(draft_management_finalized_value('0') === 0, 'False form value should be accepted.');
-expect_true(draft_management_finalized_value('1') === 1, 'True form value should be accepted.');
-expect_true(draft_management_finalized_value('true') === null, 'Non-boolean form value should be rejected.');
-expect_true(draft_management_finalized_value(1) === null, 'Non-string form value should be rejected.');
-expect_true(draft_management_status_label('approved') === 'Draft', 'Legacy statuses should render as Draft.');
-expect_true(draft_management_status_label(0) === 'Draft', 'Unfinalized runs should render as Draft.');
-expect_true(draft_management_status_label(1) === 'Finalized', 'Finalized runs should render as Finalized.');
+expect_true(draft_management_generation_mode_label('online') === 'Online Template', 'Online runs should have the agreed label.');
+expect_true(draft_management_generation_mode_label('offline') === 'Offline template', 'Offline runs should have the fallback label.');
+expect_true(draft_management_generation_mode_label(null) === 'Not recorded', 'Unknown legacy modes should remain neutral.');
+expect_true(
+    draft_management_enhancement_generation_mode(['fallback' => true, 'draft_fallback' => false]) === 'online',
+    'A confirmed Gemini stage should mark an enhanced run online.'
+);
+expect_true(
+    draft_management_enhancement_generation_mode(['fallback' => true, 'draft_fallback' => true]) === 'offline',
+    'Both confirmed template stages should mark an enhanced run offline.'
+);
+expect_true(
+    draft_management_enhancement_generation_mode(['fallback' => true]) === null,
+    'Incomplete enhanced outcome evidence should remain unknown.'
+);
 expect_true(
     draft_management_can_update(['id' => 7, 'role' => 'user'], ['created_by_user_id' => 7]),
     'The creator should be allowed to update the run.'
@@ -117,4 +125,35 @@ expect_true(
 $_SESSION['csrf_token'] = 'test-session-token';
 expect_true(validate_csrf_token('test-session-token'), 'A matching session CSRF token should be accepted.');
 expect_true(!validate_csrf_token('wrong-token'), 'A mismatched CSRF token should be rejected.');
+
+$updateDb = new SQLite3(':memory:');
+$updateDb->enableExceptions(true);
+$updateDb->exec(
+    'CREATE TABLE generated_curriculum_runs (
+        id INTEGER PRIMARY KEY,
+        user_title TEXT,
+        user_notes TEXT,
+        is_finalized INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT
+    )'
+);
+$updateDb->exec("INSERT INTO generated_curriculum_runs (id) VALUES (1)");
+draft_management_update_details($updateDb, 1, 'Renamed run', 'Reviewer notes');
+$updatedRun = $updateDb->querySingle(
+    'SELECT user_title, user_notes, updated_at FROM generated_curriculum_runs WHERE id = 1',
+    true
+);
+$runColumns = [];
+$columnResult = $updateDb->query('PRAGMA table_info(generated_curriculum_runs)');
+while ($column = $columnResult->fetchArray(SQLITE3_ASSOC)) {
+    $runColumns[] = $column['name'];
+}
+expect_true(
+    $updatedRun['user_title'] === 'Renamed run'
+        && $updatedRun['user_notes'] === 'Reviewer notes'
+        && $updatedRun['updated_at'] !== null,
+    'Rename and Notes updates should work without a finalized form value.'
+);
+expect_true(in_array('is_finalized', $runColumns, true), 'The legacy column must remain in place.');
+$updateDb->close();
 echo "Draft management helper tests passed." . PHP_EOL;

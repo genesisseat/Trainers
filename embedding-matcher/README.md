@@ -1,4 +1,4 @@
-# Curriculum Matcher & Generator
+# Curri'KoToh
 
 This project is a local-first curriculum intelligence system built for the Trainer workflow. It combines:
 
@@ -12,22 +12,81 @@ The project is designed to support curriculum gap analysis and evidence-based cu
 
 ## Workplace and data locations
 
-- Project root: W:\Trainers\embedding-matcher
-- Knowledge base: W:\Trainers\curriculum-generator-kb
-- Course dataset: W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv
-- Skill list: W:\Trainers\curriculum-generator-kb\03_industry_skills_data.md
-- Local database: W:\Trainers\embedding-matcher\curriculum_matching.db
+- The project directory is `embedding-matcher`.
+- Source data is expected in a sibling `curriculum-generator-kb` directory.
+- The local database is `embedding-matcher/curriculum_matching.db`.
 
 ## Installed stack and services
 
-This project is currently set up for a Windows workstation with:
+The tested project environment uses:
 
-- Python 3.10+
-- virtual environment in W:\Trainers\embedding-matcher\venv
+- Python 3.12.10
+- packages listed in `requirements.txt` (direct dependencies) and `requirements-lock.txt` (full environment snapshot)
 - SQLite for local storage
 - PHP 8.3 for the browser interface
-- Jupyter Notebook for experimentation and analysis
 - Hugging Face model downloads through the local cache
+
+## Setup on a new machine
+
+Use Python 3.12.10, the version used by the current project virtual environment. Run these commands from the `embedding-matcher` directory. The curriculum dataset and skill source files must be available in the sibling `curriculum-generator-kb` directory before database initialization.
+
+### Windows PowerShell
+
+```powershell
+py -3.12 -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+```
+
+For an NVIDIA GPU, first install the matching CUDA-enabled PyTorch build using the instructions at [pytorch.org](https://pytorch.org/). For a CPU-only machine, including a typical cloud VM, install the CPU build first to avoid downloading the very large CUDA package:
+
+```powershell
+python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements.txt
+```
+
+Use `requirements.txt` for the human-readable direct dependency list. To reproduce the complete package-version snapshot from the current venv instead, use `python -m pip install -r requirements-lock.txt` in place of the last command above.
+
+### Linux or macOS
+
+```sh
+python3.12 -m venv venv
+source venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements.txt
+```
+
+Use `requirements.txt` for the human-readable direct dependency list. To reproduce the complete package-version snapshot from the current venv instead, use `python -m pip install -r requirements-lock.txt` in place of the last command above. On a machine with an NVIDIA GPU, install its matching CUDA-enabled PyTorch build from [pytorch.org](https://pytorch.org/) instead of the CPU-only command, then install the selected requirements file.
+
+### Initialize and run
+
+Initialize the local SQLite database from the project directory:
+
+```sh
+python database_setup.py
+```
+
+`database_setup.py` creates the database schema and imports the course dataset and skill data. It requires the source files in the sibling `curriculum-generator-kb` directory; it does not create an empty database when those required files are absent.
+
+Install PHP 8.3 for the browser interface, with the `sqlite3` and `pdo_sqlite` extensions enabled. The application uses PHP's `SQLite3` API; enable OpenSSL when serving the site over HTTPS. Start the local development server from `embedding-matcher`:
+
+```sh
+php -S 127.0.0.1:8000
+```
+
+Open `http://127.0.0.1:8000/`. The first account created becomes `super_admin`. Each user adds their own Gemini API key from the account menu. The embedding model downloads from Hugging Face on first use, so internet access is required for the initial model download.
+
+The virtual environment (`venv/`), SQLite database files (including `curriculum_matching.db`), and `settings.json` are local-only and are not stored in the repository.
+
+### Runtime configuration
+
+- `PYTHON_BIN` optionally selects an existing Python executable. If it is unset or points to a missing file, PHP uses `venv\Scripts\python.exe` on Windows or `venv/bin/python` on Linux/macOS.
+- `KB_DIR` optionally selects the knowledge-base directory. Without it, the app uses the sibling `curriculum-generator-kb` directory. A relative override is resolved from the workspace root.
+- The app respects an externally set `HF_HOME`, `HF_HUB_CACHE`, `HUGGINGFACE_HUB_CACHE`, `TRANSFORMERS_CACHE`, `SENTENCE_TRANSFORMERS_HOME`, or `HF_DATASETS_CACHE`. If none is set, Python uses `embedding-matcher/hf_cache`.
+- Python jobs are serialized across users with an OS file lock in the system temporary directory. A request waits up to 45 seconds for the lock, then returns a friendly busy message. Once started, a job is limited to 240 seconds; lock waiting plus processing is bounded to less than 300 seconds.
+- For nginx/PHP-FPM deployments, allow at least 300 seconds for the PHP request and upstream response so the browser can receive the completed result or timeout message.
+- On a server shell, run `php tools/check_runtime.php` from `embedding-matcher` to report the resolved interpreter, knowledge-base files, effective Hugging Face cache location, and database writability. The diagnostic does not print API keys.
 
 ## What the system does
 
@@ -51,27 +110,17 @@ This provides a foundation for:
 - program-level curriculum recommendations
 - year/term structure drafts
 - rationale and source college tracking
-- self-service draft titles, personal notes, and Finalized tracking
+- self-service run titles and personal notes
 
 ## Quick start
 
 ### 1) Open a terminal in the project folder
 
-```powershell
-cd W:\Trainers\embedding-matcher
-```
+See [Setup on a new machine](#setup-on-a-new-machine) to create and activate the environment on Windows, Linux, or macOS.
 
 ### 2) Activate the environment
 
-```powershell
-.\venv\Scripts\Activate.ps1
-```
-
-If PowerShell blocks script execution, run:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
-```
+Activate the venv using the command for your operating system in [Setup on a new machine](#setup-on-a-new-machine).
 
 ### 3) Run the standard skill-matching workflow
 
@@ -87,7 +136,7 @@ python user_operations.py --generate --program BSIT --prompt "Generate a BSIT cu
 
 ### 5) Manage a saved draft
 
-Open the Dashboard or the matching Generated/Enhanced drafts page. The run creator can edit its title and personal notes and mark it Finalized for their own tracking. Finalized does not imply approval or validation.
+Open the Dashboard or the matching Generated/Enhanced drafts page. The run creator can edit the run title and personal notes. Each run also displays its recorded generation mode: Online Template, Offline template, or Not recorded when legacy provenance is unavailable.
 
 ## Primary commands
 
@@ -122,11 +171,10 @@ Then open the notebook file in the project folder:
 
 ## Browser UI
 
-Start the local PHP interface from the project folder:
+Start the local PHP interface from the `embedding-matcher` folder:
 
-```powershell
-cd W:\Trainers\embedding-matcher
-& 'C:\Users\genes\AppData\Local\Microsoft\WinGet\Packages\PHP.PHP.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe' -S 127.0.0.1:8000 -t 'W:\Trainers\embedding-matcher'
+```sh
+php -S 127.0.0.1:8000
 ```
 
 Open:
@@ -140,8 +188,9 @@ This UI is used locally for:
 - weak-skill gaps
 - generated curriculum drafts
 - saved enhancement results, with collapsible rows, client-side search and filters, and per-run assistant chat
+- deterministic per-course recommended tools/apps with reasons and curated documentation links; generated runs calculate these at display time, while new enhanced runs save a recommendation snapshot
 - per-run PDF downloads for generated drafts and enhancement results, including the completed enhanced curriculum
-- creator-owned draft title, personal notes, and Finalized tracking
+- creator-owned run title and personal notes
 - super-admin dataset file preview; files are not uploaded, saved, or activated by this UI yet
 
 PDFs are generated in the browser using locally served jsPDF and jsPDF-AutoTable assets; there is no runtime CDN request or server-side PDF service. The suggested filename is downloaded according to the browser's download settings. See `assets/PDF_EXPORT_DEPENDENCIES.md` for bundled library versions and licenses.
@@ -163,6 +212,7 @@ Use pretrained embeddings as the base system. This project does not require fine
 - database_setup.py: SQLite schema and import helper
 - curriculum_generator_foundation.py: subject clustering and canonical subject bank
 - curriculum_generator.py: draft generation, enhancement assessment, and chat logic
+- recommended_tools.py: shared deterministic course-title tool recommendations
 - weak_skills_report.py: weak skill export
 - index.php: PHP browser interface
 - generated_curriculum.php and enhanced_curriculum_generated.php: collapsible run histories and PDF exports
@@ -179,7 +229,7 @@ Use pretrained embeddings as the base system. This project does not require fine
 4. Use weak skills and skill gaps to identify curriculum missing areas.
 5. Generate a curriculum draft using the subject bank and prompt context.
 6. Inspect the generated draft and evidence in the PHP browser.
-7. Optionally set a custom title, add personal notes, or mark the draft Finalized for personal tracking.
+7. Optionally set a custom title or add personal notes.
 
 ## Guardrails and design principles
 
@@ -193,17 +243,16 @@ Use pretrained embeddings as the base system. This project does not require fine
 
 ### Missing data files
 
-Check that the following paths exist:
+Check that the sibling `curriculum-generator-kb` directory contains:
 
-- W:\Trainers\curriculum-generator-kb\data\curriculum_dataset_with_ids.csv
-- W:\Trainers\curriculum-generator-kb\03_industry_skills_data.md
+- `data/curriculum_dataset_with_ids.csv`
+- `03_industry_skills_data.md`
 
 ### Environment issues
 
 Activate the virtual environment before running Python scripts:
 
 ```powershell
-cd W:\Trainers\embedding-matcher
 .\venv\Scripts\Activate.ps1
 ```
 

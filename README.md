@@ -1,4 +1,4 @@
-# Curriculum Matcher & Generator
+# Curri'KoToh
 
 Local-first curriculum analysis and evidence-based curriculum drafting for the Trainer workflow. The system matches courses to industry skills, reports coverage gaps, creates a canonical course directory, and generates structured curriculum recommendations for human review.
 
